@@ -1,0 +1,89 @@
+.hub-section {
+  position: relative;
+  background: #ebeef0;
+  padding-top: 10vh;
+  /* padding-bottom: 10vh; */
+}
+
+.hub-fixed-header {
+  position: relative;
+  z-index: 20;
+  margin-top: 6vh;
+  margin-left: var(--margin-desktop);
+  will-change: transform, opacity, filter;
+  display: flex;
+  align-items: center;        /* centra verticalmente el botón */
+  justify-content: space-between;
+  gap: 24px;
+  margin-right: 10%;
+}
+
+.hub-fixed-header .approach-btn{
+  flex: 0 0 auto;             /* que no se estire */
+  align-self: center;   
+  width: 115px;      /* por si ApproachButton tiene algo raro */
+}
+
+.hub-title {
+  font-family: var(--font-display);
+  line-height: 110%;
+}
+
+.hub-stack-container {
+  position: relative;
+  /* padding-top: 10vh; */
+  width: calc(100% - var(--margin-desktop) * 2);
+  margin-left: var(--margin-desktop);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.hub-card-wrapper {
+  position: relative;
+  width: 100%;
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .hub-title {
+    font-size: var(--headline-small-size);
+    font-weight: var(--headline-small-weight);
+    line-height: var(--headline-small-line);
+    letter-spacing: var(--headline-small-space);
+    max-width: 90%;
+    margin-bottom: 1.2rem;
+  }
+
+  .hub-fixed-header {
+    margin-top: 0vh;
+    left: var(--margin-mobile);
+    right: var(--margin-mobile);
+  }
+
+  .hub-stack-container {
+    width: calc(100% - var(--margin-mobile) * 2);
+    margin-left: var(--margin-mobile);
+    gap: 60px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .hub-fixed-header .approach-btn {
+    display: none;
+  }
+}
+
+.hub-stack-container.is-stacking {
+  height: 100vh;
+  padding-top: 0;
+  display: block;
+  overflow: hidden;
+}
+
+.hub-stack-container.is-stacking .hub-card-wrapper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}

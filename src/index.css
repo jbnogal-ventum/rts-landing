@@ -1,0 +1,324 @@
+
+
+
+:root {
+  --font-base: "Geist", sans-serif;
+  --font-display: "Neue Power Ultra", sans-serif;
+
+  --color-text: #ffffff;
+  --color-bg: #09070c;
+  --color-bg-light: #ffffff;
+  --color-text-light: #000000;
+  --text-on-white: #8c8c8c;
+
+  --margin-desktop: 5vw;
+  --margin-laptop: 5vw;
+  --margin-tablet: 6vw;
+  --margin-mobile: 7vw;
+
+  --display-lg-size: 84px;
+  --display-lg-weight: 800;
+  --display-lg-line: 100%;
+  --display-lg-space: 0.05em;
+
+  --display-md-size: 60px;
+  --display-md-weight: 700;
+  --display-md-line: 100%;
+  --display-md-space: -0.03em;
+
+  --display-sm-size: 52px;
+  --display-sm-weight: 600;
+  --display-sm-line: 100%;
+  --display-sm-space: -0.02em;
+
+  /* ====== BODY TOKENS ====== */
+  --body-lg-size: 18px;
+  --body-lg-line: 140%;
+
+  --headline-large:46px;
+  --headline-medium:40px;
+  --headline-small:28px;
+
+  --body-md-size: 18px;
+  --body-md-weight: 400;
+  --body-md-line: 140%;
+
+  --body-sm-size: 14px;
+  --body-sm-weight: 400;
+  --body-sm-line: 140%;
+  --body-sm-space: 0%;
+
+  /* ====== MOBILE TOKENS ====== */
+  --headline-small-size: 28px;
+  --headline-small-weight: 700;
+  --headline-small-line: 108%;
+  --headline-small-space: 0.05em;
+
+   --headline-medium-size: 40px;
+  --headline-medium-weight: 700;
+  --headline-medium-line: 120%;
+  --headline-medium-space: 0.05em;
+
+  --title-small:22px;
+  --title-medium:26px;
+
+  --title-bold:800;
+   --title-size: 26px;
+  --title-weight: 800; 
+  --itle-line: 110%;
+  --title-space: -0.01em;
+}
+
+/* =========================================================
+   RESPONSIVE VISIBILITY (GLOBAL)
+========================================================= */
+
+.desktop { display: block !important; }
+.mobile  { display: none !important; }
+
+@media (max-width: 820px) {
+  .desktop { display: none !important; }
+  .mobile  { display: block !important; }
+}
+
+
+/* .title-body {
+  font-size: var(--title-size);
+  font-weight: var(--title-weight);
+  line-height: var(--title-line);
+  letter-spacing: var(--ctitle-space);
+  font-family: var(--font-base); 
+  text-transform: uppercase;
+} */
+
+#white-overlay {
+  position: fixed;
+  inset: 0;
+  background: transparent;
+  pointer-events: none;
+  z-index: 1;
+  transition: background 0.3s ease;
+}
+
+#hero {
+  visibility: hidden;
+}
+
+
+.body-default-white {
+  font-family: "Geist", sans-serif;
+  /* font-weight: 400;  */
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: 0;
+  color: var(--text-on-white);
+}
+
+.body-default {
+  font-family: "Geist", sans-serif;
+  /* font-weight: 400;  */
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: 0;
+ 
+}
+
+.title-large{
+  font-family: "Geist", sans-serif;
+  font-size:30px;
+ line-height:110%;
+  font-weight: 600;
+}
+
+
+.title-medium{
+ font-size:26px;
+ line-height:120%;
+  font-weight: 600;
+}
+
+
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/Geist-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Neue Power Ultra";
+  src: url("/fonts/NeuePower-Bold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+.headline-medium {
+  font-size: var(--headline-medium-size);
+  font-weight: var(--headline-medium-weight);
+  line-height: var(--d-medium-line);
+  letter-spacing: 120%;
+  font-family: var(--font-display);
+  /* text-transform: uppercase; */
+  
+}
+
+.title-small{
+  font-family: "Geist", sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 110%;
+  letter-spacing: -0.02em;
+
+}
+
+
+/* =========================================================
+   RESET + BASE
+========================================================= */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-base);
+  background: var(--color-bg);
+  color: var(--color-text);
+  overflow-x: hidden;
+}
+
+code, pre {
+  font-family: var(--font-base);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  /* text-transform: uppercase; */
+  letter-spacing: 2px;
+}
+
+/* =========================================================
+   TYPOGRAPHY CLASSES (UTILITARIAS)
+========================================================= */
+.display-lg {
+  font-size: var(--display-lg-size);
+  font-weight: var(--display-lg-weight);
+  line-height: var(--display-lg-line);
+  letter-spacing: var(--display-lg-space);
+}
+
+.display-md {
+  font-size: var(--display-md-size);
+  font-weight: var(--display-md-weight);
+  line-height: var(--display-md-line);
+  letter-spacing: 140%;
+}
+
+.display-sm {
+  font-size: var(--display-sm-size);
+  font-weight: var(--display-sm-weight);
+  line-height: var(--display-sm-line);
+  letter-spacing: var(--display-sm-space);
+}
+
+.body-lg {
+  font-size: var(--body-lg-size);
+  line-height: var(--body-lg-line);
+}
+
+.body-md {
+  font-size: var(--body-md-size);
+  font-weight: var(--body-md-weight);
+  line-height: var(--body-md-line);
+}
+
+.body-sm {
+  font-size: var(--body-sm-size);
+  font-weight: var(--body-sm-weight);
+  line-height: var(--body-sm-line);
+  letter-spacing: var(--body-sm-space);
+}
+
+.title-body {
+  font-size: 18px;
+  line-height: 140%;
+  letter-spacing: -2%;
+  font-weight: semibold;
+  font-family: Geist;
+}
+
+.subtitle-md {
+  font-family: var(--font-base);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: 0.05em;
+  /* text-transform: uppercase; */
+}
+
+.highlight-violet{
+  display: inline-block;
+  color: #6a5cff; /* fallback */
+  background: linear-gradient(90deg, #6a5cff 0%, #2e86ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* =========================================================
+   RESPONSIVE OVERRIDES
+========================================================= */
+@media (max-width: 1068px) {
+  .display-md {
+    font-size: var(--headline-small-size) !important;
+    font-weight: var(--headline-small-weight) !important;
+    line-height: var(--headline-small-line) !important;
+    letter-spacing: var(--headline-small-space) !important;
+  }
+
+  .display-lg {
+    font-size: calc(var(--display-lg-size) * 0.55);
+    line-height: 110%;
+  }
+
+  .body-md {
+    font-size: 16px;
+    line-height: 150%;
+  }
+
+  .body-sm {
+    font-size: 14px;
+    line-height: 150%;
+  }
+}
+
+/* =========================================================
+   UTILS / WRAPPERS / LAYOUT
+========================================================= */
+.main-container {
+  width: 100%;
+  /* max-width: 1600px; */
+  margin-inline: auto;
+}
+
+
+.wrapper {
+  padding-inline: var(--margin-desktop);
+}
+
+@media (max-width: 1280px) {
+  .wrapper {
+    padding-inline: var(--margin-laptop);
+  }
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    padding-inline: var(--margin-tablet);
+  }
+}
+
+@media (max-width: 640px) {
+  .wrapper {
+    padding-inline: var(--margin-mobile);
+  }
+}
