@@ -3,6 +3,7 @@ import "./HorizontalCarousel.css";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Card from "../UI/Card";
+import { Typography, Button } from "../index";
 
 import img0 from "../../assets/carousel/RTS_Industries.png";
 import img1 from "../../assets/carousel/RTS_Industries-1.png";
@@ -10,6 +11,7 @@ import img2 from "../../assets/carousel/RTS_Industries-2.png";
 import img3 from "../../assets/carousel/RTS_Industries-3.png";
 import img4 from "../../assets/carousel/RTS_Industries-4.png";
 import img5 from "../../assets/carousel/RTS_Industries-5.png";
+import { RiArrowLeftLine, RiArrowRightLine } from "@remixicon/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -105,12 +107,51 @@ export default function HorizontalCarousel() {
 
   return (
     <section className="horizontal-carousel" ref={sectionRef}>
-      <h4 className="carousel-subtitle-fixed subtitle-md">INDUSTRIES</h4>
+      <Typography
+        variant="subtitle-medium" className="carousel-subtitle-fixed text-text-primary">INDUSTRIES</Typography>
+      <div className="
+  absolute 
+  top-[20vh] md:top-[20vh]
+  flex justify-between items-end  
+  w-full                   
+  z-[2]
+ 
+" >
+        <Typography
+          variant="headline-medium"
+          className="
+      pl-6.5 
+      text-gradient-text
+    "
+        >
+          WE NAVIGATE AND SERVE THE MOST <br />COMPLEX{" "}
+          <span className="
+      bg-gradient-to-r from-[#1c56ff] to-[#a463ff]
+      bg-clip-text text-transparent
+    ">
+            INDUSTRIAL GALAXIES
+          </span>
+        </Typography>
 
-      <h1 className="carousel-title headline-md headline-mobile-small">
-        WE NAVIGATE AND SERVE THE MOST COMPLEX{" "}
-        <span className="gradient-text">INDUSTRIAL GALAXIES</span>
-      </h1>
+        <div className="pr-6.5
+    flex items-end                 
+  ">
+          <Button
+            variant="carruselLeft-dark"
+            className="h-auto"       /* Esto evita que tome altura completa */
+          >
+            <RiArrowLeftLine className="h-4 w-3"  />
+          </Button>
+          <Button
+            variant="carruselRight-dark"
+            className="h-auto"       /* Esto evita que tome altura completa */
+          >
+            <RiArrowRightLine className="h-4 w-3" />
+          </Button>
+        </div>
+      </div>
+
+
 
       <div className="carousel-track" ref={scrollContainerRef}>
         <Card

@@ -1,58 +1,61 @@
-import "./Footer.css";
 
+import { Typography, Button } from "../";
+import logo from "../../assets/logos/R_.svg";
 export default function Footer() {
   return (
     <footer>
-      <div className="footer footer-container">
-        <div className="footer-left">
-          <div className="footer-brand">
-            <img
-              src={`${import.meta.env.BASE_URL}footer.png`}
-              alt="RTS Logo"
-              className="footer-logo"
-            />
+      <div className="py-7 px-6.5 flex gap-7 bg-background-interactive justify-between align-start ">
+        <div className="flex gap-4 align-center">
+          <img
+            src={logo}
+            alt="RTS Logo"
+            className="h-logo-md w-auto filter brightness-0 invert"
+          />
+          <Typography
+            variant="headline-small"
 
-            <h2 className="footer-title headline-sm">
-              SPARK INDUSTRIAL<br />BRILLIANCE
-            </h2>
-          </div>
+          >
+            SPARK INDUSTRIAL<br />BRILLIANCE
+          </Typography>
         </div>
 
-        <div className="footer-columns">
-          <div className="footer-column">
-            <h4 className="footer-heading title-body ">Departments</h4>
-            <ul>
-              <li>Automation & Controls</li>
-              <li>Digital Skills</li>
-              <li>Energy & Infrastructure</li>
-            </ul>
+        <div className="flex gap-7">
+          <div className="flex flex-col gap-3">
+            <Typography
+              variant="title-body"
+              className="font-bold font-haffer"
+              children="Departments"
+            />
+            <Typography variant="body-md" className='font-haffer font-medium'>Automation & Controls</Typography>
+            <Typography variant="body-md" className='font-haffer font-medium'>Digital Skills</Typography>
+            <Typography variant="body-md" className='font-haffer font-medium'>Energy & Infrastructure</Typography>
           </div>
 
           <div className="footer-column">
-            <h4 className="footer-heading title-body">Resources</h4>
-            <ul>
-              <li>Media kit</li>
-            </ul>
+            <Typography
+              variant="title-body"
+              className="font-bold font-haffer"
+              children="Departments"
+            />
+            <Typography variant="body-md" className='font-haffer font-medium'>Media kit</Typography>
           </div>
         </div>
       </div>
 
-      <div className="footer-bottom">
-  <div className="footer-bottom-inner">
-    <div className="fb-col fb-left">
-      <span>Privacy Policy</span>
-      <span>Cookie Settings</span>
-    </div>
+      <div className="flex justify-between items-center px-6">
+        <div className="flex gap-6">
+          <Typography variant="body-sm" children="Privacy Policy" />
+          <Typography variant="body-sm" children="Cookie Settings" />
+        </div>
 
-    <p className="fb-col fb-center">All Rights Reserved ©2025 RTS Group</p>
+        <Typography variant="body-sm" className="text-text-disabled" children="All Rights Reserved ©2025 RTS Group" />
 
-    <div className="fb-col fb-right">
-      <span>Linkedin</span>
-      <span>Youtube</span>
-      <span>Discord</span>
-    </div>
-  </div>
-</div>
+        <div className="flex gap-6">
+          <Button variant="text-dark" children={"LinkedIn"} className="text-body-sm " onClick={() => window.open("https://www.linkedin.com/company/rtsgroup/")} />
+          <Button variant="text-dark" children={"Youtube"} className="text-body-sm " onClick={() => window.open("https://www.youtube.com/@rts_group")} />
+          <Button variant="text-dark" children={"Discord"} className="text-body-sm " onClick={() => window.open("https://discord.com/invite/rtsgroup")} />
+        </div>
+      </div>
 
     </footer>
   );

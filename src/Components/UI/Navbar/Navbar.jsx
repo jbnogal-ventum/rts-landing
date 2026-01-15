@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import { useTransition } from "../../Transition/Transition";
 import "./Navbar.css";
 import logo from "../../../assets/logo-rts.svg";
+import { Typography, Button } from '../../index'
 
 export default function Navbar({ navMode }) {
   const { go } = useTransition();
@@ -437,7 +438,9 @@ export default function Navbar({ navMode }) {
             </ul>
           </div>
 
-          <button className="nav-button desktop-only">Book a meeting</button>
+         <Button size="sm" onClick={closeMobileMenuHard}>
+          Book a meeting
+        </Button>
 
           <button className="hamburger-btn" onClick={toggleMenu}>
             <Menu
@@ -526,9 +529,9 @@ export default function Navbar({ navMode }) {
           </li>
         </ul>
 
-        <button className="nav-button mobile-btn" onClick={closeMobileMenuHard}>
+        <Button  onClick={closeMobileMenuHard}>
           Book a meeting
-        </button>
+        </Button>
       </div>
     </>
   );

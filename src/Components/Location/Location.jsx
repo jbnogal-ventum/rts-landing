@@ -4,7 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./Location.css";
 import mapImg from "../../assets/map.png";
 import ApproachButton from "../UI/ApproachButton";
-
+import { Typography, Button } from "../index";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Location() {
@@ -79,7 +79,7 @@ export default function Location() {
             your industrial automation journey.
           </p>
 
-          <ApproachButton label="Book a meeting now" />
+          <Button children="Book a meeting now" />
         </div>
 
         <div className="presence-right">
