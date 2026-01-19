@@ -1,5 +1,7 @@
 import { Button, Typography } from "../index.js";
 import { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import technologyImg from "../../assets/hub/technology.jpg";
 import entryCards from "../../assets/hub/entryCards.jpg";
 import rockingIndustryImg from "../../assets/hub/rockingIndustryLogo.png";
@@ -11,204 +13,72 @@ import coders from "../../assets/hub/coders.jpg";
 import { CircleCheck, ChevronLeft, ChevronRight } from "lucide-react";
 gsap.registerPlugin(ScrollTrigger);
 export default function BelowTheLineSection() {
-    const horizontalContainerRef = useRef(null);
     const sectionRef = useRef(null);
-    const [showLeftArrow, setShowLeftArrow] = useState(false);
-    const [showRightArrow, setShowRightArrow] = useState(true);
-    const [isSectionActive, setIsSectionActive] = useState(false);
+    const horizontalContainerRef = useRef(null);
 
-    // Actualizar flechas
-    const updateArrows = () => {
-        const container = horizontalContainerRef.current;
-        if (!container) return;
-
-        const scrollLeft = container.scrollLeft;
-        const maxScroll = container.scrollWidth - container.clientWidth;
-
-        setShowLeftArrow(scrollLeft > 10);
-        setShowRightArrow(scrollLeft < maxScroll - 10);
-    };
-
-    // Scrollear con botones
-    const scrollHorizontal = (direction) => {
-        const container = horizontalContainerRef.current;
-        if (!container) return;
-
-        const scrollAmount = 400;
-        container.scrollBy({
-            left: direction === 'right' ? scrollAmount : -scrollAmount,
-            behavior: 'smooth'
-        });
-    };
-
-    // Efecto para detectar cuando la sección está activa (en viewport)
     useEffect(() => {
-        const section = sectionRef.current;
-        if (!section) return;
+        const ctx = gsap.context(() => {
+            const section = sectionRef.current;
+            const container = horizontalContainerRef.current;
+            if (!section || !container) return;
 
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach(entry => {
-                    setIsSectionActive(entry.isIntersecting);
-                });
-            },
-            {
-                threshold: 0.5,
-                rootMargin: '-100px 0px'
-            }
-        );
+            // Configuración similar al carrusel
+            const PIN_START_OFFSET_VH = -0.2;
+            const PIN_BUFFER = window.innerHeight * 0.3;
 
-        observer.observe(section);
-        return () => observer.disconnect();
+            const getTotalWidth = () => {
+                const total = container.scrollWidth - window.innerWidth;
+                return Math.max(0, total);
+            };
+
+            const getStart = () => {
+                const px = Math.round(window.innerHeight * PIN_START_OFFSET_VH);
+                return `top top+=${px}`;
+            };
+
+            // Timeline principal - scroll horizontal con scroll vertical
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: section,
+                    start: getStart,
+                    end: () => `+=${Math.max(1, getTotalWidth() + PIN_BUFFER * 2)}`,
+                    scrub: 1.2, // ¡ESTO ES CLAVE para la suavidad!
+                    pin: true,
+                    anticipatePin: 1,
+                    invalidateOnRefresh: true,
+                    markers: false // Pon true para debug
+                }
+            });
+
+            tl.to(container, {
+                x: () => -getTotalWidth(),
+                ease: "power2.inOut",
+                duration: 1
+            });
+
+            // Manejo de flechas
+            const updateArrows = () => {
+                if (!container) return;
+                const progress = tl.progress();
+                // Lógica para mostrar/ocultar flechas basada en progress
+            };
+
+            // Actualizar en cada frame
+            tl.eventCallback("onUpdate", updateArrows);
+
+            return () => {
+                tl.scrollTrigger?.kill();
+                tl.kill();
+            };
+        }, sectionRef);
+
+        return () => ctx.revert();
     }, []);
-
-    // Efecto para manejar scroll con rueda - MEJORADO PARA SUAVIDAD
-    useEffect(() => {
-        const container = horizontalContainerRef.current;
-        if (!container) return;
-
-        let isHorizontalMode = false;
-        let wheelTimeout;
-        let scrollAnimationId = null;
-        let targetScrollLeft = container.scrollLeft;
-        const SCROLL_THROTTLE = 8; // REDUCIDO para más respuesta (era 16)
-        const SCROLL_SMOOTHNESS = 0.3; // Factor de suavizado (0.1 = muy suave, 0.5 = más rápido)
-
-        // Función para animación suave
-        const smoothScroll = () => {
-            if (!container) return;
-
-            const currentScroll = container.scrollLeft;
-            const diff = targetScrollLeft - currentScroll;
-
-            // Si la diferencia es muy pequeña, detener la animación
-            if (Math.abs(diff) < 0.5) {
-                container.scrollLeft = targetScrollLeft;
-                scrollAnimationId = null;
-                return;
-            }
-
-            // Interpolación exponencial para suavidad
-            container.scrollLeft = currentScroll + diff * SCROLL_SMOOTHNESS;
-            scrollAnimationId = requestAnimationFrame(smoothScroll);
-        };
-
-        const startSmoothScroll = () => {
-            if (scrollAnimationId) {
-                cancelAnimationFrame(scrollAnimationId);
-            }
-            scrollAnimationId = requestAnimationFrame(smoothScroll);
-        };
-
-        const handleWheel = (e) => {
-            if (!isSectionActive) return;
-
-            // Throttle más permisivo
-            const now = Date.now();
-            if (now - lastScrollTime < SCROLL_THROTTLE) {
-                e.preventDefault();
-                return;
-            }
-            lastScrollTime = now;
-
-            const canScrollLeft = container.scrollLeft > 0;
-            const canScrollRight =
-                container.scrollLeft < container.scrollWidth - container.clientWidth - 1;
-
-            const isScrollingDown = e.deltaY > 0;
-            const isScrollingUp = e.deltaY < 0;
-
-            const shouldScrollHorizontal =
-                (isScrollingDown && canScrollRight) ||
-                (isScrollingUp && canScrollLeft);
-
-            if (shouldScrollHorizontal || isHorizontalMode) {
-                e.preventDefault();
-                e.stopPropagation();
-
-                // Ajustar velocidad del scroll
-                const scrollDelta = e.deltaY * 1; // REDUCIDO para más control (era *2)
-                targetScrollLeft = container.scrollLeft + scrollDelta;
-
-                // Limitar el scroll a los límites
-                targetScrollLeft = Math.max(0, Math.min(
-                    targetScrollLeft,
-                    container.scrollWidth - container.clientWidth
-                ));
-
-                // Iniciar animación suave
-                startSmoothScroll();
-
-                // Actualizar flechas sin throttling extra
-                updateArrows();
-
-                isHorizontalMode = true;
-
-                clearTimeout(wheelTimeout);
-                wheelTimeout = setTimeout(() => {
-                    isHorizontalMode = false;
-                }, 300); // Aumentado para mantener modo más tiempo
-
-                return false;
-            }
-
-            if ((isScrollingDown && !canScrollRight) || (isScrollingUp && !canScrollLeft)) {
-                isHorizontalMode = false;
-                clearTimeout(wheelTimeout);
-            }
-        };
-
-        let lastScrollTime = 0;
-
-        // También prevenir el scroll vertical cuando el mouse está sobre el contenedor
-        const handleGlobalWheel = (e) => {
-            if (!isSectionActive) return;
-
-            // Si estamos sobre el contenedor y en modo horizontal, prevenir scroll vertical
-            if (isHorizontalMode) {
-                e.preventDefault();
-                e.stopPropagation();
-                return false;
-            }
-        };
-
-        // Agregar listeners
-        container.addEventListener('wheel', handleWheel, { passive: false });
-        document.addEventListener('wheel', handleGlobalWheel, { passive: false });
-        container.addEventListener('scroll', updateArrows);
-        window.addEventListener('resize', updateArrows);
-
-        // Inicializar
-        updateArrows();
-
-        return () => {
-            container.removeEventListener('wheel', handleWheel);
-            document.removeEventListener('wheel', handleGlobalWheel);
-            container.removeEventListener('scroll', updateArrows);
-            window.removeEventListener('resize', updateArrows);
-            clearTimeout(wheelTimeout);
-            if (scrollAnimationId) {
-                cancelAnimationFrame(scrollAnimationId);
-            }
-        };
-    }, [isSectionActive]);
-
-    useEffect(() => {
-        if (isSectionActive) {
-            setTimeout(() => {
-                sectionRef.current?.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center'
-                });
-            }, 100);
-        }
-    }, [isSectionActive]);
 
     return (
         <section
             ref={sectionRef}
-            className="relative w-full min-h-screen py-20"
-            style={{ scrollMarginTop: '100px' }}
+            className="relative w-full min-h-[120vh] py-20 overflow-hidden"
         >
             <div className="container mx-auto px-4">
                 <div className="flex flex-col gap-12">
@@ -217,47 +87,15 @@ export default function BelowTheLineSection() {
                         <Typography variant="display-sm">BELOW THE LINE</Typography>
                     </div>
 
-                    <div className="relative">
-                        {isSectionActive && (
-                            <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 
-                                         bg-blue-600 text-white text-xs font-medium px-3 py-1 
-                                         rounded-full z-30 animate-pulse">
-                                ↕ Scroll horizontal activo
-                            </div>
-                        )}
+                    {/* Contenedor que será "pinned" */}
+                    <div className="relative h-[60vh]">
+                        
 
-                        {showLeftArrow && (
-                            <button
-                                onClick={() => scrollHorizontal('left')}
-                                className="absolute left-0 top-1/2 -translate-y-1/2 z-20 
-                                         bg-black/80 text-white p-3 rounded-r-lg 
-                                         opacity-0 group-hover:opacity-100 transition-opacity
-                                         hover:scale-110 transform duration-200"
-                            >
-                                <ChevronLeft size={24} />
-                            </button>
-                        )}
-
-                        {showRightArrow && (
-                            <button
-                                onClick={() => scrollHorizontal('right')}
-                                className="absolute right-0 top-1/2 -translate-y-1/2 z-20 
-                                         bg-black/80 text-white p-3 rounded-l-lg 
-                                         opacity-0 group-hover:opacity-100 transition-opacity
-                                         hover:scale-110 transform duration-200"
-                            >
-                                <ChevronRight size={24} />
-                            </button>
-                        )}
-
+                        {/* Contenedor que se mueve horizontalmente con GSAP */}
                         <div
                             ref={horizontalContainerRef}
-                            className="flex gap-6 overflow-x-auto overflow-y-hidden 
-                                    scrollbar-hide scroll-smooth will-change-transform"
-                            style={{
-                                WebkitOverflowScrolling: 'touch',
-                                scrollBehavior: 'auto'
-                            }}
+                            className="flex gap-6 absolute left-0 top-0 h-full"
+                            style={{ willChange: 'transform' }}
                         >
                             {/* CONTENIDO DEL CONTAINER HORIZONTAL - NO CAMBIAR ESTO */}
                             <div className="flex-shrink-0 w-[300px] md:w-[450px]">
@@ -443,7 +281,7 @@ export default function BelowTheLineSection() {
                             </div>
 
                             <div className="flex-shrink-0">
-                                <div className="flex flex-col justify-between h-full pr-6">
+                                <div className="flex flex-col justify-between h-full mr-9">
 
                                     <div className="rounded-md overflow-hidden w-full flex justify-end ">
 
@@ -466,28 +304,6 @@ export default function BelowTheLineSection() {
                 </div>
             </div>
 
-            <style jsx global>{`
-                .scrollbar-hide {
-                    -ms-overflow-style: none;
-                    scrollbar-width: none;
-                }
-                .scrollbar-hide::-webkit-scrollbar {
-                    display: none;
-                }
-                
-                .scroll-smooth {
-                    scroll-behavior: smooth;
-                }
-                
-                @keyframes smoothScroll {
-                    from { transform: translateX(0); }
-                    to { transform: translateX(var(--scroll-amount)); }
-                }
-                
-                .will-change-transform {
-                    will-change: transform;
-                }
-            `}</style>
         </section>
     );
 }
