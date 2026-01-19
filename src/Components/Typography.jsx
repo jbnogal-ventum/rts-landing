@@ -71,7 +71,7 @@ export const Typography = ({
   lineHeight = null,
   letterSpacing = null,
   color = null,
-  fontFamily = null, // Nueva prop para font family
+  fontFamily = null,
   className = '',
   as,
   children,
@@ -86,34 +86,35 @@ export const Typography = ({
   // Construir clases dinámicamente
   const classes = cn(
     baseClasses,
-    
-    // Sobrescritura de peso
     weight && (typeof weight === 'string' ? `font-${weight}` : `font-[${weight}]`),
-    
-    // Sobrescritura de line-height
     lineHeight && `leading-[${lineHeight}]`,
-    
-    // Sobrescritura de letter-spacing
     letterSpacing && `tracking-[${letterSpacing}]`,
-    
-    // Sobrescritura de color
     color && (color.startsWith('#') || color.startsWith('rgb') || color.startsWith('var')
-      ? `[color:${color}]` // Para colores personalizados
-      : `text-${color}`), // Para clases Tailwind
-    
-    // Sobrescritura de font family (nueva)
+      ? `[color:${color}]`
+      : `text-${color}`),
     fontFamily && (
       fontFamilies[fontFamily] 
-        ? fontFamilies[fontFamily] // Si es una familia predefinida
-        : `[font-family:${fontFamily}]` // Si es un valor personalizado
+        ? fontFamilies[fontFamily]
+        : `[font-family:${fontFamily}]`
     ),
-    
-    // Clases adicionales
     className
   );
+
+  // Función para procesar los saltos de línea
+  const renderContent = (content) => {
+    if (typeof content === 'string') {
+      return content.split('\n').map((line, index, array) => (
+        <React.Fragment key={index}>
+          {line}
+          {index < array.length - 1 && <br />}
+        </React.Fragment>
+      ));
+    }
+    return content;
+  };
 
   return React.createElement(Element, {
     className: classes,
     ...props
-  }, children);
+  }, renderContent(children));
 };

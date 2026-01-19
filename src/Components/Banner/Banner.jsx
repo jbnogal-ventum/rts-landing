@@ -3,7 +3,8 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./Banner.css";
-
+import { Typography, Button } from "../index";
+import { useNavigate } from "react-router-dom";
 gsap.registerPlugin(ScrollTrigger);
 
 function Multiline({ text }) {
@@ -21,25 +22,28 @@ function Multiline({ text }) {
   );
 }
 
-function ActionButton({ label, href, onClick, variant = "primary", download }) {
+function ActionButton({ label, href, onClick, variant = "filled-dark", download }) {
+  const navigate = useNavigate();
   const className = `banner-cta banner-cta--${variant}`;
 
   if (href) {
     return (
-      <a
-        className={className}
-        href={href}
-        download={download ? true : undefined}
-      >
-        {label}
-      </a>
+      <Button onClick={() => {
+        if (href.startsWith("http")) {
+          window.open(href, "_blank");
+        } else {
+          navigate(href);
+        }
+      }} className={className} download={download}>
+      {label}
+    </Button>
     );
   }
 
   return (
-    <button className={className} type="button" onClick={onClick}>
+    <Button onClick={onClick}>
       {label}
-    </button>
+    </Button>
   );
 }
 
@@ -62,6 +66,7 @@ export default function Banner({
   bodyMobileClassName = "body-lg",
 
   actionsDirection = "row",
+  overlay = false,
 }) {
   const rootRef = useRef(null);
 
@@ -142,49 +147,61 @@ export default function Banner({
 
   return (
     <section
-      className={`banner ${isGlow ? "banner--glow" : "banner--image"}`}
-      ref={rootRef}
-    >
-      {backgroundImage && (
-        <div
-          className="banner-bg"
-          style={{ backgroundImage: `url(${backgroundImage})` }}
-          aria-hidden="true"
-        />
-      )}
+  className={`banner ${isGlow ? "banner--glow" : "banner--image"} relative`}
+  ref={rootRef}
+>
+  {/* Contenedor para la imagen de fondo */}
+  <div className="absolute inset-0">
+    {backgroundImage && (
+      <div
+        className="banner-bg absolute inset-0"
+        style={{ backgroundImage: `url(${backgroundImage})` }}
+        aria-hidden="true"
+      />
+    )}
+    
+    {/* Overlay - DEBE estar sobre la imagen pero debajo del texto */}
+    {overlay && (
+      <div 
+        className="absolute inset-0 bg-background-primary opacity-80"
+        style={{ zIndex: 1 }} // Encima de la imagen, debajo del texto
+      />
+    )}
+  </div>
 
-      <div className="banner-inner">
-        <h2 className="banner-title">
-          <span className={`banner-titleDesktop desktop ${titleClassName}`}>
-            <Multiline text={titleDesktop} />
-          </span>
+  {/* Contenido (texto y botones) */}
+  <div className="banner-inner relative" style={{ zIndex: 2 }}>
+    <h2 className="banner-title">
+      <span className={`banner-titleDesktop desktop ${titleClassName}`}>
+        <Multiline text={titleDesktop} />
+      </span>
 
-          <span className={`banner-titleMobile mobile ${titleMobileClassName}`}>
-            <Multiline text={titleMobile ?? titleDesktop} />
-          </span>
-        </h2>
+      <span className={`banner-titleMobile mobile ${titleMobileClassName}`}>
+        <Multiline text={titleMobile ?? titleDesktop} />
+      </span>
+    </h2>
 
-        {(bodyDesktop || bodyMobile) && (
-          <p className="banner-body">
-            <span className={`banner-bodyDesktop desktop ${bodyClassName}`}>
-              <Multiline text={bodyDesktop} />
-            </span>
+    {(bodyDesktop || bodyMobile) && (
+      <p className="banner-body">
+        <span className={`banner-bodyDesktop desktop ${bodyClassName}`}>
+          <Multiline text={bodyDesktop} />
+        </span>
 
-            <span className={`banner-bodyMobile mobile ${bodyMobileClassName}`}>
-              <Multiline text={bodyMobile ?? bodyDesktop} />
-            </span>
-          </p>
-        )}
+        <span className={`banner-bodyMobile mobile ${bodyMobileClassName}`}>
+          <Multiline text={bodyMobile ?? bodyDesktop} />
+        </span>
+      </p>
+    )}
 
-        {buttons?.length > 0 && (
-          <div className="banner-actions" data-direction={actionsDirection}>
-            {buttons.map((b, idx) => (
-              <ActionButton key={idx} {...b} />
-            ))}
-          </div>
-        )}
+    {buttons?.length > 0 && (
+      <div className="banner-actions" data-direction={actionsDirection}>
+        {buttons.map((b, idx) => (
+          <ActionButton key={idx} {...b} />
+        ))}
       </div>
-    </section>
+    )}
+  </div>
+</section>
   );
 }
 

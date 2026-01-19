@@ -405,13 +405,13 @@ export default function Navbar({ navMode }) {
               <li className="nav-item">
                 <a
                   className="nav-link plain"
-                  href={`${BASE}#hub`}
+                  href={`${BASE}hub`}
                   onClick={(e) => {
-                    if (location.pathname !== "/") {
-                      e.preventDefault();
-                      goHomeHash("#hub");
-                      return;
-                    }
+                    // if (location.pathname !== "/") {
+                    //   e.preventDefault();
+                    //   goHomeHash("#hub");
+                    //   return;
+                    // }
                     closeDropdowns();
                   }}
                 >

@@ -30,6 +30,10 @@ export default {
           blue: '#04CBFE',                   // Uso: text-core-blue / bg-core-blue / border-core-blue
         },
 
+        sentimental: {
+          positive: '#CDFFBE',               // Uso: text-sentimental-positive / bg-sentimental-positive
+        },
+
         text: {
           primary: '#FFFFFF',                // Uso: text-text-primary
           secondary: '#DADADA',              // Uso: text-text-secondary
@@ -81,6 +85,7 @@ export default {
       // ===== ESPACIADO (Spacing System) =====
       spacing: {
         'none': '0px',                       // Uso: p-none / m-none / gap-none
+        '0': '0px',                         // Uso: p-0 / m-0 / gap-0
         '0.5': '4px',                        // Uso: p-0.5 / m-0.5 / gap-0.5
         '1': '8px',                          // Uso: p-1 / m-1 / gap-1
         '2': '12px',                         // Uso: p-2 / m-2 / gap-2
@@ -90,10 +95,12 @@ export default {
         '6': '40px',                         // Uso: p-6 / m-6 / gap-6
         '6.5': '60px',                       // Uso: p-6.5 / m-6.5 / gap-6.5
         '7': '80px',                         // Uso: p-7 / m-7 / gap-7
+        '8': '100px',                        // Uso: p-8 / m-8 / gap-8
+        '9': '120px',                        // Uso: p-9 / m-9 / gap-9
         'desktop': '5vw',
-    'laptop': '5vw',
-    'tablet': '6vw',
-    'mobile': '7vw',
+        'laptop': '5vw',
+        'tablet': '6vw',
+        'mobile': '7vw',
       },
 
       // ===== BORDES REDONDEADOS =====
@@ -236,7 +243,8 @@ export default {
 
       // ===== GRADIENTES =====
       backgroundImage: {
-        'gradient-text': 'linear-gradient(90deg, #7513FF 100%, #4348F3 100%, #0093CE 100%)',
+        'gradient-text': 'linear-gradient(90deg, #7513FF, #4348F3, #0093CE)',
+        'gradient-data-lab': 'linear-gradient(90deg, #7513FF 0%, #4348F3 50%, #0093CE 100%)',
         // Uso: bg-gradient-text (para fondos) o bg-gradient-text bg-clip-text text-transparent (para texto)
       },
 
@@ -244,10 +252,30 @@ export default {
       height: {
         'header': '64px',                    // Uso: h-header,
         'logo-md': '59px',                   // Uso: h-logo-md
+        'logo-lg': '124px',                  // Uso: h-logo-lg
+        'hub-card': '304px',                // Uso: h-hub-card
+        'icon-sm': '20px',                   // Uso: h-icon-sm
+      },
+      width: {
+        'logo-md': '59px',                   // Uso: w-logo-md
+        'logo-lg': '124px',                  // Uso: w-logo-lg
+        'hub-card': '357px',                 // Uso: w-hub-card
       },
     },
     plugins: [
       require("tailwindcss-animate"),
+      function ({ addUtilities }) {
+        const newUtilities = {
+          '.text-gradient': {
+            background: 'linear-gradient(90deg, #7513FF 0%, #4348F3 50%, #0093CE 100%)',
+            '-webkit-background-clip': 'text',
+            'background-clip': 'text',
+            'color': 'transparent',
+            '-webkit-text-fill-color': 'transparent',
+          },
+        }
+        addUtilities(newUtilities)
+      }
     ],
   }
 }

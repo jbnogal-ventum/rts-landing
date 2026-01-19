@@ -4,12 +4,12 @@ import logo from "../../assets/logos/R_.svg";
 export default function Footer() {
   return (
     <footer>
-      <div className="py-7 px-6.5 flex gap-7 bg-background-interactive justify-between align-start ">
-        <div className="flex gap-4 align-center">
+      <div className="py-7 md:px-6.5 px-3 flex flex-col md:flex-row gap-7 bg-background-interactive justify-between align-start ">
+        <div className="flex flex-col md:flex-row gap-4 items-start md:align-center">
           <img
             src={logo}
             alt="RTS Logo"
-            className="h-logo-md w-auto filter brightness-0 invert"
+            className="h-logo-lg md:h-logo-md w-auto filter brightness-0 invert"
           />
           <Typography
             variant="headline-small"
@@ -19,7 +19,7 @@ export default function Footer() {
           </Typography>
         </div>
 
-        <div className="flex gap-7">
+        <div className="flex flex-col md:flex-row gap-7">
           <div className="flex flex-col gap-3">
             <Typography
               variant="title-body"
@@ -42,7 +42,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="flex justify-between items-center px-6">
+      <div className="flex justify-between items-center px-6 hidden md:flex">
         <div className="flex gap-6">
           <Typography variant="body-sm" children="Privacy Policy" />
           <Typography variant="body-sm" children="Cookie Settings" />

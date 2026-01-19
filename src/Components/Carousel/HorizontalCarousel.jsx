@@ -108,39 +108,30 @@ export default function HorizontalCarousel() {
   return (
     <section className="horizontal-carousel" ref={sectionRef}>
       <Typography
-        variant="subtitle-medium" className="carousel-subtitle-fixed text-text-primary">INDUSTRIES</Typography>
-      <div className="
-  absolute 
-  top-[20vh] md:top-[20vh]
-  flex justify-between items-end  
-  w-full                   
-  z-[2]
- 
-" >
+        variant="subtitle-medium" className="absolute top-[10vh] md:left-6.5 left-3 text-text-primary">INDUSTRIES</Typography>
+      <div className="  absolute   top-[20vh] md:top-[20vh]  flex justify-between items-end    w-full                    z-[2] " >
         <Typography
           variant="headline-medium"
-          className="
-      pl-6.5 
-      text-gradient-text
-    "
-        >
+          className=" hidden md:block      md:pl-6.5    "        >
           WE NAVIGATE AND SERVE THE MOST <br />COMPLEX{" "}
-          <span className="
-      bg-gradient-to-r from-[#1c56ff] to-[#a463ff]
-      bg-clip-text text-transparent
-    ">
+          <span className="      bg-gradient-to-r from-[#1c56ff] to-[#a463ff]      bg-clip-text text-transparent    ">
             INDUSTRIAL GALAXIES
           </span>
         </Typography>
-
-        <div className="pr-6.5
-    flex items-end                 
-  ">
+        <Typography
+          variant="headline-small"
+          className=" md:hidden       pl-3       "        >
+          WE NAVIGATE AND SERVE THE MOST <br />COMPLEX{" "}
+          <span className="      bg-gradient-to-r from-[#1c56ff] to-[#a463ff]      bg-clip-text text-transparent    ">
+            INDUSTRIAL GALAXIES
+          </span>
+        </Typography>
+        <div className="pr-6.5    flex items-end      hidden md:block       ">
           <Button
             variant="carruselLeft-dark"
             className="h-auto"       /* Esto evita que tome altura completa */
           >
-            <RiArrowLeftLine className="h-4 w-3"  />
+            <RiArrowLeftLine className="h-4 w-3" />
           </Button>
           <Button
             variant="carruselRight-dark"
