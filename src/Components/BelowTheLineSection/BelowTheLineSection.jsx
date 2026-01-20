@@ -81,7 +81,7 @@ export default function BelowTheLineSection() {
             className="relative w-full min-h-[120vh] py-20 overflow-hidden"
         >
             <div className="container mx-auto px-4">
-                <div className="flex flex-col gap-12">
+                <div className="flex flex-col gap-12 pr-6">
                     <div className="flex flex-col gap-3">
                         <Typography variant="subtitle-large">- 01</Typography>
                         <Typography variant="display-sm">BELOW THE LINE</Typography>

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ApproachButton from "../../UI/ApproachButton";
@@ -11,450 +11,573 @@ export default function HeroHomePage({ onPhase }) {
   const heroTLRef = useRef(null);
   const introPlayedRef = useRef(false);
   const onPhaseRef = useRef(onPhase);
+  const [isMounted, setIsMounted] = useState(false);
 
+  // Asegurar que el componente esté montado
+  useEffect(() => {
+    setIsMounted(true);
+    return () => setIsMounted(false);
+  }, []);
+
+  // Actualizar ref para callback
   useEffect(() => {
     onPhaseRef.current = onPhase;
   }, [onPhase]);
 
+  // Configuración principal de animaciones
   useEffect(() => {
+    if (!isMounted) return;
+
     const root = rootRef.current;
-    if (!root) return;
+    if (!root) {
+      console.warn("HeroHomePage: rootRef not set");
+      return;
+    }
 
-    let removeHeroHomePageEnter = null;
+    console.log("HeroHomePage: Starting setup");
 
-    const ctx = gsap.context(() => {
-      const q = gsap.utils.selector(root);
+    let cleanupFns = [];
 
-      const steps = gsap.utils.toArray(q(".heroV-step"));
-      const step0 = q('[data-phase="0"]')[0];
-      const step1 = q('[data-phase="1"]')[0];
-      const step2 = q('[data-phase="2"]')[0];
-      if (!step0 || !step1 || !step2) return;
+    try {
+      const ctx = gsap.context(() => {
+        const q = gsap.utils.selector(root);
 
-      const step0Titles = step0.querySelectorAll(
-        ".hv-title--desktop .line, .hv-title--mobile"
-      );
-      const step0Texts = step0.querySelectorAll(
-        ".hv-subtext--desktop, .hv-subtext--mobile"
-      );
+        const steps = gsap.utils.toArray(q(".heroV-step"));
+        const step0 = q('[data-phase="0"]')[0];
+        const step1 = q('[data-phase="1"]')[0];
+        const step2 = q('[data-phase="2"]')[0];
 
-      gsap.set([step0Titles, step0Texts], {
-        autoAlpha: 0,
-        y: 46,
-        filter: "blur(12px)",
-      });
+        if (!step0 || !step1 || !step2) {
+          console.error("HeroHomePage: Missing phase elements");
+          return;
+        }
 
-      const introTL = gsap.timeline({
-        paused: true,
-        defaults: { ease: "power3.out" },
-      });
-
-      introTL
-        .to(
-          step0Titles,
-          {
-            autoAlpha: 1,
-            y: 0,
-            filter: "blur(0px)",
-            duration: 0.95,
-            stagger: 0.1,
-            overwrite: "auto",
-          },
-          0
-        )
-        .to(
-          step0Texts,
-          {
-            autoAlpha: 1,
-            y: 0,
-            filter: "blur(0px)",
-            duration: 0.85,
-            overwrite: "auto",
-          },
-          0.25
-        )
-        .add(() => {
-          if (heroTLRef.current) heroTLRef.current.invalidate();
-          ScrollTrigger.refresh();
+        console.log("HeroHomePage: Elements found", {
+          step0: !!step0,
+          step1: !!step1,
+          step2: !!step2
         });
 
-      const playIntro = () => {
-        if (introPlayedRef.current) return;
-        introPlayedRef.current = true;
-        introTL.play(0);
-      };
+        // 1. SETUP INICIAL - Asegurar que step0 sea visible
+        // Primero, resetear cualquier estado previo
+        gsap.set(steps, {
+          position: "absolute",
+          inset: 0,
+          autoAlpha: 0
+        });
 
-      if (window.__heroEnter) requestAnimationFrame(playIntro);
+        // Hacer step0 visible inmediatamente
+        gsap.set(step0, {
+          autoAlpha: 1,
+          y: 0,
+          filter: "blur(0px)"
+        });
 
-      const onEnter = () => playIntro();
-      window.addEventListener("hero:enter", onEnter);
-      removeHeroHomePageEnter = () => window.removeEventListener("hero:enter", onEnter);
+        // 2. INTRO ANIMATION (cuando hero entra)
+        const setupIntro = () => {
+          if (introPlayedRef.current) return null;
 
-      const node = document.querySelector(".floating-node");
-      const isDesktop = window.innerWidth > 820;
+          const step0Titles = step0.querySelectorAll(
+            ".hv-title--desktop .line, .hv-title--mobile"
+          );
+          const step0Texts = step0.querySelectorAll(
+            ".hv-subtext--desktop, .hv-subtext--mobile"
+          );
 
-      if (node && isDesktop) {
-        const expandNode = () => {
-          node.classList.add("expanded");
-          node.classList.remove("collapsed");
-          gsap.to(node, {
-            bottom: 48,
-            right: "50%",
-            xPercent: 50,
-            duration: 0.25,
-            ease: "power4.out",
-            overwrite: true,
+          if (step0Titles.length === 0 || step0Texts.length === 0) {
+            console.warn("Intro elements not found");
+            return null;
+          }
+
+          // Configurar estado inicial para animación
+          gsap.set([step0Titles, step0Texts], {
+            autoAlpha: 0,
+            y: 46,
+            filter: "blur(12px)",
           });
+
+          const introTL = gsap.timeline({
+            defaults: { ease: "power3.out" },
+          });
+
+          introTL
+            .to(
+              step0Titles,
+              {
+                autoAlpha: 1,
+                y: 0,
+                filter: "blur(0px)",
+                duration: 0.95,
+                stagger: 0.1,
+              },
+              0
+            )
+            .to(
+              step0Texts,
+              {
+                autoAlpha: 1,
+                y: 0,
+                filter: "blur(0px)",
+                duration: 0.85,
+              },
+              0.25
+            )
+            .add(() => {
+              console.log("HeroHomePage: Intro animation completed");
+              if (heroTLRef.current) heroTLRef.current.invalidate();
+              ScrollTrigger.refresh();
+            });
+
+          introPlayedRef.current = true;
+          return introTL;
         };
 
-        const collapseNode = () => {
-          node.classList.add("collapsed");
-          node.classList.remove("expanded");
-          gsap.to(node, {
-            height: 60,
-            bottom: 32,
-            right: 32,
-            xPercent: 0,
-            duration: 0.3,
-            ease: "power3.out",
-            overwrite: true,
+        // 3. SETUP SCROLL ANIMATIONS
+        const setupScrollAnimations = () => {
+          console.log("HeroHomePage: Setting up scroll animations");
+
+          // Preparar step1
+          const step1Subtitle = step1.querySelector(".approach-subtitle-fixed");
+          const step1Titles = step1.querySelectorAll(
+            ".hv-title--desktop .line, .hv-title--mobile"
+          );
+          const step1Texts = step1.querySelectorAll(
+            ".hv-subtext--desktop, .hv-subtext--mobile"
+          );
+
+          gsap.set([step1Subtitle, ...step1Titles, ...step1Texts], {
+            autoAlpha: 0,
+            y: 16,
+            filter: "blur(8px)",
           });
-        };
 
-        ScrollTrigger.create({
-          trigger: step0,
-          start: "top top",
-          end: "bottom top",
-          onEnter: expandNode,
-          onEnterBack: expandNode,
-          onLeave: collapseNode,
-          onLeaveBack: (self) =>
-            self.scroll() <= self.start + 5 ? expandNode() : collapseNode(),
-        });
+          // Preparar step2
+          const eyebrow = step2.querySelector(".heroH-eyebrow");
+          const indexSpans = step2.querySelectorAll(".heroH-index span");
+          const panels = gsap.utils.toArray(step2.querySelectorAll(".heroH-panel"));
+          const panelInners = panels.map((p) =>
+            Array.from(p.querySelectorAll(".heroH-inner"))
+          );
 
-        expandNode();
-      }
+          if (panels.length === 0) {
+            console.warn("No panels found");
+            return null;
+          }
 
-      gsap.set(steps, { position: "absolute", inset: 0, autoAlpha: 0 });
-      gsap.set(step0, { autoAlpha: 1 });
-
-      const step1Subtitle = step1.querySelector(".approach-subtitle-fixed");
-      const step1Titles = step1.querySelectorAll(
-        ".hv-title--desktop .line, .hv-title--mobile"
-      );
-      const step1Texts = step1.querySelectorAll(
-        ".hv-subtext--desktop, .hv-subtext--mobile"
-      );
-
-      gsap.set([step1Subtitle, ...step1Titles, ...step1Texts], {
-        autoAlpha: 0,
-        y: 16,
-        filter: "blur(8px)",
-      });
-
-      const eyebrow = step2.querySelector(".heroH-eyebrow");
-      const indexSpans = step2.querySelectorAll(".heroH-index span");
-
-      const panels = gsap.utils.toArray(step2.querySelectorAll(".heroH-panel"));
-      const panelInners = panels.map((p) => Array.from(p.querySelectorAll(".heroH-inner")));
-
-      indexSpans.forEach((s, i) => {
-        const n = String(i + 1).padStart(2, "0");
-        s.textContent = n;
-        s.dataset.n = n;
-      });
-
-      const setActiveIndex = (active) => {
-        indexSpans.forEach((s, i) => {
-          s.classList.toggle("active", i === active);
-          s.textContent = s.dataset.n;
-        });
-      };
-
-      setActiveIndex(0);
-
-      gsap.set([eyebrow, ...indexSpans], {
-        autoAlpha: 0,
-        y: 14,
-        filter: "blur(10px)",
-      });
-
-      gsap.set(panels, { autoAlpha: 0 });
-      gsap.set(panels[0], { autoAlpha: 1 });
-
-      gsap.set(panelInners.flat(), {
-        autoAlpha: 0,
-        clipPath: "inset(0 100% 0 0)",
-        WebkitClipPath: "inset(0 100% 0 0)",
-      });
-
-      gsap.set(panelInners[0], {
-        autoAlpha: 1,
-        clipPath: "inset(0 0% 0 0)",
-        WebkitClipPath: "inset(0 0% 0 0)",
-      });
-
-      panels.forEach((panel, i) => {
-        const inners = Array.from(panel.querySelectorAll(".heroH-inner"));
-        inners.forEach((inner) => {
-          const title = inner.querySelector(".heroH-title");
-          const body = inner.querySelectorAll(".heroH-body");
-          const btn = inner.querySelector(".approach-btn");
-          gsap.set([title, ...body, btn].filter(Boolean), {
-            autoAlpha: i === 0 ? 1 : 0,
-            x: i === 0 ? 0 : 40,
-            filter: i === 0 ? "blur(0px)" : "blur(12px)",
+          // Configurar números de índice
+          indexSpans.forEach((s, i) => {
+            const n = String(i + 1).padStart(2, "0");
+            s.textContent = n;
+            s.dataset.n = n;
           });
-        });
-      });
 
-      const HOLD_READ = 0.55;
-      const ANTICIPO = 0.1;
-      const GAP = 0.02;
+          const setActiveIndex = (active) => {
+            indexSpans.forEach((s, i) => {
+              s.classList.toggle("active", i === active);
+              s.textContent = s.dataset.n;
+            });
+          };
 
-      const WIPE_IN = 0.34;
-      const WIPE_OUT = 0.28;
-      const CHILD_IN = 0.22;
-      const CHILD_OUT = 0.18;
+          setActiveIndex(0);
 
-      const wipeIn = (tl, panelEl, innerEls, at = "<") => {
-        const inners = Array.isArray(innerEls) ? innerEls : [innerEls];
+          // Estados iniciales step2
+          gsap.set([eyebrow, ...indexSpans], {
+            autoAlpha: 0,
+            y: 14,
+            filter: "blur(10px)",
+          });
 
-        tl.to(panelEl, { autoAlpha: 1, duration: 0.01 }, at);
-        tl.to(inners, { autoAlpha: 1, duration: 0.01 }, "<");
+          gsap.set(panels, { autoAlpha: 0 });
+          gsap.set(panels[0], { autoAlpha: 1 });
 
-        tl.fromTo(
-          inners,
-          { clipPath: "inset(0 100% 0 0)", WebkitClipPath: "inset(0 100% 0 0)" },
-          {
+          gsap.set(panelInners.flat(), {
+            autoAlpha: 0,
+            clipPath: "inset(0 100% 0 0)",
+            WebkitClipPath: "inset(0 100% 0 0)",
+          });
+
+          gsap.set(panelInners[0], {
+            autoAlpha: 1,
             clipPath: "inset(0 0% 0 0)",
             WebkitClipPath: "inset(0 0% 0 0)",
-            duration: WIPE_IN,
-            ease: "power3.out",
-          },
-          "<+=0.01"
-        );
+          });
 
-        const kids = inners.flatMap((el) => Array.from(el.children));
-        tl.fromTo(
-          kids,
-          { autoAlpha: 0, x: 14, filter: "blur(12px)" },
-          {
-            autoAlpha: 1,
-            x: 0,
-            filter: "blur(0px)",
-            stagger: 0.04,
-            duration: CHILD_IN,
-            ease: "power3.out",
-          },
-          "<+=0.05"
-        );
-      };
+          // Funciones helper para animaciones de paneles
+          const HOLD_READ = 0.55;
+          const ANTICIPO = 0.1;
+          const GAP = 0.02;
+          const WIPE_IN = 0.34;
+          const WIPE_OUT = 0.28;
+          const CHILD_IN = 0.22;
+          const CHILD_OUT = 0.18;
 
-      const wipeOut = (tl, panelEl, innerEls, at = "+=0") => {
-        const inners = Array.isArray(innerEls) ? innerEls : [innerEls];
-        const kids = inners.flatMap((el) => Array.from(el.children));
+          const wipeIn = (tl, panelEl, innerEls, at = "<") => {
+            const inners = Array.isArray(innerEls) ? innerEls : [innerEls];
 
-        tl.to(inners, { x: -8, duration: ANTICIPO, ease: "power2.out" }, at).to(
-          inners,
-          { x: 0, duration: 0.12, ease: "power2.out" },
-          "<"
-        );
+            tl.to(panelEl, { autoAlpha: 1, duration: 0.01 }, at);
+            tl.to(inners, { autoAlpha: 1, duration: 0.01 }, "<");
 
-        tl.to(
-          inners,
-          {
-            clipPath: "inset(0 0% 0 100%)",
-            WebkitClipPath: "inset(0 0% 0 100%)",
-            duration: WIPE_OUT,
-            ease: "power2.inOut",
-          },
-          `<+=${GAP}`
-        );
+            tl.fromTo(
+              inners,
+              { clipPath: "inset(0 100% 0 0)", WebkitClipPath: "inset(0 100% 0 0)" },
+              {
+                clipPath: "inset(0 0% 0 0)",
+                WebkitClipPath: "inset(0 0% 0 0)",
+                duration: WIPE_IN,
+                ease: "power3.out",
+              },
+              "<+=0.01"
+            );
 
-        tl.to(
-          kids,
-          {
-            autoAlpha: 0,
-            x: -10,
-            filter: "blur(10px)",
-            stagger: 0.025,
-            duration: CHILD_OUT,
-            ease: "power2.inOut",
-          },
-          "<"
-        );
+            const kids = inners.flatMap((el) => Array.from(el.children));
+            tl.fromTo(
+              kids,
+              { autoAlpha: 0, x: 14, filter: "blur(12px)" },
+              {
+                autoAlpha: 1,
+                x: 0,
+                filter: "blur(0px)",
+                stagger: 0.04,
+                duration: CHILD_IN,
+                ease: "power3.out",
+              },
+              "<+=0.05"
+            );
+          };
 
-        tl.to(panelEl, { autoAlpha: 0, duration: 0.01 }, "<+=0.12");
-      };
+          const wipeOut = (tl, panelEl, innerEls, at = "+=0") => {
+            const inners = Array.isArray(innerEls) ? innerEls : [innerEls];
+            const kids = inners.flatMap((el) => Array.from(el.children));
 
-      let tl;
+            tl.to(inners, { x: -8, duration: ANTICIPO, ease: "power2.out" }, at)
+              .to(inners, { x: 0, duration: 0.12, ease: "power2.out" }, "<");
 
-      tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: root,
-          start: "top top",
-          end: "+=420%",
-          pin: true,
-          anticipatePin: 1,
-          scrub: 0.18,
-          snap: {
-            snapTo: (value) => {
-              if (!tl || !tl.duration()) return value;
-              const d = tl.duration();
+            tl.to(
+              inners,
+              {
+                clipPath: "inset(0 0% 0 100%)",
+                WebkitClipPath: "inset(0 0% 0 100%)",
+                duration: WIPE_OUT,
+                ease: "power2.inOut",
+              },
+              `<+=${GAP}`
+            );
 
-              const p2Start = (tl.labels.STEP2 ?? 0) / d;
-              const p0 = (tl.labels.H0 ?? 0) / d;
-              const p1 = (tl.labels.H1 ?? p0) / d;
-              const p2 = (tl.labels.H2 ?? p1) / d;
+            tl.to(
+              kids,
+              {
+                autoAlpha: 0,
+                x: -10,
+                filter: "blur(10px)",
+                stagger: 0.025,
+                duration: CHILD_OUT,
+                ease: "power2.inOut",
+              },
+              "<"
+            );
 
-              if (value < p2Start) return value;
-              if (value < p0 || value > p2) return value;
+            tl.to(panelEl, { autoAlpha: 0, duration: 0.01 }, "<+=0.12");
+          };
 
-              return gsap.utils.snap([p0, p1, p2])(value);
+          // Timeline principal con ScrollTrigger
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: root,
+              start: "top top",
+              end: "+=420%",
+              pin: true,
+              anticipatePin: 1,
+              scrub: 0.18,
+              snap: {
+                snapTo: (value) => {
+                  if (!tl || !tl.duration()) return value;
+                  const d = tl.duration();
+
+                  const p2Start = (tl.labels.STEP2 ?? 0) / d;
+                  const p0 = (tl.labels.H0 ?? 0) / d;
+                  const p1 = (tl.labels.H1 ?? p0) / d;
+                  const p2 = (tl.labels.H2 ?? p1) / d;
+
+                  if (value < p2Start) return value;
+                  if (value < p0 || value > p2) return value;
+
+                  return gsap.utils.snap([p0, p1, p2])(value);
+                },
+                duration: { min: 0.06, max: 0.18 },
+                delay: 0,
+                ease: "power3.out",
+                inertia: false,
+              },
+              onUpdate: (self) => {
+                onPhaseRef.current?.(self.progress);
+
+                if (!tl || !tl.duration()) return;
+                const t = tl.time();
+                const t2 = tl.labels.STEP2 ?? 0;
+                if (t < t2) return;
+
+                const h0 = tl.labels.H0 ?? t2;
+                const h1 = tl.labels.H1 ?? h0;
+                const h2 = tl.labels.H2 ?? h1;
+
+                let active = 0;
+                if (t >= h2) active = 2;
+                else if (t >= h1) active = 1;
+
+                setActiveIndex(active);
+              },
             },
-            duration: { min: 0.06, max: 0.18 },
-            delay: 0,
-            ease: "power3.out",
-            inertia: false,
-          },
-          onUpdate: (self) => {
-            onPhaseRef.current?.(self.progress);
+          });
 
-            if (!tl || !tl.duration()) return;
-            const t = tl.time();
-            const t2 = tl.labels.STEP2 ?? 0;
-            if (t < t2) return;
+          heroTLRef.current = tl;
 
-            const h0 = tl.labels.H0 ?? t2;
-            const h1 = tl.labels.H1 ?? h0;
-            const h2 = tl.labels.H2 ?? h1;
+          // Animaciones timeline
+          tl.to({}, { duration: 0.1 });
+          tl.to(step1, { autoAlpha: 1, duration: 0.01 }, "<");
 
-            let active = 0;
-            if (t >= h2) active = 2;
-            else if (t >= h1) active = 1;
+          // Step 1 animations
+          const step0Titles = step0.querySelectorAll(
+            ".hv-title--desktop .line, .hv-title--mobile"
+          );
+          const step0Texts = step0.querySelectorAll(
+            ".hv-subtext--desktop, .hv-subtext--mobile"
+          );
 
-            setActiveIndex(active);
-          },
-        },
+          if (step1Subtitle) {
+            tl.to(step1Subtitle, {
+              autoAlpha: 1,
+              y: 0,
+              filter: "blur(0px)",
+              duration: 0.18,
+              ease: "power3.out",
+            });
+          }
+
+          tl.to(
+            step1Titles,
+            {
+              autoAlpha: 1,
+              y: 0,
+              filter: "blur(0px)",
+              duration: 0.3,
+              stagger: 0.045,
+              ease: "power3.out",
+            },
+            "<+=0.04"
+          );
+
+          tl.to(
+            step1Texts,
+            {
+              autoAlpha: 1,
+              y: 0,
+              filter: "blur(0px)",
+              duration: 0.25,
+              ease: "power2.out",
+            },
+            "<+=0.05"
+          );
+
+          // Transición step 0 → step 1
+          tl.fromTo(
+            [...step0Titles, ...step0Texts],
+            { autoAlpha: 1, y: 0, filter: "blur(0px)" },
+            {
+              autoAlpha: 0,
+              y: -8,
+              filter: "blur(6px)",
+              duration: 0.28,
+              ease: "power2.inOut",
+              immediateRender: false,
+            },
+            "<"
+          );
+
+          // Step 1 fade out
+          tl.to([...step1Titles, ...step1Texts, step1Subtitle].filter(Boolean), {
+            autoAlpha: 0,
+            y: -10,
+            filter: "blur(8px)",
+            duration: 0.35,
+            ease: "power2.inOut",
+          });
+
+          // Step 2 entrada
+          tl.to(step2, { autoAlpha: 1, duration: 0.01 }, "<");
+          tl.addLabel("STEP2");
+
+          if (eyebrow) {
+            tl.to(eyebrow, {
+              autoAlpha: 1,
+              y: 0,
+              filter: "blur(0px)",
+              duration: 0.18,
+              ease: "power3.out",
+            }).to(
+              indexSpans,
+              {
+                autoAlpha: 1,
+                y: 0,
+                filter: "blur(0px)",
+                stagger: 0.08,
+                duration: 0.28,
+                ease: "power3.out",
+              },
+              "<+=0.04"
+            );
+          }
+
+          // Paneles step 2
+          tl.to({}, { duration: 0.01, onStart: () => setActiveIndex(0) });
+
+          wipeIn(tl, panels[0], panelInners[0], "<+=0.1");
+          tl.addLabel("H0");
+          tl.to({}, { duration: HOLD_READ });
+
+          wipeOut(tl, panels[0], panelInners[0], "+=0");
+          wipeIn(tl, panels[1], panelInners[1], `<+=${GAP}`);
+          tl.addLabel("H1");
+          tl.to({}, { duration: HOLD_READ });
+
+          wipeOut(tl, panels[1], panelInners[1], "+=0");
+          wipeIn(tl, panels[2], panelInners[2], `<+=${GAP}`);
+          tl.addLabel("H2");
+          tl.to({}, { duration: HOLD_READ });
+
+          // Step 2 fade out
+          tl.to([eyebrow, ...indexSpans], {
+            autoAlpha: 0,
+            y: -8,
+            filter: "blur(8px)",
+            duration: 0.35,
+            ease: "power2.inOut",
+          });
+
+          return tl;
+        };
+
+        // 4. FLOATING NODE
+        const setupFloatingNode = (step0Element) => {
+          if (!step0Element || window.innerWidth <= 820) return null;
+
+          const node = document.querySelector('.floating-node');
+          if (!node) return null;
+
+          const expandNode = () => {
+            node.classList.add('expanded');
+            node.classList.remove('collapsed');
+            gsap.to(node, {
+              bottom: 48,
+              right: '50%',
+              xPercent: 50,
+              duration: 0.25,
+              ease: "power4.out",
+              overwrite: true,
+            });
+          };
+
+          const collapseNode = () => {
+            node.classList.add('collapsed');
+            node.classList.remove('expanded');
+            gsap.to(node, {
+              height: 60,
+              bottom: 32,
+              right: 32,
+              xPercent: 0,
+              duration: 0.3,
+              ease: "power3.out",
+              overwrite: true,
+            });
+          };
+
+          const st = ScrollTrigger.create({
+            trigger: step0Element,
+            start: "top top",
+            end: "bottom top",
+            onEnter: expandNode,
+            onEnterBack: expandNode,
+            onLeave: collapseNode,
+            onLeaveBack: (self) =>
+              self.scroll() <= self.start + 5 ? expandNode() : collapseNode(),
+          });
+
+          expandNode();
+          return st;
+        };
+
+        // 5. Ejecutar setup en orden
+        const nodeST = setupFloatingNode(step0);
+        if (nodeST) cleanupFns.push(() => nodeST.kill());
+
+        // Intro animation
+        const playIntro = () => {
+          const introTL = setupIntro();
+          if (introTL) {
+            introTL.play();
+          }
+        };
+
+        if (window.__heroEnter) {
+          setTimeout(playIntro, 100);
+        } else {
+          const handleHeroEnter = () => {
+            console.log("HeroHomePage: Received hero:enter");
+            setTimeout(playIntro, 100);
+          };
+          window.addEventListener('hero:enter', handleHeroEnter);
+          cleanupFns.push(() => window.removeEventListener('hero:enter', handleHeroEnter));
+        }
+
+        // Scroll animations después de un delay
+        setTimeout(() => {
+          const scrollTL = setupScrollAnimations();
+          if (scrollTL) {
+            cleanupFns.push(() => {
+              scrollTL.scrollTrigger?.kill();
+              scrollTL.kill();
+            });
+          }
+        }, 300);
+
+      }, root);
+
+      cleanupFns.push(() => {
+        console.log("HeroHomePage: Cleaning up GSAP context");
+        ctx.revert();
       });
 
-      heroTLRef.current = tl;
+    } catch (error) {
+      console.error("HeroHomePage setup error:", error);
+    }
 
-      tl.to({}, { duration: 0.1 });
-
-      tl.to(step1, { autoAlpha: 1, duration: 0.01 }, "<");
-
-      tl.to(step1Subtitle, {
-        autoAlpha: 1,
-        y: 0,
-        filter: "blur(0px)",
-        duration: 0.18,
-        ease: "power3.out",
-      });
-
-      tl.to(
-        step1Titles,
-        {
-          autoAlpha: 1,
-          y: 0,
-          filter: "blur(0px)",
-          duration: 0.3,
-          stagger: 0.045,
-          ease: "power3.out",
-        },
-        "<+=0.04"
-      );
-
-      tl.to(
-        step1Texts,
-        {
-          autoAlpha: 1,
-          y: 0,
-          filter: "blur(0px)",
-          duration: 0.25,
-          ease: "power2.out",
-        },
-        "<+=0.05"
-      );
-
-      tl.fromTo(
-        [...step0Titles, ...step0Texts],
-        { autoAlpha: 1, y: 0, filter: "blur(0px)" },
-        {
-          autoAlpha: 0,
-          y: -8,
-          filter: "blur(6px)",
-          duration: 0.28,
-          ease: "power2.inOut",
-          immediateRender: false,
-        },
-        "<"
-      );
-
-      tl.to([...step1Titles, ...step1Texts, step1Subtitle].filter(Boolean), {
-        autoAlpha: 0,
-        y: -10,
-        filter: "blur(8px)",
-        duration: 0.35,
-        ease: "power2.inOut",
-      });
-
-      tl.to(step2, { autoAlpha: 1, duration: 0.01 }, "<");
-      tl.addLabel("STEP2");
-
-      tl.to(eyebrow, {
-        autoAlpha: 1,
-        y: 0,
-        filter: "blur(0px)",
-        duration: 0.18,
-        ease: "power3.out",
-      }).to(
-        indexSpans,
-        {
-          autoAlpha: 1,
-          y: 0,
-          filter: "blur(0px)",
-          stagger: 0.08,
-          duration: 0.28,
-          ease: "power3.out",
-        },
-        "<+=0.04"
-      );
-
-      tl.to({}, { duration: 0.01, onStart: () => setActiveIndex(0) });
-
-      wipeIn(tl, panels[0], panelInners[0], "<+=0.1");
-      tl.addLabel("H0");
-      tl.to({}, { duration: HOLD_READ });
-
-      wipeOut(tl, panels[0], panelInners[0], "+=0");
-      wipeIn(tl, panels[1], panelInners[1], `<+=${GAP}`);
-      tl.addLabel("H1");
-      tl.to({}, { duration: HOLD_READ });
-
-      wipeOut(tl, panels[1], panelInners[1], "+=0");
-      wipeIn(tl, panels[2], panelInners[2], `<+=${GAP}`);
-      tl.addLabel("H2");
-      tl.to({}, { duration: HOLD_READ });
-
-tl.to([eyebrow, ...indexSpans], {
-  autoAlpha: 0,
-  y: -8,
-  filter: "blur(8px)",
-  duration: 0.35,
-  ease: "power2.inOut",
-});
-
-
-      // tl.to(step2, { autoAlpha: 0, duration: 0.01 }, "<");
-    }, rootRef);
-
+    // Cleanup
     return () => {
-      removeHeroHomePageEnter?.();
-      ctx.revert();
+      console.log("HeroHomePage: Running cleanup");
+      cleanupFns.forEach(fn => fn?.());
+
+      // Solo matar los ScrollTriggers de ESTE componente
+      ScrollTrigger.getAll().forEach(st => {
+        if (st.trigger === rootRef.current || st.vars?.trigger === rootRef.current) {
+          console.log("HeroHomePage: Killing ScrollTrigger", st);
+          st.kill();
+        }
+      });
+
+      // Esperar un frame antes de refresh global
+      requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
+      });
     };
-  }, []);
+  }, [isMounted]);
+
+  // Si no está montado, renderizar placeholder
+  if (!isMounted) {
+    return (
+      <section id="hero" ref={rootRef} style={{ minHeight: "100vh", background: "#000" }}>
+        {/* Placeholder */}
+      </section>
+    );
+  }
 
   return (
     <section id="hero" ref={rootRef}>
@@ -604,6 +727,8 @@ tl.to([eyebrow, ...indexSpans], {
             </section>
           </div>
         </div>
+
+
       </section>
     </section>
   );

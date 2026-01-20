@@ -1,207 +1,311 @@
-
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import "./Banner.css";
-import { Typography, Button } from "../index";
+import { useRef, useEffect } from "react";
+import { motion, useInView, useAnimation } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-gsap.registerPlugin(ScrollTrigger);
+import { Button } from "../index";
+import { cn } from "../../lib/utils";
 
-function Multiline({ text }) {
+// Componente para texto multilínea
+function Multiline({ text, className = "" }) {
   if (!text) return null;
   const lines = String(text).split("\n");
+  
   return (
-    <>
+    <span className={className}>
       {lines.map((line, i) => (
         <span key={i}>
           {line}
           {i !== lines.length - 1 && <br />}
         </span>
       ))}
-    </>
+    </span>
   );
 }
 
-function ActionButton({ label, href, onClick, variant = "filled-dark", download }) {
+// Botón de acción
+function ActionButton({ label, href, onClick, variant = "primary", download }) {
   const navigate = useNavigate();
-  const className = `banner-cta banner-cta--${variant}`;
 
-  if (href) {
-    return (
-      <Button onClick={() => {
-        if (href.startsWith("http")) {
-          window.open(href, "_blank");
-        } else {
-          navigate(href);
-        }
-      }} className={className} download={download}>
-      {label}
-    </Button>
-    );
-  }
+  const handleClick = () => {
+    if (href) {
+      if (href.startsWith("http")) {
+        window.open(href, "_blank");
+      } else {
+        navigate(href);
+      }
+    } else if (onClick) {
+      onClick();
+    }
+  };
+
+  const buttonVariants = {
+    primary: "bg-core-violet text-white hover:bg-core-violet/90 border-none",
+    outline: "bg-transparent text-white border border-white/35 hover:bg-white/10",
+    ghost: "bg-white/8 text-white border border-white/12 hover:bg-white/15",
+    "filled-dark": "bg-black text-white hover:bg-gray-900 border-none",
+  };
 
   return (
-    <Button onClick={onClick}>
+    <Button
+      onClick={handleClick}
+      className={cn(
+        "px-6 py-3 rounded-2xl font-medium transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0",
+        buttonVariants[variant]
+      )}
+      download={download}
+    >
       {label}
     </Button>
   );
 }
 
+// Componente principal Banner
 export default function Banner({
   variant = "image",
   backgroundImage,
-
   titleDesktop,
   titleMobile,
   bodyDesktop,
   bodyMobile,
-
   buttons = [],
   start = "top 85%",
-
   titleClassName = "headline-medium",
   titleMobileClassName = "headline-small",
-
   bodyClassName = "body-lg",
   bodyMobileClassName = "body-lg",
-
   actionsDirection = "row",
   overlay = false,
 }) {
-  const rootRef = useRef(null);
+  const ref = useRef(null);
+  const isInView = useInView(ref, {
+    once: true,
+    amount: 0.3,
+  });
+  
+  const controls = useAnimation();
 
+  // Animaciones con Framer Motion
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const root = rootRef.current;
-      if (!root) return;
+    if (isInView) {
+      controls.start("visible");
+    }
+  }, [controls, isInView]);
 
-      const inner = root.querySelector(".banner-inner");
-      const title = root.querySelector(".banner-title");
-      const body = root.querySelector(".banner-body");
-      const actions = root.querySelector(".banner-actions");
+  const containerVariants = {
+    hidden: { scale: 1.05 },
+    visible: {
+      scale: 1,
+      transition: {
+        duration: 1.4,
+        ease: [0.16, 1, 0.3, 1], // power3.out equivalente
+      },
+    },
+  };
 
-      gsap.set(root, { scale: 1.05 });
-      if (inner) gsap.set(inner, { opacity: 0 });
+  const contentVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { duration: 0.2, delay: 0.3 },
+    },
+  };
 
-      if (title) gsap.set(title, { opacity: 0, y: 40, filter: "blur(14px)" });
-      if (body) gsap.set(body, { opacity: 0, y: 32, filter: "blur(10px)" });
-      if (actions)
-        gsap.set(actions, { opacity: 0, y: 24, filter: "blur(8px)" });
+  const titleVariants = {
+    hidden: {
+      opacity: 0,
+      y: 40,
+      filter: "blur(14px)",
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.9,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: root,
-          start,
-          once: true,
-        },
-      });
+  const bodyVariants = {
+    hidden: {
+      opacity: 0,
+      y: 32,
+      filter: "blur(10px)",
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.8,
+        delay: 0.4,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
 
-      tl.to(root, { scale: 1, duration: 1.4, ease: "power3.out" });
-
-      if (inner) tl.to(inner, { opacity: 1, duration: 0.2 }, "-=1.1");
-
-      if (title)
-        tl.to(
-          title,
-          {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            duration: 0.9,
-            ease: "power3.out",
-          },
-          "-=1"
-        );
-
-      if (body)
-        tl.to(
-          body,
-          {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            duration: 0.8,
-            ease: "power3.out",
-          },
-          "-=0.6"
-        );
-
-      if (actions)
-        tl.to(
-          actions,
-          {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            duration: 0.7,
-            ease: "power3.out",
-          },
-          "-=0.45"
-        );
-    }, rootRef);
-
-    return () => ctx.revert();
-  }, [start]);
+  const actionsVariants = {
+    hidden: {
+      opacity: 0,
+      y: 24,
+      filter: "blur(8px)",
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.7,
+        delay: 0.55,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
 
   const isGlow = variant === "glow";
 
   return (
-    <section
-  className={`banner ${isGlow ? "banner--glow" : "banner--image"} relative`}
-  ref={rootRef}
->
-  {/* Contenedor para la imagen de fondo */}
-  <div className="absolute inset-0">
-    {backgroundImage && (
-      <div
-        className="banner-bg absolute inset-0"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-        aria-hidden="true"
-      />
-    )}
-    
-    {/* Overlay - DEBE estar sobre la imagen pero debajo del texto */}
-    {overlay && (
-      <div 
-        className="absolute inset-0 bg-background-primary opacity-80"
-        style={{ zIndex: 1 }} // Encima de la imagen, debajo del texto
-      />
-    )}
-  </div>
+    <motion.section
+      ref={ref}
+      className={cn(
+        "relative w-full min-h-screen flex items-center justify-center",
+        "text-white text-center overflow-hidden",
+        isGlow ? "bg-black" : ""
+      )}
+      variants={containerVariants}
+      initial="hidden"
+      animate={controls}
+    >
+      {/* Fondo con imagen */}
+      {backgroundImage && (
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          {/* Overlay sobre la imagen si es glow */}
+          {isGlow && (
+            <div className="absolute inset-0 bg-black/45" />
+          )}
+        </div>
+      )}
 
-  {/* Contenido (texto y botones) */}
-  <div className="banner-inner relative" style={{ zIndex: 2 }}>
-    <h2 className="banner-title">
-      <span className={`banner-titleDesktop desktop ${titleClassName}`}>
-        <Multiline text={titleDesktop} />
-      </span>
+      {/* Efecto glow para variante glow */}
+      {isGlow && (
+        <>
+          <div
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            style={{
+              width: "min(1200px, 150vw)",
+              height: "min(1200px, 150vw)",
+            }}
+          >
+            <div
+              className="absolute inset-0 rounded-full"
+              style={{
+                background: "radial-gradient(circle at center, rgba(115, 92, 255, 0.55) 0%, rgba(115, 92, 255, 0.25) 35%, rgba(115, 92, 255, 0) 70%)",
+                filter: "blur(26px)",
+              }}
+            />
+          </div>
+          
+          {/* Línea inferior */}
+          <div
+            className="absolute bottom-0 left-0 right-0 h-[2px]"
+            style={{
+              background: "linear-gradient(90deg, rgba(115,92,255,0), rgba(115,92,255,0.9), rgba(115,92,255,0))",
+              opacity: 0.8,
+            }}
+          />
+        </>
+      )}
 
-      <span className={`banner-titleMobile mobile ${titleMobileClassName}`}>
-        <Multiline text={titleMobile ?? titleDesktop} />
-      </span>
-    </h2>
+      {/* Overlay adicional (si se solicita) */}
+      {overlay && (
+        <div className="absolute inset-0 bg-background-primary/80 z-10" />
+      )}
 
-    {(bodyDesktop || bodyMobile) && (
-      <p className="banner-body">
-        <span className={`banner-bodyDesktop desktop ${bodyClassName}`}>
-          <Multiline text={bodyDesktop} />
-        </span>
+      {/* Contenido */}
+      <motion.div
+        className={cn(
+          "relative z-20 mx-auto px-4",
+          "flex flex-col items-center gap-5",
+          "w-full max-w-6xl"
+        )}
+        variants={contentVariants}
+      >
+        {/* Título */}
+        <motion.h2 className="flex flex-col gap-2" variants={titleVariants}>
+          {/* Desktop */}
+          <span className={cn(
+            titleClassName,
+            "font-display font-bold uppercase tracking-wide",
+            "hidden md:block"
+          )}>
+            <Multiline text={titleDesktop} />
+          </span>
 
-        <span className={`banner-bodyMobile mobile ${bodyMobileClassName}`}>
-          <Multiline text={bodyMobile ?? bodyDesktop} />
-        </span>
-      </p>
-    )}
+          {/* Mobile */}
+          <span className={cn(
+            titleMobileClassName || titleClassName,
+            "font-display font-bold uppercase tracking-wide",
+            "block md:hidden"
+          )}>
+            <Multiline text={titleMobile ?? titleDesktop} />
+          </span>
+        </motion.h2>
 
-    {buttons?.length > 0 && (
-      <div className="banner-actions" data-direction={actionsDirection}>
-        {buttons.map((b, idx) => (
-          <ActionButton key={idx} {...b} />
-        ))}
-      </div>
-    )}
-  </div>
-</section>
+        {/* Cuerpo del texto */}
+        {(bodyDesktop || bodyMobile) && (
+          <motion.p
+            className={cn(
+              "max-w-3xl opacity-90",
+              "-mt-3"
+            )}
+            variants={bodyVariants}
+          >
+            {/* Desktop */}
+            <span className={cn(
+              bodyClassName,
+              "hidden md:block"
+            )}>
+              <Multiline text={bodyDesktop} />
+            </span>
+
+            {/* Mobile */}
+            <span className={cn(
+              bodyMobileClassName || bodyClassName,
+              "block md:hidden"
+            )}>
+              <Multiline text={bodyMobile ?? bodyDesktop} />
+            </span>
+          </motion.p>
+        )}
+
+        {/* Botones */}
+        {buttons.length > 0 && (
+          <motion.div
+            className={cn(
+              "mt-4 flex gap-3 justify-center flex-wrap",
+              actionsDirection === "column" && "flex-col items-center"
+            )}
+            variants={actionsVariants}
+          >
+            {buttons.map((button, index) => (
+              <div
+                key={index}
+                className={actionsDirection === "column" ? "w-full max-w-xs" : ""}
+              >
+                <ActionButton {...button} />
+              </div>
+            ))}
+          </motion.div>
+        )}
+      </motion.div>
+    </motion.section>
   );
 }
-

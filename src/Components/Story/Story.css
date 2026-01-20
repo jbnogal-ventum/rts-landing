@@ -1,13 +1,13 @@
+/* src/Components/Story/Story.css */
 .story-section {
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
   background: #000102;
   color: #000;
-  padding: 0;
 }
 
-/* Wrapper */
+/* Wrapper - solo para contener el subtítulo */
 .story-wrapper {
   position: relative;
   width: 100%;
@@ -22,88 +22,67 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   margin-bottom: 24px;
+  color: #fff;
+  position: relative;
+  z-index: 10;
 }
 
-
+/* LOS PANELES SE CONTROLAN DESDE JS - NO poner estilos de posición aquí */
 .story-panel {
-  position: absolute;
-  /* top: 26vh; */
-  left: var(--margin-desktop);
-  width: 90vw;
-  /* max-width: 1200px; */
-  opacity: 0;
-  overflow: hidden;
-  pointer-events: none;
+  /* Las posiciones se controlan desde GSAP */
+  /* No usar opacity, visibility, o transform aquí */
 }
 
-
+/* Estilos de texto */
 .story-title {
   margin-bottom: 2rem;
-  /* max-width: 700px; */
+  color: #fff;
 }
 
+.story-title.mobile {
+  display: none;
+}
 
 .story-body {
   font-size: var(--title-medium);
   font-weight: 700;
-  color: var(--text-on-white);
-
-  margin-top: 24vh;  
-  margin-left: 60%;  
+  color: #000;
+  margin-top: 24vh;
+  margin-left: 60%;
   width: 360px;
 }
 
-
+/* Responsive */
 @media (min-width: 768px) and (max-width: 1024px) {
-  
-.story-body {
-  font-size: var(--title-medium);
-  font-weight: 700;
-  color: var(--text-on-white);
-
-  margin-top: 24vh;  
-  margin-left: 50%;  
-  width: 360px;
+  .story-body {
+    margin-left: 50%;
+  }
 }
 
-   }
-
-@media (max-width: 768px) {
-
+@media (max-width: 820px) {
   .story-wrapper {
     padding-left: var(--margin-mobile);
     padding-right: var(--margin-mobile);
     padding-top: 12vh;
   }
 
-  .story-panel {
-    position: absolute;     
-    top: 22vh;
-    left: var(--margin-mobile);
-    width: calc(100% - 2 * var(--margin-mobile));
-    max-width: none;
+  .story-title.desktop {
+    display: none;
   }
 
-  .story-title {
-    font-size: var(--headline-small-size); 
-    font-weight: var(--headline-small-weight);
-    line-height: var(--headline-small-line);
-    letter-spacing: var(--headline-small-space);
-    max-width: 90%;
-    margin-bottom: 1.2rem;
+  .story-title.mobile {
+    display: block;
   }
 
   .story-body {
     font-size: var(--title-small);
-    line-height: 110%;
-    letter-spacing: -2%;
-    margin-top: 25vh;      
-    margin-left: 20vw;    
+    margin-top: 25vh;
+    margin-left: 20vw;
     max-width: 85%;
   }
 }
 
-
+/* Clases responsivas para mostrar/ocultar */
 .story-desktop {
   display: block;
 }
@@ -111,7 +90,6 @@
   display: none;
 }
 
-/* En mobile invertimos */
 @media (max-width: 820px) {
   .story-desktop {
     display: none;
@@ -119,35 +97,4 @@
   .story-mobile {
     display: block;
   }
-}
-
-
-.heroH-index span {
-  font-weight: 400;
-  opacity: 0.35;
-  position: relative;
-  transition: none;
-}
-
-.heroH-index span::before {
-  content: "";
-  position: absolute;
-  left: -14px;
-  top: 50%;
-  width: 8px;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: right;
-  opacity: 0;
-}
-
-.heroH-index span.is-active {
-  font-weight: 600;
-  opacity: 1;
-}
-
-.heroH-index span.is-active::before {
-  transform: scaleX(1);
-  opacity: 1;
 }

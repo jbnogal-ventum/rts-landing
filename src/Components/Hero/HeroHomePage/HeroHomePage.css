@@ -5,7 +5,17 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
+#hero {
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-height: 100vh;
+  background: #000;
+}
 
+.heroV-step[data-phase="0"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
 .heroV {
   height: 100vh;
   width: 100%;
@@ -411,5 +421,58 @@ html {
     font-size: calc(16px - 2px) !important;
     /* padding: 0; */
     margin-bottom: 10px;
+  }
+}
+/* FORZAR VISIBILIDAD */
+#hero {
+  opacity: 1 !important;
+  visibility: visible !important;
+  min-height: 100vh;
+}
+
+.heroV-step[data-phase="0"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  position: relative !important;
+}
+
+/* HeroHomePage.css - Actualizado */
+#hero {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.heroV-step {
+  width: 100%;
+  pointer-events: none;
+}
+
+.heroV-step > div {
+  pointer-events: auto;
+}
+
+/* Asegurar que los elementos sean visibles por defecto */
+.hv-layout,
+.hv-layout-2 {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Clases para transiciones suaves */
+.fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
   }
 }

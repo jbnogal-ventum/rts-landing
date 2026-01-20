@@ -1,8 +1,8 @@
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef, useEffect } from "react";
+import { motion, useInView, useAnimation } from "framer-motion";
 import CardHub from "../UI/CardHub";
-import "./Hub.css";
+import ApproachButton from "../UI/ApproachButton";
+import { cn } from "../../lib/utils";
 
 import iconInnovation from "../../assets/hub/icon1.png";
 import iconAcademy from "../../assets/hub/icon1.png";
@@ -11,12 +11,11 @@ import iconBTL from "../../assets/hub/icon1.png";
 import imgInnovation from "../../assets/hub/innovation.png";
 import imgAcademy from "../../assets/hub/academy.png";
 import imgBTL from "../../assets/hub/below.png";
-import ApproachButton from "../UI/ApproachButton";
 
-gsap.registerPlugin(ScrollTrigger);
-
-export default function HUB() {
-  const rootRef = useRef(null);
+export default function Hub() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const controls = useAnimation();
 
   const cardData = [
     {
@@ -48,107 +47,113 @@ export default function HUB() {
     },
   ];
 
+  // Animaciones de entrada
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const root = rootRef.current;
-      const header = root.querySelector(".hub-fixed-header");
-      const cards = gsap.utils.toArray(".hub-card-wrapper");
+    if (isInView) {
+      controls.start("visible");
+    }
+  }, [controls, isInView]);
 
-      gsap.set(cards, {
-        y: 20,
-        opacity: 0,
-        filter: "blur(12px)",
-      });
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15, delayChildren: 0.1 }
+    }
+  };
 
-      gsap.set(cards, {
-        y: 0,
-        opacity: 0,
-        filter: "blur(14px)",
-      });
-
-      const intro = gsap.timeline({
-        scrollTrigger: {
-          trigger: root,
-          start: "top 75%",
-        },
-      });
-
-      intro.to(header, {
-        y: 0,
-        opacity: 1,
-        filter: "blur(0px)",
+  const headerVariants = {
+    hidden: {
+      opacity: 0,
+      y: 20,
+      filter: "blur(12px)"
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: {
         duration: 0.9,
-        ease: "power3.out",
-      });
+        ease: [0.16, 1, 0.3, 1] // power3.out
+      }
+    }
+  };
 
-      intro.to(
-        cards,
-        {
-          y: 0,
-          opacity: 1,
-          filter: "blur(0px)",
-          duration: 0.9,
-          stagger: 0.15,
-          ease: "power3.out",
-        },
-        "-=0.4"
-      );
-
-      const STACK_OFFSET = 95;
-
-      const main = gsap.timeline({
-        scrollTrigger: {
-          trigger: root,
-          start: "top top",
-          end: "+=260%",
-          scrub: 0.8,
-          pin: true,
-          pinSpacing: true,
-        },
-      });
-
-      cards.forEach((card, i) => {
-        gsap.set(card, { zIndex: i + 1 });
-
-        main.to(
-          card,
-          {
-            yPercent: -STACK_OFFSET * i,
-            ease: "power2.out",
-            duration: 1,
-          },
-          ">-0.15"
-        );
-      });
-    }, rootRef);
-
-    return () => ctx.revert();
-  }, []);
+  const cardVariants = {
+    hidden: {
+      opacity: 0,
+      y: 20,
+      filter: "blur(12px)"
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.9,
+        ease: [0.16, 1, 0.3, 1]
+      }
+    }
+  };
 
   return (
-    <section className="hub-section" id="hub" ref={rootRef}>
-      <div className="hub-fixed-header">
-        <h2 className="hub-title headline-medium desktop">
-          <span className="gradient-text">RTS HUB</span> IS OUR LABORATORY
-          <br />
-          OF IDEAS AND EXECUTION
-        </h2>
+    <section
+      ref={ref}
+      className="relative bg-[#ebeef0] pt-10vh"
+      id="hub"
+    >
+      <motion.div
+        className={cn(
+          "relative z-20 mt-6vh mx-desktop",
+          "flex items-center justify-between gap-6",
+          "mr-[10%]"
+        )}
+        variants={headerVariants}
+        initial="hidden"
+        animate={controls}
+      >
+        <div className="flex-1">
+          {/* Desktop */}
+          <h2 className="hidden md:block font-display headline-medium leading-[110%]">
+            <span className="text-gradient">RTS HUB</span> IS OUR LABORATORY
+            <br />
+            OF IDEAS AND EXECUTION
+          </h2>
 
-        <h2 className="hub-title headline-small mobile">
-          <span className="gradient-text">RTS HUB</span> IS OUR LABORATORY
-          <br />
-          OF IDEAS AND EXECUTION
-        </h2>
-         <ApproachButton label="Learn more" href="#approach" />
-      </div>
+          {/* Mobile */}
+          <h2 className="md:hidden font-display headline-small leading-[110%]">
+            <span className="text-gradient">RTS HUB</span> IS OUR LABORATORY
+            <br />
+            OF IDEAS AND EXECUTION
+          </h2>
+        </div>
 
-      <div className="hub-stack-container">
-        {cardData.map((item, i) => (
-          <div className="hub-card-wrapper" key={i}>
+        <div className="hidden xl:flex">
+          <ApproachButton label="Learn more" href="#approach" />
+        </div>
+      </motion.div>
+
+      <motion.div
+        className={cn(
+          "relative mt-10vh mx-desktop",
+          "flex flex-col gap-8",
+          "w-[calc(100%-var(--margin-desktop)*2)]"
+        )}
+        variants={containerVariants}
+        initial="hidden"
+        animate={controls}
+      >
+        {cardData.map((item, index) => (
+          <motion.div
+            key={index}
+            className="relative w-full"
+            variants={cardVariants}
+            style={{ zIndex: cardData.length - index }}
+          >
             <CardHub {...item} />
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

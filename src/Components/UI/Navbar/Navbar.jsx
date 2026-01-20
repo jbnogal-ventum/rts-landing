@@ -4,13 +4,15 @@ import gsap from "gsap";
 import { Menu, X } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { useTransition } from "../../Transition/Transition";
+import { useApp } from "../../../context/AppContext"; // ← Importar el contexto
 import "./Navbar.css";
 import logo from "../../../assets/logo-rts.svg";
 import { Typography, Button } from '../../index'
 
-export default function Navbar({ navMode }) {
+export default function Navbar() {
   const { go } = useTransition();
   const location = useLocation();
+  const { navMode } = useApp(); // ← Obtener navMode del contexto
 
   // ✅ BASE real (dev/prod) según Vite: "/" o "/RTS/"
   const BASE = import.meta.env.BASE_URL; // ej: "/RTS/"
@@ -350,7 +352,7 @@ export default function Navbar({ navMode }) {
     <>
       <div className="navbar-wrapper">
         <nav
-          className={`navbar ${navMode === "light" ? "light" : "dark"}`}
+          className={`navbar ${navMode === "light" ? "light" : "dark"}`} // ← Usar navMode del contexto
           ref={navRef}
         >
           <div className="navbar-left">
@@ -405,13 +407,13 @@ export default function Navbar({ navMode }) {
               <li className="nav-item">
                 <a
                   className="nav-link plain"
-                  href={`${BASE}hub`}
+                  href={`${BASE}#hub`}
                   onClick={(e) => {
-                    // if (location.pathname !== "/") {
-                    //   e.preventDefault();
-                    //   goHomeHash("#hub");
-                    //   return;
-                    // }
+                    if (location.pathname !== "/") {
+                      e.preventDefault();
+                      goHomeHash("#hub");
+                      return;
+                    }
                     closeDropdowns();
                   }}
                 >
@@ -438,18 +440,18 @@ export default function Navbar({ navMode }) {
             </ul>
           </div>
 
-         <Button size="sm" onClick={closeMobileMenuHard}>
-          Book a meeting
-        </Button>
+          <Button size="sm" onClick={closeMobileMenuHard}>
+            Book a meeting
+          </Button>
 
           <button className="hamburger-btn" onClick={toggleMenu}>
             <Menu
               ref={menuIconRef}
               size={20}
-              color="white"
+              color={navMode === "light" ? "black" : "white"} // ← Color dinámico según modo
               style={{ position: "absolute" }}
             />
-            <X ref={closeIconRef} size={20} color="white" />
+            <X ref={closeIconRef} size={20} color={navMode === "light" ? "black" : "white"} /> {/* ← Color dinámico */}
           </button>
         </nav>
       </div>
@@ -529,7 +531,7 @@ export default function Navbar({ navMode }) {
           </li>
         </ul>
 
-        <Button  onClick={closeMobileMenuHard}>
+        <Button onClick={closeMobileMenuHard}>
           Book a meeting
         </Button>
       </div>

@@ -4,8 +4,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Typography, Button } from "../Components/index";
 import HeroHub from "../Components/Hero/Hub/HeroHub.jsx";
-import HorizontalCarousel from "../Components/Carousel/HorizontalCarousel";
-import Story from "../Components/Story/Story";
 import Banner from "../Components/Banner/Banner";
 import Marquee from "../Components/Marquee/Marquee";
 import Hub from "../Components/Hub/Hub";

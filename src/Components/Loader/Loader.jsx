@@ -2,9 +2,12 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import * as THREE from "three";
+
+import { useApp } from "../../context/AppContext";
 import "./Loader.css";
 
-export default function Loader({ isReady, onDone }) {
+export default function Loader({ onDone }) {
+  const { isReady } = useApp(); // Obtener isReady del contexto
   const rootRef = useRef(null);
   const curtainRef = useRef(null);
   const contentRef = useRef(null);

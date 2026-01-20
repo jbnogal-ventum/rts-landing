@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from "react";
+// src/Components/Carousel/HorizontalCarousel.jsx
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import "./HorizontalCarousel.css";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -18,132 +19,202 @@ gsap.registerPlugin(ScrollTrigger);
 export default function HorizontalCarousel() {
   const sectionRef = useRef(null);
   const scrollContainerRef = useRef(null);
+  const [isMounted, setIsMounted] = useState(false);
 
+  // Asegurar que el componente esté montado
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const section = sectionRef.current;
-      const container = scrollContainerRef.current;
-      if (!section || !container) return;
+    setIsMounted(true);
+    return () => setIsMounted(false);
+  }, []);
 
-      const PIN_START_OFFSET_VH = -0.2;
+  // Refactorizado: Configuración de animaciones
+  const setupAnimations = useCallback(() => {
+    const section = sectionRef.current;
+    const container = scrollContainerRef.current;
+    
+    if (!section || !container || !isMounted) {
+      console.warn("HorizontalCarousel: Missing elements or not mounted");
+      return null;
+    }
 
-      const getTotalWidth = () => {
-        const total = container.scrollWidth - window.innerWidth;
-        return Math.max(0, total);
-      };
+    const PIN_START_OFFSET_VH = -0.2;
 
-      const getStart = () => {
-        const px = Math.round(window.innerHeight * PIN_START_OFFSET_VH);
-        return `top top+=${px}`;
-      };
+    const getTotalWidth = () => {
+      const total = container.scrollWidth - window.innerWidth;
+      return Math.max(0, total);
+    };
 
-      const PIN_BUFFER = window.innerHeight * 0.3;
+    const getStart = () => {
+      const px = Math.round(window.innerHeight * PIN_START_OFFSET_VH);
+      return `top top+=${px}`;
+    };
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: getStart,
-          end: () => `+=${Math.max(1, getTotalWidth() + PIN_BUFFER * 2)}`,
-          scrub: 1.2,
-          pin: true,
-          anticipatePin: 1,
-          invalidateOnRefresh: true
-        }
-      });
+    const PIN_BUFFER = window.innerHeight * 0.3;
 
-      tl.to({}, { duration: 0.05 });
-
-      tl.to(container, {
-        x: () => -getTotalWidth(),
-        ease: "power2.inOut",
-        duration: 1
-      });
-
-      tl.to({}, { duration: 0.2 });
-
-      const firstCard = container.children[0];
-      if (!firstCard) return;
-
-      const gap = parseInt(getComputedStyle(container).gap || "48", 10);
-      const cardWidth = firstCard.offsetWidth + gap;
-      const totalCards = container.children.length;
-
-      const autoTl = gsap.timeline({
-        repeat: -1,
-        paused: true,
-        defaults: { ease: "power3.inOut" }
-      });
-
-      for (let i = 0; i < totalCards; i++) {
-        autoTl.to(container, { x: () => -(i * cardWidth), duration: 1.6 }).to({}, { duration: 1.4 });
-      }
-
-      autoTl.to(container, { x: 0, duration: 1.6 });
-
-      const autoST = ScrollTrigger.create({
+    // Timeline principal con scroll
+    const tl = gsap.timeline({
+      scrollTrigger: {
         trigger: section,
         start: getStart,
-        end: "bottom bottom",
-        onEnter: () => autoTl.play(),
-        onLeave: () => autoTl.pause(),
-        onEnterBack: () => autoTl.play(),
-        onLeaveBack: () => autoTl.pause()
+        end: () => `+=${Math.max(1, getTotalWidth() + PIN_BUFFER * 2)}`,
+        scrub: 1.2,
+        pin: true,
+        anticipatePin: 1,
+        invalidateOnRefresh: true
+      }
+    });
+
+    tl.to({}, { duration: 0.05 });
+    tl.to(container, {
+      x: () => -getTotalWidth(),
+      ease: "power2.inOut",
+      duration: 1
+    });
+    tl.to({}, { duration: 0.2 });
+
+    // Timeline automático (para efecto infinito)
+    const firstCard = container.children[0];
+    if (!firstCard) {
+      console.warn("HorizontalCarousel: No cards found");
+      return { tl, autoST: null };
+    }
+
+    const gap = parseInt(getComputedStyle(container).gap || "48", 10);
+    const cardWidth = firstCard.offsetWidth + gap;
+    const totalCards = container.children.length;
+
+    const autoTl = gsap.timeline({
+      repeat: -1,
+      paused: true,
+      defaults: { ease: "power3.inOut" }
+    });
+
+    for (let i = 0; i < totalCards; i++) {
+      autoTl.to(container, { x: () => -(i * cardWidth), duration: 1.6 })
+            .to({}, { duration: 1.4 });
+    }
+    autoTl.to(container, { x: 0, duration: 1.6 });
+
+    const autoST = ScrollTrigger.create({
+      trigger: section,
+      start: getStart,
+      end: "bottom bottom",
+      onEnter: () => autoTl.play(),
+      onLeave: () => autoTl.pause(),
+      onEnterBack: () => autoTl.play(),
+      onLeaveBack: () => autoTl.pause()
+    });
+
+    return { tl, autoTl, autoST };
+  }, [isMounted]);
+
+  // Efecto principal con manejo de errores
+// En el useEffect principal de HorizontalCarousel, modificar el setup:
+useEffect(() => {
+  if (!isMounted) return;
+
+  // Delay para asegurar que HeroHomePage se establezca primero
+  const setupTimer = setTimeout(() => {
+    let cleanupFns = [];
+    let autoRefreshHandler = null;
+
+    try {
+      const animations = setupAnimations();
+      if (!animations) return;
+
+      // ... resto del setup ...
+
+    } catch (error) {
+      console.error("HorizontalCarousel setup error:", error);
+    }
+
+    // Cleanup
+    return () => {
+      clearTimeout(setupTimer);
+      cleanupFns.forEach(fn => fn?.());
+      if (autoRefreshHandler) {
+        window.removeEventListener("load", autoRefreshHandler);
+      }
+      
+      // Solo matar ScrollTriggers de ESTE componente
+      ScrollTrigger.getAll().forEach(st => {
+        if (st.trigger === sectionRef.current) {
+          console.log("HorizontalCarousel: Killing ScrollTrigger", st);
+          st.kill();
+        }
       });
+    };
+  }, 300); // 300ms delay para que HeroHomePage se establezca primero
 
-      const onLoad = () => ScrollTrigger.refresh();
-      window.addEventListener("load", onLoad);
+}, [setupAnimations, isMounted]);
 
-      return () => {
-        window.removeEventListener("load", onLoad);
-        autoST.kill();
-        tl.scrollTrigger?.kill();
-        tl.kill();
-        autoTl.kill();
-      };
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+  // Si no está montado, renderizar vacío
+  if (!isMounted) {
+    return (
+      <section className="horizontal-carousel" ref={sectionRef}>
+        {/* Placeholder mientras se monta */}
+        <div style={{ opacity: 0 }}>
+          <Typography
+            variant="subtitle-medium" 
+            className="absolute top-[10vh] md:left-6.5 left-3 text-text-primary"
+          >
+            INDUSTRIES
+          </Typography>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="horizontal-carousel" ref={sectionRef}>
       <Typography
-        variant="subtitle-medium" className="absolute top-[10vh] md:left-6.5 left-3 text-text-primary">INDUSTRIES</Typography>
-      <div className="  absolute   top-[20vh] md:top-[20vh]  flex justify-between items-end    w-full                    z-[2] " >
+        variant="subtitle-medium" 
+        className="absolute top-[10vh] md:left-6.5 left-3 text-text-primary"
+      >
+        INDUSTRIES
+      </Typography>
+      
+      <div className="absolute top-[20vh] md:top-[20vh] flex justify-between items-end w-full z-[2]">
+        {/* Desktop Title */}
         <Typography
           variant="headline-medium"
-          className=" hidden md:block      md:pl-6.5    "        >
+          className="hidden md:block md:pl-6.5"
+        >
           WE NAVIGATE AND SERVE THE MOST <br />COMPLEX{" "}
-          <span className="      bg-gradient-to-r from-[#1c56ff] to-[#a463ff]      bg-clip-text text-transparent    ">
+          <span className="bg-gradient-to-r from-[#1c56ff] to-[#a463ff] bg-clip-text text-transparent">
             INDUSTRIAL GALAXIES
           </span>
         </Typography>
+
+        {/* Mobile Title */}
         <Typography
           variant="headline-small"
-          className=" md:hidden       pl-3       "        >
+          className="md:hidden pl-3"
+        >
           WE NAVIGATE AND SERVE THE MOST <br />COMPLEX{" "}
-          <span className="      bg-gradient-to-r from-[#1c56ff] to-[#a463ff]      bg-clip-text text-transparent    ">
+          <span className="bg-gradient-to-r from-[#1c56ff] to-[#a463ff] bg-clip-text text-transparent">
             INDUSTRIAL GALAXIES
           </span>
         </Typography>
-        <div className="pr-6.5    flex items-end      hidden md:block       ">
+
+        {/* Navigation Buttons (Desktop only) */}
+        <div className="pr-6.5 flex items-end hidden md:block">
           <Button
             variant="carruselLeft-dark"
-            className="h-auto"       /* Esto evita que tome altura completa */
+            className="h-auto"
           >
             <RiArrowLeftLine className="h-4 w-3" />
           </Button>
           <Button
             variant="carruselRight-dark"
-            className="h-auto"       /* Esto evita que tome altura completa */
+            className="h-auto"
           >
             <RiArrowRightLine className="h-4 w-3" />
           </Button>
         </div>
       </div>
 
-
-
+      {/* Carousel Track */}
       <div className="carousel-track" ref={scrollContainerRef}>
         <Card
           title="Oil & Gas"
