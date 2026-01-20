@@ -13,17 +13,12 @@
     <script>
       // Handle SPA redirect from 404.html
       (function() {
-        const redirectPath = sessionStorage.getItem('redirectPath');
+        var params = new URLSearchParams(window.location.search);
+        var redirectPath = params.get('p');
         if (redirectPath) {
-          sessionStorage.removeItem('redirectPath');
-          // Remove the base path to get the actual route
-          const basePath = '/rts-landing';
-          const route = redirectPath.startsWith(basePath)
-            ? redirectPath.slice(basePath.length) || '/'
-            : redirectPath;
-          if (route !== '/' && route !== '') {
-            history.replaceState(null, '', redirectPath);
-          }
+          // Remove the query parameter and set the correct URL
+          var newUrl = window.location.pathname.replace(/\/$/, '') + decodeURIComponent(redirectPath);
+          window.history.replaceState(null, '', newUrl);
         }
       })();
     </script>

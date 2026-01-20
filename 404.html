@@ -5,12 +5,18 @@
     <title>Redirecting...</title>
     <script>
       // Single Page App redirect for GitHub Pages
-      // Stores the path in sessionStorage and redirects to index
-      const path = window.location.pathname;
-      const search = window.location.search;
-      const hash = window.location.hash;
-      sessionStorage.setItem('redirectPath', path + search + hash);
-      window.location.replace('/rts-landing/');
+      // Redirect to index with the path as a query parameter
+      var pathSegmentsToKeep = 1; // Keep /rts-landing
+      var l = window.location;
+      var basePath = l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/');
+      var remainingPath = l.pathname.slice(basePath.length);
+
+      // Redirect to base with path encoded in query string
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        basePath + '/?p=' +
+        encodeURIComponent(remainingPath + l.search + l.hash)
+      );
     </script>
   </head>
   <body>
