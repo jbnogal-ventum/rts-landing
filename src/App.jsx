@@ -2,8 +2,8 @@
 import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AppProvider, useApp } from "./context/AppContext";
-import { useLenisManager } from "./hooks/useLenisManager";
-
+//import { useLenisManager } from "./hooks/useLenisManager";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Loader from "./Components/Loader/Loader";
 import Navbar from "./Components/UI/Navbar/Navbar";
 import FloatingNode from "./Components/UI/FloatingNode";
@@ -30,15 +30,39 @@ const AppContent = () => {
   }, [setIsReady]);
 
   // Inicializar Lenis
-  useLenisManager();
+  // useLenisManager();
 
   // Manejar cambio de tema basado en ruta
   useEffect(() => {
     if (!loaderDone) return;
 
     const isHome = location.pathname === "/";
-    setNavMode(isHome ? "light" : "dark");
+   // setNavMode(isHome ? "light" : "dark");
   }, [location.pathname, loaderDone, setNavMode]);
+
+ useEffect(() => {
+  if (!loaderDone) return;
+
+  const refreshTimer = setTimeout(() => {
+    console.log("=== SCROLLTRIGGER ORDER DEBUG ===");
+    
+    const allTriggers = ScrollTrigger.getAll();
+    allTriggers.forEach((st, i) => {
+      const triggerEl = st.trigger || st.vars?.trigger;
+      console.log(`${i}: ${triggerEl?.className || triggerEl?.tagName || 'unknown'}`, {
+        start: Math.round(st.start),
+        end: Math.round(st.end),
+        pinned: st.pin,
+        isActive: st.isActive
+      });
+    });
+    
+    ScrollTrigger.refresh();
+  }, 1000);
+
+  return () => clearTimeout(refreshTimer);
+}, [loaderDone]);
+
   useEffect(() => {
     if (!loaderDone) return;
 

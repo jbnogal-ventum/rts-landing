@@ -13,9 +13,9 @@ import Location from "../Components/Location/Location";
 import bannerImg from "../assets/Banner.jpeg";
 
 export default function HomePage() {
-    const whiteBlockRef = useRef(null);
+  const whiteBlockRef = useRef(null);
   const { setNavMode, setPhase } = useApp(); // Ahora viene del contexto
-  
+
   // Efecto para detectar cuando el usuario está en la sección blanca
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -50,13 +50,14 @@ export default function HomePage() {
   return (
     <>
       <HeroHomePage onPhase={setPhase} />
-      <div className="hero-outro-spacer" />
+      <div style={{ height: '1px' }} />
 
       <HorizontalCarousel />
       <Marquee />
 
       <div ref={whiteBlockRef}>
-        <Story />
+        <Story key="story-component" /> {/* Key única */}
+
         <Hub />
         <Location />
       </div>

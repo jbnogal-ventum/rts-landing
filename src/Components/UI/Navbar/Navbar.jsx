@@ -407,7 +407,7 @@ export default function Navbar() {
               <li className="nav-item">
                 <a
                   className="nav-link plain"
-                  href={`${BASE}#hub`}
+                  href={`${BASE}hub`}
                   onClick={(e) => {
                     if (location.pathname !== "/") {
                       e.preventDefault();
@@ -424,7 +424,7 @@ export default function Navbar() {
               <li className="nav-item">
                 <a
                   className="nav-link plain"
-                  href={`${BASE}#culture`}
+                  href={`${BASE}culture`}
                   onClick={(e) => {
                     if (location.pathname !== "/") {
                       e.preventDefault();
@@ -499,7 +499,7 @@ export default function Navbar() {
           <li className="m-item">
             <a
               className="m-link plain"
-              href={`${BASE}#hub`}
+              href={`${BASE}hub`}
               onClick={(e) => {
                 if (location.pathname !== "/") {
                   e.preventDefault();
@@ -516,7 +516,7 @@ export default function Navbar() {
           <li className="m-item">
             <a
               className="m-link plain"
-              href={`${BASE}#culture`}
+              href={`${BASE}culture`}
               onClick={(e) => {
                 if (location.pathname !== "/") {
                   e.preventDefault();
