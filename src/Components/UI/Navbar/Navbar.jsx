@@ -40,16 +40,16 @@ export default function Navbar() {
 
   const whatWeDoItems = [
     { label: "Automation & Controls", to: "/automation-controls" },
-    { label: "Digitalization", href: "#digital" },
-    { label: "OT Cybersecurity", href: "#security" },
-    { label: "Engineering Services", href: "#services" },
+    { label: "Digitalization", href: "digital" },
+    { label: "OT Cybersecurity", href: "security" },
+    { label: "Engineering Services", href: "services" },
   ];
 
   const industriesItems = [
-    { label: "Oil & Gas", href: "#industries" },
-    { label: "Power Generation", href: "#industries" },
-    { label: "Mining", href: "#industries" },
-    { label: "Pharma", href: "#industries" },
+    { label: "Oil & Gas", href: "industries" },
+    { label: "Power Generation", href: "industries" },
+    { label: "Mining", href: "industries" },
+    { label: "Pharma", href: "industries" },
   ];
 
   useEffect(() => {
@@ -425,11 +425,11 @@ export default function Navbar() {
               <li className="nav-item">
                 <a
                   className="nav-link plain"
-                  href={`${BASE}#culture`}
+                  href={`${BASE}culture`}
                   onClick={(e) => {
                     if (location.pathname !== "/") {
                       e.preventDefault();
-                      goHomeHash("#culture");
+                      goHomeHash("culture");
                       return;
                     }
                     closeDropdowns();

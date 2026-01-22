@@ -58,6 +58,7 @@ export default {
           'inverse-hover': '#E4E5EE',        // Uso: bg-background-inverse-hover
           'inverse-disabled': '#C6C6C6',     // Uso: bg-background-inverse-disabled
           white: '#FFFFFF',                  // Uso: bg-background-white
+          soft: '#121212',                   // Uso: bg-background-soft
         },
 
         border: {
@@ -90,6 +91,7 @@ export default {
         '1': '8px',                          // Uso: p-1 / m-1 / gap-1
         '2': '12px',                         // Uso: p-2 / m-2 / gap-2
         '3': '16px',                         // Uso: p-3 / m-3 / gap-3
+        '3.5': '20px',                       // Uso: p-3.5 / m-3.5 / gap-3.5
         '4': '24px',                         // Uso: p-4 / m-4 / gap-4
         '5': '32px',                         // Uso: p-5 / m-5 / gap-5
         '6': '40px',                         // Uso: p-6 / m-6 / gap-6
@@ -258,6 +260,7 @@ export default {
         'navbar': '58px',                    // Uso: h-navbar
         'navbar-top': '30px',                 // Uso: h-navbar-top
         'navbar-total': '88px',               // Uso: h-navbar-total
+
       },
       width: {
         'logo-md': '59px',                   // Uso: w-logo-md

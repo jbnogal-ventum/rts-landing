@@ -5,7 +5,7 @@ import { FadeInBlur } from "../../../animations/index.js"
 export default function HeroHub({ onPhase }) {
     const rootRef = useRef(null);
     return (<section
-        id="hero"
+        id="hero-hub"
         ref={rootRef}
         className="relative w-full h-full min-h-screen"
         style={{

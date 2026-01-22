@@ -23,6 +23,7 @@ import Molecule from './Components/molecule/Molecule'
 
 import "./App.css";
 import "./index.css";
+import DigitalServicesPage from "./Pages/DigitalServicesPage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -138,6 +139,10 @@ export default function App() {
               <Route
                 path="/automation-controls"
                 element={<AutomationControlsPage  />}
+              />
+              <Route
+                path="/digital"
+                element={<DigitalServicesPage />}
               />
               <Route
                 path="*"
