@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button, Typography } from "../index";
+import { Plus } from "lucide-react";
 export default function Accordion({
   items = [],
   defaultOpen = 0,
@@ -40,7 +41,7 @@ export default function Accordion({
                 onClick={() => toggle(i)}
                 aria-expanded={isOpen}
               >
-                <Typography variant="title-body" className="">
+                <Typography variant="title-body" className="text-text-primary">
                   {it.title}
                 </Typography>
 
@@ -48,11 +49,12 @@ export default function Accordion({
                   className={`
                     w-10 h-10 rounded-full flex-shrink-0 
                     flex items-center justify-center transition-all duration-300
+               
                     hover:bg-background-inverse
                     hover:text-background-primary
                     ${isOpen 
                       ? "bg-background-inverse text-background-primary" 
-                      : "bg-assistant-background"
+                      : "bg-assistant-background text-text-primary"
                     }
                   `}
                   aria-hidden="true"
@@ -64,7 +66,7 @@ export default function Accordion({
                     animate={{ rotate: isOpen ? 45 : 0 }}
                     transition={{ duration: 0.3, ease: "easeOut" }}
                   >
-                    +
+                    <Plus className="w-icon-xs h-icon-xs " />
                   </motion.span>
                 </span>
               </button>

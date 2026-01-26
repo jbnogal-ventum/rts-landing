@@ -4,6 +4,7 @@ import * as THREE from 'three'
 import vertexShader from '../../shaders/circle.vert?raw'
 import fragmentShader from '../../shaders/circle.frag?raw'
 import { getInitialState, updateState } from './moleculeState'
+import { useLocation } from 'react-router-dom'
 
 const MAX_POINTS = 10
 
@@ -101,17 +102,21 @@ function CirclePlane() {
 }
 
 function Molecule() {
+    const location = useLocation()
+    const { pathname } = location
+    const isHome = pathname === '/'
     return (
-        <div style={{
+        <div className={!isHome && 'hidden'} style={{
             position: 'fixed',
             top: 0,
             left: 0,
-            width: '100vw',
+            width: '100%',
             height: '100vh',
             zIndex: 1,
             pointerEvents: 'none',
+
         }}>
-            <Canvas orthographic camera={{ zoom: 100, position: [0, 0, 1] }}>
+            <Canvas  orthographic camera={{ zoom: 100, position: [0, 0, 1] }}>
                 <CirclePlane />
             </Canvas>
         </div>

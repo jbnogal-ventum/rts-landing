@@ -271,6 +271,7 @@ export default function AutomationControlsPage({ setNavMode }) {
           <div className="flex flex-col gap-6 md:gap-5">
             <Typography variant='title-large' className='md:text-center text-text-on-white-primary'>Capabilities with Honeywell technologies</Typography>
             <Table
+            mode='light'
               title="Capabilities with Honeywell technologies"
               columns={["Service", "Focus", "Description", "Main technologies"]}
               rows={tableRows}

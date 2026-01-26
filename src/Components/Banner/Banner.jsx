@@ -1,26 +1,10 @@
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./Banner.css";
 import { Typography, Button } from "../index";
 import { useNavigate } from "react-router-dom";
-gsap.registerPlugin(ScrollTrigger);
+import { motion, AnimatePresence } from "framer-motion";
 
-function Multiline({ text }) {
-  if (!text) return null;
-  const lines = String(text).split("\n");
-  return (
-    <>
-      {lines.map((line, i) => (
-        <span key={i}>
-          {line}
-          {i !== lines.length - 1 && <br />}
-        </span>
-      ))}
-    </>
-  );
-}
+
 
 function ActionButton({ label, href, onClick, variant = "filled-dark", download }) {
   const navigate = useNavigate();
@@ -28,20 +12,21 @@ function ActionButton({ label, href, onClick, variant = "filled-dark", download 
 
   if (href) {
     return (
-      <Button onClick={() => {
+      <Button variant={variant} onClick={() => {
         if (href.startsWith("http")) {
           window.open(href, "_blank");
         } else {
           navigate(href);
         }
-      }} className={className} download={download}>
-      {label}
-    </Button>
+      }} download={download}
+        className='w-fit'>
+        {label}
+      </Button>
     );
   }
 
   return (
-    <Button onClick={onClick}>
+    <Button onClick={onClick} variant={variant} className='w-fit' >
       {label}
     </Button>
   );
@@ -59,149 +44,81 @@ export default function Banner({
   buttons = [],
   start = "top 85%",
 
-  titleClassName = "headline-medium",
-  titleMobileClassName = "headline-small",
+  variantDesktop = 'headline-medium',
+  variantMobile = 'headline-small',
 
   bodyClassName = "body-lg",
   bodyMobileClassName = "body-lg",
 
   actionsDirection = "row",
-  overlay = false,
+  overlay = 0,
 }) {
-  const rootRef = useRef(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const root = rootRef.current;
-      if (!root) return;
-
-      const inner = root.querySelector(".banner-inner");
-      const title = root.querySelector(".banner-title");
-      const body = root.querySelector(".banner-body");
-      const actions = root.querySelector(".banner-actions");
-
-      gsap.set(root, { scale: 1.05 });
-      if (inner) gsap.set(inner, { opacity: 0 });
-
-      if (title) gsap.set(title, { opacity: 0, y: 40, filter: "blur(14px)" });
-      if (body) gsap.set(body, { opacity: 0, y: 32, filter: "blur(10px)" });
-      if (actions)
-        gsap.set(actions, { opacity: 0, y: 24, filter: "blur(8px)" });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: root,
-          start,
-          once: true,
-        },
-      });
-
-      tl.to(root, { scale: 1, duration: 1.4, ease: "power3.out" });
-
-      if (inner) tl.to(inner, { opacity: 1, duration: 0.2 }, "-=1.1");
-
-      if (title)
-        tl.to(
-          title,
-          {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            duration: 0.9,
-            ease: "power3.out",
-          },
-          "-=1"
-        );
-
-      if (body)
-        tl.to(
-          body,
-          {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            duration: 0.8,
-            ease: "power3.out",
-          },
-          "-=0.6"
-        );
-
-      if (actions)
-        tl.to(
-          actions,
-          {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            duration: 0.7,
-            ease: "power3.out",
-          },
-          "-=0.45"
-        );
-    }, rootRef);
-
-    return () => ctx.revert();
-  }, [start]);
-
-  const isGlow = variant === "glow";
 
   return (
-    <section
-  className={`banner ${isGlow ? "banner--glow" : "banner--image"} relative`}
-  ref={rootRef}
->
-  {/* Contenedor para la imagen de fondo */}
-  <div className="absolute inset-0">
-    {backgroundImage && (
-      <div
-        className="banner-bg absolute inset-0"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-        aria-hidden="true"
-      />
-    )}
-    
-    {/* Overlay - DEBE estar sobre la imagen pero debajo del texto */}
-    {overlay && (
-      <div 
-        className="absolute inset-0 bg-background-primary opacity-80"
-        style={{ zIndex: 1 }} // Encima de la imagen, debajo del texto
-      />
-    )}
-  </div>
+    <section className={`relative min-h-[600px]`}>
+      {/* Contenedor para la imagen de fondo - FONDO COMPLETO */}
+      <div className="absolute inset-0 z-0">
+        {backgroundImage && (
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: `url(${backgroundImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'top center',
+              backgroundRepeat: 'no-repeat'
+            }}
+            aria-hidden="true"
+          />
+        )}
 
-  {/* Contenido (texto y botones) */}
-  <div className="banner-inner relative" style={{ zIndex: 2 }}>
-    <h2 className="banner-title">
-      <span className={`banner-titleDesktop desktop ${titleClassName}`}>
-        <Multiline text={titleDesktop} />
-      </span>
-
-      <span className={`banner-titleMobile mobile ${titleMobileClassName}`}>
-        <Multiline text={titleMobile ?? titleDesktop} />
-      </span>
-    </h2>
-
-    {(bodyDesktop || bodyMobile) && (
-      <p className="banner-body">
-        <span className={`banner-bodyDesktop desktop ${bodyClassName}`}>
-          <Multiline text={bodyDesktop} />
-        </span>
-
-        <span className={`banner-bodyMobile mobile ${bodyMobileClassName}`}>
-          <Multiline text={bodyMobile ?? bodyDesktop} />
-        </span>
-      </p>
-    )}
-
-    {buttons?.length > 0 && (
-      <div className="banner-actions" data-direction={actionsDirection}>
-        {buttons.map((b, idx) => (
-          <ActionButton key={idx} {...b} />
-        ))}
+        {/* Overlay */}
+        {!!overlay && (
+          <div
+            className="absolute inset-0 bg-background-primary"
+            style={{
+              opacity: overlay / 100, // Convertir 50 a 0.5
+              zIndex: 1
+            }}
+          />
+        )}
       </div>
-    )}
-  </div>
-</section>
+
+
+      {/* Contenido (texto y botones) */}
+      <div className="relative z-10 min-h-[600px] flex flex-col items-center justify-center">
+        <div className="py-9 px-3 md:px-7 flex flex-col gap-6 " >
+          <h2 className="text-center text-text-primary">
+            <span className={`hidden md:block`}>
+              <Typography variant={variantDesktop} children={titleDesktop} />
+            </span>
+
+            <span className={`block md:hidden`}>
+              <Typography variant={variantMobile} children={titleMobile} />
+            </span>
+          </h2>
+
+          {(bodyDesktop || bodyMobile) && (
+            <p className="banner-body">
+              <span className={`banner-bodyDesktop desktop ${bodyClassName}`}>
+                <Multiline text={bodyDesktop} />
+              </span>
+
+              <span className={`banner-bodyMobile mobile ${bodyMobileClassName}`}>
+                <Multiline text={bodyMobile ?? bodyDesktop} />
+              </span>
+            </p>
+          )}
+
+          {buttons?.length > 0 && (
+            <div className="flex flex-col gap-3 items-center" >
+              {buttons.map((b, idx) => (
+                <ActionButton key={idx} {...b} />
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
   );
 }
 

@@ -42,7 +42,7 @@ export default function Navbar() {
     { label: "Automation & Controls", to: "/automation-controls" },
     { label: "Digitalization", href: "digital" },
     { label: "OT Cybersecurity", href: "security" },
-    { label: "Engineering Services", href: "services" },
+    { label: "Energy & Infrastructure", href: "energy" },
   ];
 
   const industriesItems = [
@@ -519,11 +519,7 @@ export default function Navbar() {
               className="m-link plain"
               href={`${BASE}culture`}
               onClick={(e) => {
-                if (location.pathname !== "/") {
-                  e.preventDefault();
-                  goHomeHash("culture");
-                  return;
-                }
+                navigateWithTransition(`${BASE}culture`);
                 closeMobileMenuHard();
               }}
             >

@@ -11,7 +11,7 @@ import academyCardBackgroundImage from "../assets/Backgrounds/academyCardBackgro
 import { Brain, DatabaseZap, GraduationCap, Grip, GripHorizontal, GripVertical, Sprout, Telescope } from "lucide-react";
 import { useTheme } from "../contexts/ThemeContext";
 
-export default function HubPage({ onPhase }) {
+export default function HubPage() {
   const whiteBlockRef = useRef(null);
   const { setTheme } = useTheme();
 
@@ -21,7 +21,7 @@ export default function HubPage({ onPhase }) {
       return;
     }
 
-   
+
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -39,7 +39,7 @@ export default function HubPage({ onPhase }) {
             setTheme("light");
             window.dispatchEvent(new Event("navLight"));
           } else {
-           // console.log('❌ FUERA DE VISTA - Cambiando a dark');
+            // console.log('❌ FUERA DE VISTA - Cambiando a dark');
             setTheme("dark");
             window.dispatchEvent(new Event("navDark"));
           }
@@ -61,7 +61,7 @@ export default function HubPage({ onPhase }) {
 
   return (
     <>
-      <HeroHub onPhase={onPhase} />
+      <HeroHub  />
       <div className="hero-outro-spacer" />
 
       <section id='laboratory' className="relative overflow-hidden ">
@@ -212,7 +212,12 @@ export default function HubPage({ onPhase }) {
           {innovationLabBackgroundImage && (
             <div
               className="absolute inset-0"
-              style={{ backgroundImage: `url(${innovationLabBackgroundImage})` }}
+              style={{
+                backgroundImage: `url(${innovationLabBackgroundImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+              }}
               aria-hidden="true"
             />
           )}
@@ -225,7 +230,7 @@ export default function HubPage({ onPhase }) {
         </div> {/* ← AQUÍ FALTABA ESTE CIERRE */}
 
         {/* Contenido (texto y botones) */}
-        <div className="md:px-7 py-9 px-3 relative flex flex-col md:flex-row gap-6.5 md:gap-0 " style={{ zIndex: 2 }}>
+        <div className="md:px-7 py-9 px-3 relative flex flex-col md:flex-row gap-6.5 md:gap-0 text-text-primary " style={{ zIndex: 2 }}>
           <div className="md:w-1/2 flex flex-col gap-3">
             <Typography
               variant="subtitle-large"

@@ -5,18 +5,15 @@ import Lenis from "@studio-freight/lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { Canvas } from "@react-three/fiber";
-import { EffectComposer, Noise, Vignette, Bloom } from "@react-three/postprocessing";
-import { Fluid } from "@whatisjery/react-fluid-distortion";
-
 import { useTheme } from "./contexts/ThemeContext";
 import Loader from "./Components/Loader/Loader";
 import Navbar from "./Components/UI/Navbar/Navbar";
 import FloatingNode from "./Components/UI/FloatingNode";
 import HomePage from "./Pages/HomePage";
 import HubPage from "./Pages/HubPage";
+import CulturePage from "./Pages/CulturePage";
 import Footer from "./Components/Footer/Footer";
-import Scene from "./Components/Scene";
+import EnergyPage from "./Pages/EnergyPage";
 import AutomationControlsPage from "./Pages/AutomationControlsPage";
 import Transition from "./Components/Transition/Transition";
 import Molecule from './Components/molecule/Molecule'
@@ -143,6 +140,14 @@ export default function App() {
               <Route
                 path="/digital"
                 element={<DigitalServicesPage />}
+              />
+              <Route
+                path="/energy"
+                element={<EnergyPage />}
+              />
+              <Route
+                path="/culture"
+                element={<CulturePage />}
               />
               <Route
                 path="*"

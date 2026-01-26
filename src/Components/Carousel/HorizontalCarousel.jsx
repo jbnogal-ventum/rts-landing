@@ -106,7 +106,7 @@ export default function HorizontalCarousel() {
   }, []);
 
   return (
-    <section className="horizontal-carousel" ref={sectionRef}>
+    <section className="horizontal-carousel px-3 md:px-7" ref={sectionRef}>
       <Typography
         variant="subtitle-medium" className="absolute top-[10vh] md:left-6.5 left-3 text-text-primary">INDUSTRIES</Typography>
       <div className="  absolute   top-[20vh] md:top-[20vh]  flex justify-between items-end    w-full                    z-[2] " >
@@ -144,7 +144,7 @@ export default function HorizontalCarousel() {
 
 
 
-      <div className="carousel-track" ref={scrollContainerRef}>
+      <div className="carousel-track overflow-hidden" ref={scrollContainerRef}>
         <Card
           title="Oil & Gas"
           image={img0}

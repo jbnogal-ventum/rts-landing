@@ -148,12 +148,18 @@ export default {
         'headline-large': '46px',            // Uso: text-headline-large
         'headline-medium': '40px',           // Uso: text-headline-medium
         'headline-small': '28px',            // Uso: text-headline-small
+'headline-lg': '46px',               // Uso: text-headline-lg
+'headline-md': '40px',               // Uso: text-headline-md
+'headline-sm': '28px',               // Uso: text-headline-sm
 
         // Titles
         'title-large': '30px',               // Uso: text-title-large
         'title-medium': '26px',              // Uso: text-title-medium
         'title-small': '22px',               // Uso: text-title-small
         'title-body': '18px',                // Uso: text-title-body
+        'title-lg': '30px',                  // Uso: text-title-lg
+        'title-md': '26px',                  // Uso: text-title-md
+        'title-sm': '22px',                  // Uso: text-title-sm
 
         // Body
         'body-lg': '18px',                   // Uso: text-body-lg
@@ -256,16 +262,29 @@ export default {
         'logo-md': '59px',                   // Uso: h-logo-md
         'logo-lg': '124px',                  // Uso: h-logo-lg
         'hub-card': '304px',                // Uso: h-hub-card
-        'icon-sm': '20px',                   // Uso: h-icon-sm
         'navbar': '58px',                    // Uso: h-navbar
         'navbar-top': '30px',                 // Uso: h-navbar-top
         'navbar-total': '88px',               // Uso: h-navbar-total
-
+        'icon-xxs': '12px',                  // Uso: h-icon-xxs
+        'icon-xs': '16px',                   // Uso: h-icon-xs
+        'icon-sm': '20px',                   // Uso: h-icon-sm
+        'icon-md': '24px',                   // Uso: h-icon-md
+        'icon-lg': '32px',                   // Uso: h-icon-lg
+        'icon-xl': '38px',                   // Uso: h-icon-xl
+        'ds-parteners-img': '403px',          // Uso: h-ds-parteners-img
+        
       },
       width: {
         'logo-md': '59px',                   // Uso: w-logo-md
         'logo-lg': '124px',                  // Uso: w-logo-lg
         'hub-card': '357px',                 // Uso: w-hub-card
+        'icon-xxs': '12px',                  // Uso: w-icon-xxs
+        'icon-xs': '16px',                   // Uso: w-icon-xs
+        'icon-sm': '20px',                   // Uso: w-icon-sm
+        'icon-md': '24px',                   // Uso: w-icon-md
+        'icon-lg': '32px',                   // Uso: w-icon-lg
+        'icon-xl': '38px',                   // Uso: w-icon-xl
+        'ds-parteners-img': '454px',         // Uso: w-ds-parteners-img
       },
     },
     plugins: [
