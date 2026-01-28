@@ -5,22 +5,31 @@
     <link rel="icon" type="image/svg+xml" href="assets/logos/logo_ico.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>RTS</title>
-    <script type="module" crossorigin src="/rts-landing/assets/index-CzrzPwXF.js"></script>
-    <link rel="stylesheet" crossorigin href="/rts-landing/assets/index-lfb_8WiL.css">
+    <script type="module" crossorigin src="/RTS/assets/index-CKcv_8H_.js"></script>
+    <link rel="stylesheet" crossorigin href="/RTS/assets/index-CLtfkbxT.css">
   </head>
   <body>
-    <div id="root"></div>
-    <script>
-      // Handle SPA redirect from 404.html
-      (function() {
-        var params = new URLSearchParams(window.location.search);
-        var redirectPath = params.get('p');
-        if (redirectPath) {
-          // Remove the query parameter and set the correct URL
-          var newUrl = window.location.pathname.replace(/\/$/, '') + decodeURIComponent(redirectPath);
-          window.history.replaceState(null, '', newUrl);
+    <div id="root"></div>
+      <script>
+    // Limpiar GSAP antes de que React cargue
+    if (window.gsap) {
+      try {
+        if (window.gsap.core && window.gsap.core.ScrollTrigger) {
+          const triggers = window.gsap.core.ScrollTrigger.getAll();
+          triggers.forEach(st => {
+            try { st.kill(); } catch(e) {}
+          });
+          window.gsap.core.ScrollTrigger.clearScrollMemory();
         }
-      })();
-    </script>
+        window.gsap.killTweensOf('*');
+        window.gsap.globalTimeline.clear();
+      } catch(e) {
+        console.warn('Error cleaning GSAP on page load:', e);
+      }
+    }
+    
+    // Variable global para rastrear animaciones
+    window.__gsapAnimations = [];
+  </script>
   </body>
 </html>
