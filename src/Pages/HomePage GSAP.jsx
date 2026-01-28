@@ -21,27 +21,27 @@ useEffect(() => {
       return;
     }
 
-    console.log('🎯 Observando elemento:', whiteBlockRef.current);
-    console.log('🎯 Altura del elemento:', whiteBlockRef.current.offsetHeight);
-    console.log('🎯 Posición top:', whiteBlockRef.current.offsetTop);
+    // console.log('🎯 Observando elemento:', whiteBlockRef.current);
+    // console.log('🎯 Altura del elemento:', whiteBlockRef.current.offsetHeight);
+    // console.log('🎯 Posición top:', whiteBlockRef.current.offsetTop);
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          console.log('🔍 IntersectionObserver entry:', {
-            isIntersecting: entry.isIntersecting,
-            intersectionRatio: entry.intersectionRatio,
-            boundingClientRect: entry.boundingClientRect,
-            rootBounds: entry.rootBounds,
-            time: entry.time
-          });
+          //console.log('🔍 IntersectionObserver entry:', {
+          //   isIntersecting: entry.isIntersecting,
+          //   intersectionRatio: entry.intersectionRatio,
+          //   boundingClientRect: entry.boundingClientRect,
+          //   rootBounds: entry.rootBounds,
+          //   time: entry.time
+          // });
           
           if (entry.isIntersecting) {
-            console.log('✅ EN VISTA - Cambiando a light');
+            //console.log('✅ EN VISTA - Cambiando a light');
             setTheme("light");
             window.dispatchEvent(new Event("navLight"));
           } else {
-            console.log('❌ FUERA DE VISTA - Cambiando a dark');
+            //console.log('❌ FUERA DE VISTA - Cambiando a dark');
             setTheme("dark");
             window.dispatchEvent(new Event("navDark"));
           }
@@ -64,13 +64,13 @@ useEffect(() => {
 
   return (
     <>
-      {/* <HeroHomePage onPhase={onPhase} /> */}
+      <HeroHomePage onPhase={onPhase} />
       <div className="hero-outro-spacer" />
 
       <HorizontalCarousel />
       <Marquee />
 
-      <div  ref={whiteBlockRef}>
+      <div ref={whiteBlockRef}>
         <Story />
         <Hub />
         <Location/>

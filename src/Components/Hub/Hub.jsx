@@ -1,8 +1,9 @@
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import CardHub from "../UI/CardHub";
-import "./Hub.css";
+// src/Components/Hub/Hub.jsx
+import { useRef } from "react";
+import { motion, useTransform, useScroll } from "framer-motion";
+import { useMediaQuery } from "../../hooks/useMediaQuery.js";
+import { Typography, Button } from "../index";
+import { Grip } from "lucide-react";
 
 import iconInnovation from "../../assets/hub/icon1.png";
 import iconAcademy from "../../assets/hub/icon1.png";
@@ -11,143 +12,156 @@ import iconBTL from "../../assets/hub/icon1.png";
 import imgInnovation from "../../assets/hub/innovation.png";
 import imgAcademy from "../../assets/hub/academy.png";
 import imgBTL from "../../assets/hub/below.png";
-import ApproachButton from "../UI/ApproachButton";
+export default function Hub() {
+  const hubSectionRef = useRef(null);
 
-gsap.registerPlugin(ScrollTrigger);
+  // Detectar dispositivos
+  const isDesktop = useMediaQuery('(min-width: 1024px)');
+  const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
-export default function HUB() {
-  const rootRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: hubSectionRef
+  });
 
-  const cardData = [
-    {
-      title: "BELOW THE LINE",
-      icon: iconBTL,
-      image: imgBTL,
-      description:
-        "Below-the-line powerhouse — a creative and experiential unit where ideas meet industry.",
-      descriptionLight:
-        "Through initiatives like Rocking the Industry and the Data-Driven LAB, we go beyond traditional services to spark interaction, collaboration, and thought leadership.",
-    },
-    {
-      title: "ACADEMY",
-      icon: iconAcademy,
-      image: imgAcademy,
-      description:
-        "Dedicated to advancing technical skills and knowledge in industrial automation, OT/IT convergence, and analytics.",
-      descriptionLight:
-        "It serves as a center of excellence both for our internal teams and for clients, helping professionals stay ahead in a rapidly evolving industry.",
-    },
-    {
-      title: "INNOVATION LAB",
-      icon: iconInnovation,
-      image: imgInnovation,
-      description:
-        "Is more than a testing ground — it is a laboratory of ideas and execution where we develop new technologies.",
-      descriptionLight:
-        "Here, we develop new technologies, provide industrial tech consulting, and design pilot projects that bring innovation into real practice.",
-    },
-  ];
+  // Ajustar la altura del contenedor según dispositivo
+  const containerHeight = isDesktop ? "400vh" : isTablet ? "500vh" : "600vh";
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const root = rootRef.current;
-      const header = root.querySelector(".hub-fixed-header");
-      const cards = gsap.utils.toArray(".hub-card-wrapper");
+  // Valores de progreso para el scroll (0 a 1)
+  // Dividimos el scroll en 3 secciones para las 3 cards
+  const card1Range = [0, 0.33]; // Card 1 sticky en primera sección
+  const card2Range = [0.33, 0.66]; // Card 2 entra en segunda sección
+  const card3Range = [0.66, 1]; // Card 3 entra en tercera sección
 
-      gsap.set(cards, {
-        y: 20,
-        opacity: 0,
-        filter: "blur(12px)",
-      });
+  // Posición Y para cada card
+  const card1Y = useTransform(scrollYProgress, card1Range, ["0%", "0%"]);
+  const card2Y = useTransform(scrollYProgress, card2Range, ["100%", "9%"]); // pt-3 ≈ 3%
+  const card3Y = useTransform(scrollYProgress, card3Range, ["100%", "18%"]); // pt-3 * 2 ≈ 6%
 
-      gsap.set(cards, {
-        y: 0,
-        opacity: 0,
-        filter: "blur(14px)",
-      });
+  // Opacidad para las cards (aparecen cuando entran)
+  const card1Opacity = useTransform(scrollYProgress, [0, 0.1], [1, 1]);
+  const card2Opacity = useTransform(scrollYProgress, [0.33, 0.38], [0, 1]);
+  const card3Opacity = useTransform(scrollYProgress, [0.66, 0.71], [0, 1]);
 
-      const intro = gsap.timeline({
-        scrollTrigger: {
-          trigger: root,
-          start: "top 75%",
-        },
-      });
-
-      intro.to(header, {
-        y: 0,
-        opacity: 1,
-        filter: "blur(0px)",
-        duration: 0.9,
-        ease: "power3.out",
-      });
-
-      intro.to(
-        cards,
-        {
-          y: 0,
-          opacity: 1,
-          filter: "blur(0px)",
-          duration: 0.9,
-          stagger: 0.15,
-          ease: "power3.out",
-        },
-        "-=0.4"
-      );
-
-      const STACK_OFFSET = 95;
-
-      const main = gsap.timeline({
-        scrollTrigger: {
-          trigger: root,
-          start: "top top",
-          end: "+=260%",
-          scrub: 0.8,
-          pin: true,
-          pinSpacing: true,
-        },
-      });
-
-      cards.forEach((card, i) => {
-        gsap.set(card, { zIndex: i + 1 });
-
-        main.to(
-          card,
-          {
-            yPercent: -STACK_OFFSET * i,
-            ease: "power2.out",
-            duration: 1,
-          },
-          ">-0.15"
-        );
-      });
-    }, rootRef);
-
-    return () => ctx.revert();
-  }, []);
 
   return (
-    <section className="hub-section" id="hub" ref={rootRef}>
-      <div className="hub-fixed-header">
-        <h2 className="hub-title headline-medium desktop">
-          <span className="gradient-text">RTS HUB</span> IS OUR LABORATORY
-          <br />
-          OF IDEAS AND EXECUTION
-        </h2>
+    <section
+    id="hub-section"
+      className="relative w-full bg-background-inverse text-text-on-white-primary"
+      ref={hubSectionRef}
+      style={{ height: containerHeight }}
+    >
+      {/* Contenedor sticky que mantiene las cards en vista */}
+      <div className="sticky top-0 h-screen overflow-hidden w-full ">
+        <div className=" px-3 md:px-7 h-full w-full py-9">
+          <Typography
+            variant="headline-medium"
+            className="md:text-headline-large "
 
-        <h2 className="hub-title headline-small mobile">
-          <span className="gradient-text">RTS HUB</span> IS OUR LABORATORY
-          <br />
-          OF IDEAS AND EXECUTION
-        </h2>
-         <ApproachButton label="Learn more" href="#approach" />
-      </div>
+          ><span className="text-core-violet">RTS HUB</span> S OUR LABORATORY  <br />OF IDEAS AND EXECUTION</Typography>
+          <div className=" h-full flex items-center justify-center py-5 w-full ">
+            {/* Contenedor relativo para las cards superpuestas */}
+            <div className="relative w-full h-full">
 
-      <div className="hub-stack-container">
-        {cardData.map((item, i) => (
-          <div className="hub-card-wrapper" key={i}>
-            <CardHub {...item} />
+              {/* Card 1 - Sticky inicial */}
+              <motion.div
+                className="absolute w-full  bg-white rounded-xl shadow-2xl "
+                style={{
+                  y: card1Y,
+                  opacity: card1Opacity,
+                  //scale: card1Scale,
+                  zIndex: 10
+                }}
+              >
+                <div className="h-full grid grid-cols-1 md:grid-cols-3 gap-7 md:justify-between p-5">
+                  <div className="flex flex-col md:flex-row md:items-center gap-3">
+                    <Grip className="w-6 h-6 text-background-interactive shrink-0" />
+                    <Typography
+                      variant="headline-small"
+                      className=" "
+
+                    ><span className="bg-gradient-to-r from-[#7513FF] via-[#4348F3] to-[#0093CE] bg-clip-text text-transparent">BELOW THE LINE</span>  </Typography>
+
+                  </div>
+                  <img src={imgInnovation} className="hidden md:block w-[252px] h-[252px]" />
+                  <div className="flex flex-col gap-2 text-text-on-white-secondary">
+                    <Typography variant="title-body">
+                      Below-the-line powerhouse—a creative and experiential unit where ideas meet industry.
+                    </Typography>
+                    <Typography >
+                      Through initiatives like Rocking the Industry and the Data-Driven LAB, we go beyond traditional services to spark interaction, collaboration, and thought leadership.
+                    </Typography>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Card 2 - Entra desde abajo */}
+              <motion.div
+                className="absolute w-full  bg-white rounded-xl shadow-2xl "
+                style={{
+                  y: card2Y,
+                  opacity: card2Opacity,
+                  //scale: card2Scale,
+                  zIndex: 20
+                }}
+              >
+                <div className="h-full grid grid-cols-1 md:grid-cols-3 gap-7 md:justify-between p-5">
+                  <div className="flex flex-col md:flex-row md:items-center gap-3">
+                    <Grip className="w-6 h-6 text-background-interactive shrink-0" />
+                    <Typography
+                      variant="headline-small"
+                      className=" "
+
+                    ><span className="bg-gradient-to-r from-[#7513FF] via-[#4348F3] to-[#0093CE] bg-clip-text text-transparent">ACADEMY</span>  </Typography>
+
+                  </div>
+                  <img src={imgAcademy} className="hidden md:block w-[252px] h-[252px]" />
+                  <div className="flex flex-col gap-2 text-text-on-white-secondary">
+                    <Typography variant="title-body">
+                      Below-the-line powerhouse—a creative and experiential unit where ideas meet industry.
+                    </Typography>
+                    <Typography >
+                      Through initiatives like Rocking the Industry and the Data-Driven LAB, we go beyond traditional services to spark interaction, collaboration, and thought leadership.
+                    </Typography>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Card 3 - Entra desde abajo */}
+              <motion.div
+                className="absolute w-full  bg-white rounded-xl shadow-2xl"
+                style={{
+                  y: card3Y,
+                  opacity: card3Opacity,
+                  //scale: card3Scale,
+                  zIndex: 30
+                }}
+              >
+                <div className="h-full grid grid-cols-1 md:grid-cols-3 gap-7 md:justify-between p-5">
+                  <div className="flex flex-col md:flex-row md:items-center gap-3">
+                    <Grip className="w-6 h-6 text-background-interactive shrink-0" />
+                    <Typography
+                      variant="headline-small"
+                      className=" "
+
+                    ><span className="bg-gradient-to-r from-[#7513FF] via-[#4348F3] to-[#0093CE] bg-clip-text text-transparent">INNOVATION LAB</span>  </Typography>
+
+                  </div>
+                  <img src={imgInnovation} className="hidden md:block w-[252px] h-[252px]" />
+                  <div className="flex flex-col gap-2 text-text-on-white-secondary">
+                    <Typography variant="title-body">
+                      Below-the-line powerhouse—a creative and experiential unit where ideas meet industry.
+                    </Typography>
+                    <Typography >
+                      Through initiatives like Rocking the Industry and the Data-Driven LAB, we go beyond traditional services to spark interaction, collaboration, and thought leadership.
+                    </Typography>
+                  </div>
+                </div>
+              </motion.div>
+
+            </div>
           </div>
-        ))}
+        </div>
       </div>
     </section>
   );

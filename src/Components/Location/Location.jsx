@@ -5,11 +5,10 @@ import "./Location.css";
 import mapImg from "../../assets/map.png";
 import ApproachButton from "../UI/ApproachButton";
 import { Typography, Button } from "../index";
-gsap.registerPlugin(ScrollTrigger);
+// gsap.registerPlugin(ScrollTrigger);
 
 export default function Location() {
   const markersRef = useRef([]);
-  const rootRef = useRef(null);
 
   const markerData = [
     { name: "BUENOS AIRES" },
@@ -20,46 +19,46 @@ export default function Location() {
     { name: "SANTIAGO DE CHILE" },
   ];
 
-  useLayoutEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
+  // useLayoutEffect(() => {
+  //   const root = rootRef.current;
+  //   if (!root) return;
 
-    const setOverlap = () => {
-      const hub = document.querySelector("#hub");
-      const spacer = hub ? hub.closest(".pin-spacer") : null;
+  //   const setOverlap = () => {
+  //     const hub = document.querySelector("#hub");
+  //     const spacer = hub ? hub.closest(".pin-spacer") : null;
 
-      if (!spacer) {
-        root.style.setProperty("--loc-overlap", "0px");
-        return;
-      }
+  //     if (!spacer) {
+  //       root.style.setProperty("--loc-overlap", "0px");
+  //       return;
+  //     }
 
-      const spacerH = spacer.offsetHeight;
-      const vh = window.innerHeight;
+  //     const spacerH = spacer.offsetHeight;
+  //     const vh = window.innerHeight;
 
-      const extra = Math.max(0, spacerH - vh);
-      const maxOverlap = vh * 0.75;
-      const buffer = Math.min(180, vh * 0.22);
+  //     const extra = Math.max(0, spacerH - vh);
+  //     const maxOverlap = vh * 0.75;
+  //     const buffer = Math.min(180, vh * 0.22);
 
-      const overlap = Math.max(0, Math.min(extra, maxOverlap) - buffer);
-      root.style.setProperty("--loc-overlap", `${overlap}px`);
-    };
+  //     const overlap = Math.max(0, Math.min(extra, maxOverlap) - buffer);
+  //     root.style.setProperty("--loc-overlap", `${overlap}px`);
+  //   };
 
-    setOverlap();
-    requestAnimationFrame(() => ScrollTrigger.refresh());
+  //   setOverlap();
+  //   requestAnimationFrame(() => ScrollTrigger.refresh());
 
-    const onResize = () => {
-      setOverlap();
-      ScrollTrigger.refresh();
-    };
+  //   const onResize = () => {
+  //     setOverlap();
+  //     ScrollTrigger.refresh();
+  //   };
 
-    window.addEventListener("resize", onResize);
-    window.addEventListener("load", onResize, { once: true });
+  //   window.addEventListener("resize", onResize);
+  //   window.addEventListener("load", onResize, { once: true });
 
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
+  //   return () => window.removeEventListener("resize", onResize);
+  // }, []);
 
   return (
-    <section className="presence-section" ref={rootRef} id="location">
+    <section className="relative bg-background-inverse text-text-on-white-primary py-9"  id="location">
       <div className="presence-container">
         <div className="presence-left">
           <h4 className="presence-label">LOCATION</h4>
@@ -85,7 +84,7 @@ export default function Location() {
         <div className="presence-right">
           <div className="presence-canvas">
             <div className="presence-mapWrap">
-              <img src={mapImg} alt="Global map" className="presence-map" />
+              <img src={mapImg} alt="Global map" className="presence-map shrink-0" />
             </div>
 
             {markerData.map((item, i) => (

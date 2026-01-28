@@ -2,163 +2,109 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./Story.css";
-gsap.registerPlugin(ScrollTrigger);
+import { motion, useTransform, useScroll } from "framer-motion";
+import { useMediaQuery } from "../../hooks/useMediaQuery.js";
+import { Typography, Button } from "../index";
 
 export default function Story() {
-  const rootRef = useRef(null);
+  const storySectionRef = useRef(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const root = rootRef.current;
-      if (!root) return;
+  // Detectar dispositivos
+  // const isDesktop = useMediaQuery('(min-width: 1024px)');
+  // const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
+  // const isMobile = useMediaQuery('(max-width: 767px)');
 
-      const q = gsap.utils.selector(root);
+  const { scrollYProgress } = useScroll({
+    target: storySectionRef
+  });
 
-      const p1 = q(".story-panel.panel-1");
-      const p2 = gsap.utils.toArray(q(".story-panel.panel-2")); // hay 2 (mobile/desktop)
+  // Para el efecto fade in/out más preciso
+  const opacityRange = [0, 0.3, 0.7, 1]; // Ajusta estos valores para controlar el timing
+  const opacityRangePannel1 = [0, 1, 0, 0];
+  const opacityRangePannel2 = [0, 0, 1, 1];
 
-      // Estado inicial
-      gsap.set(root, { backgroundColor: "#000102" });
+  const opacityPannel1 = useTransform(scrollYProgress, opacityRange, opacityRangePannel1);
+  const opacityPannel2 = useTransform(scrollYProgress, opacityRange, opacityRangePannel2);
 
-      gsap.set(p1, {
-        autoAlpha: 1,
-        y: 0,
-        filter: "blur(0px)",
-        zIndex: 2,
-      });
-
-      gsap.set(p2, {
-        autoAlpha: 0,
-        y: 120,
-        filter: "blur(14px)",
-        zIndex: 1,
-      });
-
-      // ✅ Fondo cambia ANTES (tuneá este start)
-      const bgST = ScrollTrigger.create({
-        trigger: root,
-        start: "top 75%", // antes de llegar a top (más alto = más temprano)
-        onEnter: () => {
-          gsap.to(root, {
-            backgroundColor: "#ebeef0",
-            duration: 0.5,
-            ease: "power2.out",
-            overwrite: "auto",
-          });
-        },
-        onLeaveBack: () => {
-          gsap.to(root, {
-            backgroundColor: "#000102",
-            duration: 0.35,
-            ease: "power2.out",
-            overwrite: "auto",
-          });
-        },
-      });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: root,
-          start: "top top",
-          end: "+=220%",
-          scrub: 0.6,
-          pin: true,
-          anticipatePin: 1,
-        },
-      });
-
-      tl.to(p1, {
-        autoAlpha: 0,
-        y: -80,
-        filter: "blur(12px)",
-        ease: "power3.inOut",
-        duration: 0.4,
-      });
-
-      tl.to(
-        p2,
-        {
-          autoAlpha: 1,
-          y: 0,
-          filter: "blur(0px)",
-          ease: "power3.out",
-          duration: 0.6,
-        },
-        ">-=0.25"
-      );
-
-      return () => {
-        bgST.kill();
-        tl.scrollTrigger?.kill();
-        tl.kill();
-      };
-    }, rootRef);
-
-    return () => ctx.revert();
-  }, []);
+  // También podrías agregar un pequeño desplazamiento en Y para efecto parallax
+  const yOffsetPannel1 = useTransform(scrollYProgress, [0, 0.5], ["0px", "-20px"]);
+  const yOffsetPannel2 = useTransform(scrollYProgress, [0.3, 0.8], ["20px", "0px"]);
 
   return (
-    <section className="story-section" ref={rootRef}>
-      <div className="story-wrapper">
-        <h4 className="story-subtitle">OUR STORY</h4>
-
-        <div className="story-panel panel-1">
-          <h2 className="story-title desktop headline-medium">
-            RTS WAS BORN IN THE <br />
-            WORLD OF OPERATIONAL <br />
-            TECHNOLOGY
-          </h2>
-
-           <h2 className="story-title mobile headline-small">
-            RTS WAS BORN IN THE <br />
-            WORLD OF OPERATIONAL <br />
-            TECHNOLOGY
-          </h2>
-
-          <p className="story-body desktop">
-            — and evolved to 
-            engineer <br />the future 
-            through curated <br />
-            industrial innovation.
-          </p>
-
-          <p className="story-body mobile">
-            — and evolved to <br />
-            engineer the future <br />
-            through curated <br />
-            industrial innovation.
-          </p>
+    <section id="story-section" className="relative w-full md:h-[500vh] h-[300vh] bg-background-inverse text-text-on-white-primary" ref={storySectionRef}>
+      <div className="sticky top-0 h-screen  ">
+        <div className="pt-9 px-3 md:px-7">
+          <Typography variant="subtitle-md" children={"OUR STORY"} className="text-text-on-white-primary" />
         </div>
+        <div className="flex items-center justify-center overflow-hidden ">
+          <div className=" flex flex-col gap-4">
 
-        <div className="story-panel panel-2 story-mobile">
-          <h2 className="story-title headline-medium desktop">
-            OUR STORY ISN’T <br /> ONE OF CHANGE, <br />
-            BUT OF CONTINUOUS <br />
-            EVOLUTION
-          </h2>
 
-           <h2 className="story-title headline-small mobile ">
-            OUR STORY ISN’T <br /> ONE OF CHANGE, <br />
-            BUT OF CONTINUOUS <br />
-            EVOLUTION
-          </h2>
+            {/* Contenedor para ambos paneles (uno sobre otro) */}
+            <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center px-3 md:px-7">
+              {/* Panel 1 */}
+              <motion.div
+                id='panel1'
+                className=" w-full absolute "
+                style={{
+                  opacity: opacityPannel1,
+                  y: yOffsetPannel1
+                }}
+              >
+                <div className="flex flex-col justify-between w-full h-screen py-9 px-3 md:px-7 mt-9">
 
-          <p className="story-body">
-            — from control systems <br />
-            to intelligent ecosystems.
-          </p>
-        </div>
+                  <Typography variant="headline-medium" className="text-text-on-white-primary hidden md:block">
+                    RTS WAS BORN IN THE <br />
+                    WORLD OF OPERATIONAL <br />
+                    TECHNOLOGY
+                  </Typography>
 
-        <div className="story-panel panel-2 story-desktop">
-          <h2 className="story-title headline-medium">
-            OUR STORY ISN’T ONE OF CHANGE, <br />
-            BUT OF CONTINUOUS EVOLUTION
-          </h2>
+                  <Typography variant="headline-small" className="text-text-on-white-primary md:hidden">
+                    RTS WAS BORN <br />IN THE WORLD OF<br /> OPERATIONAL <br />TECHNOLOGY
+                  </Typography>
 
-          <p className="story-body">
-            — from control systems <br />
-            to intelligent ecosystems.
-          </p>
+                  <div className="w-full flex justify-end">
+                    <Typography variant="title-medium" className="text-text-on-white-primary hidden md:block font-base pb-9">
+                      — and evolved to engineer<br />the future through curated<br />industrial innovation.
+                    </Typography>
+
+                    <Typography variant="title-small" className="text-text-on-white-disabled md:hidden font-base pb-9">
+                      — and evolved to<br />engineer the future<br />through curated <br />industrial innovation.
+                    </Typography>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Panel 2 */}
+              <motion.div
+                id='panel2'
+                className=" w-full absolute"
+                style={{
+                  opacity: opacityPannel2,
+                  y: yOffsetPannel2
+                }}
+              >
+                <div className="flex flex-col justify-between w-full h-screen py-9 px-3 md:px-7  mt-9 ">
+                  <div className="flex flex-col gap-4">
+                    <Typography variant="headline-medium" className="text-text-on-white-primary hidden md:block">
+                      OUR STORY ISN’T ONE OF CHANGE,<br /> BUT OF CONTINUOS EVOLUTION
+                    </Typography>
+
+                    <Typography variant="headline-small" className="text-text-on-white-primary md:hidden">
+                      OUR STORY ISN’T<br />ONE OF CHANGE,<br /> BUT OF CONTINUOS<br />EVOLUTION
+                    </Typography>
+
+                    <Button children="Learn more about our culture" variant="filled-light" />
+                  </div>
+                  <div className="w-full flex justify-end">
+                    <Typography variant="title-medium" className="text-text-on-white-primary font-base pb-9">
+                      — from control systems<br />to intelligent ecosystems.
+                    </Typography>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

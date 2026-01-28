@@ -12,169 +12,129 @@ import img3 from "../../assets/carousel/RTS_Industries-3.png";
 import img4 from "../../assets/carousel/RTS_Industries-4.png";
 import img5 from "../../assets/carousel/RTS_Industries-5.png";
 import { RiArrowLeftLine, RiArrowRightLine } from "@remixicon/react";
-
-gsap.registerPlugin(ScrollTrigger);
+import { motion, useTransform, useScroll } from "framer-motion";
+import { useMediaQuery } from "../../hooks/useMediaQuery.js";
 
 export default function HorizontalCarousel() {
   const sectionRef = useRef(null);
   const scrollContainerRef = useRef(null);
+  const horizontalContainerRef = useRef(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const section = sectionRef.current;
-      const container = scrollContainerRef.current;
-      if (!section || !container) return;
+  // Detectar dispositivos
+  const isDesktop = useMediaQuery('(min-width: 1024px)');
+  const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
-      const PIN_START_OFFSET_VH = -0.2;
+  const { scrollYProgress } = useScroll({
+    target: sectionRef
+  });
 
-      const getTotalWidth = () => {
-        const total = container.scrollWidth - window.innerWidth;
-        return Math.max(0, total);
-      };
+  const xDesktop = useTransform(scrollYProgress, [0, 1], ["0%", "-60%"]);
+  const xTablet = useTransform(scrollYProgress, [0, 1], ["0%", "-85%"]);
+  const xMobile = useTransform(scrollYProgress, [0, 1], ["0%", "-90%"]);
 
-      const getStart = () => {
-        const px = Math.round(window.innerHeight * PIN_START_OFFSET_VH);
-        return `top top+=${px}`;
-      };
-
-      const PIN_BUFFER = window.innerHeight * 0.3;
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: getStart,
-          end: () => `+=${Math.max(1, getTotalWidth() + PIN_BUFFER * 2)}`,
-          scrub: 1.2,
-          pin: true,
-          anticipatePin: 1,
-          invalidateOnRefresh: true
-        }
-      });
-
-      tl.to({}, { duration: 0.05 });
-
-      tl.to(container, {
-        x: () => -getTotalWidth(),
-        ease: "power2.inOut",
-        duration: 1
-      });
-
-      tl.to({}, { duration: 0.2 });
-
-      const firstCard = container.children[0];
-      if (!firstCard) return;
-
-      const gap = parseInt(getComputedStyle(container).gap || "48", 10);
-      const cardWidth = firstCard.offsetWidth + gap;
-      const totalCards = container.children.length;
-
-      const autoTl = gsap.timeline({
-        repeat: -1,
-        paused: true,
-        defaults: { ease: "power3.inOut" }
-      });
-
-      for (let i = 0; i < totalCards; i++) {
-        autoTl.to(container, { x: () => -(i * cardWidth), duration: 1.6 }).to({}, { duration: 1.4 });
-      }
-
-      autoTl.to(container, { x: 0, duration: 1.6 });
-
-      const autoST = ScrollTrigger.create({
-        trigger: section,
-        start: getStart,
-        end: "bottom bottom",
-        onEnter: () => autoTl.play(),
-        onLeave: () => autoTl.pause(),
-        onEnterBack: () => autoTl.play(),
-        onLeaveBack: () => autoTl.pause()
-      });
-
-      const onLoad = () => ScrollTrigger.refresh();
-      window.addEventListener("load", onLoad);
-
-      return () => {
-        window.removeEventListener("load", onLoad);
-        autoST.kill();
-        tl.scrollTrigger?.kill();
-        tl.kill();
-        autoTl.kill();
-      };
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+  // Seleccionar el valor de x según el dispositivo
+  let xValue;
+  if (isDesktop) {
+    xValue = xDesktop;
+  } else if (isTablet) {
+    xValue = xTablet;
+  } else {
+    xValue = xMobile;
+  }
 
   return (
-    <section className="horizontal-carousel px-3 md:px-7" ref={sectionRef}>
-      <Typography
-        variant="subtitle-medium" className="absolute top-[10vh] md:left-6.5 left-3 text-text-primary">INDUSTRIES</Typography>
-      <div className="  absolute   top-[20vh] md:top-[20vh]  flex justify-between items-end    w-full                    z-[2] " >
-        <Typography
-          variant="headline-medium"
-          className=" hidden md:block      md:pl-6.5    "        >
-          WE NAVIGATE AND SERVE THE MOST <br />COMPLEX{" "}
-          <span className="      bg-gradient-to-r from-[#1c56ff] to-[#a463ff]      bg-clip-text text-transparent    ">
-            INDUSTRIAL GALAXIES
-          </span>
-        </Typography>
-        <Typography
-          variant="headline-small"
-          className=" md:hidden       pl-3       "        >
-          WE NAVIGATE AND SERVE THE MOST <br />COMPLEX{" "}
-          <span className="      bg-gradient-to-r from-[#1c56ff] to-[#a463ff]      bg-clip-text text-transparent    ">
-            INDUSTRIAL GALAXIES
-          </span>
-        </Typography>
-        <div className="pr-6.5    flex items-end      hidden md:block       ">
-          <Button
-            variant="carruselLeft-dark"
-            className="h-auto"       /* Esto evita que tome altura completa */
-          >
-            <RiArrowLeftLine className="h-4 w-3" />
-          </Button>
-          <Button
-            variant="carruselRight-dark"
-            className="h-auto"       /* Esto evita que tome altura completa */
-          >
-            <RiArrowRightLine className="h-4 w-3" />
-          </Button>
+    <section ref={sectionRef} className="relative h-[300vh] " >
+      <div className="sticky top-0  h-[780px]  flex items-center overflow-hidden w-full">
+        <div className=" px-3 md:px-7 w-full">
+
+
+          <div className="flex flex-col gap-12 w-full">
+            <div className="">
+              <div className="flex flex-col gap-4 w-full">
+                <Typography
+                  variant="subtitle-medium" className=" text-text-primary">INDUSTRIES</Typography>
+                <div className="w-full flex flex-row justify-between">
+                  <Typography
+                    variant="headline-medium"
+                    className=" hidden md:block       "        >
+                    WE NAVIGATE AND SERVE THE MOST <br />COMPLEX{" "}
+                    <span className="      bg-gradient-to-r from-[#1c56ff] to-[#a463ff]      bg-clip-text text-transparent    ">
+                      INDUSTRIAL GALAXIES
+                    </span>
+                  </Typography>
+                  <Typography
+                    variant="headline-small"
+                    className=" md:hidden        "        >
+                    WE NAVIGATE AND SERVE THE MOST <br />COMPLEX{" "}
+                    <span className="      bg-gradient-to-r from-[#1c56ff] to-[#a463ff]      bg-clip-text text-transparent    ">
+                      INDUSTRIAL GALAXIES
+                    </span>
+                  </Typography>
+                  <div id={"buttons"} className="flex items-end justify-end md:flex     ">
+                    <Button
+                      variant="carruselLeft-dark"
+                      className="h-auto"       /* Esto evita que tome altura completa */
+                      onClick={() => scrollContainerRef.current.scrollLeft -= 400}
+                    >
+                      <RiArrowLeftLine className="h-4 w-3" />
+                    </Button>
+                    <Button
+                      variant="carruselRight-dark"
+                      className="h-auto"       /* Esto evita que tome altura completa */
+                      onClick={() => scrollContainerRef.current.scrollLeft += 400}
+                    >
+                      <RiArrowRightLine className="h-4 w-3" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            {/* Contenedor que será "pinned" */}
+            <div className="relative h-[410px]">
+              <motion.div
+                // className="relative h-[410px] "
+                ref={scrollContainerRef}
+                className="flex gap-6 absolute left-0 top-0 h-full"
+                style={{ x: xValue }}
+              >
+                <Card
+                  title="Oil & Gas"
+                  image={img0}
+                  description="We enhance operational reliability and efficiency through OT/IT integration, ensuring safe, data-driven, and continuous performance across upstream, midstream, and downstream operations."
+                />
+                <Card
+                  title="Power Generation"
+                  image={img1}
+                  description="We help power assets improve availability, safety, and performance through automation, monitoring, and optimized operations."
+                />
+                <Card
+                  title="Chemicals & Petrochemicals"
+                  image={img2}
+                  description="We enable smarter, safer, and more efficient operations by digitalizing processes and connecting critical data from field to boardroom."
+                />
+                <Card
+                  title="Pulp & Paper"
+                  image={img3}
+                  description="We support sustainable production through automation, energy optimization, and process digitalization — driving efficiency and lower environmental impact."
+                />
+                <Card
+                  title="Metals & Mining"
+                  image={img4}
+                  description="We enable efficient and safe mining operations through advanced automation, digital monitoring, and environmental performance tracking."
+                />
+                <Card
+                  title="Pharmaceuticals"
+                  image={img5}
+                  description="An emerging universe with strict laws of motion—traceability, accuracy, and real-time compliance."
+                />
+              </motion.div>
+            </div>
+          </div>
         </div>
-      </div>
-
-
-
-      <div className="carousel-track overflow-hidden" ref={scrollContainerRef}>
-        <Card
-          title="Oil & Gas"
-          image={img0}
-          description="We enhance operational reliability and efficiency through OT/IT integration, ensuring safe, data-driven, and continuous performance across upstream, midstream, and downstream operations."
-        />
-        <Card
-          title="Power Generation"
-          image={img1}
-          description="We help power assets improve availability, safety, and performance through automation, monitoring, and optimized operations."
-        />
-        <Card
-          title="Chemicals & Petrochemicals"
-          image={img2}
-          description="We enable smarter, safer, and more efficient operations by digitalizing processes and connecting critical data from field to boardroom."
-        />
-        <Card
-          title="Pulp & Paper"
-          image={img3}
-          description="We support sustainable production through automation, energy optimization, and process digitalization — driving efficiency and lower environmental impact."
-        />
-        <Card
-          title="Metals & Mining"
-          image={img4}
-          description="We enable efficient and safe mining operations through advanced automation, digital monitoring, and environmental performance tracking."
-        />
-        <Card
-          title="Pharmaceuticals"
-          image={img5}
-          description="An emerging universe with strict laws of motion—traceability, accuracy, and real-time compliance."
-        />
       </div>
     </section>
   );

@@ -61,22 +61,22 @@ export default function HubPage() {
     };
   }, [setTheme]);
  // RESETEO DE SCROLL AL ENTRAR A LA PÁGINA
-  useEffect(() => {
-    // Resetear scroll al top cuando se monta el componente
-    window.scrollTo(0, 0);
+  // useEffect(() => {
+  //   // Resetear scroll al top cuando se monta el componente
+  //   window.scrollTo(0, 0);
     
-    // Si estás usando Lenis (como en App.jsx), resetea también
-    if (window.lenis) {
-      window.lenis.scrollTo(0, { immediate: true });
-    }
+  //   // Si estás usando Lenis (como en App.jsx), resetea también
+  //   if (window.lenis) {
+  //     window.lenis.scrollTo(0, { immediate: true });
+  //   }
     
-    // Forzar reset de ScrollTrigger
-    if (window.gsap && window.gsap.core.ScrollTrigger) {
-      window.gsap.core.ScrollTrigger.refresh();
-    }
+  //   // Forzar reset de ScrollTrigger
+  //   if (window.gsap && window.gsap.core.ScrollTrigger) {
+  //     window.gsap.core.ScrollTrigger.refresh();
+  //   }
     
-    console.log('HubPage mounted, scroll reset');
-  }, [location.key]);
+  //   console.log('HubPage mounted, scroll reset');
+  // }, [location.key]);
   return (
     <>
       <HeroHub />

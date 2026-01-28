@@ -120,7 +120,19 @@ export default function App() {
 
   // Eliminamos el useEffect que manejaba el background
   // porque ahora lo maneja el ThemeContext
-
+  useEffect(() => {
+    // Resetear scroll al top cuando se monta el componente
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // window.scrollTo(0, 0);
+    
+    // // Si estás usando Lenis (como en App.jsx), resetea también
+    // if (window.lenis) {
+    //   window.lenis.scrollTo(0, { immediate: true });
+    // }
+    
+    
+    console.log('App mounted, scroll reset');
+  }, [location.pathname]);
 
   return (
     <>
