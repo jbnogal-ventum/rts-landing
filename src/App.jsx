@@ -25,6 +25,7 @@ import PharmaceuticalsIndustryPage from "./Pages/PharmaceuticalsIndustryPage";
 import "./App.css";
 import "./index.css";
 import DigitalServicesPage from "./Pages/DigitalServicesPage";
+import MoleculePage from "./Pages/MoleculePage";
 
 // Registrar GSAP UNA SOLA VEZ
 if (typeof window !== 'undefined') {
@@ -156,6 +157,7 @@ export default function App() {
                 path="/"
                 element={<HomePage onPhase={setPhase} />}
               />
+              <Route path="/molecule" element={<MoleculePage />} />
               <Route
                 path="/hub"
                 element={<HubPage onPhase={setPhase}  />}

@@ -104,10 +104,10 @@ function CirclePlane() {
 function Molecule() {
     const location = useLocation()
     const { pathname } = location
-    const isHome = pathname === '/'
+    const isDisplay = pathname === '/' || pathname === '/molecule'
     return (
         <div style={{
-            display: !isHome && 'none',
+            display: !isDisplay && 'none',
             position: 'fixed',
             top: 0,
             left: 0,
