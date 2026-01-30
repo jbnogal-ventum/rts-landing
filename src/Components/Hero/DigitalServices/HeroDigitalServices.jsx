@@ -1,7 +1,6 @@
 import { Typography, Button } from "../../index";
 import { useEffect, useRef } from "react";
 import heroHubBackground from "../../../assets/Backgrounds/HeroDigitalServices.png";
-import { FadeInBlur } from "../../../animations/index.js"
 
 export default function HeroDigitalServices() {
     const rootRef = useRef(null);

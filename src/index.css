@@ -77,7 +77,7 @@
 
 /* Tema LIGHT */
 [data-theme="light"] {
-  --color-bg: var(--color-bg-light);          /* bg-background-white */
+  --color-bg: #EBEEF0;          /* bg-background-white */
   --color-text: #212121;        /* text-black - ajusta según necesites */
   --color-bg-light: var(--color-bg-light);
   --color-text-light: #000000;

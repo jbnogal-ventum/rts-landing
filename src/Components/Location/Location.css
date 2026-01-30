@@ -216,10 +216,7 @@
 
 
   .presence-right{
-    width: 140vw;
-    margin-left: 50%;
-    padding-top: 100px;
-    transform: translateX(-30%);
+    
     justify-content: center;
   }
   .presence-mapWrap{
@@ -274,10 +271,10 @@
   }
 
   /* POSICIONES MOBILE (relativas a presence-right oversize) */
-  .m1 { top: 80%; left: 22%; }
+  .m1 { top: 62%; left: 32%; }
   .m2 { top: 42%; left: 2%; }
-  .m3 { top: 72%; left: 28%; }
+  .m3 { top: 65%; left: 30%; }
   .m4 { top: 39%; left: 18%; }
   .m5 { top: 29%; left: 45%; }
-  .m6 { top: 66%; left: 28%; }
+  .m6 { top: 61%; left: 27%; }
 }

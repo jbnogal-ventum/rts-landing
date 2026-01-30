@@ -1,5 +1,6 @@
-import FadeInBlur from './FadeInBlur';
-import AnimatedItem from './AnimatedItem';
-import AnimatedList from './AnimatedList';
+export { AnimatedTextFlipY } from './AnimatedTextFlipY';
 
-export { FadeInBlur, AnimatedItem, AnimatedList };
+export { RevealAnimation } from './Reveal';
+export { SlideInAnimation } from './SlideIn';
+export { FadeInAnimation, FadeInScaleAnimation } from './FadeIn';
+export {  AnimatedBorder } from './AnimatedBorder';

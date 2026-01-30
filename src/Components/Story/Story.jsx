@@ -5,14 +5,55 @@ import "./Story.css";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { useMediaQuery } from "../../hooks/useMediaQuery.js";
 import { Typography, Button } from "../index";
+import { useTheme } from "../../contexts/ThemeContext";
 
 export default function Story() {
   const storySectionRef = useRef(null);
+  const { setTheme } = useTheme();
 
-  // Detectar dispositivos
-  // const isDesktop = useMediaQuery('(min-width: 1024px)');
-  // const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
-  // const isMobile = useMediaQuery('(max-width: 767px)');
+  useEffect(() => {
+    if (!storySectionRef.current) {
+     // console.log('⚠️ storySectionRef.current aún no existe');
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // console.log('🔍 IntersectionObserver entry:', {
+          //   isIntersecting: entry.isIntersecting,
+          //   intersectionRatio: entry.intersectionRatio,
+          //   boundingClientRect: entry.boundingClientRect,
+          //   rootBounds: entry.rootBounds,
+          //   time: entry.time
+          // });
+
+          if (entry.isIntersecting) {
+            //console.log('✅ EN VISTA - Cambiando a light');
+            setTheme("light");
+            //window.dispatchEvent(new Event("navLight"));
+          } else {
+            // Si está yendo para arriba, cambia a dark
+            //console.log('❌ FUERA DE VISTA - Cambiando a dark');
+            if (entry.boundingClientRect.y < 0) return;
+            setTheme("dark");
+            //window.dispatchEvent(new Event("navDark"));
+          }
+        });
+      },
+      {
+        threshold: 0.1, // Baja a 10% para más sensibilidad
+        rootMargin: "0px", // Quita los márgenes negativos para empezar
+      }
+    );
+
+    observer.observe(storySectionRef.current);
+
+    return () => {
+      console.log('🧹 Limpiando observer');
+      observer.disconnect();
+    };
+  }, [setTheme]);
 
   const { scrollYProgress } = useScroll({
     target: storySectionRef
@@ -31,7 +72,7 @@ export default function Story() {
   const yOffsetPannel2 = useTransform(scrollYProgress, [0.3, 0.8], ["20px", "0px"]);
 
   return (
-    <section id="story-section" className="relative w-full md:h-[500vh] h-[300vh] bg-background-inverse text-text-on-white-primary" ref={storySectionRef}>
+    <section id="story-section" className="relative w-full md:h-[500vh] h-[300vh] " ref={storySectionRef}>
       <div className="sticky top-0 h-screen  ">
         <div className="pt-9 px-3 md:px-7">
           <Typography variant="subtitle-md" children={"OUR STORY"} className="text-text-on-white-primary" />
@@ -63,12 +104,12 @@ export default function Story() {
                     RTS WAS BORN <br />IN THE WORLD OF<br /> OPERATIONAL <br />TECHNOLOGY
                   </Typography>
 
-                  <div className="w-full flex justify-end">
-                    <Typography variant="title-medium" className="text-text-on-white-primary hidden md:block font-base pb-9">
+                  <div className="w-full flex justify-end text-text-on-white-disabled">
+                    <Typography variant="title-medium" className=" hidden md:block font-base pb-9">
                       — and evolved to engineer<br />the future through curated<br />industrial innovation.
                     </Typography>
 
-                    <Typography variant="title-small" className="text-text-on-white-disabled md:hidden font-base pb-9">
+                    <Typography variant="title-small" className=" md:hidden font-base pb-9">
                       — and evolved to<br />engineer the future<br />through curated <br />industrial innovation.
                     </Typography>
                   </div>
@@ -97,7 +138,7 @@ export default function Story() {
                     <Button children="Learn more about our culture" variant="filled-light" />
                   </div>
                   <div className="w-full flex justify-end">
-                    <Typography variant="title-medium" className="text-text-on-white-primary font-base pb-9">
+                    <Typography variant="title-medium" className="text-text-on-white-disabled font-base pb-9">
                       — from control systems<br />to intelligent ecosystems.
                     </Typography>
                   </div>

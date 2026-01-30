@@ -81,6 +81,13 @@ export default {
           hover: '#4B4B4B',                  // Uso: bg-assistant-hover
           prompt: '#5A5A5A',                 // Uso: bg-assistant-prompt
         },
+
+        navbar: {
+          'background-primary': 'rgba(199, 199, 199, 0.1)',
+          'menu-primary': 'rgba(199, 199, 199, 0.2)',
+          'button-hover-primary': "rgba(242, 242, 242, 0.2)",
+          'button-active-primary': "rgba(242, 242, 242, 0.2)",
+        }
       },
 
       // ===== ESPACIADO (Spacing System) =====
@@ -272,6 +279,7 @@ export default {
         'icon-lg': '32px',                   // Uso: h-icon-lg
         'icon-xl': '38px',                   // Uso: h-icon-xl
         'ds-parteners-img': '403px',          // Uso: h-ds-parteners-img
+        'industry-card': '409px',             // Uso: h-industry-card
         
       },
       width: {
@@ -285,6 +293,7 @@ export default {
         'icon-lg': '32px',                   // Uso: w-icon-lg
         'icon-xl': '38px',                   // Uso: w-icon-xl
         'ds-parteners-img': '454px',         // Uso: w-ds-parteners-img
+        'industry-card': '535px',             // Uso: w-industry-card
       },
     },
     plugins: [

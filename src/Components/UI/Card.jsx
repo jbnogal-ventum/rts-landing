@@ -1,9 +1,10 @@
 // src/Components/UI/Card.jsx
 import React from "react";
 import "./Card.css";
-
-
-export default function Card({ title, description, image, children }) {
+import { useNavigate } from "react-router-dom";
+import { Button } from "../index";
+export default function Card({ title, description, image,to, children }) {
+  const navigate = useNavigate();
   return (
     <div className="card-component">
       <img src={image} alt={title} className="card-image" />
@@ -15,9 +16,9 @@ export default function Card({ title, description, image, children }) {
       <div className="card-hover">
         <p className="card-hover-description body-sm">{description}</p>
 
-        <button className="card-hover-button body-sm">
+        <Button variant="navbar-filled-light" className="" onClick={() => navigate(to)}>
           Learn more
-        </button>
+        </Button>
       </div>
     </div>
   );

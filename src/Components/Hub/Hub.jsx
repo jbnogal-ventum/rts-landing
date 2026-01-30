@@ -46,26 +46,29 @@ export default function Hub() {
 
   return (
     <section
-    id="hub-section"
-      className="relative w-full bg-background-inverse text-text-on-white-primary"
+      id="hub-section"
+      className="relative w-full bg-background-inverse text-text-on-white-primary "
       ref={hubSectionRef}
       style={{ height: containerHeight }}
     >
       {/* Contenedor sticky que mantiene las cards en vista */}
       <div className="sticky top-0 h-screen overflow-hidden w-full ">
-        <div className=" px-3 md:px-7 h-full w-full py-9">
-          <Typography
-            variant="headline-medium"
-            className="md:text-headline-large "
+        <div className=" px-3 md:px-7 h-full w-full lg:py-9 xs:py-5">
+          <div className=" h-full flex flex-col gap-5   w-full mt-5">
+            <div className="flex flex-col gap-3 md:flex-row md:justify-between">
+              <Typography
+                variant="headline-medium"
+                className="md:text-headline-large "
 
-          ><span className="text-core-violet">RTS HUB</span> S OUR LABORATORY  <br />OF IDEAS AND EXECUTION</Typography>
-          <div className=" h-full flex items-center justify-center py-5 w-full ">
+              ><span className="text-core-violet">RTS HUB</span> S OUR LABORATORY  <br />OF IDEAS AND EXECUTION</Typography>
+              <Button className="h-fit">Learn more</Button>
+            </div>
             {/* Contenedor relativo para las cards superpuestas */}
-            <div className="relative w-full h-full">
+            <div className="relative w-full h-full mb-9 ">
 
               {/* Card 1 - Sticky inicial */}
               <motion.div
-                className="absolute w-full  bg-white rounded-xl shadow-2xl "
+                className="absolute w-full  bg-white rounded-xl  shrink-0 border-[1px] border-border-subtle "
                 style={{
                   y: card1Y,
                   opacity: card1Opacity,
@@ -97,7 +100,7 @@ export default function Hub() {
 
               {/* Card 2 - Entra desde abajo */}
               <motion.div
-                className="absolute w-full  bg-white rounded-xl shadow-2xl "
+                className="absolute w-full  bg-white rounded-xl  border-[1px] border-border-subtle "
                 style={{
                   y: card2Y,
                   opacity: card2Opacity,
@@ -129,7 +132,7 @@ export default function Hub() {
 
               {/* Card 3 - Entra desde abajo */}
               <motion.div
-                className="absolute w-full  bg-white rounded-xl shadow-2xl"
+                className="absolute w-full  bg-white rounded-xl border-[1px] border-border-subtle "
                 style={{
                   y: card3Y,
                   opacity: card3Opacity,

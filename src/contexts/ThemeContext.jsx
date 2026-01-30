@@ -28,7 +28,7 @@ export const ThemeProvider = ({ children }) => {
     if (metaThemeColor) {
       metaThemeColor.setAttribute(
         'content', 
-        theme === 'dark' ? '#030108' : '#ffffff'
+        theme === 'dark' ? '#030108' : '#EBEEF0'
       );
     }
   }, [theme]);

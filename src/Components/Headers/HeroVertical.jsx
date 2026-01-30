@@ -111,7 +111,7 @@ useEffect(() => {
 
       <Canvas
         camera={{ position: [0, 0, 8], fov: 45 }}
-        style={{ position: "fixed", inset: 0, zIndex: 0 }}
+        style={{ position: "fixed", inset: 0, zIndex: 0, width: "100%" }}
         gl={{ antialias: true, powerPreference: "high-performance" }}
       >
         <Scene scroll={scroll} phase={phase} />

@@ -13,53 +13,7 @@ import bannerImg from "../assets/Banner.jpeg";
 
 export default function HomePage({ onPhase }) {
   const whiteBlockRef = useRef(null);
-  const { setTheme } = useTheme();
-
-useEffect(() => {
-    if (!whiteBlockRef.current) {
-      console.log('⚠️ whiteBlockRef.current aún no existe');
-      return;
-    }
-
-    console.log('🎯 Observando elemento:', whiteBlockRef.current);
-    console.log('🎯 Altura del elemento:', whiteBlockRef.current.offsetHeight);
-    console.log('🎯 Posición top:', whiteBlockRef.current.offsetTop);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          console.log('🔍 IntersectionObserver entry:', {
-            isIntersecting: entry.isIntersecting,
-            intersectionRatio: entry.intersectionRatio,
-            boundingClientRect: entry.boundingClientRect,
-            rootBounds: entry.rootBounds,
-            time: entry.time
-          });
-          
-          if (entry.isIntersecting) {
-            console.log('✅ EN VISTA - Cambiando a light');
-            setTheme("light");
-            window.dispatchEvent(new Event("navLight"));
-          } else {
-            console.log('❌ FUERA DE VISTA - Cambiando a dark');
-            setTheme("dark");
-            window.dispatchEvent(new Event("navDark"));
-          }
-        });
-      },
-      {
-        threshold: 0.1, // Baja a 10% para más sensibilidad
-        rootMargin: "0px", // Quita los márgenes negativos para empezar
-      }
-    );
-
-    observer.observe(whiteBlockRef.current);
-
-    return () => {
-      console.log('🧹 Limpiando observer');
-      observer.disconnect();
-    };
-  }, [setTheme]);
+ 
 
 
   return (

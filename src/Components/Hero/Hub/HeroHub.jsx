@@ -1,8 +1,7 @@
 import { Typography, Button } from "../../index";
 import { useEffect, useRef } from "react";
 import heroHubBackground from "../../../assets/Backgrounds/heroHubBackground.jpg";
-import { FadeInBlur } from "../../../animations/index.js"
-export default function HeroHub({ onPhase }) {
+export default function HeroHub() {
     const rootRef = useRef(null);
     return (<section
         id="hero-hub"
