@@ -204,7 +204,7 @@ export default function Navbar() {
 
               <Button
                 variant={theme === "light" ? "navbar-light" : "navbar-dark"}
-                className=""
+                className={`${ddOpen === "what" ? "!bg-navbar-background-primary" :""}`}
                 onClick={() => openDropdown("what")}
               >
                 <div className="flex flex-row items-center gap-2 ">
@@ -217,12 +217,12 @@ export default function Navbar() {
 
               <Button
                 variant={theme === "light" ? "navbar-light" : "navbar-dark"}
-                className="flex items-center gap-2"
+                className={`${ddOpen === "industries" ? "!bg-navbar-background-primary" :""}`}
                 onClick={() => openDropdown("industries")}
               >
                 <span>Industries</span>
                 <ChevronDown
-                  className={` transition-transform duration-300 ${ddMobileOpen === "what" ? "rotate-180" : ""}`}
+                  className={` transition-transform duration-300 ${ddOpen === "industries" ? "rotate-180" : ""}`}
                 />
               </Button>
               <Button
@@ -287,7 +287,7 @@ export default function Navbar() {
               <div className="relative ">
                 <Button
                   variant={theme === "light" ? "navbar-light" : "navbar-dark"}
-                  className="flex items-center gap-2"
+                  className={`flex items-center gap-2 `}
                 >
                   <span>What we do</span>
                   <ChevronDown

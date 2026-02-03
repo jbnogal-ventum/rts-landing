@@ -11,6 +11,9 @@ import academyCardBackgroundImage from "../assets/Backgrounds/academyCardBackgro
 import { Brain, DatabaseZap, GraduationCap, Grip, GripHorizontal, GripVertical, Sprout, Telescope } from "lucide-react";
 import { useTheme } from "../contexts/ThemeContext";
 import { useLocation } from "react-router-dom";
+import OvalPods from '../assets/pages_items/oval_pods_mono.svg?react'; // Nota el ?react
+import CirclePods from '../assets/pages_items/circle_pods_mono.svg?react';
+import DicePods from '../assets/pages_items/dice_pods_mono.svg?react';
 
 export default function HubPage() {
   const location = useLocation();
@@ -60,23 +63,7 @@ export default function HubPage() {
       observer.disconnect();
     };
   }, [setTheme]);
- // RESETEO DE SCROLL AL ENTRAR A LA PÁGINA
-  // useEffect(() => {
-  //   // Resetear scroll al top cuando se monta el componente
-  //   window.scrollTo(0, 0);
-    
-  //   // Si estás usando Lenis (como en App.jsx), resetea también
-  //   if (window.lenis) {
-  //     window.lenis.scrollTo(0, { immediate: true });
-  //   }
-    
-  //   // Forzar reset de ScrollTrigger
-  //   if (window.gsap && window.gsap.core.ScrollTrigger) {
-  //     window.gsap.core.ScrollTrigger.refresh();
-  //   }
-    
-  //   console.log('HubPage mounted, scroll reset');
-  // }, [location.key]);
+
   return (
     <>
       <HeroHub />
@@ -104,16 +91,18 @@ export default function HubPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Primera fila de 3 cards */}
               {[
-                { title: 'Bellow The Line', icon: <GripHorizontal className="w-5 h-5 text-core-violet" />, info: 'A creative and experiential \nunit where ideas meet industry.' },
-                { title: 'Academy', icon: <Grip className="w-5 h-5 text-core-violet" />, info: 'Training and development  \narm of RTS Group.' },
-                { title: 'Innovation Lab', icon: <GripVertical className="w-5 h-5 text-core-violet" />, info: 'More than a testing ground—it is a laboratory of ideas and execution.' },
+                { title: 'Bellow The Line', icon: OvalPods, info: 'A creative and experiential \nunit where ideas meet industry.' },
+                { title: 'Academy', icon: DicePods, info: 'Training and development  \narm of RTS Group.' },
+                { title: 'Innovation Lab', icon: CirclePods, info: 'More than a testing ground—it is a laboratory of ideas and execution.' },
               ].map((card, index) => (
                 <div
                   key={`hub-card-laboratory-${index}`}
                   className="rounded-md shadow-md p-5 flex flex-col justify-between h-hub-card border border-assistant-prompt bg-background-primary"
                 >
                   <div className="flex flex-col gap-3">
-                    {card.icon}
+                     <card.icon 
+          className="w-icon-xl h-icon-xl text-core-violet fill-current"
+        />
                     <Typography
                       variant="title-body"
                       className="font-bold"
@@ -275,17 +264,17 @@ export default function HubPage() {
       </section>
 
       <Banner
-        variant="image"
         backgroundImage={bannerImg}
-        overlay={true}
-        titleClassName="display-medium"
+        overlay={80}
+        variantDesktop="headline-medium"
+        variantMobile="headline-small"
         titleDesktop={"WOULD YOU LIKE TO KNOW\nMORE ABOUT OUR EXPERIENCE?"}
         titleMobile={"WOULD YOU LIKE TO KNOW MORE ABOUT OUR EXPERIENCE?"}
 
         buttons={[
-          { label: "Book a meeting now", href: "#book", variant: "filled-dark" },
+          { children: "Book a meeting now",  variant: "filled-dark" },
         ]}
-        start="top top"
+        backgroundPosition="center center"
       />
 
     </>

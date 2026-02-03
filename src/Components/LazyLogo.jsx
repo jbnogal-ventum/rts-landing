@@ -33,8 +33,8 @@ export function LazyLogo({
   };
 
   const logoSizeClasses = {
-    small: "max-h-6",
-    medium: "max-h-8",
+    small: "max-h-10",
+    medium: "max-h-12",
     large: "max-h-10",
     xlarge: "max-h-12"
   };
@@ -64,7 +64,7 @@ export function LazyLogo({
       <img 
         src={logo} 
         alt={alt} 
-        className={`${logoSizeClasses[size]} max-w-[80%] object-contain ${logoClass}`}
+        className={`h-auto max-w-[80%] object-contain ${logoClass}`}
         loading="lazy"
       />
     </div>

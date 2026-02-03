@@ -155,9 +155,7 @@ export default {
         'headline-large': '46px',            // Uso: text-headline-large
         'headline-medium': '40px',           // Uso: text-headline-medium
         'headline-small': '28px',            // Uso: text-headline-small
-'headline-lg': '46px',               // Uso: text-headline-lg
-'headline-md': '40px',               // Uso: text-headline-md
-'headline-sm': '28px',               // Uso: text-headline-sm
+
 
         // Titles
         'title-large': '30px',               // Uso: text-title-large
@@ -206,19 +204,27 @@ export default {
 
       // ===== TIPOGRAFÍA - ESPACIADO DE LETRAS =====
       letterSpacing: {
-        'display-lg': '0.05em',              // Uso: tracking-display-lg
-        'display-md': '-0.03em',             // Uso: tracking-display-md
-        'display-sm': '-0.02em',             // Uso: tracking-display-sm
+        'display-lg': '5%',              // Uso: tracking-display-lg
+        'display-md': '0%',             // Uso: tracking-display-md
+        'display-sm': '0%',             // Uso: tracking-display-sm
 
-        'headline-small': '0.05em',          // Uso: tracking-headline-small
-        'headline-medium': '0.05em',         // Uso: tracking-headline-medium
+        'headline-large': '5%',          // Uso: tracking-headline-large
+        'headline-medium': '5%',         // Uso: tracking-headline-medium
+        'headline-small': '5%',          // Uso: tracking-headline-small
 
-        'title-small': '-0.02em',            // Uso: tracking-title-small
+        'title-large': '-2%',                // Uso: tracking-title-large
+        'title-medium': '-2%',               // Uso: tracking-title-medium
         'title-body': '-2%',                 // Uso: tracking-title-body
+        'title-small': '-2%',            // Uso: tracking-title-small
 
-        'subtitle-md': '0.05em',             // Uso: tracking-subtitle-md
-        'subtitle-lg': '0.05em',             // Uso: tracking-subtitle-lg (agregar si falta)
-        'subtitle-sm': '0.05em',             // Uso: tracking-subtitle-sm (agregar si falta)
+        'body-lg': '0%',                 // Uso: tracking-body-lg
+        'body-md': '0%',                 // Uso: tracking-body-md
+        'body-sm': '0%',                 // Uso: tracking-body-sm
+        'body-default': '0%',            // Uso: tracking-body-default
+
+        'subtitle-md': '0%',             // Uso: tracking-subtitle-md
+        'subtitle-lg': '0%',             // Uso: tracking-subtitle-lg (agregar si falta)
+        'subtitle-sm': '0%',             // Uso: tracking-subtitle-sm (agregar si falta)
       },
 
       // ===== TIPOGRAFÍA - PESOS =====

@@ -194,20 +194,18 @@ export default function EnergyPage() {
         </section>
       </div>
       <Banner
-        variant="image"
-        backgroundImage={bannerImg}
-        overlay={50}
-        variantMobile="headline-small"
-        variantDesktop="headline-medium"
-        titleDesktop={"WOULD YOU LIKE TO KNOW \nMORE ABOUT OUR EXPERIENCE?"}
-        titleMobile={"WOULD YOU LIKE TO KNOW MORE ABOUT OUR EXPERIENCE?"}
-
-        buttons={[
-          { label: "Download the full document", href: "#contact", variant: "outlined-dark" },
-          { label: "Book a meeting now", href: "#book", variant: "filled-dark" },
-        ]}
-        start="top top"
-      />
+              titleClassName="headline-medium"
+              backgroundImage={bannerImg}
+              titleDesktop={"WOULD YOU LIKE TO KNOW\nMORE ABOUT OUR EXPERIENCE?"}
+              overlay={50}
+              buttons={[
+                {
+                  children: "Download the full document",
+                  variant: "outlined-dark",
+                },
+                { children: "Book a meeting now", variant: "filled-dark", className: "w-full" },
+              ]}
+            />
 
     </>
   );

@@ -5,18 +5,19 @@ import { useEffect, useRef } from "react";
 import { Typography, Button } from "../Components/index";
 import ApproachButton from "../Components/UI/ApproachButton";
 import Accordeon from "../Components/UI/Accordeon";
-import BannerText from "../Components/BannerText/BannerText";
+import SwapContent from "../Components/SwapContent";
 import Table from "../Components/UI/Table";
 import Banner from "../Components/Banner/Banner";
 import { useTheme } from "../contexts/ThemeContext";
-import bannerOne from "../assets/A&C1.png";
-import bannerTwo from "../assets/A&C.png";
+
 import bannerImg from "../assets/Content.png";
+import HeroAutomation from "../Components/Hero/Automation/HeroAutomation";
+import ovalPods from "../assets/pages_items/oval_pods.svg";
+import circlePods from "../assets/pages_items/circle_pods.svg";
+import dicePods from "../assets/pages_items/dice_pods.svg";
 
-import iconPods from "../assets/hub/icon1.png";
-import iconEmbedded from "../assets/hub/Pods.png";
 import integrationsImg from "../assets/integrations.png";
-
+import expertiseBackground from "../assets/Backgrounds/innovationLabBackgroung.jpg";
 import "./AutomationControls.css";
 
 
@@ -87,21 +88,95 @@ const engineeringCards = [
     title: "Dedicated Pods",
     body:
       "Multidisciplinary RTS teams (automation, IT/OT, data analytics, commissioning) assigned to targeted objectives — from system migrations to full lifecycle projects.",
-    icon: iconPods,
+    icon: ovalPods,
   },
   {
     title: "Embedded Engineers",
     body:
       "Individual RTS specialists integrated into client teams, supporting specific project tasks or long-term maintenance in hybrid or remote modes.",
-    icon: iconEmbedded,
+    icon: circlePods,
   },
   {
     title: "Hybrid Workforce\nas-a-Service",
     body:
       "A combined model with onsite engineers and remote RTS Global Operations support, ensuring 24/7 responsiveness and access to global expertise.",
-    icon: iconPods,
+    icon: dicePods,
   },
 ];
+
+const itemsExpertice = [
+  {
+    id: "e1",
+    title: "Areas of expertise",
+    body: <ul className="flex flex-col list-disc pl-4">
+      <li >
+        <Typography
+          children={`Process Control Systems (Honeywell, Siemens, Rockwell, ABB)`}
+        />
+      </li>
+      <li >
+        <Typography
+          children={`AVEVA PI System & Industrial Data Infrastructure`}
+        />
+      </li>
+      <li >
+        <Typography
+          children={`OT Networking & Cybersecurity`}
+        />
+      </li>
+      <li >
+        <Typography
+          children={`SCADA & Edge Computing`}
+        />
+      </li>
+      <li >
+        <Typography
+          children={`Energy Management & Power Systems`}
+        />
+      </li>
+      <li >
+        <Typography
+          children={`Process Optimization & Industrial Analytics`}
+        />
+      </li>
+      <li >
+        <Typography
+          children={`Digital Twin Development`}
+        />
+      </li>
+      <li >
+        <Typography
+          children={`FAT/SAT, Commissioning & Field Services`}
+        />
+      </li>
+    </ul>
+  },
+  {
+    id: "e2",
+    title: "Cost-Effective Planning",
+    body: "Convert fixed costs into variable ones. Scale your engineering capacity to match project demand without long-term overhead."
+  },
+  {
+    id: "e3",
+    title: "On-Demand Expertise",
+    body: "Access highly qualified professionals in automation, networking, cybersecurity, PI System, IT/OT convergence, energy systems, commissioning, and more — instantly."
+  },
+  {
+    id: "e4",
+    title: "Process Optimization",
+    body: "Our engineers bring RTS’s proven methodologies to enhance process performance and operational efficiency from day one."
+  },
+  {
+    id: "e5",
+    title: "Integrated Knowledge Transfer",
+    body: "We ensure full documentation and skill transfer, so your organization retains expertise even after the engagement ends."
+  },
+  {
+    id: "e6",
+    title: "Unlock More Projects — Without More Headcount",
+    body: "Increase your execution bandwidth, pursue new contracts, and meet deadlines without expanding internal teams."
+  }
+]
 
 export default function AutomationControlsPage({ setNavMode }) {
 
@@ -113,19 +188,19 @@ export default function AutomationControlsPage({ setNavMode }) {
       return;
     }
 
-   
+
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-         
+
 
           if (entry.isIntersecting) {
             //console.log('✅ EN VISTA - Cambiando a light');
             setTheme("light");
             window.dispatchEvent(new Event("navLight"));
           } else {
-           // console.log('❌ FUERA DE VISTA - Cambiando a dark');
+            // console.log('❌ FUERA DE VISTA - Cambiando a dark');
             setTheme("dark");
             window.dispatchEvent(new Event("navDark"));
           }
@@ -147,203 +222,252 @@ export default function AutomationControlsPage({ setNavMode }) {
 
 
   return (
-    <main className="automation-page">
+    <main id="automation-page">
+      <HeroAutomation />
 
-      <section className="layout-automation">
-        <div className="automation-hero">
-          <h1 className="display-lg">
-            <span className="line">AUTOMATION </span>
-            <br />
-            <span className="line">& CONTROLS</span>
-          </h1>
+      <section id="automation-expertise" className="relative"
+      >
+        {/* Contenedor para la imagen de fondo - FONDO COMPLETO */}
+        <div className="absolute inset-0 z-0 hidden md:block">
+          {expertiseBackground && (
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{
+                backgroundImage: `url(${expertiseBackground})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'top center',
+                backgroundRepeat: 'no-repeat'
+              }}
+              aria-hidden="true"
+            />
+          )}
 
-          <p className="title-medium subtitle-hero subtitle-hero--desktop">
-            — provide expert guidance to <br />
-            design and integrate control systems
-          </p>
+          {/* Overlay */}
+          <div
+            className=" absolute inset-0 bg-gradient-to-b from-[#030108] to-transparent h-1/2"
+            style={{
+              zIndex: 1
+            }}
+          />
+          <div
+            className="absolute inset-0 bg-background-primary"
+            style={{
+              opacity: 0.8, // Convertir 50 a 0.5
+              zIndex: 2
+            }}
+          />
+        </div>
 
-          <p className="title-small subtitle-hero subtitle-hero--mobile">
-            — provide expert <br />
-            guidance to design and <br />
-            integrate control systems
-          </p>
+
+        <div className="flex flex-col pt-9 pb-9 md:pb-7 px-3 md:px-7 gap-7 relative z-10 ">
+          <div className="flex flex-col md:flex-row  gap-7 ">
+            <div className="flex flex-col gap-5 md:gap-7 w-full md:w-1/2">
+              <Typography variant="title-medium">
+                Devoted to maintaining, innovating, and enhancing industrial control systems, <br className="md:hidden" />we engineer projects across various industries.
+              </Typography>
+
+              <Button variant="filled-dark" className="w-fit">
+                Book a meeting now
+              </Button>
+            </div>
+
+            <div className="flex flex-col gap-4 w-full md:w-1/2">
+              <Typography variant="subtitle-lg" className="text-text-secondary">
+                Key areas of expertise
+              </Typography>
+              <Accordeon items={items} defaultOpen={0} allowCollapse />
+            </div>
+          </div>
+          <div className="hidden md:block pt-9">
+            <Typography
+              variant="headline-large"
+              className="text-center"
+            >
+              WE ARE COMMITTED <br />TO DELIVERING {" "}
+              <span className="bg-gradient-to-br from-[#7513FF] via-[#4348F3] to-[#0093CE] bg-clip-text text-transparent">
+                EFFICIENT<br /> AND RELIABLE
+              </span> SOLUTIONS
+            </Typography>
+          </div>
         </div>
       </section>
+            <SwapContent />
 
-
-      <section className="automation-expertiseSection">
-        <div className="automation-expertiseLeft">
-          <p className="title-medium desktop">
-            Devoted to maintaining, innovating,
-            <br /> and enhancing industrial control <br />
-            systems, we engineer projects across <br /> various industries.
-          </p>
-
-          <p className="title-medium mobile">
-            Devoted to maintaining, innovating,
-            and enhancing  <br /> industrial control
-            systems,<br /> we engineer projects across <br /> various industries.
-          </p>
-
-          <ApproachButton label="Book a meeting now" />
-
-        </div>
-
-        <div className="automation-expertiseRight">
-          <p className="automation-kicker">Key areas of expertise</p>
-          <Accordeon items={items} defaultOpen={0} allowCollapse />
-        </div>
-      </section>
-
-
-
-      <BannerText
-        imgOne={bannerOne}
-        imgTwo={bannerTwo}
-        nextLeftItems={[]}
-        nextRightItems={[]}
-      />
       <div ref={whiteBlockRef}>
+        <section id="honey-well" className="relative overflow-hidden ">
+          {/* GRADIENTE BACKGROUND */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+            {/* DESKTOP: Primer gradiente principal */}
+            <div
+              className="absolute hidden md:block"
+              style={{
+                background: 'radial-gradient(145.3% 70.02% at 45.94% 35.79%, rgba(255, 168, 0, 1) 24.04%, rgba(255, 0, 0, 1) 60.58%, rgba(255, 71, 214, 1) 100%)',
+                transform: 'rotate(-112deg)',
+                width: '50vw',
+                height: '50vh',
+                top: '-30%',
+                left: '30%',
+                filter: 'blur(400px)',
+                // Suavizar transiciones
+                mixBlendMode: 'screen',
+              }}
+            />
 
-        <section className="whiteTableWrap flex flex-col gap-9">
-          <div className="honeywellElite__inner">
+            {/* MOBILE: Primer gradiente principal */}
+            <div
+              className="absolute md:hidden"
+              style={{
+                background: 'radial-gradient(111.63% 111.63% at 42.64% -5.82%, rgba(255, 168, 0, 1) 33.65%, rgba(255, 0, 0, 1) 44.58%, transparent 100%)',
+                transform: 'rotate(-90deg)',
+                width: '100vw',
+                height: '100vh',
+                top: '-50%',
+                right: '0%',
+                filter: 'blur(400px)',
+                // Suavizar transiciones
+                mixBlendMode: 'screen',
+              }}
+            />
+            {/* DEGRADADO Bottom*/}
+            <div
+              className="absolute inset-x-0 bottom-0 bg-gradient-to-b to-background-inverse from-transparent h-1/2"
+              style={{
+                zIndex: 1
+              }}
+            />
+          </div>
 
-            <div className="honeywellElite__left">
-              <h2 className="honeywellElite__title headline-medium">
-                <span className="highlight-violet">HONEYWELL</span>
-                <br />
-                ELITE TEAM
-                <br />
-                WORLDWIDE
-              </h2>
 
-              <div className="honeywellElite__media">
+          <div className="relative z-10 px-3 md:px-7 pt-9 ">
+            <div className="flex flex-col md:flex-row gap-6">
+              <div className="flex flex-col gap-6 md:gap-4 w-full md:w-1/2">
+                <Typography variant="headline-medium" className="md:text-headline-medium">
+                  <span className="bg-gradient-to-br from-[#7513FF] via-[#4348F3] to-[#0093CE] bg-clip-text text-transparent">
+                    HONEYWELL
+                  </span> <br />
+                  ELITE TEAM WORLDWIDE
+                </Typography>
                 <img
-                  className="honeywellElite__img"
+                  className="w-full h-auto"
                   src={integrationsImg}
                   alt="Honeywell integrations diagram"
                   loading="lazy"
                 />
               </div>
-            </div>
 
+              <div className="flex flex-col gap-6 w-full md:w-1/2 text-text-on-white-secondary">
 
-            <div className="honeywellElite__right">
-              <p className="honeywellElite__lead title-medium">
-                This team ensures that every customer using Honeywell technologies benefits from
-                world-class expertise and global support.
-              </p>
+                <Typography variant="title-medium" className="">
+                  This team ensures that every customer using Honeywell technologies benefits from world-class expertise and global support.
+                </Typography>
 
-              <div className="honeywellElite__body">
-                <p>
-                  At RTS, we support end customers operating with Honeywell technologies by providing
-                  integration, configuration, and lifecycle services that ensure safe, reliable, and
-                  optimized operations.
-                </p>
+                <Typography className="">
+                  At RTS, we support end customers operating with Honeywell technologies by providing integration, configuration, and lifecycle services that ensure safe, reliable, and optimized operations.
+                  <br /><br />
+                  To meet the highest quality standards, we established the Honeywell Elite Team — a specialized group of engineers focused on Honeywell Process Solutions (HPS) and the seamless integration of Honeywell platforms with third-party systems.
+                </Typography>
 
-                <p>
-                  To meet the highest quality standards, we established the Honeywell Elite Team — a
-                  specialized group of engineers focused on Honeywell Process Solutions (HPS) and the
-                  seamless integration of Honeywell platforms with third-party systems.
-                </p>
+                <Typography variant="title-body" className="">
+                  Engineering Services Abroad Department
+                </Typography>
 
-                <h3 className="honeywellElite__subhead">Engineering Services Abroad Department</h3>
+                <Typography className="">
+                  To further extend our reach, we created the Engineering Services Abroad Department, delivering high-performance back-office engineering and implementation support for Honeywell-based operations around the world.
+                  <br /> <br />
+                  As a Value Added Reseller (VAR) for Honeywell Process Solutions, <br className="hidden md:block" />RTS is also authorized to offer, distribute, and integrate HPS products <br className="hidden md:block" />and hardware, from controllers and field instruments to advanced automation systems.
+                </Typography>
 
-                <p>
-                  To further extend our reach, we created the Engineering Services Abroad Department,
-                  delivering high-performance back-office engineering and implementation support for
-                  Honeywell-based operations around the world.
-                </p>
+                <Button children="Book a meeting now" />
 
-                <p>
-                  As a Value Added Reseller (VAR) for Honeywell Process Solutions, RTS is also
-                  authorized to offer, distribute, and integrate HPS products and hardware, from
-                  controllers and field instruments to advanced automation systems.
-                </p>
               </div>
 
-              <div className="honeywellElite__cta">
-                <ApproachButton label="Book a meeting now" />
-              </div>
             </div>
+
           </div>
 
-          <div className="flex flex-col gap-6 md:gap-5">
-            <Typography variant='title-large' className='md:text-center text-text-on-white-primary'>Capabilities with Honeywell technologies</Typography>
-            <Table
-            mode='light'
-              title="Capabilities with Honeywell technologies"
-              columns={["Service", "Focus", "Description", "Main technologies"]}
-              rows={tableRows}
-            />
+
+        </section>
+
+        <section id="honey-well-technologies" className="px-3 md:px-7 py-9">
+
+          <div className="flex flex-col md:gap-5 gap-6">
+            <Typography variant="title-large" className="text-center">
+              Capabilities with Honeywell technologies
+            </Typography>
+
+            <Table columns={['Service', 'Focus', 'Description', 'Main technologies']} rows={tableRows} />
           </div>
+
+
         </section>
       </div>
 
 
-      <section className="automation-expertiseSection automation-expertiseSection--cards">
-        <div className="automation-expertiseLeft">
-          <h2 className="title-body">RTS engineering Workforce</h2>
-
-          <h1 className="headline-medium">
-            AUGMENTED <br />
-            <span className="highlight-violet">INDUSTRIAL</span> <br />
-            INTELLIGENCE
-          </h1>
-
-          <p className="body-default">
-            A flexible, cost-effective solution designed to expand your <br />
-            operational and technical capabilities without increasing <br />
-            permanent headcount.
-          </p>
-
-          <ApproachButton label="Book a meeting now" />
-        </div>
-
-        <div className="automation-expertiseRight">
-          <Accordeon items={items} defaultOpen={0} allowCollapse />
-        </div>
-
-        <div className="engineeringSupport">
-          <h2 className="engineeringSupport__title title-large">Engineering services with expert support</h2>
-
-          <div className="engineeringSupport__grid">
-            {engineeringCards.map((c) => (
-              <article key={c.title} className="engineeringCard title-large">
-                <img className="engineeringCard__icon" src={c.icon} alt="" aria-hidden="true" />
-
-                <h3 className="engineeringCard__title title-small">
-                  {c.title.split("\n").map((line, i) => (
-                    <span key={i}>
-                      {line}
-                      <br />
-                    </span>
-                  ))}
-                </h3>
-
-                <p className="engineeringCard__body">{c.body}</p>
-              </article>
-            ))}
+      <section id="industrial-intelligence">
+        <div className="flex flex-col md:flex-row gap-6 py-9 px-3 md:px-7">
+          <div className="w-full md:hidden flex flex-col gap-6 ">
+            <Typography variant="headline-small">
+              ENGINEERING<br />SERVICES ABROAD
+            </Typography>
+            <Button children="Book a meeting now" />
           </div>
+          <div className="hidden md:flex w-1/2  flex-col gap-7">
+            <Typography variant="title-medium">
+              RTS Engineering Workforce
+            </Typography>
+            <Typography variant="headline-medium">
+              AUGMENTING<br />
+              <span className="bg-gradient-to-br from-[#7513FF] via-[#4348F3] to-[#0093CE] bg-clip-text text-transparent">INDUSTRIAL</span><br />
+              INTELLIGENCE
+            </Typography>
+            <Typography variant="body-default">
+              A flexible, cost-effective solution designed to expand your operational and technical capabilities without increasing permanent headcount.
+            </Typography>
+          </div>
+
+          <div className="w-full md:w-1/2">
+            <Accordeon items={itemsExpertice} defaultOpen={0} allowCollapse />
+          </div>
+
         </div>
+
       </section>
 
+      <section id={'engineering-cards'}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 px-3 md:px-7 pt-4 pb-9">
 
+          {engineeringCards.map((card, index) => (
+            <div key={`engineering-card-${index}`} className="flex flex-col justify-between p-5 bg-background-white border border-1 border-surface-primary rounded-md text-text-on-white-primary h-hub-card">
+              <div className="">
+                <img
+                  className="w-icon-xl h-icon-xl"
+                  src={card.icon}
+                  alt={card.title}
+                  loading="lazy"
+                />
+                <Typography variant="title-small" className="mt-3">
+                  {card.title}
+                </Typography>
+              </div>
+              <Typography variant="body-small" className="">
+                {card.body}
+              </Typography>
+            </div>
+          ))}
+        </div>
+
+      </section>
       <Banner
-        variant="glow"
         titleClassName="headline-medium"
         backgroundImage={bannerImg}
-        actionsDirection="column"
         titleDesktop={"WOULD YOU LIKE TO KNOW\nMORE ABOUT OUR EXPERIENCE?"}
-        titleMobile={"WOULD YOU LIKE TO KNOW\nMORE ABOUT OUR EXPERIENCE?"}
+         overlay={50}
         buttons={[
           {
-            label: "Download the full document",
-            href: "/docs/experience.pdf",
-            variant: "outline",
-            download: true,
+            children: "Download the full document",
+            variant: "outlined-dark",
           },
-          { label: "Book a meeting now", href: "#book", variant: "primary" },
+          { children: "Book a meeting now", variant: "filled-dark", className: "w-full" },
         ]}
       />
     </main>

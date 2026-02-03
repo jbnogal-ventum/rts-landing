@@ -8,7 +8,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 function ActionButton({ label, href, onClick, variant = "filled-dark", download }) {
   const navigate = useNavigate();
-  const className = `banner-cta banner-cta--${variant}`;
 
   if (href) {
     return (
@@ -33,8 +32,8 @@ function ActionButton({ label, href, onClick, variant = "filled-dark", download 
 }
 
 export default function Banner({
-  variant = "image",
   backgroundImage,
+  backgroundPosition = "top center",
 
   titleDesktop,
   titleMobile,
@@ -47,8 +46,8 @@ export default function Banner({
   variantDesktop = 'headline-medium',
   variantMobile = 'headline-small',
 
-  bodyClassName = "body-lg",
-  bodyMobileClassName = "body-lg",
+  variantBody = "body-lg",
+  variantBodyMobile = "body-lg",
 
   actionsDirection = "row",
   overlay = 0,
@@ -64,7 +63,7 @@ export default function Banner({
             style={{
               backgroundImage: `url(${backgroundImage})`,
               backgroundSize: 'cover',
-              backgroundPosition: 'top center',
+              backgroundPosition: backgroundPosition,
               backgroundRepeat: 'no-repeat'
             }}
             aria-hidden="true"
@@ -87,30 +86,30 @@ export default function Banner({
       {/* Contenido (texto y botones) */}
       <div className="relative z-10 min-h-[600px] flex flex-col items-center justify-center">
         <div className="py-9 px-3 md:px-7 flex flex-col gap-6 " >
-          <h2 className="text-center text-text-primary">
-            <span className={`hidden md:block`}>
-              <Typography variant={variantDesktop} children={titleDesktop} />
-            </span>
+          <div className="text-center text-text-primary flex flex-col gap-2">
+            <Typography variant={variantDesktop} children={titleDesktop} className="hidden md:block" />
+            <Typography variant={variantMobile} children={titleMobile ?? titleDesktop} className="md:hidden " />
 
-            <span className={`block md:hidden`}>
-              <Typography variant={variantMobile} children={titleMobile} />
-            </span>
-          </h2>
 
-          {(bodyDesktop) && (
-            <Typography children={bodyDesktop} className="hidden md:block"/>)
-          }
+            {(bodyDesktop) && (
+              <Typography variant={variantBody} children={bodyDesktop} className="hidden md:block" />)
+            }
 
-          {(bodyMobile || bodyDesktop) && (
-                <Typography children={bodyMobile ?? bodyDesktop} className="block md:hidden" />
-           )}
+            {(bodyMobile || bodyDesktop) && (
+              <Typography variant={variantBodyMobile} children={bodyMobile ?? bodyDesktop} className="block md:hidden" />
+            )}
+          </div>
+
 
 
           {buttons?.length > 0 && (
-            <div className="flex flex-col gap-3 items-center" >
+            <div className=" w-full flex flex-col items-center " >
+              <div className="flex flex-col gap-3 items-center w-fit">
               {buttons.map((b, idx) => (
-                <ActionButton key={idx} {...b} />
+                
+                <Button key={idx + b.label} {...b} />
               ))}
+              </div>
             </div>
           )}
         </div>

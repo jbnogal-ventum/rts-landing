@@ -11,12 +11,16 @@ export const industriesContent = {
             info: "We enhance operational reliability and efficiency through OT/IT integration, ensuring safe, data-driven, and continuous performance across upstream, midstream, and downstream operations.",
             clientsLogos: {
                 repsolLogo: () => import('../assets/clients/repsol.png'),
-                ypfLogo: () => import('../assets/clients/ypf.png'),
-                shellLogo: () => import('../assets/clients/shell.png'),
                 cepsaLogo: () => import('../assets/clients/cepsa.png'),
-                centralPuertoLogo: () => import('../assets/clients/centralPuerto.png'),
-                sipetrolLogo: () => import('../assets/clients/sipetrol.png'),
+                raizenLogo: () => import('../assets/clients/raizen.png'),
+                shellLogo: () => import('../assets/clients/shell.png'),
+                ypfLogo: () => import('../assets/clients/ypf.png'),
                 tgsLogo: () => import('../assets/clients/tgs.png'),
+                chevronLogo: () => import('../assets/clients/chevron.png'),
+                enapLogo: () => import('../assets/clients/enap.png'),
+                axionLogo: () => import('../assets/clients/axion.png'),
+                enerflexLogo: () => import('../assets/clients/enerflex.png'),
+                pemexLogo: () => import('../assets/clients/pemex.png'),
             }
         },
         projectSection: {
@@ -44,13 +48,11 @@ export const industriesContent = {
             title: "Where uptime is currency and control is everything this universe demands robust, adaptive systems.",
             info: "We design and implement high-availability control architectures and digitalization strategies, that maximize efficiency, stability, and asset longevity in both conventional and renewable power plants.",
             clientsLogos: {
-                repsolLogo: () => import('../assets/clients/repsol.png'),
-                ypfLogo: () => import('../assets/clients/ypf.png'),
-                shellLogo: () => import('../assets/clients/shell.png'),
-                cepsaLogo: () => import('../assets/clients/cepsa.png'),
                 centralPuertoLogo: () => import('../assets/clients/centralPuerto.png'),
-                sipetrolLogo: () => import('../assets/clients/sipetrol.png'),
-                tgsLogo: () => import('../assets/clients/tgs.png'),
+                cenLogo: () => import('../assets/clients/cen.png'),
+                tmbLogo: () => import('../assets/clients/tmb.png'),
+                greenaliaLogo: () => import('../assets/clients/greenalia.png'),
+               
             }
         },
         projectSection: {
@@ -80,13 +82,9 @@ export const industriesContent = {
             title: "A volatile but high-potential galaxy, where operational efficiency and data intelligence rule.",
             info: "We help petrochemical plants achieve smarter, safer, and more efficient operations by digitalizing processes and connecting critical data from field to boardroom.",
             clientsLogos: {
-                repsolLogo: () => import('../assets/clients/repsol.png'),
-                ypfLogo: () => import('../assets/clients/ypf.png'),
-                shellLogo: () => import('../assets/clients/shell.png'),
-                cepsaLogo: () => import('../assets/clients/cepsa.png'),
-                centralPuertoLogo: () => import('../assets/clients/centralPuerto.png'),
-                sipetrolLogo: () => import('../assets/clients/sipetrol.png'),
-                tgsLogo: () => import('../assets/clients/tgs.png'),
+                dowLogo: () => import('../assets/clients/dow.png'),
+                poliresinasLogo: () => import('../assets/clients/poliResinas.png'),
+                basfLogo: () => import('../assets/clients/basf.png')                
             }
         },
         projectSection: {
@@ -115,13 +113,8 @@ export const industriesContent = {
             title: "Heavily industrial terrain requiring resilient networks and smooth modernization paths.",
             info: "We support sustainable pulp and paper production through automation, energy optimization, and process digitalization — driving efficiency, circularity, and lower environmental impact.",
             clientsLogos: {
-                repsolLogo: () => import('../assets/clients/repsol.png'),
-                ypfLogo: () => import('../assets/clients/ypf.png'),
-                shellLogo: () => import('../assets/clients/shell.png'),
-                cepsaLogo: () => import('../assets/clients/cepsa.png'),
-                centralPuertoLogo: () => import('../assets/clients/centralPuerto.png'),
-                sipetrolLogo: () => import('../assets/clients/sipetrol.png'),
-                tgsLogo: () => import('../assets/clients/tgs.png'),
+                enceLogo: () => import('../assets/clients/ence.png'),
+                upmLogo: () => import('../assets/clients/upm.png'),
             }
         },
         projectSection: {
@@ -142,13 +135,8 @@ export const industriesContent = {
             title: "Harsh environments and remote locations—requiring diagnostics that go deep and networks that endure.",
             info: "We enable sustainable, efficient, and safe mining operations through advanced automation, digital monitoring, and environmental performance tracking that reduce impact and optimize resources.",
             clientsLogos: {
-                repsolLogo: () => import('../assets/clients/repsol.png'),
-                ypfLogo: () => import('../assets/clients/ypf.png'),
-                shellLogo: () => import('../assets/clients/shell.png'),
-                cepsaLogo: () => import('../assets/clients/cepsa.png'),
-                centralPuertoLogo: () => import('../assets/clients/centralPuerto.png'),
-                sipetrolLogo: () => import('../assets/clients/sipetrol.png'),
-                tgsLogo: () => import('../assets/clients/tgs.png'),
+                codelcoLogo: () => import('../assets/clients/codelco.png'),
+                rioTintoLogo: () => import('../assets/clients/rio_tinto.png'),
             }
         },
         projectSection: {
@@ -166,7 +154,7 @@ export const industriesContent = {
                 "Standardized KPIs, analytics and operational dashboards"
             ],
             img: () => import('../assets/Backgrounds/project_mining.jpg'),
-            companyLogo: () => import('../assets/clients/honeywell.png'),
+            companyLogo: () => import('../assets/clients/enerflex.png'),
         }
     },
     pharmaceuticals: {
@@ -178,13 +166,8 @@ export const industriesContent = {
             title: "An emerging universe with strict laws of motion—traceability, accuracy, and real-time compliance.",
             info: "An emerging universe with strict laws of motion—traceability, accuracy, and real-time compliance.",
             clientsLogos: {
-                repsolLogo: () => import('../assets/clients/repsol.png'),
-                ypfLogo: () => import('../assets/clients/ypf.png'),
-                shellLogo: () => import('../assets/clients/shell.png'),
-                cepsaLogo: () => import('../assets/clients/cepsa.png'),
-                centralPuertoLogo: () => import('../assets/clients/centralPuerto.png'),
-                sipetrolLogo: () => import('../assets/clients/sipetrol.png'),
-                tgsLogo: () => import('../assets/clients/tgs.png'),
+                bayerLogo: () => import('../assets/clients/bayer.png'),
+                bagoLogo: () => import('../assets/clients/bago.png'),
             }
         },
         projectSection: {

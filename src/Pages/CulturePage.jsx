@@ -301,17 +301,15 @@ export default function CulturePage() {
       </div>
 
       <Banner
-        variant="image"
         backgroundImage={card1}
         overlay={80}
-        titleClassName="display-medium"
+        // variantDesktop="headline-medium"
         titleDesktop={"WOULD YOU LIKE TO KNOW\nMORE ABOUT OUR EXPERIENCE?"}
         titleMobile={"WOULD YOU LIKE TO KNOW MORE ABOUT OUR EXPERIENCE?"}
 
         buttons={[
-          { label: "Book a meeting now", href: "#book", variant: "filled-dark" },
+          { children: "Book a meeting now",  variant: "filled-dark" },
         ]}
-        start="top top"
       />
 
     </>

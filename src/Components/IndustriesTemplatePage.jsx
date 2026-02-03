@@ -5,6 +5,7 @@ import { useTheme } from "../contexts/ThemeContext";
 import { CircleCheck, MapPin } from "lucide-react";
 import Banner from "./Banner/Banner.jsx";
 import bannerImg from "../assets/Banners/moon_20.png";
+import { cn } from "../lib/utils.js";
 export function IndustriesTemplatePage({ content }) {
     const whiteBlockRef = useRef(null);
     const { setTheme } = useTheme();
@@ -62,9 +63,6 @@ export function IndustriesTemplatePage({ content }) {
             console.log('⚠️ whiteBlockRef.current aún no existe');
             return;
         }
-
-
-
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -101,7 +99,8 @@ export function IndustriesTemplatePage({ content }) {
         };
     }, [setTheme]);
 
-
+    const arrayClientsLogos = Object.entries(logos).map(([key, logo]) => ({ key, logo }));
+    console.log({arrayClientsLogos}, arrayClientsLogos.length%2 === 0 && !arrayClientsLogos.length <= 4 ? 'lg:grid-cols-2' : 'lg:grid-cols-3');
     return (
         <section id="industry">
             <section id="hero-industries"
@@ -146,13 +145,14 @@ export function IndustriesTemplatePage({ content }) {
                             </Typography>
 
                             {/* Opción A: Grid con logos cargados dinámicamente */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <div className={cn("grid grid-cols-1 md:grid-cols-2  gap-4", arrayClientsLogos.length%2 === 0 && arrayClientsLogos.length <= 4 ? 'lg:grid-cols-2' : 'lg:grid-cols-3' )}>
                                 {Object.entries(content?.clientsSection.clientsLogos || {}).map(([logoKey, importFn]) => (
                                     <LazyLogo
                                         key={logoKey}
                                         logoImport={importFn}
                                         alt={`${logoKey.replace('Logo', '')} logo`}
-                                        className="h-[85px] md:py-2 hover:shadow-md"
+                                        size="small"
+                                        className="h-[150px] md:py-2 hover:shadow-md "
                                     />
                                 ))}
                             </div>
@@ -310,7 +310,6 @@ export function IndustriesTemplatePage({ content }) {
             </section>
 
             <Banner
-                    variant="image"
                     backgroundImage={bannerImg}
                     overlay={50}
                     variantMobile="headline-small"
@@ -319,9 +318,8 @@ export function IndustriesTemplatePage({ content }) {
                     titleMobile={"WOULD YOU LIKE TO KNOW MORE ABOUT OUR EXPERIENCE?"}
             
                     buttons={[
-                      { label: "Book a meeting now", href: "#book", variant: "filled-dark" },
+                      { children: "Book a meeting now", variant: "filled-dark" },
                     ]}
-                    start="top top"
                   />
         </section>
     )

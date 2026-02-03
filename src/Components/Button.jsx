@@ -16,7 +16,7 @@ const buttonVariants = cva(
         "text-dark": "bg-transparent text-text-primary relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-border-interactive after:transition-all after:duration-300 after:ease-out after:w-0 hover:after:w-full disabled:text-text-disabled py-2 px-3",
         "carruselLeft-dark": "bg-assistant-hover text-background-white rounded-l-md rounded-r-none border-r-0 hover:bg-assistant-prompt hover:text-background-inverse disabled:bg-assistant-background disabled:text-background-disabled py-2 px-3",
         "carruselRight-dark": "bg-assistant-hover text-background-white rounded-r-md rounded-l-none border-l-0 hover:bg-assistant-prompt hover:text-background-inverse disabled:bg-assistant-background disabled:text-background-disabled py-2 px-3",
-        "navbar-dark": "bg-transparent text-text-primary rounded-md disabled:bg-background-disabled py-2 px-3 hover:bg-navbar-button-hover-primary",
+        "navbar-dark": "bg-transparent text-text-primary rounded-md disabled:bg-background-disabled py-1 px-3 hover:bg-navbar-button-hover-primary",
         "navbar-text-dark": "bg-transparent text-text-primary relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-border-subtle after:transition-all after:duration-300 after:ease-out after:w-0 hover:after:w-full disabled:text-text-disabled py-1",
         "navbar-filled-dark": "hover:bg-background-interactive text-text-primary rounded-md disabled:bg-background-disabled py-2 px-3 bg-navbar-button-active-primary",
         // LIGHT  
@@ -25,7 +25,7 @@ const buttonVariants = cva(
         "text-light": "bg-transparent text-text-on-white-primary  relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-border-interactive after:transition-all after:duration-300 after:ease-out after:w-0 hover:after:w-full disabled:text-text-disabled py-2 px-3",
         "carruselLeft-light": "bg-assistant-hover text-background-white rounded-l-md rounded-r-none border-r-0 hover:bg-assistant-prompt hover:text-background-inverse disabled:bg-assistant-background disabled:text-background-disabled py-2 px-3",
         "carruselRight-light": "bg-assistant-hover text-background-white rounded-r-md rounded-l-none border-l-0 hover:bg-assistant-prompt hover:text-background-inverse disabled:bg-assistant-background disabled:text-background-disabled py-2 px-3",
-        "navbar-light": "bg-transparent text-text-on-white-primary rounded-md disabled:bg-background-disabled py-2 px-3 hover:bg-navbar-button-hover-primary",
+        "navbar-light": "bg-transparent text-text-on-white-primary rounded-md disabled:bg-background-disabled py-1 px-3 hover:bg-navbar-button-hover-primary",
         "navbar-text-light": "bg-transparent text-text-on-white-primary relative relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-background-soft after:transition-all after:duration-300 after:ease-out after:w-0 hover:after:w-full disabled:text-text-disabled py-1",
         "navbar-filled-light": "hover:bg-background-interactive hover:text-text-primary text-text-on-white-primary rounded-md disabled:bg-background-disabled py-2 px-3 bg-bg-light",
       },

@@ -1,22 +1,62 @@
 // src/Components/UI/Card.jsx
 import React from "react";
-import "./Card.css";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../index";
-export default function Card({ title, description, image,to, children }) {
+import { Button, Typography } from "../index";
+
+export default function Card({ title, description, image, to, children }) {
   const navigate = useNavigate();
+  
   return (
-    <div className="card-component">
-      <img src={image} alt={title} className="card-image" />
+    <div className="
+      relative
+      w-industry-card
+      h-industry-card
+      rounded-xs
+      overflow-hidden
+      cursor-pointer
+      flex flex-col justify-between p-4
+    " style={{
+      backgroundImage: `url(${image})`, 
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat'
+    }}
+    >
+    
+   {/* Título flotante (siempre visible) */}
+      <Typography variant="title-small" className="z-10">
+        {title}
+      </Typography>
+      {/* Overlay de hover */}
+      <div className="
+        absolute
+        inset-0
+        p-4
+        bg-black/60
+        //backdrop-blur
+        opacity-0
+        flex
+        flex-col
+        justify-end
+        gap-5
+        transition-opacity
+        duration-350
+        ease-out
+        hover:opacity-100
+      ">
+   
 
- 
-      <h3 className="card-floating-title title-sm">{title}</h3>
+        {/* Descripción */}
+        <Typography className="mr-7 pr-5">
+          {description}
+        </Typography>
 
-
-      <div className="card-hover">
-        <p className="card-hover-description body-sm">{description}</p>
-
-        <Button variant="navbar-filled-light" className="" onClick={() => navigate(to)}>
+        {/* Botón */}
+        <Button 
+          variant="navbar-filled-light" 
+         
+          onClick={() => navigate(to)}
+        >
           Learn more
         </Button>
       </div>

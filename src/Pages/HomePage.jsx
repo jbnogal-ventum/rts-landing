@@ -18,7 +18,8 @@ export default function HomePage({ onPhase }) {
 
   return (
     <>
-      {/* <HeroHomePage onPhase={onPhase} /> */}
+     <div className="h-1" />
+      <HeroHomePage onPhase={onPhase} />
       <div className="hero-outro-spacer" />
 
       <HorizontalCarousel />
@@ -33,7 +34,7 @@ export default function HomePage({ onPhase }) {
       <Banner
         variant="image"
         backgroundImage={bannerImg}
-        titleClassName="display-medium"
+        overlay={50}
         titleDesktop={"LET'S SPARK YOUR\nINDUSTRIAL BRILLIANCE"}
         titleMobile={"LET'S SPARK\nYOUR INDUSTRIAL\nBRILLIANCE"}
         bodyDesktop={
@@ -43,7 +44,7 @@ export default function HomePage({ onPhase }) {
           "Every challenge is an opportunity.\nShare yours, and let's explore how to\nbring your vision to life."
         }
         buttons={[
-          { label: "Book a meeting now", href: "#book", variant: "primary" },
+          { children: "Book a meeting now", onClick: () => window.open("https://tu-url.com", "_blank"), variant: "filled-dark" },
         ]}
         start="top top"
       />

@@ -1,9 +1,6 @@
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import "./Story.css";
+
 import { motion, useTransform, useScroll } from "framer-motion";
-import { useMediaQuery } from "../../hooks/useMediaQuery.js";
 import { Typography, Button } from "../index";
 import { useTheme } from "../../contexts/ThemeContext";
 

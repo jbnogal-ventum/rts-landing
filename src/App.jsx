@@ -133,7 +133,7 @@ export default function App() {
         <Loader isReady={isReady} onDone={() => setLoaderDone(true)} />
       )}
 
-      {/* <Molecule /> */}
+      <Molecule />
 
       <Transition ref={transitionRef} enabled={loaderDone} lenisRef={lenisRef}>
         <Navbar />
