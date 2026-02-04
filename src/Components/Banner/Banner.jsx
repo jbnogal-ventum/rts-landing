@@ -1,5 +1,5 @@
 
-import "./Banner.css";
+
 import { Typography, Button } from "../index";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";

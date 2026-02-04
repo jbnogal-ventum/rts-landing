@@ -3,11 +3,11 @@ import { useRef } from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { useMediaQuery } from "../../hooks/useMediaQuery.js";
 import { Typography, Button } from "../index";
-import { Grip } from "lucide-react";
 
-import iconInnovation from "../../assets/hub/icon1.png";
-import iconAcademy from "../../assets/hub/icon1.png";
-import iconBTL from "../../assets/hub/icon1.png";
+
+import OvalPods from '../../assets/pages_items/oval_pods_mono.svg?react';
+import CirclePods from '../../assets/pages_items/circle_pods_mono.svg?react';
+import DicePods from '../../assets/pages_items/dice_pods_mono.svg?react';
 
 import imgInnovation from "../../assets/hub/innovation.png";
 import imgAcademy from "../../assets/hub/academy.png";
@@ -47,24 +47,24 @@ export default function Hub() {
   return (
     <section
       id="hub-section"
-      className="relative w-full bg-background-inverse text-text-on-white-primary "
+      className="relative w-full text-primary bg-background-inverse"
       ref={hubSectionRef}
       style={{ height: containerHeight }}
     >
       {/* Contenedor sticky que mantiene las cards en vista */}
-      <div className="sticky top-0 h-screen overflow-hidden w-full ">
+      <div className="sticky top-0 h-screen overflow-hidden w-full  ">
         <div className=" px-3 md:px-7 h-full w-full lg:py-9 xs:py-5">
           <div className=" h-full flex flex-col gap-5   w-full mt-5">
-            <div className="flex flex-col gap-3 md:flex-row md:justify-between">
+            <div className="flex flex-col gap-3 md:flex-row md:justify-between ">
               <Typography
-                variant="headline-medium"
-                className="md:text-headline-large "
+                variant="headline-small"
+                className="md:text-headline-medium "
 
               ><span className="text-core-violet">RTS HUB</span> S OUR LABORATORY  <br />OF IDEAS AND EXECUTION</Typography>
               <Button className="h-fit">Learn more</Button>
             </div>
             {/* Contenedor relativo para las cards superpuestas */}
-            <div className="relative w-full h-full mb-9 ">
+            <div className="relative w-full h-full mb-9  ">
 
               {/* Card 1 - Sticky inicial */}
               <motion.div
@@ -78,7 +78,7 @@ export default function Hub() {
               >
                 <div className="h-full grid grid-cols-1 md:grid-cols-3 gap-7 md:justify-between p-5">
                   <div className="flex flex-col md:flex-row md:items-center gap-3">
-                    <Grip className="w-6 h-6 text-background-interactive shrink-0" />
+                    <OvalPods className="w-icon-xl h-icon-xl  shrink-0" />
                     <Typography
                       variant="headline-small"
                       className=" "
@@ -86,8 +86,8 @@ export default function Hub() {
                     ><span className="bg-gradient-to-r from-[#7513FF] via-[#4348F3] to-[#0093CE] bg-clip-text text-transparent">BELOW THE LINE</span>  </Typography>
 
                   </div>
-                  <img src={imgInnovation} className="hidden md:block w-[252px] h-[252px]" />
-                  <div className="flex flex-col gap-2 text-text-on-white-secondary">
+                  <img src={imgAcademy} className="hidden md:block w-[252px] h-[252px]" />
+                  <div className="flex flex-col gap-2 text-secondary">
                     <Typography variant="title-body">
                       Below-the-line powerhouse—a creative and experiential unit where ideas meet industry.
                     </Typography>
@@ -110,7 +110,7 @@ export default function Hub() {
               >
                 <div className="h-full grid grid-cols-1 md:grid-cols-3 gap-7 md:justify-between p-5">
                   <div className="flex flex-col md:flex-row md:items-center gap-3">
-                    <Grip className="w-6 h-6 text-background-interactive shrink-0" />
+                    <DicePods className="w-icon-xl h-icon-xl shrink-0" />
                     <Typography
                       variant="headline-small"
                       className=" "
@@ -118,8 +118,8 @@ export default function Hub() {
                     ><span className="bg-gradient-to-r from-[#7513FF] via-[#4348F3] to-[#0093CE] bg-clip-text text-transparent">ACADEMY</span>  </Typography>
 
                   </div>
-                  <img src={imgAcademy} className="hidden md:block w-[252px] h-[252px]" />
-                  <div className="flex flex-col gap-2 text-text-on-white-secondary">
+                  <img src={imgBTL} className="hidden md:block w-[252px] h-[252px]" />
+                  <div className="flex flex-col gap-2 text-secondary">
                     <Typography variant="title-body">
                       Below-the-line powerhouse—a creative and experiential unit where ideas meet industry.
                     </Typography>
@@ -142,7 +142,7 @@ export default function Hub() {
               >
                 <div className="h-full grid grid-cols-1 md:grid-cols-3 gap-7 md:justify-between p-5">
                   <div className="flex flex-col md:flex-row md:items-center gap-3">
-                    <Grip className="w-6 h-6 text-background-interactive shrink-0" />
+                    <CirclePods className="w-icon-xl h-icon-xl shrink-0" />
                     <Typography
                       variant="headline-small"
                       className=" "
@@ -151,7 +151,7 @@ export default function Hub() {
 
                   </div>
                   <img src={imgInnovation} className="hidden md:block w-[252px] h-[252px]" />
-                  <div className="flex flex-col gap-2 text-text-on-white-secondary">
+                  <div className="flex flex-col gap-2 text-secondary">
                     <Typography variant="title-body">
                       Below-the-line powerhouse—a creative and experiential unit where ideas meet industry.
                     </Typography>

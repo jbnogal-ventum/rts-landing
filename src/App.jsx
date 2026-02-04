@@ -2,8 +2,7 @@
 import { useEffect, useRef, useState} from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Lenis from "@studio-freight/lenis";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 
 import Loader from "./Components/Loader/Loader";
 import Navbar from "./Components/UI/Navbar/Navbar";
@@ -27,24 +26,12 @@ import "./index.css";
 import DigitalServicesPage from "./Pages/DigitalServicesPage";
 import MoleculePage from "./Pages/MoleculePage";
 
-// Registrar GSAP UNA SOLA VEZ
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-  
-  // Limpiar cualquier instancia previa de GSAP
-  if (window.gsap) {
-    window.gsap.globalTimeline.clear();
-    window.gsap.killTweensOf('*');
-  }
-}
 
 export default function App() {
     // const { theme } = useTheme();
   // console.log('App theme', theme);
   const location = useLocation();
   const transitionRef = useRef(null);
-  
-  const [scroll, setScroll] = useState(0);
   const [phase, setPhase] = useState(0);
 
   const [isReady, setIsReady] = useState(false);
@@ -79,48 +66,22 @@ export default function App() {
 
     //lenis.on("scroll", ({ scroll }) => setScroll(scroll));
 
-    const onTick = () => ScrollTrigger.update();
-    stTickRef.current = onTick;
-    gsap.ticker.add(onTick);
-
-    ScrollTrigger.scrollerProxy(".scroll-container", {
-      scrollTop(value) {
-        return arguments.length
-          ? lenis.scrollTo(value, { immediate: true })
-          : lenis.scroll;
-      },
-      getBoundingClientRect() {
-        return {
-          top: 0,
-          left: 0,
-          width: window.innerWidth,
-          height: window.innerHeight,
-        };
-      },
-    });
-
-    ScrollTrigger.defaults({ scroller: ".scroll-container" });
-    requestAnimationFrame(() => ScrollTrigger.refresh());
+    
 
     return () => {
       cancelAnimationFrame(rafIdRef.current);
-      if (stTickRef.current) gsap.ticker.remove(stTickRef.current);
+     
       lenis.destroy();
       lenisRef.current = null;
-      ScrollTrigger.getAll().forEach((st) => st.kill());
     };
   }, [loaderDone]);
 
   useEffect(() => {
     if (!loaderDone) return;
     if (location.pathname !== "/") return;
-    gsap.set("#hero", { visibility: "visible" });
-    window.__heroEnter = true;
-    window.dispatchEvent(new Event("hero:enter"));
+   
   }, [loaderDone]);
 
-  // Eliminamos el useEffect que manejaba el background
-  // porque ahora lo maneja el ThemeContext
   useEffect(() => {
     // Resetear scroll al top cuando se monta el componente
     window.scrollTo({ top: 0, behavior: 'smooth' });

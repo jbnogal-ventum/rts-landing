@@ -82,7 +82,7 @@ export default function Location() {
     observer.observe(whiteBlockRef.current);
 
     return () => {
-      console.log('🧹 Limpiando observer');
+      //console.log('🧹 Limpiando observer');
       observer.disconnect();
     };
   }, [setTheme]);

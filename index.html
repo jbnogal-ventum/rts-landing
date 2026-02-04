@@ -10,25 +10,7 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
       <script>
-    // Limpiar GSAP antes de que React cargue
-    if (window.gsap) {
-      try {
-        if (window.gsap.core && window.gsap.core.ScrollTrigger) {
-          const triggers = window.gsap.core.ScrollTrigger.getAll();
-          triggers.forEach(st => {
-            try { st.kill(); } catch(e) {}
-          });
-          window.gsap.core.ScrollTrigger.clearScrollMemory();
-        }
-        window.gsap.killTweensOf('*');
-        window.gsap.globalTimeline.clear();
-      } catch(e) {
-        console.warn('Error cleaning GSAP on page load:', e);
-      }
-    }
     
-    // Variable global para rastrear animaciones
-    window.__gsapAnimations = [];
   </script>
   </body>
 </html>

@@ -34,7 +34,7 @@ export default function HeroHomePage({ onPhase }) {
   // const blurPannel5 = useTransform(scrollYProgress, [0, 0.7, 0.8, 0.9, 1], ["40px", "40px", "10px", "0px", "0px"]);
   return (
     <section id="hero-home-section" className="relative w-full h-[700vh] " ref={heroHomeSectionRef}>
-      <div className="sticky top-0 h-screen  ">
+      <div className="sticky top-0 h-screen bg-gradient-to-b from-transparent via-transparent to-background-primary ">
 
         <div className="flex items-center justify-center overflow-hidden ">
           <div className=" flex flex-col gap-4">
@@ -181,7 +181,7 @@ export default function HeroHomePage({ onPhase }) {
               {/* Panel 5 */}
               <motion.div
                 id='panel5'
-                className=" w-full absolute overflow-hidden"
+                className=" w-full absolute overflow-hidden bg-gradient-to-b from-transparent via-transparent to-background-primary"
                 style={{
                   opacity: opacityPannel5,
                 }}

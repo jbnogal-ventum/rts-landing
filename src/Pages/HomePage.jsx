@@ -1,6 +1,3 @@
-import { useRef, useEffect } from "react";
-import { useTheme } from "../contexts/ThemeContext";
-
 import HeroHomePage from "../Components/Hero/HeroHomePage/HeroHomePage";
 import HorizontalCarousel from "../Components/Carousel/HorizontalCarousel";
 import Story from "../Components/Story/Story";
@@ -12,20 +9,19 @@ import Location from "../Components/Location/Location";
 import bannerImg from "../assets/Banner.jpeg";
 
 export default function HomePage({ onPhase }) {
-  const whiteBlockRef = useRef(null);
- 
 
 
   return (
-    <>
-     <div className="h-1" />
+    <main className="bg-background">
+        
+     <div style={{height: "1px"}} />
       <HeroHomePage onPhase={onPhase} />
-      <div className="hero-outro-spacer" />
+      <div style={{height: "1px"}} />
 
       <HorizontalCarousel />
       <Marquee />
 
-      <div  ref={whiteBlockRef}>
+      <div >
         <Story />
         <Hub />
         <Location/>
@@ -46,8 +42,7 @@ export default function HomePage({ onPhase }) {
         buttons={[
           { children: "Book a meeting now", onClick: () => window.open("https://tu-url.com", "_blank"), variant: "filled-dark" },
         ]}
-        start="top top"
       />
-    </>
+    </main>
   );
 }

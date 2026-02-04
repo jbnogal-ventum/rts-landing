@@ -12,7 +12,6 @@ import coders from "../../assets/hub/coders.jpg";
 import { CircleCheck, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { useMediaQuery } from "../../hooks/useMediaQuery.js";
-//gsap.registerPlugin(ScrollTrigger);
 export default function BelowTheLineSection() {
     const sectionRef = useRef(null);
     const horizontalContainerRef = useRef(null);
@@ -56,7 +55,6 @@ export default function BelowTheLineSection() {
                         <div className="relative h-[400px]">
 
 
-                            {/* Contenedor que se mueve horizontalmente con GSAP */}
                             <motion.div
                                 ref={horizontalContainerRef}
                                 className="flex gap-6 absolute left-0 top-0 h-full"

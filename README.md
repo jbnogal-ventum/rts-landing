@@ -1,7 +1,7 @@
 RTS 
 
 Three.js
-Gsap & Lenis
+ Lenis
 
 Interactive webpage
 

@@ -70,7 +70,7 @@ export default function Story() {
 
   return (
     <section id="story-section" className="relative w-full md:h-[500vh] h-[300vh] " ref={storySectionRef}>
-      <div className="sticky top-0 h-screen  ">
+      <div className="sticky top-0 h-screen bg-gradient-to-b from-transparent via-transparent to-background-inverse ">
         <div className="pt-9 px-3 md:px-7">
           <Typography variant="subtitle-md" children={"OUR STORY"} className="text-text-on-white-primary" />
         </div>
@@ -116,7 +116,7 @@ export default function Story() {
               {/* Panel 2 */}
               <motion.div
                 id='panel2'
-                className=" w-full absolute"
+                className=" w-full absolute  bg-gradient-to-b from-transparent via-transparent to-background-inverse "
                 style={{
                   opacity: opacityPannel2,
                   y: yOffsetPannel2
@@ -124,11 +124,11 @@ export default function Story() {
               >
                 <div className="flex flex-col justify-between w-full h-screen py-9 px-3 md:px-7  mt-9 ">
                   <div className="flex flex-col gap-4">
-                    <Typography variant="headline-medium" className="text-text-on-white-primary hidden md:block">
+                    <Typography variant="headline-medium" className="text-primary hidden md:block">
                       OUR STORY ISN’T ONE OF CHANGE,<br /> BUT OF CONTINUOS EVOLUTION
                     </Typography>
 
-                    <Typography variant="headline-small" className="text-text-on-white-primary md:hidden">
+                    <Typography variant="headline-small" className="text-primary md:hidden">
                       OUR STORY ISN’T<br />ONE OF CHANGE,<br /> BUT OF CONTINUOS<br />EVOLUTION
                     </Typography>
 

@@ -1,7 +1,4 @@
-import React, { useEffect, useRef } from "react";
-import "./HorizontalCarousel.css";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import  { useRef } from "react";
 import Card from "../UI/Card";
 import { Typography, Button } from "../index";
 
@@ -18,12 +15,10 @@ import { useMediaQuery } from "../../hooks/useMediaQuery.js";
 export default function HorizontalCarousel() {
   const sectionRef = useRef(null);
   const scrollContainerRef = useRef(null);
-  const horizontalContainerRef = useRef(null);
 
   // Detectar dispositivos
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
-  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const { scrollYProgress } = useScroll({
     target: sectionRef
@@ -44,8 +39,8 @@ export default function HorizontalCarousel() {
   }
 
   return (
-    <section ref={sectionRef} className="relative h-[300vh] " >
-      <div className="sticky top-0  h-[780px]  flex items-center overflow-hidden w-full">
+    <section ref={sectionRef} className="relative h-[300vh] bg-background-primary" >
+      <div className="sticky top-0  h-[780px]  flex items-center overflow-hidden w-full bg-background">
         <div className=" px-3 md:px-7 w-full">
 
 
@@ -53,7 +48,7 @@ export default function HorizontalCarousel() {
          
               <div className="flex flex-col gap-4 w-full">
                 <Typography
-                  variant="subtitle-medium" className=" text-text-primary">INDUSTRIES</Typography>
+                  variant="subtitle-medium" className=" text-primary">INDUSTRIES</Typography>
                 <div className="w-full flex flex-row justify-between">
                   <Typography
                     variant="headline-medium"

@@ -67,10 +67,10 @@ export default function Marquee() {
   }, []);
 
   return (
-    <div className="marquee-wrapper">
+    <div className="flex flex-col gap-4 md:gap-4  bg-gradient-to-b from-background-primary via-background-primary to-transparent">
       <h2 className="marquee-title ">TRUSTED BY INDUSTRY LEADERS</h2>
 
-      <div className="marquee-container">
+      <div className="marquee-container bg-gradient-to-b from-background-primary to-transparent">
         <div className="marquee-track marquee-left" ref={topTrackRef}>
           {duplicatedTop.map((src, i) => (
             <div className="logo-box" key={"t"+i}>
@@ -79,7 +79,7 @@ export default function Marquee() {
           ))}
         </div>
 
-        <div className="marquee-track marquee-right" ref={bottomTrackRef}>
+        <div className="marquee-track marquee-right " ref={bottomTrackRef}>
           {duplicatedBottom.map((src, i) => (
             <div className="logo-box" key={"b"+i}>
               <img src={src} alt="" />
