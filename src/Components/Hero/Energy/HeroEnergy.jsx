@@ -6,7 +6,7 @@ import heroEnergyBackground from "../../../assets/Backgrounds/hero_energy.png";
 export default function HeroEnergy() {
     const rootRef = useRef(null);
 
-    return (
+    return ( 
         <section
             id="hero-energy"
             ref={rootRef}
@@ -20,21 +20,21 @@ export default function HeroEnergy() {
             }}
         >
             {/* Overlay opcional si el texto no se ve bien */}
-            <div className="absolute inset-0 bg-black/60"></div>
+            <div className="absolute inset-0 bg-black/50"></div>
             <div className="relative z-10 w-full h-full md:px-7 py-9 px-3">
-                <div className="pt-9 flex flex-col gap-6 md:gap-4">
-                    <Typography variant="headline-large" className="md:text-display-lg hidden md:block">
+                <div className="pt-9 flex flex-col gap-7 md:gap-6 w-fit">
+                    <Typography variant="display-lg" className=" hidden md:block w-fit">
                         ENERGY  & <br /> INFRASTRUCTURE
                     </Typography>
-                    <Typography variant="headline-large" className="md:hidden">
-                        ENERGY
-                        & <br /> INFRA-
+                    <Typography variant="headline-large" className="md:hidden w-fit">
+                        ENERGY <br />
+                        & INFRA-
                         STRUCTURE
                     </Typography>
-                    <div className="flex justify-end pr-3  md:mr-9">
+                    <div className="flex justify-end lg:pr-9">
                         <Typography
                             variant="title-small"
-                            className="w-2/3 md:w-3/5 md:text-title-medium"
+                            className="w-3/4 md:w-3/5 md:text-title-medium"
                         >
                             — stands to ensure technical excellence, operational reliability, and seamless project execution.
                         </Typography>

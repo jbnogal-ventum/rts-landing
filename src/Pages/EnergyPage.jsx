@@ -32,7 +32,7 @@ const items = [
   {
     title: "Automation & Power Integration",
     body: "Seamless integration of power systems withautomation and control technologies."
-  }
+  } 
 ]
 export default function EnergyPage() {
   const whiteBlockRef = useRef(null);
@@ -40,19 +40,19 @@ export default function EnergyPage() {
 
   useEffect(() => {
     if (!whiteBlockRef.current) {
-      console.log('⚠️ whiteBlockRef.current aún no existe');
+      //console.log('⚠️ whiteBlockRef.current aún no existe');
       return;
     }
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          console.log('🔍 IntersectionObserver entry:', {
-            isIntersecting: entry.isIntersecting,
-            intersectionRatio: entry.intersectionRatio,
-            boundingClientRect: entry.boundingClientRect,
-            rootBounds: entry.rootBounds,
-            time: entry.time
-          });
+          // console.log('🔍 IntersectionObserver entry:', {
+          //   isIntersecting: entry.isIntersecting,
+          //   intersectionRatio: entry.intersectionRatio,
+          //   boundingClientRect: entry.boundingClientRect,
+          //   rootBounds: entry.rootBounds,
+          //   time: entry.time
+          // });
 
           if (entry.isIntersecting) {
             //console.log('✅ EN VISTA - Cambiando a light');
@@ -83,11 +83,11 @@ export default function EnergyPage() {
     <>
       <HeroEnergy />
 
-      <section id='energy-solutions' className="flex flex-col md:flex-row gap-8 pt-9 pb-9 md:pb-7 px-3 md:px-8  bg-background-primary ">
+      <section id='energy-solutions' className="flex flex-col md:flex-row gap-8 pt-9 pb-9 md:pb-7 px-3 md:px-8  bg-background text-color ">
 
         <div className="flex flex-col gap-5 md:gap-7 w-full md:w-1/2 " >
 
-          <Typography variant="title-medium" className="text-text-secondary font-base" >
+          <Typography variant="title-medium" className="text-secondary font-base" >
             Dedicated to delivering innovative and reliable <br />energy solutions, optimizing power infrastructure,  and supporting industrial and commercial operations with efficient energy management strategies.
           </Typography>
 
@@ -98,6 +98,7 @@ export default function EnergyPage() {
           />
         </div>
         <div className="flex flex-col gap-4  w-full md:w-1/2">
+          <Typography variant="subtitle-large" className="text-secondary hidden md:block" children='Key areas of expertise' />
           <Accordeon items={items} defaultOpen={0} allowCollapse />
         </div>
       </section>

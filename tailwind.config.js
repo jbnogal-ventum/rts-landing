@@ -23,7 +23,8 @@ export default {
         'on-white': '#8c8c8c',               // Uso: text-on-white (obsoleto - usar text-text-on-white)
         'gradient-violet': '#6a5cff',        // Uso: text-gradient-violet / bg-gradient-violet
         'gradient-blue': '#2e86ff',          // Uso: text-gradient-blue / bg-gradient-blue
-
+        secondary: 'var(--color-text-secondary)',
+        
         // Sistema de colores organizado
         core: {
           violet: '#5B25D4',                 // Uso: text-core-violet / bg-core-violet / border-core-violet
@@ -162,7 +163,7 @@ export default {
         // Headlines 
         'headline-large': '46px',            // Uso: text-headline-large
         'headline-medium': '40px',           // Uso: text-headline-medium
-        'headline-small': '28px',            // Uso: text-headline-small
+        'headline-small': '28px',             // Uso: text-headline-small
 
 
         // Titles
@@ -294,7 +295,7 @@ export default {
         'icon-xl': '38px',                   // Uso: h-icon-xl
         'ds-parteners-img': '403px',          // Uso: h-ds-parteners-img
         'industry-card': '409px',             // Uso: h-industry-card
-        
+
       },
       width: {
         'logo-md': '59px',                   // Uso: w-logo-md
