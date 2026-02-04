@@ -107,7 +107,7 @@ export default function Banner({
               <div className="flex flex-col gap-3 items-center w-fit">
               {buttons.map((b, idx) => (
                 
-                <Button key={idx + b.label} {...b} />
+                <Button key={`button-${idx}-${b.label}`} {...b} />
               ))}
               </div>
             </div>

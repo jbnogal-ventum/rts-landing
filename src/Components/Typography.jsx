@@ -81,6 +81,7 @@ export const Typography = ({
   className = '',
   as,
   children,
+  htmlContent,
   ...props
 }) => {
   // Determinar el elemento HTML
@@ -106,6 +107,14 @@ export const Typography = ({
     className
   );
 
+  // Si tenemos contenido HTML
+  if (htmlContent) {
+    return React.createElement(Element, {
+      className: classes,
+      dangerouslySetInnerHTML: { __html: htmlContent },
+      ...props
+    });
+  }
   // Función para procesar los saltos de línea
   const renderContent = (content) => {
     if (typeof content === 'string') {

@@ -100,11 +100,12 @@ export function IndustriesTemplatePage({ content }) {
     }, [setTheme]);
 
     const arrayClientsLogos = Object.entries(logos).map(([key, logo]) => ({ key, logo }));
-    console.log({arrayClientsLogos}, arrayClientsLogos.length%2 === 0 && !arrayClientsLogos.length <= 4 ? 'lg:grid-cols-2' : 'lg:grid-cols-3');
+    console.log({ arrayClientsLogos }, arrayClientsLogos.length % 2 === 0 && !arrayClientsLogos.length <= 4 ? 'lg:grid-cols-2' : 'lg:grid-cols-3');
     return (
         <section id="industry">
+
             <section id="hero-industries"
-                className="relative w-full h-[450px] "
+                className="relative w-full h-[450px] rounded-none "
                 style={{
                     backgroundImage: `url(${heroImage})`,
                     backgroundSize: 'cover', // Cambiado a 'contain'
@@ -114,19 +115,21 @@ export function IndustriesTemplatePage({ content }) {
                 }}
             >
                 {/* Overlay opcional si el texto no se ve bien */}
-                <div className="absolute inset-0 bg-black/60"></div>
+                <div className="absolute inset-0 bg-black/0"></div>
                 <div className="relative z-10 w-full h-full md:px-7 py-9 px-3">
-                    <div className="pt-9 flex flex-col gap-6 md:gap-4">
-                        <Typography variant="headline-large" className="md:text-display-lg ">
-                            {content?.hero.title}
-                        </Typography>
+                    <div className="pt-9 flex  gap-6 md:gap-4 h-full items-center">
+                        <Typography 
+            variant="headline-large" 
+            className="md:text-display-lg"
+            htmlContent={content?.hero.title}
+        />
 
                     </div>
                 </div>
             </section>
 
             <section id="industry-clients">
-                <div className="flex flex-col md:flex-row gap-7 md:gap-9 py-9 px-3 md:px-7 bg-background-primary text-text-secondary">
+                <div className="flex flex-col md:flex-row gap-7 md:gap-9 py-9 px-3 md:px-7 bg-background text-color">
 
                     <div className="w-full md:w-2/5 flex flex-col md:gap-7 gap-5 ">
                         <Typography variant="title-body">
@@ -145,14 +148,22 @@ export function IndustriesTemplatePage({ content }) {
                             </Typography>
 
                             {/* Opción A: Grid con logos cargados dinámicamente */}
-                            <div className={cn("grid grid-cols-1 md:grid-cols-2  gap-4", arrayClientsLogos.length%2 === 0 && arrayClientsLogos.length <= 4 ? 'lg:grid-cols-2' : 'lg:grid-cols-3' )}>
+                            <div className={cn(
+                                "flex flex-wrap gap-4 justify-center",
+                                arrayClientsLogos.length % 2 === 0 || arrayClientsLogos.length <= 4
+                                    ? '[&>*]:w-full md:[&>*]:w-[calc(45%-0.5rem)] '
+                                    : '[&>*]:w-[calc(45%-0.5rem)] lg:[&>*]:w-[calc(30%-0.667rem)]'
+                            )}>
                                 {Object.entries(content?.clientsSection.clientsLogos || {}).map(([logoKey, importFn]) => (
                                     <LazyLogo
                                         key={logoKey}
                                         logoImport={importFn}
                                         alt={`${logoKey.replace('Logo', '')} logo`}
                                         size="small"
-                                        className="h-[150px] md:py-2 hover:shadow-md "
+                                        className={cn(
+                                            "h-[150px] md:py-2 hover:shadow-md",
+                                            arrayClientsLogos.length > 6 ? 'md:h-[84px]' : ''
+                                        )}
                                     />
                                 ))}
                             </div>
@@ -166,7 +177,7 @@ export function IndustriesTemplatePage({ content }) {
 
             <section ref={whiteBlockRef}>
 
-                <section id='industry-project' className="relative overflow-hidden ">
+                <section id='industry-project' className="relative overflow-hidden bg-background text-color">
                     <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
                         {/* Primer gradiente principal */}
                         <div
@@ -310,17 +321,17 @@ export function IndustriesTemplatePage({ content }) {
             </section>
 
             <Banner
-                    backgroundImage={bannerImg}
-                    overlay={50}
-                    variantMobile="headline-small"
-                    variantDesktop="headline-medium"
-                    titleDesktop={"WOULD YOU LIKE TO KNOW \nMORE ABOUT OUR EXPERIENCE?"}
-                    titleMobile={"WOULD YOU LIKE TO KNOW MORE ABOUT OUR EXPERIENCE?"}
-            
-                    buttons={[
-                      { children: "Book a meeting now", variant: "filled-dark" },
-                    ]}
-                  />
+                backgroundImage={bannerImg}
+                overlay={50}
+                variantMobile="headline-small"
+                variantDesktop="headline-medium"
+                titleDesktop={"WOULD YOU LIKE TO KNOW \nMORE ABOUT OUR EXPERIENCE?"}
+                titleMobile={"WOULD YOU LIKE TO KNOW MORE ABOUT OUR EXPERIENCE?"}
+
+                buttons={[
+                    { children: "Book a meeting now", variant: "filled-dark" },
+                ]}
+            />
         </section>
     )
 }
