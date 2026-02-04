@@ -398,3 +398,8 @@ h1, h2, h3, h4, h5, h6 {
 [data-theme="light"] * {
   scrollbar-color: rgba(140, 140, 140, 0.5) transparent;
 }
+
+/* QUITAR RING FOCUS DE BOTONES */
+button:focus:not(:focus-visible) {
+  outline: none;
+}

@@ -18,7 +18,6 @@ import dicePods from "../assets/pages_items/dice_pods.svg";
 
 import integrationsImg from "../assets/integrations.png";
 import expertiseBackground from "../assets/Backgrounds/innovationLabBackgroung.jpg";
-import "./AutomationControls.css";
 
 
 const items = [

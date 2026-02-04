@@ -44,7 +44,7 @@ export default function BelowTheLineSection() {
         <section
             ref={sectionRef}
             className="relative w-full md:h-[500vh] h-[600vh] "
-        >   <div className="sticky top-0  h-[780px]  flex items-center overflow-hidden">
+        >   <div className="sticky top-0 h-screen md:h-[780px]  flex items-center overflow-hidden">
                 <div className=" md:px-7 px-3 my-9">
                     <div className="flex flex-col gap-12">
                         <div className="flex flex-col gap-3">

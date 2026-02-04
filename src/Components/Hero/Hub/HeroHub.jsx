@@ -2,22 +2,33 @@ import { Typography, Button } from "../../index";
 import { useEffect, useRef } from "react";
 import heroHubBackground from "../../../assets/Backgrounds/heroHubBackground.jpg";
 export default function HeroHub() {
-    const rootRef = useRef(null);
     return (<section
         id="hero-hub"
-        ref={rootRef}
-        className="relative w-full h-full min-h-screen"
-        style={{
-            backgroundImage: `url(${heroHubBackground})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'top-center',
-            backgroundRepeat: 'no-repeat'
-        }}
+        className="relative w-full h-screen "
+
     >
-        {/* Overlay opcional si el texto no se ve bien */}
-        <div className="absolute inset-0 bg-black/60"></div>
-        <div className="relative z-10  w-full h-full md:px-7 py-9 px-3 " >
-            <div className="py-9 flex flex-col gap-6 md:gap-4">
+        {/* Imagen de fondo para desktop (oculta en mobile) */}
+        <div
+            className="hidden md:block absolute inset-0 bg-cover bg-no-repeat bg-center"
+            style={{
+                backgroundImage: `url(${heroHubBackground})`,
+                zIndex: 1
+            }}
+        ></div>
+
+        {/* Imagen para mobile (posicionada en el fondo) */}
+        <div
+            className="md:hidden absolute bottom-0 left-0 right-0 h-2/3 bg-cover bg-no-repeat bg-bottom"
+            style={{
+                backgroundImage: `url(${heroHubBackground})`,
+                zIndex: 1
+            }}
+        ></div>
+
+        {/* Overlay oscuro para mejorar legibilidad */}
+        <div className="absolute inset-0 bg-black/50 z-10"></div>
+        <div className="relative z-20  w-full h-full md:px-7 py-9 px-3 " >
+            <div className="py-9 flex flex-col gap-7 md:gap-4">
 
                 <Typography variant="headline-large" className="md:text-display-lg " >
                     HUB
@@ -31,9 +42,9 @@ export default function HeroHub() {
                     </Typography>
                     <Typography
                         variant="title-small"
-                        className="w-2/3  md:hidden"
+                        className="w-3/4  md:hidden"
                     >
-                        — stands to ensure technical excellence, operational reliability, \nand seamless project execution.
+                        — stands to ensure technical excellence, operational reliability, <br/>and seamless project execution.
                     </Typography>
                 </div>
             </div>

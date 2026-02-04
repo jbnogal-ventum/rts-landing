@@ -59,6 +59,7 @@ export default {
           'inverse-disabled': '#C6C6C6',     // Uso: bg-background-inverse-disabled
           white: '#FFFFFF',                  // Uso: bg-background-white
           soft: '#121212',                   // Uso: bg-background-soft
+
         },
 
         border: {
@@ -87,7 +88,14 @@ export default {
           'menu-primary': 'rgba(199, 199, 199, 0.2)',
           'button-hover-primary': "rgba(242, 242, 242, 0.2)",
           'button-active-primary': "rgba(242, 242, 242, 0.2)",
-        }
+        },
+
+        gradient: {
+          'violet': '',
+          'soft-violet': '#E5DAFF',
+          'blue': '',
+          'soft-blue': '',
+        },
       },
 
       // ===== ESPACIADO (Spacing System) =====

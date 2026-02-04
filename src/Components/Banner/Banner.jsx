@@ -33,7 +33,7 @@ function ActionButton({ label, href, onClick, variant = "filled-dark", download 
 
 export default function Banner({
   backgroundImage,
-  backgroundPosition = "top center",
+  backgroundPosition = "top-center",
 
   titleDesktop,
   titleMobile,
@@ -56,15 +56,12 @@ export default function Banner({
   return (
     <section className={`relative min-h-[600px]`}>
       {/* Contenedor para la imagen de fondo - FONDO COMPLETO */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 overflow-hidden">
         {backgroundImage && (
           <div
-            className="absolute inset-0 bg-cover bg-center"
+            className={`absolute inset-0 bg-cover  bg-no-repeat bg-${backgroundPosition}`}
             style={{
               backgroundImage: `url(${backgroundImage})`,
-              backgroundSize: 'cover',
-              backgroundPosition: backgroundPosition,
-              backgroundRepeat: 'no-repeat'
             }}
             aria-hidden="true"
           />

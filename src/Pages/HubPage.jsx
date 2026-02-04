@@ -104,12 +104,12 @@ export default function HubPage() {
           className="w-icon-xl h-icon-xl text-core-violet fill-current"
         />
                     <Typography
-                      variant="title-body"
+                      variant="title-small"
                       className="font-bold"
                       children={card.title}
                     />
                   </div>
-                  <Typography variant="body-md" children={card.info} />
+                  <Typography variant="body-sm" children={card.info} />
                 </div>
               ))}
             </div>
@@ -121,10 +121,7 @@ export default function HubPage() {
         <section id='academy' className="relative overflow-hidden ">
           <div className="absolute inset-0">
             <div
-              className="banner-bg absolute inset-0"
-              style={{
-                backgroundImage: 'linear-gradient(180deg, #EBEEF0 0%, #E5DAFF 100%)'
-              }}
+              className="bg-gradient-to-b from-background-inverse to-gradient-soft-violet absolute inset-0"
               aria-hidden="true"
             />
 
@@ -141,8 +138,8 @@ export default function HubPage() {
                   children="- 02"
                 />
                 <Typography
-                  variant="display-sm"
-                  className=""
+                  variant="headline-medium"
+                  className="text-display-small"
                   children="ACADEMY"
                 />
               </div>
@@ -163,17 +160,17 @@ export default function HubPage() {
                 ].map((card, index) => (
                   <div
                     key={`hub-card-academy-1-${index}`}
-                    className="bg-white rounded-md shadow-md p-5 flex flex-col justify-between h-hub-card"
+                    className="bg-white rounded-md border border-surface-primary p-5 flex flex-col justify-between h-hub-card"
                   >
                     <div className="flex flex-col gap-3">
                       {card.icon}
                       <Typography
-                        variant="title-body"
+                        variant="title-small"
                         className="font-bold"
                         children={card.title}
                       />
                     </div>
-                    <Typography variant="body-md" children={card.info} />
+                    <Typography variant="body-sm" children={card.info} />
                   </div>
                 ))}
 
@@ -184,17 +181,17 @@ export default function HubPage() {
                 ].map((card, index) => (
                   <div
                     key={`hub-card-academy-2-${index}`}
-                    className="bg-white rounded-md shadow-md p-5 flex flex-col justify-between h-hub-card"
+                    className="bg-white rounded-md border border-surface-primary p-5 flex flex-col justify-between h-hub-card"
                   >
                     <div className="flex flex-col gap-3">
                       {card.icon}
                       <Typography
-                        variant="title-body"
+                        variant="title-small"
                         className="font-bold"
                         children={card.title}
                       />
                     </div>
-                    <Typography variant="body-md" children={card.info} />
+                    <Typography variant="body-sm" children={card.info} />
                   </div>
                 ))}
 
@@ -214,6 +211,8 @@ export default function HubPage() {
 
         </section>
       </div>
+
+
       <section id='innovation-lab' className="relative overflow-hidden">
         <div className="absolute inset-0">
           {innovationLabBackgroundImage && (
@@ -274,9 +273,9 @@ export default function HubPage() {
         buttons={[
           { children: "Book a meeting now",  variant: "filled-dark" },
         ]}
-        backgroundPosition="center center"
+        backgroundPosition="center scale-150 md:scale-100 "
       />
 
-    </>
+    </> 
   );
 }
