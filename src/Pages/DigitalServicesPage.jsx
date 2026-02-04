@@ -13,9 +13,13 @@ import partnersImg from "../assets/pages_items/ds_partners.png";
 import HeroDigitalServices from "../Components/Hero/DigitalServices/HeroDigitalServices.jsx";
 import blueNebulosa from "../assets/Backgrounds/nebulosa_blue.png";
 import bannerImg from "../assets/Banners/moon_20.png";
+import OvalPods from '../assets/pages_items/oval_pods_mono.svg?react'; // Nota el ?react
+import CirclePods from '../assets/pages_items/circle_pods_mono.svg?react';
+import DicePods from '../assets/pages_items/dice_pods_mono.svg?react';
+import TrianglePods from '../assets/pages_items/triangle_pods_mono.svg?react';
 const tableRows = [
   [
-    { children: "Data-Driven", variant: "title-small", Icon: (<Grip className="w-6 h-6 text-core-violet md:text-text-primary" />) },
+    { children: "Data-Driven", variant: "title-small", Icon: (<CirclePods className="w-icon-xl h-icon-xl text-core-violet md:text-text-primary  fill-current" />) },
     { children: "From initial data gathering \nto final value creation", variant: "title-body" },
     { children: "By focusing on defined objectives, advanced analytics,  and measurable impact, we turn overwhelming data streams into powerful tools for decision-making and business growth.", variant: "body-sm" },
 
@@ -26,7 +30,7 @@ const tableRows = [
     },
   ],
   [
-    { children: "Networking", variant: "title-small", Icon: (<Grip className="w-6 h-6 text-core-violet md:text-text-primary" />) },
+    { children: "Networking", variant: "title-small", Icon: (<DicePods className="w-icon-xl h-icon-xl text-core-violet md:text-text-primary  fill-current" />) },
     { children: "Connecting systems, \nempowering industries", variant: "title-body" },
     { children: "Designed to establish, optimize, and maintain robust communication infrastructures that enable seamless connectivity across industrial systems. Its focus is on ensuring reliable, secure, and efficient data exchange  for modern industrial operations.", variant: "body-sm" },
     {
@@ -39,7 +43,7 @@ const tableRows = [
     },
   ],
   [
-    { children: "IT/OT\n Convergence", variant: "title-small", Icon: (<Grip className="w-6 h-6 text-core-violet md:text-text-primary" />) },
+    { children: "IT/OT\n Convergence", variant: "title-small", Icon: (<OvalPods className="w-icon-xl h-icon-xl text-core-violet md:text-text-primary  fill-current" />) },
     { children: "Bridging operational\nand digital worlds with \nculture approach", variant: "title-body" },
     { children: "Guiding organizations in developing a culture that bridges the gap between Information Technology (IT)  and Operational Technology (OT). This POD emphasizes fostering collaboration, shared goals, and mutual understanding between teams, unlocking \nthe full potential of digital transformation.", variant: "body-sm" },
     {
@@ -55,7 +59,7 @@ const tableRows = [
     },
   ],
   [
-    { children: "AVEVA PI System", variant: "title-small", Icon: (<Grip className="w-6 h-6 text-core-violet md:text-text-primary" />) },
+    { children: "AVEVA PI System", variant: "title-small", Icon: (<TrianglePods className="w-icon-xl h-icon-xl text-core-violet md:text-text-primary  fill-current" />) },
     { children: "Maximizing the value of your AVEVA PI System", variant: "title-body" },
     { children: "Specializes in providing comprehensive services for AVEVA PI System, the industry-leading platform for real-time operational data management. Our focus is on helping organizations fully leverage the capabilities of their PI System to drive operational efficiency, enhance decision- making, and unlock the power of their data.", variant: "body-sm" },
     {
@@ -138,7 +142,7 @@ export default function DigitalServicesPage() {
 
         <div className="flex flex-col gap-5 md:gap-7 w-full md:w-1/2 " >
 
-          <Typography variant="title-medium" className="text-text-secondary font-base" >
+          <Typography variant="title-medium" className="text-secondary font-base" >
             Through our POD services framework, we merge OT experience, process knowledge, and computer science to engineer the digital core of industrial operations.
           </Typography>
 
@@ -152,19 +156,18 @@ export default function DigitalServicesPage() {
           <Accordeon items={items} defaultOpen={0} allowCollapse />
         </div>
       </section>
-      <section id='meet-our-pods' className='felx flex-col gap-4 md:gap-7 py-9 px-3 md:px-7 bg-background-primary'>
-        <div><Typography
+      <section id='meet-our-pods' className='felx flex-col py-9 px-3 md:px-7 bg-background'>
+
+        <Typography
           variant="headline-medium"
-          className="md:text-center text-text-primary pb-7">
-          MEET OUR {" "}
+          className="md:text-display-sm md:text-center text-text-primary pb-4  md:pb-7">
+          MEET <br className="md:hidden" /> OUR {" "}
           <span className="      bg-gradient-to-b  from-[#6343f3]  to-[#0093CE]      bg-clip-text text-transparent    ">
             PODS
           </span>
         </Typography>
-        </div>
-        <div>
-          <Table rows={tableRows} columns={["Service", "Focus", "Description", "Main technologies"]} mode='dark' />
-        </div>
+        <Table rows={tableRows} columns={["Service", "Focus", "Description", "Main technologies"]} mode='dark' />
+
       </section>
       <div ref={whiteBlockRef}>
         <section id='partners' className="flex flex-col md:flex-row px-3 md:px-7 py-9 gap-6 md:gap-4 relative overflow-hidden ">
@@ -189,7 +192,7 @@ export default function DigitalServicesPage() {
           {/* Contenido existente con z-index para que esté por encima del fondo */}
           <div className="relative z-10 flex flex-col gap-6 w-full md:w-3/5">
             <div className="flex flex-col gap-4">
-              <Typography variant="subtitle-md" className="text-text-on-white-secondary" >
+              <Typography variant="subtitle-md" className="text-secondary" >
                 DIGITAL SOLUTIONS
               </Typography>
               <Typography variant="headline-small" className="md:text-headline-medium" >
@@ -197,7 +200,7 @@ export default function DigitalServicesPage() {
               </Typography>
             </div>
             <div className="flex w-full md:justify-center">
-              <Typography variant="body-lg" className="text-text-on-white-secondary md:w-ds-parteners-img" >
+              <Typography variant="body-lg" className="text-tsecondary md:w-ds-parteners-img" >
                 At RTS Group, we seamlessly integrate industry-leading technology solutions into our PODs to achieve the specific outcomes of each project.
               </Typography>
             </div>
@@ -210,18 +213,21 @@ export default function DigitalServicesPage() {
         </section>
       </div>
       <Banner
-              titleClassName="headline-medium"
-              backgroundImage={bannerImg}
-              titleDesktop={"WOULD YOU LIKE TO KNOW\nMORE ABOUT OUR EXPERIENCE?"}
-               overlay={50}
-              buttons={[
-                {
-                  children: "Download the full document",
-                  variant: "outlined-dark",
-                },
-                { children: "Book a meeting now", variant: "filled-dark", className: "w-full" },
-              ]}
-            />
+        variantDesktop="headline-medium"
+        variantMobile="headline-small"
+        backgroundImage={bannerImg}
+        backgroundPosition="center"
+        titleDesktop={"WOULD YOU LIKE TO KNOW\nMORE ABOUT OUR EXPERIENCE?"}
+        titleMobile={"WOULD YOU LIKE TO KNOW MORE ABOUT OUR EXPERIENCE?"}
+        overlay={50}
+        buttons={[
+          {
+            children: "Download the full document",
+            variant: "outlined-dark",
+          },
+          { children: "Book a meeting now", variant: "filled-dark", className: "w-full" },
+        ]}
+      />
 
     </>
   );

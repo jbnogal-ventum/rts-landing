@@ -24,7 +24,7 @@ export default function Table({
         </div>
 
         {/* Rows - Contenedor con scroll */}
-        <div className={cn("flex-1 overflow-y-auto", isLightMode ? "text-text-on-white-secondary" : "text-text-secondary")}>
+        <div className={cn("flex-1 overflow-y-auto text-secondary",) }>
           <div className="flex flex-col gap-4 pb-4">
             {rows.map((r, rowIndex) => (
               <div
@@ -52,13 +52,10 @@ export default function Table({
                           variant={c.variant}
                           className={cn(
                             "whitespace-pre-line",
-                            isLightMode
-                              ? colIndex === 0
-                                ? "text-text-on-white-primary"
-                                : "text-text-on-white-secondary"
-                              : colIndex === 0
-                                ? "text-text-primary"
-                                : "text-text-secondary"
+                             colIndex === 0
+                                ? "text-primary"
+                                : "text-secondary"
+                             
                           )}
                         />
                         {c.Icon && (

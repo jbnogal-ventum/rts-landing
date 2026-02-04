@@ -307,7 +307,7 @@ export default function CulturePage() {
         // variantDesktop="headline-medium"
         titleDesktop={"WOULD YOU LIKE TO KNOW\nMORE ABOUT OUR EXPERIENCE?"}
         titleMobile={"WOULD YOU LIKE TO KNOW MORE ABOUT OUR EXPERIENCE?"}
-
+backgroundPosition="center"
         buttons={[
           { children: "Book a meeting now",  variant: "filled-dark" },
         ]}

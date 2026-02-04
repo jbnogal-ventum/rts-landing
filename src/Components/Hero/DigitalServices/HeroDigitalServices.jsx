@@ -38,7 +38,7 @@ export default function HeroDigitalServices() {
         
         // Efectos basados en la posición del mouse
         const blur = isHovering ? distance * 7 : 0;
-        const brightness = isHovering ? 1 + (distance * 0.0) : 1;
+        const brightness = isHovering ? 1 + (distance * 0.5) : 1;
         const scale = isHovering ? 1 + (distance * 0.5) : 1;
         
         // Rotación sutil basada en la posición
@@ -51,7 +51,7 @@ export default function HeroDigitalServices() {
             scale,
             rotateX: `${rotateX}deg`,
             rotateY: `${rotateY}deg`,
-            transition: isHovering ? 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)' : 'all 0.6s ease'
+            transition: isHovering ? 'all 0.7s cubic-bezier(0.23, 1, 0.32, 1)' : 'all 0.7s ease'
         };
     };
     
@@ -69,7 +69,7 @@ export default function HeroDigitalServices() {
             {/* Contenedor de la imagen con efecto */}
             <div className="absolute inset-0 w-full h-full flex items-center justify-center">
                 <div 
-                    className="w-full h-full max-w-[90%] max-h-[90%] relative"
+                    className="w-full h-full md:max-w-[90%] md:max-h-[90%] relative"
                     style={{
                         backgroundImage: `url(${heroHubBackground})`,
                         backgroundSize: 'contain',
