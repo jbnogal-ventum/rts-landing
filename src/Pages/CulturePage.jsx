@@ -23,7 +23,7 @@ export default function CulturePage() {
 
   useEffect(() => {
     if (!whiteBlockRef.current) {
-      console.log('⚠️ whiteBlockRef.current aún no existe');
+      //console.log('⚠️ whiteBlockRef.current aún no existe');
       return;
     }
 
@@ -79,7 +79,7 @@ export default function CulturePage() {
           >EMPOWERING INDUSTRIES BY <br className="md:block hidden" /> MASTERING THE ART OF {" "} <span className="      bg-gradient-to-b  from-[#7513FF] via-[#4348F3]  to-[#0093CE]      bg-clip-text text-transparent    ">INDUSTRIAL  <br className="md:block hidden" /> TECHNOLOGY </span> CURATION</Typography>
 
           <div className="flex justify-center w-full ">
-            <div className="flex flex-col gap-4 text-text-secondary w-full md:px-9 lg:mx-9">
+            <div className="flex flex-col gap-4 text-text-secondary w-full md:w-industry-card">
               <Typography
                 variant="title-body">
                 At RTS Group, we view technology as only the beginning<br /> — our true value lies in integrating it into holistic solutions <br />that transform the way our clients operate.
@@ -169,13 +169,14 @@ export default function CulturePage() {
         </div>
         {/* Overlay opcional si el texto no se ve bien */}
         <div className="absolute inset-0 bg-black/50"></div>
+
         <div className="md:px-7 py-9 px-3 relative flex flex-col  gap-7" style={{ zIndex: 2 }}>
           <div className="flex flex-col md:flex-row md:justify-between gap-4 " >
             <div className="flex flex-row md:w-2/3">
 
               <Typography
-                variant="headline-medium"
-                className="md:text-headline-large"
+                variant="headline-large"
+                className=""
 
               >OUR APPROACH</Typography>
             </div>
@@ -199,12 +200,12 @@ export default function CulturePage() {
               ].map((card, index) => (
                 <div
                   key={`culture-card-1-${index}`}
-                  className="bg-white rounded-md shadow-md p-5 flex flex-col justify-between h-hub-card"
+                  className="bg-white rounded-md shadow-md p-5 flex flex-col gap-4 md:justify-between md:h-hub-card"
                 >
                   <div className="flex flex-col gap-3">
                     {card.icon}
                     <Typography
-                      variant="title-body"
+                      variant="title-small"
                       className="font-bold"
                       children={card.title}
                     />
@@ -213,7 +214,7 @@ export default function CulturePage() {
                 </div>
               ))}
 
-              <div className="bg-white rounded-md shadow-md p-5 flex flex-col justify-between h-hub-card"
+              <div className="bg-white rounded-md shadow-md p-5 flex flex-col gap-4 md:justify-between md:h-hub-card"
               >
                 <div className="flex flex-col gap-3">
                   <Pyramid className="w-5 h-5 " />
@@ -227,8 +228,8 @@ export default function CulturePage() {
               </div>
 
               <div className="rounded-md bg-transparent p-5  h-hub-card hidden md:flex"
-              >
-              </div>
+              />
+              
 
               {/* Texto como última card */}
               <div
@@ -248,7 +249,7 @@ export default function CulturePage() {
 
       <div ref={whiteBlockRef}>
         <section id='operation' className="relative overflow-hidden ">
-          <div className="absolute inset-0">
+          <div className="absolute inset-0 hidden md:block">
             <div
               className="banner-bg absolute inset-0"
               style={{
@@ -261,7 +262,7 @@ export default function CulturePage() {
           </div>
 
           {/* Contenido (titulos y cards) */}
-          <div className="md:px-7 py-9 px-3 relative flex flex-col  gap-7" style={{ zIndex: 2 }}>
+          <div className="md:px-7 py-9 px-3 relative flex flex-col gap-4  md:gap-7" style={{ zIndex: 2 }}>
 
             <Typography
               variant="headline-small"
@@ -279,17 +280,17 @@ export default function CulturePage() {
               ].map((card, index) => (
                 <div
                   key={`culture-card-1-${index}`}
-                  className="bg-white rounded-xl shadow-md grid grid-cols-1 md:grid-cols-3 gap-4 md:items-center w-full p-5"
+                  className="bg-white rounded-xl  grid grid-cols-1 md:grid-cols-3 gap-4 md:items-center w-full p-5 border border-border-subtle"
                 >
                   
                     
                     <Typography
                       variant="headline-small"
-                      className="  bg-gradient-to-b  from-[#7513FF] via-[#4348F3]  to-[#0093CE]      bg-clip-text text-transparent   "
+                      className="  bg-gradient-to-br  from-[#7513FF] via-[#4348F3]  to-[#0093CE]      bg-clip-text text-transparent   "
                       children={card.title}
                     />
                    
-                <img className="w-[252px] h-[252px] object-cover rounded-xs" src={card.img} alt="" />
+                <img className="w-full md:w-[252px] h-[252px] object-cover rounded-xs" src={card.img} alt="" />
 
                   <Typography variant="body-md" children={card.info} />
                 </div>

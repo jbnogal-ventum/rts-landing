@@ -148,10 +148,10 @@ export default {
       fontSize: {
         // Display
         'display-lg': '84px',                // Uso: text-display-lg
-        'display-md': '60px',                // Uso: text-display-md
+        'display-md': '60px',                // Uso: text-display-md 
         'display-sm': '52px',                // Uso: text-display-sm
 
-        // Headlines
+        // Headlines 
         'headline-large': '46px',            // Uso: text-headline-large
         'headline-medium': '40px',           // Uso: text-headline-medium
         'headline-small': '28px',            // Uso: text-headline-small
@@ -291,13 +291,13 @@ export default {
       width: {
         'logo-md': '59px',                   // Uso: w-logo-md
         'logo-lg': '124px',                  // Uso: w-logo-lg
-        'hub-card': '357px',                 // Uso: w-hub-card
         'icon-xxs': '12px',                  // Uso: w-icon-xxs
         'icon-xs': '16px',                   // Uso: w-icon-xs
         'icon-sm': '20px',                   // Uso: w-icon-sm
         'icon-md': '24px',                   // Uso: w-icon-md
         'icon-lg': '32px',                   // Uso: w-icon-lg
         'icon-xl': '38px',                   // Uso: w-icon-xl
+        'hub-card': '357px',                 // Uso: w-hub-card
         'ds-parteners-img': '454px',         // Uso: w-ds-parteners-img
         'industry-card': '535px',             // Uso: w-industry-card
       },
