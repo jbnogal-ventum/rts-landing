@@ -145,7 +145,7 @@ export default function SwapContent() {
               }}
             >
               <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-6.5 px-3 md:px-7 ">
-                <div className="text-text-primary flex flex-col gap-3">
+                <div className="text-primary flex flex-col gap-3">
                   <Typography variant="subtitle-large">
                     {kicker}
                   </Typography>
@@ -154,7 +154,7 @@ export default function SwapContent() {
                   </Typography>
                 </div>
 
-                <div className="md:col-span-2 text-text-secondary flex flex-col gap-5">
+                <div className="md:col-span-2 text-secondary flex flex-col gap-5">
                   <Typography variant="body-large">
                     {paragraph}
                   </Typography>
@@ -172,7 +172,7 @@ export default function SwapContent() {
               }}
             >
               <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 px-3 md:px-7 ">
-                <div className="text-text-primary flex flex-col gap-3">
+                <div className="text-primary flex flex-col gap-3">
                   <Typography variant="subtitle-large">
                     {nextKicker}
                   </Typography>
@@ -181,7 +181,7 @@ export default function SwapContent() {
                   </Typography>
                 </div>
 
-                <div className="md:col-span-2 text-text-secondary flex flex-col gap-5">
+                <div className="md:col-span-2 text-secondary flex flex-col gap-5">
                   <Typography variant="body-large">
                     {nextParagraph}
                   </Typography>

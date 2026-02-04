@@ -19,18 +19,19 @@ export default function HeroAutomation() {
             }}
         >
              {/* Overlay opcional si el texto no se ve bien */}
-        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="absolute inset-0 bg-black/50"></div>
             <div className="relative z-10 w-full h-full md:px-7 py-9 px-3">
-                <div className="pt-9 flex flex-col gap-7 md:gap-4">
+                <div className="pt-9 flex flex-col gap-8 md:gap-4">
                     <Typography variant="headline-large" className="md:text-display-lg">
                         AUTOMATION<br/>& CONTROLS
                     </Typography>
-                    <div className="flex justify-end md:justify-center md:mr-5 ">
+                    <div className="flex justify-end md:justify-center md:mr-5 "> 
                         <Typography
                             variant="title-small"
-                            className="w-3/4 md:w-3/5 md:text-title-medium"
+                            className="w-4/5 md:w-3/5 md:text-title-medium"
                         >
                             — provide expert guidance to<br className="md:block hidden"/> design and integrate control systems
+                            
                         </Typography>
                     </div>
                 </div>

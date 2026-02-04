@@ -262,7 +262,7 @@ export default function AutomationControlsPage({ setNavMode }) {
           <div className="flex flex-col md:flex-row  gap-7 ">
             <div className="flex flex-col gap-5 md:gap-7 w-full md:w-1/2">
               <Typography variant="title-medium">
-                Devoted to maintaining, innovating, and enhancing industrial control systems, <br className="md:hidden" />we engineer projects across various industries.
+                Devoted to maintaining, innovating,<br className="md:block hidden" /> and enhancing industrial control systems, <br className="md:hidden" />we engineer projects across various industries.
               </Typography>
 
               <Button variant="filled-dark" className="w-fit">
@@ -271,7 +271,7 @@ export default function AutomationControlsPage({ setNavMode }) {
             </div>
 
             <div className="flex flex-col gap-4 w-full md:w-1/2">
-              <Typography variant="subtitle-lg" className="text-text-secondary">
+              <Typography variant="subtitle-lg" className="text-secondary">
                 Key areas of expertise
               </Typography>
               <Accordeon items={items} defaultOpen={0} allowCollapse />
@@ -290,7 +290,7 @@ export default function AutomationControlsPage({ setNavMode }) {
           </div>
         </div>
       </section>
-            <SwapContent />
+      <SwapContent />
 
       <div ref={whiteBlockRef}>
         <section id="honey-well" className="relative overflow-hidden ">
@@ -340,7 +340,7 @@ export default function AutomationControlsPage({ setNavMode }) {
           <div className="relative z-10 px-3 md:px-7 pt-9 ">
             <div className="flex flex-col md:flex-row gap-6">
               <div className="flex flex-col gap-6 md:gap-4 w-full md:w-1/2">
-                <Typography variant="headline-medium" className="md:text-headline-medium">
+                <Typography variant="headline-medium" className="md:text-headline-large">
                   <span className="bg-gradient-to-br from-[#7513FF] via-[#4348F3] to-[#0093CE] bg-clip-text text-transparent">
                     HONEYWELL
                   </span> <br />
@@ -354,7 +354,7 @@ export default function AutomationControlsPage({ setNavMode }) {
                 />
               </div>
 
-              <div className="flex flex-col gap-6 w-full md:w-1/2 text-text-on-white-secondary">
+              <div className="flex flex-col gap-6 w-full md:w-1/2 text-secondary">
 
                 <Typography variant="title-medium" className="">
                   This team ensures that every customer using Honeywell technologies benefits from world-class expertise and global support.
@@ -433,7 +433,11 @@ export default function AutomationControlsPage({ setNavMode }) {
       </section>
 
       <section id={'engineering-cards'}>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 px-3 md:px-7 pt-4 pb-9">
+        <div className="flex flex-col gap-7  px-3 md:px-7 pt-4 pb-9">
+          <Typography variant="title-medium" className="md:text-center">
+            Engineering services with expert support
+          </Typography>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 ">
 
           {engineeringCards.map((card, index) => (
             <div key={`engineering-card-${index}`} className="flex flex-col justify-between p-5 bg-background-white border border-1 border-surface-primary rounded-md text-text-on-white-primary h-hub-card">
@@ -454,13 +458,15 @@ export default function AutomationControlsPage({ setNavMode }) {
             </div>
           ))}
         </div>
-
+</div>
       </section>
       <Banner
         titleClassName="headline-medium"
         backgroundImage={bannerImg}
+        backgroundPosition="center"
         titleDesktop={"WOULD YOU LIKE TO KNOW\nMORE ABOUT OUR EXPERIENCE?"}
-         overlay={50}
+        titleMobile={"WOULD YOU LIKE TO KNOW MORE ABOUT OUR EXPERIENCE?"}
+        overlay={50}
         buttons={[
           {
             children: "Download the full document",

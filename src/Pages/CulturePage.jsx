@@ -229,7 +229,7 @@ export default function CulturePage() {
 
               <div className="rounded-md bg-transparent p-5  h-hub-card hidden md:flex"
               />
-              
+
 
               {/* Texto como última card */}
               <div
@@ -274,23 +274,23 @@ export default function CulturePage() {
               {/* Primera fila de 3 cards */}
               {[
                 { title: "UNIFIED ECOSYSTEMS", img: card1, info: "We design and implement cohesive \nsystems where all technologies work \nseamlessly together, tailored to the \nclient’s specific needs." },
-                { title: "INNOVATION \nAT THE CORE", img: card2 , info: "By integrating industry-leading tools into\nour PODs, we ensure our clients stay at the forefront of industrial innovation." },
+                { title: "INNOVATION \nAT THE CORE", img: card2, info: "By integrating industry-leading tools into\nour PODs, we ensure our clients stay at the forefront of industrial innovation." },
                 { title: "SCALABILITY AND FUTURE-READINESS", img: card3, info: "Our solutions are built to adapt and \nscaleas client operations grow, ensuring long-term value." },
-                { title: "EXPERT IMPLEMENTATION", img: card4 , info: "Our team’s deep expertise with these \nplatforms guarantees smooth integration, minimal disruption, and maximum ROI." },
+                { title: "EXPERT IMPLEMENTATION", img: card4, info: "Our team’s deep expertise with these \nplatforms guarantees smooth integration, minimal disruption, and maximum ROI." },
               ].map((card, index) => (
                 <div
                   key={`culture-card-1-${index}`}
                   className="bg-white rounded-xl  grid grid-cols-1 md:grid-cols-3 gap-4 md:items-center w-full p-5 border border-border-subtle"
                 >
-                  
-                    
-                    <Typography
-                      variant="headline-small"
-                      className="  bg-gradient-to-br  from-[#7513FF] via-[#4348F3]  to-[#0093CE]      bg-clip-text text-transparent   "
-                      children={card.title}
-                    />
-                   
-                <img className="w-full md:w-[252px] h-[252px] object-cover rounded-xs" src={card.img} alt="" />
+
+
+                  <Typography
+                    variant="headline-small"
+                    className="  bg-gradient-to-br  from-[#7513FF] via-[#4348F3]  to-[#0093CE]      bg-clip-text text-transparent   "
+                    children={card.title}
+                  />
+
+                  <img className="w-full md:w-[252px] h-[252px] object-cover rounded-xs" src={card.img} alt="" />
 
                   <Typography variant="body-md" children={card.info} />
                 </div>
@@ -307,9 +307,9 @@ export default function CulturePage() {
         // variantDesktop="headline-medium"
         titleDesktop={"WOULD YOU LIKE TO KNOW\nMORE ABOUT OUR EXPERIENCE?"}
         titleMobile={"WOULD YOU LIKE TO KNOW MORE ABOUT OUR EXPERIENCE?"}
-backgroundPosition="center"
+        backgroundPosition="center"
         buttons={[
-          { children: "Book a meeting now",  variant: "filled-dark" },
+          { children: "Book a meeting now", variant: "filled-dark" },
         ]}
       />
 
