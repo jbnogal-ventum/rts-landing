@@ -35,13 +35,13 @@ export default function Hub() {
 
   // Posición Y para cada card
   const card1Y = useTransform(scrollYProgress, card1Range, ["0%", "0%"]);
-  const card2Y = useTransform(scrollYProgress, card2Range, ["100%", "9%"]); // pt-3 ≈ 3%
-  const card3Y = useTransform(scrollYProgress, card3Range, ["100%", "18%"]); // pt-3 * 2 ≈ 6%
+  const card2Y = useTransform(scrollYProgress, card2Range, ["109%", "9%"]); // pt-3 ≈ 3%
+  const card3Y = useTransform(scrollYProgress, card3Range, ["218%", "18%"]); // pt-3 * 2 ≈ 6%
 
   // Opacidad para las cards (aparecen cuando entran)
   const card1Opacity = useTransform(scrollYProgress, [0, 0.1], [1, 1]);
-  const card2Opacity = useTransform(scrollYProgress, [0.33, 0.38], [0, 1]);
-  const card3Opacity = useTransform(scrollYProgress, [0.66, 0.71], [0, 1]);
+  const card2Opacity = useTransform(scrollYProgress, [0.33, 0.38], [1, 1]);
+  const card3Opacity = useTransform(scrollYProgress, [0.66, 0.71], [1, 1]);
 
 
   return (

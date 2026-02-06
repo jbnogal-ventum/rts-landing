@@ -16,7 +16,6 @@ export default function HomePage({ onPhase }) {
         
      <div style={{height: "1px"}} />
       <HeroHomePage onPhase={onPhase} />
-      <div style={{height: "1px"}} />
 
       <HorizontalCarousel />
       <Marquee />

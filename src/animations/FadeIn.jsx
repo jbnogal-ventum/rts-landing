@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
 
-const FadeInScaleAnimation = ({ children, width = "100%" }) => {
+const FadeInScaleAnimation = ({ children, className, delay, duration=0.6, ...props}) => {
   const ref = useRef(null);
   const isInView = useInView(ref, {});
   const controls = useAnimation();
@@ -11,7 +11,7 @@ const FadeInScaleAnimation = ({ children, width = "100%" }) => {
   }, [isInView]);
 
   return (
-    <div ref={ref} style={{ width, overflow: "hidden" }}>
+    <div ref={ref} className={className} {...props}>
       <motion.div
         variants={{
           hidden: { opacity: 0, scale: 0.8 },
@@ -19,14 +19,15 @@ const FadeInScaleAnimation = ({ children, width = "100%" }) => {
         }}
         initial="hidden"
         animate={controls}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+        transition={{ duration, delay, ease: "easeOut" }}
+        className={className}
       >
         {children}
       </motion.div>
     </div>
   );
 };
-const FadeInAnimation = ({ children, width = "100%" }) => {
+const FadeInAnimation = ({ children, className, delay, duration=0.6,  ...props}) => {
   const ref = useRef(null);
   const isInView = useInView(ref, {});
   const controls = useAnimation();
@@ -36,7 +37,7 @@ const FadeInAnimation = ({ children, width = "100%" }) => {
   }, [isInView]);
 
   return (
-    <div ref={ref} style={{ width, overflow: "hidden" }}>
+    <div ref={ref} className={className} {...props}>
       <motion.div
         variants={{
           hidden: { opacity: 0 },
@@ -44,7 +45,7 @@ const FadeInAnimation = ({ children, width = "100%" }) => {
         }}
         initial="hidden"
         animate={controls}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: duration, delay, ease: "easeOut" }}
       >
         {children}
       </motion.div>

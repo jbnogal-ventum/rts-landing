@@ -264,39 +264,17 @@ export default function Navbar() {
       {/* DROPDOWNS DESKTOP */}
       <div className="fixed top-[30px]  z-[899] flex justify-center w-full bg-transparent px-3  md:px-7">
         <div
-          className={`flex justify-between items-center w-full h-navbar py-2 pl-3 pr-2 rounded-md bg-transparent`}
+          className={`flex justify-between items-center w-full h-navbar py-2 pl-3 pr-2 rounded-md bg-transparent text-transparent`}
         >
           <div className="flex flex-row  items-center gap-4">
-            <a
-              className="cursor-pointer shrink-0"
-              onClick={() => handleNavigate("/")}
-            >
-              <img
-                src={logo}
-                className="w-[44px] h-[21px] "
-                alt="RTS Logo"
-                style={{
-                  filter: theme === "light"
-                    ? "invert(0)"
-                    : "invert(1)"
-                }}
-              />
-            </a>
+            <div className="w-[44px]" />
 
             <div className="hidden md:flex flex-row gap-3 ">
               <div className="relative ">
-                <Button
-                  variant={theme === "light" ? "navbar-light" : "navbar-dark"}
-                  className={`flex items-center gap-2 `}
-                >
-                  <span>What we do</span>
-                  <ChevronDown
-                    className={` transition-transform duration-300 ${ddMobileOpen === "what" ? "rotate-180" : ""}`}
-                  />
-                </Button>
+                
                 <AnimatePresence>
                   {ddOpen === "what" && (
-                    <div className={`absolute top-full left-0 mt-3 min-w-[330px] rounded-xs`}>
+                    <div className={`absolute top-[20px] left-0 mt-3 min-w-[330px] rounded-xs`}>
                       <motion.div
                         variants={dropdownVariants}
                         initial="hidden"
@@ -317,19 +295,10 @@ export default function Navbar() {
               </div>
 
               <div className="relative ">
-                <Button
-                  variant={theme === "light" ? "navbar-light" : "navbar-dark"}
-                  className="flex items-center gap-2"
-                  onClick={() => openDropdown("industries")}
-                >
-                  <span>Industries</span>
-                  <ChevronDown
-                    className={` transition-transform duration-300 ${ddOpen === "what" ? "rotate-180" : ""}`}
-                  />
-                </Button>
+                
                 <AnimatePresence>
                   {ddOpen === "industries" && (
-                    <div className={`absolute ml-2 top-full left-0 mt-3 min-w-[330px] rounded-xs`}>
+                    <div className={`absolute ml-2 top-[20px] left-[140px] mt-3 min-w-[330px] rounded-xs`}>
                       <motion.div
                         variants={dropdownVariants}
                         initial="hidden"

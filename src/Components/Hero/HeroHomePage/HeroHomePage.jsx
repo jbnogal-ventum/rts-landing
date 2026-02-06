@@ -30,8 +30,7 @@ export default function HeroHomePage({ onPhase }) {
   const yOffsetPannel1 = useTransform(scrollYProgress, [0, 0.5, 1], ["20px", "20px", "0px"]);
   const yOffsetPannel2 = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], ["20px", "20px", "0px", "0px"]);
   const yOffsetPannel3 = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], ["20px", "20px", "0px", "0px"]);
-  // const blurPannel4 = useTransform(scrollYProgress, [0, 0.7, 0.8, 0.9, 1], ["40px", "40px", "10px", "0px", "0px"]);
-  // const blurPannel5 = useTransform(scrollYProgress, [0, 0.7, 0.8, 0.9, 1], ["40px", "40px", "10px", "0px", "0px"]);
+
   return (
     <section id="hero-home-section" className="relative w-full h-[700vh] " ref={heroHomeSectionRef}>
       <div className="sticky top-0 h-screen bg-gradient-to-b from-transparent via-transparent to-background-primary ">

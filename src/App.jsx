@@ -28,8 +28,6 @@ import MoleculePage from "./Pages/MoleculePage";
 
 
 export default function App() {
-    // const { theme } = useTheme();
-  // console.log('App theme', theme);
   const location = useLocation();
   const transitionRef = useRef(null);
   const [phase, setPhase] = useState(0);
@@ -39,7 +37,6 @@ export default function App() {
 
   const lenisRef = useRef(null);
   const rafIdRef = useRef(0);
-  const stTickRef = useRef(null);
 
   useEffect(() => {
     const t = setTimeout(() => setIsReady(true), 1200);
@@ -84,7 +81,7 @@ export default function App() {
 
   useEffect(() => {
     // Resetear scroll al top cuando se monta el componente
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
     
   }, [location.pathname]);
 

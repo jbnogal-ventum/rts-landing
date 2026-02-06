@@ -1,15 +1,16 @@
 import { Typography, Button } from "../../index";
 import { useEffect, useRef } from "react";
 import heroHubBackground from "../../../assets/Backgrounds/heroHubBackground.jpg";
+import { SlideInAnimation } from "../../../animations/index";
 export default function HeroHub() {
     return (<section
         id="hero-hub"
-        className="relative w-full h-screen "
+        className="relative w-full h-screen overflow-hidden"
 
     >
         {/* Imagen de fondo para desktop (oculta en mobile) */}
         <div
-            className="hidden md:block absolute inset-0 bg-cover bg-no-repeat bg-center"
+            className="hidden md:block absolute inset-0 bg-cover bg-no-repeat bg-center md:scale-110"
             style={{
                 backgroundImage: `url(${heroHubBackground})`,
                 zIndex: 1
@@ -18,9 +19,10 @@ export default function HeroHub() {
 
         {/* Imagen para mobile (posicionada en el fondo) */}
         <div
-            className="md:hidden absolute bottom-0 left-0 right-0 h-2/3 bg-cover bg-no-repeat bg-bottom"
+            className="md:hidden absolute bottom-0 left-0 right-0 translate-x-50 translate-y-50 h-2/3 bg-cover bg-no-repeat "
             style={{
                 backgroundImage: `url(${heroHubBackground})`,
+                backgroundPosition: '43% center',
                 zIndex: 1
             }}
         ></div>
@@ -29,11 +31,12 @@ export default function HeroHub() {
         <div className="absolute inset-0 bg-black/50 z-10"></div>
         <div className="relative z-20  w-full h-full md:px-7 py-9 px-3 " >
             <div className="py-9 flex flex-col gap-7 md:gap-4">
-
-                <Typography variant="headline-large" className="md:text-display-lg " >
-                    HUB
-                </Typography>
-                <div className="flex justify-end md:pr-9 pr-3"> {/* flex-1 añadido aquí */}
+                <SlideInAnimation y={50} className="" repeat={true}>
+                    <Typography variant="headline-large" className="md:text-display-lg " >
+                        HUB
+                    </Typography>
+                </SlideInAnimation>
+                <SlideInAnimation className="flex justify-end md:pr-9 pr-3 w-full" delay={0.7}>
                     <Typography
                         variant="title-small"
                         className="w-2/3 hidden md:block"
@@ -44,9 +47,9 @@ export default function HeroHub() {
                         variant="title-small"
                         className="w-3/4  md:hidden"
                     >
-                        — stands to ensure technical excellence, operational reliability, <br/>and seamless project execution.
+                        — stands to ensure technical excellence, operational reliability, <br />and seamless project execution.
                     </Typography>
-                </div>
+                </SlideInAnimation>
             </div>
         </div>
 
