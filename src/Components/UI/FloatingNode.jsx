@@ -1,9 +1,10 @@
 // src/Components/UI/FloatingNode.jsx
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, use } from "react";
 import gsap from "gsap";
 import { SendHorizonal, X } from "lucide-react";
 import "./FloatingNode.css";
-
+import { useTheme } from "../../contexts/ThemeContext";
+import { cn } from "../../lib/utils";
 const WEBHOOK_URL =
   "https://ruana-ai-d9eshse0hxcqfrae.eastus2-01.azurewebsites.net/webhook/660ac8f6-f8c3-4af3-b6ff-3f17007faf96";
 
@@ -22,6 +23,8 @@ export default function FloatingNode() {
 
   const hasGreeted = useRef(false);
   const isAnimating = useRef(false);
+
+  const {theme} = useTheme();
 
   // Auto-scroll to bottom when messages change
   useEffect(() => {
@@ -179,19 +182,19 @@ export default function FloatingNode() {
       window.removeEventListener("hero:enter", onEnter);
     };
   }, []);
-
+  console.log({theme})
   return (
     <div className="floating-node" ref={nodeRef}>
       {!isExpanded ? (
-        <div key="collapsed" className="fn-collapsed" onClick={expand}>
-          <div className="fn-outer-circle">
+        <div key="collapsed" className={"fn-collapsed"} onClick={expand}>
+          <div className={cn(theme === "dark" ? "fn-outer-circle-dark" : "fn-outer-circle-light", "transition-colors duration-700 ease-in-out fn-outer-circle")} >
             <div className="fn-ring" />
           </div>
         </div>
       ) : (
-        <div key="panel" className="fn-chat-panel" ref={panelRef}>
+        <div key="panel" className="fn-chat-panel bg-assistant-background rounded-md shadow-md" ref={panelRef}>
           {/* Header */}
-          <div className="fn-chat-header">
+          <div className="fn-chat-header ">
             <div className="fn-chat-header-left">
               <div className="fn-chat-header-ring" />
               <span className="fn-chat-header-title">RTS Assistant</span>

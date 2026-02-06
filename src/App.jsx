@@ -25,7 +25,7 @@ import "./App.css";
 import "./index.css";
 import DigitalServicesPage from "./Pages/DigitalServicesPage";
 import MoleculePage from "./Pages/MoleculePage";
-
+import { SlideInAnimation, FadeInAnimation } from "./animations/index";
 
 export default function App() {
   const location = useLocation();
@@ -91,8 +91,7 @@ export default function App() {
         <Loader isReady={isReady} onDone={() => setLoaderDone(true)} />
       )}
 
-      <Molecule />
-
+    <Molecule />
       <Transition ref={transitionRef} enabled={loaderDone} lenisRef={lenisRef}>
         <Navbar />
         <FloatingNode phase={phase} />

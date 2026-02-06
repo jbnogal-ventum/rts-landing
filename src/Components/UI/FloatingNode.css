@@ -36,14 +36,22 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: rgba(60, 60, 60, 0.5);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
+  
 }
+.fn-outer-circle-dark {
+ 
+  background: rgba(60, 60, 60, 0.5);
 
+}
+.fn-outer-circle-light {
+  background: rgba(227, 232, 255, 0.6);
+
+}
 .fn-ring {
   width: 32px;
   height: 32px;
@@ -94,11 +102,9 @@
 .fn-chat-panel {
   width: 380px;
   height: 480px;
-  border-radius: 20px;
-  background: rgba(30, 30, 30, 0.85);
+  
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
   overflow: hidden;

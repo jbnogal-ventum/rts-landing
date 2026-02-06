@@ -131,7 +131,7 @@ export function IndustriesTemplatePage({ content }) {
             <section id="industry-clients">
                 <div className="flex flex-col md:flex-row gap-7 md:gap-9 py-9 px-3 md:px-7 bg-background text-color">
 
-                    <div className="w-full md:w-2/5 flex flex-col md:gap-7 gap-5 ">
+                    <div className="w-full md:w-2/5 flex flex-col md:gap-7 gap-5 text-secondary ">
                         <Typography variant="title-body">
                             {content?.clientsSection?.title}
                         </Typography>
@@ -150,7 +150,7 @@ export function IndustriesTemplatePage({ content }) {
                             {/* Opción A: Grid con logos cargados dinámicamente */}
                             <div className={cn(
                                 "flex flex-wrap gap-4 justify-center",
-                                arrayClientsLogos.length % 2 === 0 || arrayClientsLogos.length <= 4
+                                arrayClientsLogos.length % 2 === 0 && arrayClientsLogos.length <= 4
                                     ? '[&>*]:w-full md:[&>*]:w-[calc(45%-0.5rem)] '
                                     : '[&>*]:w-[calc(45%-0.5rem)] lg:[&>*]:w-[calc(30%-0.667rem)]'
                             )}>

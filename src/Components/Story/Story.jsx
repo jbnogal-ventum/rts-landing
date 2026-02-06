@@ -57,9 +57,9 @@ export default function Story() {
   });
 
   // Para el efecto fade in/out más preciso
-  const opacityRange = [0, 0.3, 0.7, 1]; // Ajusta estos valores para controlar el timing
-  const opacityRangePannel1 = [0, 1, 0, 0];
-  const opacityRangePannel2 = [0, 0, 1, 1];
+  const opacityRange = [0, 0.3, 0.4, 0.51, 0.7, 1]; 
+  const opacityRangePannel1 = [0, 1, 1, 0, 0, 0];
+  const opacityRangePannel2 = [0, 0, 0, 0, 1,1];
 
   const opacityPannel1 = useTransform(scrollYProgress, opacityRange, opacityRangePannel1);
   const opacityPannel2 = useTransform(scrollYProgress, opacityRange, opacityRangePannel2);

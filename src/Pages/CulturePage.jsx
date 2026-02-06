@@ -242,7 +242,7 @@ export default function CulturePage() {
 
 
               {/* Texto como última card */}
-              <SlideInAnimation  delay={(3) * 0.3} ></SlideInAnimation>
+              <SlideInAnimation  delay={(3) * 0.3} >
               <div
                 className=" rounded-md h-auto md:h-hub-card flex flex-col justify-end md:p-5 "
               >
@@ -276,11 +276,12 @@ export default function CulturePage() {
           {/* Contenido (titulos y cards) */}
           <div className="md:px-7 py-9 px-3 relative flex flex-col gap-4  md:gap-7" style={{ zIndex: 2 }}>
 
-            <Typography
+             <SlideInAnimation y={50} delay={0.3} repeat={true}><Typography
               variant="headline-small"
               className="md:text-headline-large md:text-center"
               children={"SOLUTIONS THAT TRANSFORM \nTHE WAY OUR CLIENTS OPAREATE"}
             />
+            </SlideInAnimation>
             <div className="flex flex-col gap-4">
 
               {/* Primera fila de 3 cards */}
@@ -290,8 +291,9 @@ export default function CulturePage() {
                 { title: "SCALABILITY AND FUTURE-READINESS", img: card3, info: "Our solutions are built to adapt and \nscaleas client operations grow, ensuring long-term value." },
                 { title: "EXPERT IMPLEMENTATION", img: card4, info: "Our team’s deep expertise with these \nplatforms guarantees smooth integration, minimal disruption, and maximum ROI." },
               ].map((card, index) => (
+                <SlideInAnimation key={`culture-card-1-${index}`} delay={(index + 1) * 0.3} >
                 <div
-                  key={`culture-card-1-${index}`}
+                 
                   className="bg-white rounded-xl  grid grid-cols-1 md:grid-cols-3 gap-4 md:items-center w-full p-5 border border-border-subtle"
                 >
 
@@ -306,6 +308,7 @@ export default function CulturePage() {
 
                   <Typography variant="body-md" children={card.info} />
                 </div>
+                </SlideInAnimation>
               ))}
             </div>
           </div>

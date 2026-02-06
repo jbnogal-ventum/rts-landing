@@ -9,8 +9,9 @@ export default function Card({ title, description, image, to, children }) {
   return (
     <div className="
       relative
-      w-industry-card
-      h-industry-card
+      max-w-[409px]
+      w-[85vw]
+      h-[50vh]
       rounded-xs
       overflow-hidden
       cursor-pointer
@@ -47,7 +48,7 @@ export default function Card({ title, description, image, to, children }) {
    
 
         {/* Descripción */}
-        <Typography className="mr-7 pr-5">
+        <Typography className="mr-7 pr-2">
           {description}
         </Typography>
 

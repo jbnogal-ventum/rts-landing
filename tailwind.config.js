@@ -171,9 +171,7 @@ export default {
         'title-medium': '26px',              // Uso: text-title-medium
         'title-small': '22px',               // Uso: text-title-small
         'title-body': '18px',                // Uso: text-title-body
-        'title-lg': '30px',                  // Uso: text-title-lg
-        'title-md': '26px',                  // Uso: text-title-md
-        'title-sm': '22px',                  // Uso: text-title-sm
+        
 
         // Body
         'body-lg': '18px',                   // Uso: text-body-lg
@@ -213,27 +211,25 @@ export default {
 
       // ===== TIPOGRAFÍA - ESPACIADO DE LETRAS =====
       letterSpacing: {
-        'display-lg': '5%',              // Uso: tracking-display-lg
-        'display-md': '0%',             // Uso: tracking-display-md
-        'display-sm': '0%',             // Uso: tracking-display-sm
+        'display-lg': '0.05em',              // Uso: tracking-display-lg
+        'display-md': '-0.0em',             // Uso: tracking-display-md
+        'display-sm': '-0.0em',             // Uso: tracking-display-sm
 
-        'headline-large': '5%',          // Uso: tracking-headline-large
-        'headline-medium': '5%',         // Uso: tracking-headline-medium
-        'headline-small': '5%',          // Uso: tracking-headline-small
+        'headline-large': '0.05em',          // Uso: tracking-headline-large
+        'headline-small': '0.05em',          // Uso: tracking-headline-small
+        'headline-medium': '0.05em',         // Uso: tracking-headline-medium
 
-        'title-large': '-2%',                // Uso: tracking-title-large
-        'title-medium': '-2%',               // Uso: tracking-title-medium
-        'title-body': '-2%',                 // Uso: tracking-title-body
-        'title-small': '-2%',            // Uso: tracking-title-small
+        'title-large': '-0.01em',                // Uso: tracking-title-large
+        'title-medium': '-0.01em',               // Uso: tracking-title-medium
+        'title-body': '-0.01em',                 // Uso: tracking-title-body
+        'title-small': '-0.01em',            // Uso: tracking-title-small
 
         'body-lg': '0%',                 // Uso: tracking-body-lg
         'body-md': '0%',                 // Uso: tracking-body-md
         'body-sm': '0%',                 // Uso: tracking-body-sm
         'body-default': '0%',            // Uso: tracking-body-default
 
-        'subtitle-md': '0%',             // Uso: tracking-subtitle-md
-        'subtitle-lg': '0%',             // Uso: tracking-subtitle-lg (agregar si falta)
-        'subtitle-sm': '0%',             // Uso: tracking-subtitle-sm (agregar si falta)
+          'subtitle-md': '0.05em',   
       },
 
       // ===== TIPOGRAFÍA - PESOS =====
@@ -251,6 +247,7 @@ export default {
         'title-large': '600',                // Uso: font-title-large
         'title-medium': '600',               // Uso: font-title-medium
         'title-small': '600',                // Uso: font-title-small
+        'title-body': '600',                 // Uso: font-title-body
         'title-bold': '800',                 // Uso: font-title-bold
         'title-weight': '800',               // Uso: font-title-weight (redundante)
 

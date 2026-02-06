@@ -14,10 +14,10 @@ export default function HeroHomePage({ onPhase }) {
   const opacityRange = [0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1];
 
   // Todos los arrays deben tener 7 valores
-  const opacityRangePannel1 = [1, 1, 0, 0, 0, 0, 0, 0, 0, 0];    // Visible de 0 a 20%
-  const opacityRangePannel2 = [0, 0, 1, 1, 0, 0, 0, 0, 0, 0];    // Visible de 20% a 40%
-  const opacityRangePannel3 = [0, 0, 0, 0, 1, 1, 0, 0, 0, 0];    // Visible de 40% a 60%
-  const opacityRangePannel4 = [0, 0, 0, 0, 0, 0, 1, 1, 0, 0];    // Visible de 60% a 80%
+  const opacityRangePannel1 = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0];    // Visible de 0 a 20%
+  const opacityRangePannel2 = [0, 0, 1, 0, 0, 0, 0, 0, 0, 0];    // Visible de 20% a 40%
+  const opacityRangePannel3 = [0, 0, 0, 0, 1, 0, 0, 0, 0, 0];    // Visible de 40% a 60%
+  const opacityRangePannel4 = [0, 0, 0, 0, 0, 0, 1, 0, 0, 0];    // Visible de 60% a 80%
   const opacityRangePannel5 = [0, 0, 0, 0, 0, 0, 0, 0, 1, 1];    // Visible de 80% a 100%
 
   const opacityPannel1 = useTransform(scrollYProgress, opacityRange, opacityRangePannel1);
@@ -27,12 +27,12 @@ export default function HeroHomePage({ onPhase }) {
   const opacityPannel5 = useTransform(scrollYProgress, opacityRange, opacityRangePannel5);
 
   // Mejora las animaciones Y para que sean reversibles
-  const yOffsetPannel1 = useTransform(scrollYProgress, [0, 0.5, 1], ["20px", "20px", "0px"]);
-  const yOffsetPannel2 = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], ["20px", "20px", "0px", "0px"]);
-  const yOffsetPannel3 = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], ["20px", "20px", "0px", "0px"]);
+  const yOffsetPannel1 = useTransform(scrollYProgress, [0, 0.1, 0.2,1], ["0px", "-50px", "0px", "0px"]);
+  const yOffsetPannel2 = useTransform(scrollYProgress, [0, 0.1, 0.2, 0.4, 1], ["0px", "20px", "0px", "-50px", "0px"]);
+  const yOffsetPannel3 = useTransform(scrollYProgress, [0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1], ["0px", "0px", "0px", "30px", '0px', "0px", "0px", "0px", "0px", "0px"]);
 
   return (
-    <section id="hero-home-section" className="relative w-full h-[700vh] " ref={heroHomeSectionRef}>
+    <section id="hero-home-section" className="relative w-full h-[1000vh] " ref={heroHomeSectionRef}>
       <div className="sticky top-0 h-screen bg-gradient-to-b from-transparent via-transparent to-background-primary ">
 
         <div className="flex items-center justify-center overflow-hidden ">
@@ -95,7 +95,7 @@ export default function HeroHomePage({ onPhase }) {
                 className=" w-full absolute overflow-hidden"
                 style={{
                   opacity: opacityPannel3,
-                 // y: yOffsetPannel3
+                  y: yOffsetPannel3
                  
                 }}
               >

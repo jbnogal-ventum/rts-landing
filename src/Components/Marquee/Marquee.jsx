@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import "./Marquee.css";
+import { Typography } from "../Typography";
 
 export default function Marquee() {
   const topTrackRef = useRef(null);
@@ -67,13 +68,13 @@ export default function Marquee() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-4 md:gap-4  bg-gradient-to-b from-background-primary via-background-primary to-transparent">
-      <h2 className="marquee-title ">TRUSTED BY INDUSTRY LEADERS</h2>
-
+    <div className="flex flex-col gap-4 md:gap-4  bg-gradient-to-b from-background-primary via-background-primary to-transparent pt-7  text-secondary">
+      <Typography variant={'title-body'} className="text-center hidden md:block">TRUSTED BY INDUSTRY LEADERS</Typography>
+      <Typography variant={'title-body'} className="text-center md:hidden bg-gradient-to-tl from-[#1c56ff] to-[#a463ff]  bg-clip-text text-transparent">TRUSTED BY INDUSTRY LEADERS</Typography>
       <div className="marquee-container bg-gradient-to-b from-background-primary to-transparent">
         <div className="marquee-track marquee-left" ref={topTrackRef}>
           {duplicatedTop.map((src, i) => (
-            <div className="logo-box" key={"t"+i}>
+            <div className="logo-box" key={"t" + i}>
               <img src={src} alt="" />
             </div>
           ))}
@@ -81,7 +82,7 @@ export default function Marquee() {
 
         <div className="marquee-track marquee-right " ref={bottomTrackRef}>
           {duplicatedBottom.map((src, i) => (
-            <div className="logo-box" key={"b"+i}>
+            <div className="logo-box" key={"b" + i}>
               <img src={src} alt="" />
             </div>
           ))}

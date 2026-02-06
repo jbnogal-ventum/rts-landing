@@ -11,6 +11,7 @@ import img5 from "../../assets/carousel/RTS_Industries-5.png";
 import { RiArrowLeftLine, RiArrowRightLine } from "@remixicon/react";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { useMediaQuery } from "../../hooks/useMediaQuery.js";
+import Marquee from "../Marquee/Marquee.jsx";
 
 export default function HorizontalCarousel() {
   const sectionRef = useRef(null);
@@ -40,13 +41,13 @@ export default function HorizontalCarousel() {
 
   return (
     <section ref={sectionRef} className="relative h-[300vh] bg-background-primary" >
-      <div className="sticky top-0  h-[780px]  flex items-center overflow-hidden w-full bg-background">
+      <div className="sticky top-0  h-[95vh]  flex items-center overflow-hidden w-full bg-background">
         <div className=" px-3 md:px-7 w-full">
 
 
           <div className="flex flex-col gap-12 w-full">
          
-              <div className="flex flex-col gap-4 w-full">
+              <div className="flex flex-col gap-4 w-full pt-7">
                 <Typography
                   variant="subtitle-medium" className=" text-primary">INDUSTRIES</Typography>
                 <div className="w-full flex flex-row justify-between">
@@ -67,22 +68,7 @@ export default function HorizontalCarousel() {
                     </span>
                   </Typography>
                   <div id={"buttons"} className="flex items-end justify-end md:flex     ">
-                    <Button
-                      variant="carruselLeft-dark"
-                      className="h-auto"       /* Esto evita que tome altura completa */
-                      disabled
-                      onClick={() => scrollContainerRef.current.scrollLeft -= 400}
-                    >
-                      <RiArrowLeftLine className="h-4 w-3" />
-                    </Button>
-                    <Button
-                      variant="carruselRight-dark"
-                      disabled
-                      className="h-auto"       /* Esto evita que tome altura completa */
-                      onClick={() => scrollContainerRef.current.scrollLeft += 400}
-                    >
-                      <RiArrowRightLine className="h-4 w-3" />
-                    </Button>
+                   
                   </div>
                 </div>
             </div>
@@ -90,7 +76,7 @@ export default function HorizontalCarousel() {
 
 
             {/* Contenedor del carrusel */}
-            <div className="relative h-[410px]">
+            <div className="relative h-[50vh]">
               <motion.div
                 ref={scrollContainerRef}
                 className="flex gap-4 absolute left-0 top-0 h-full"
@@ -134,6 +120,8 @@ export default function HorizontalCarousel() {
                 />
               </motion.div>
             </div>
+
+
           </div>
         </div>
       </div>

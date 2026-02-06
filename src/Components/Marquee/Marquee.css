@@ -23,7 +23,7 @@
   align-items: center;
   min-width: max-content;
   height: 150px;
-  gap: 50px;
+  gap: 16px;
   padding: 0 50px;
   animation: marquee linear infinite;
   animation-duration: var(--speed, 18s);

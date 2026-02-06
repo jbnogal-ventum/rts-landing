@@ -1,9 +1,9 @@
 // src/Components/LazyLogo.jsx
 import { useState, useEffect } from 'react';
 
-export function LazyLogo({ 
-  logoImport, 
-  alt = "Client logo", 
+export function LazyLogo({
+  logoImport,
+  alt = "Client logo",
   className = "",
   // Nuevas props para controlar el estilo
   variant = "default", // "default" | "blurred" | "transparent"
@@ -61,10 +61,16 @@ export function LazyLogo({
 
   return (
     <div className={`${variantStyles[variant]} rounded-xs ${sizeClasses[size]} flex items-center justify-center ${containerClass} ${className}`}>
-      <img 
-        src={logo} 
-        alt={alt} 
+      <img
+        src={logo}
+        alt={alt}
         className={`h-auto max-w-[80%] object-contain ${logoClass}`}
+        style={{
+          'inline-size': '92px',
+          'block-size': '34px',
+          'objectFit': 'contain',
+          
+        }}
         loading="lazy"
       />
     </div>

@@ -88,7 +88,7 @@ export default function Location() {
   }, [setTheme]);
   return (
     <section className="presence-section bg-background-inverse" id="location" ref={whiteBlockRef}>
-      <div className="py-9 flex flex-col md:flex-row gap-3 md:gap-0">
+      <div className="py-9 flex flex-col md:flex-row gap-3 md:gap-0 pt-0 sm:pt-9">
         <div className="w-full md:w-2/5 pt-4 flex flex-col gap-3 md:gap-4 text-text-on-white-primary pl-3 md:pl-7">
           <Typography variant="subtitle-md">LOCATION</Typography>
           <Typography variant="headline-small" className="text-headline-medium">
