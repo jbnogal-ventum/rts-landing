@@ -75,17 +75,17 @@ export const getInitialState = (state) => {
                 getMass: (t, p, v, a, m, r, c) => 5.2,
                 getDragForce: (t, p, v, a, m, r, c) => prod(v, -1800 * abs(v) * abs(v)),
                 getInternalForce: (t, p, v, a, m, r, c) => {
-                    const target = [(0.5 + 0.12 * Math.sin(t / 3 + 1)), (0.5 + 0.18 * Math.cos(t)), 0];
+                    const target = [(0.5 + 0.2 * Math.sin(t / 3 + 1)), (0.5 + 0.18 * Math.cos(t)), 0];
                     const d = diff(target, p);
-                    return prod(d, 0.05);
+                    return prod(d, 0.17);
                 },
                 getIntraSpheresForce: (t, p, v, a, m, r, c, other) => {
                     const d = diff(other.lastState.position, p);
-                    const f = prod(d, (abs(d) - 0.08));
+                    const f = prod(d, (abs(d) - 0.18));
                     return f;
                 },
                 getCenterForce: (t, p, v, a, m, r, c) => {
-                    const target = [0.5, 0.5, 0];
+                    const target = [0.3, 0.3, 0];
                     const d = diff(target, p);
                     return prod(d, 0.0);
                 },
@@ -100,7 +100,7 @@ export const getInitialState = (state) => {
             {
                 lastState: {
                     position: [0.55, 0.55, 0],
-                    velocity: [0, 0, 0],
+                    velocity: [-0.01, -0.03, 0],
                     acceleration: [0, 0, 0],
                     mass: 40,
                     radius: 0.25,
@@ -110,17 +110,17 @@ export const getInitialState = (state) => {
                 getMass: (t, p, v, a, m, r, c) => 5.2,
                 getDragForce: (t, p, v, a, m, r, c) => prod(v, -1800 * abs(v) * abs(v)),
                 getInternalForce: (t, p, v, a, m, r, c) => {
-                    const target = [(0.5 + 0.14 * Math.sin(2 * t / 5 + 1)), (0.5 + 0.18 * Math.cos(-t)), 0];
+                    const target = [(0.5 + 0.27 * Math.sin(2 * t / 5 + 1)), (0.4 + 0.18 * Math.cos(-t)), 0];
                     const d = diff(target, p)
-                    return prod(d, 0.05);
+                    return prod(d, 0.17);
                 },
                 getIntraSpheresForce: (t, p, v, a, m, r, c, other) => {
                     const d = diff(other.lastState.position, p);
-                    const f = prod(d, (abs(d) - 0.08))
+                    const f = prod(d, (abs(d) - 0.18))
                     return f;
                 },
                 getCenterForce: (t, p, v, a, m, r, c) => {
-                    const target = [0.5, 0.5, 0];
+                    const target = [0.3, 0.3, 0];
                     const d = diff(target, p);
                     return prod(d, 0.0);
                 },
@@ -135,7 +135,7 @@ export const getInitialState = (state) => {
             {
                 lastState: {
                     position: [0.5, 0.45, 0],
-                    velocity: [0.0, 0, 0],
+                    velocity: [0.08, 0.02, 0],
                     acceleration: [0, 0, 0],
                     mass: 30,
                     radius: 0.18,
@@ -146,17 +146,17 @@ export const getInitialState = (state) => {
                 getMass: (t, p, v, a, m, r, c) => 5.2,
                 getDragForce: (t, p, v, a, m, r, c) => prod(v, -1800 * abs(v) * abs(v)),
                 getInternalForce: (t, p, v, a, m, r, c) => {
-                    const target = [(0.5 + 0.14 * Math.sin(-1.5 * t / 3 + 1)), (0.5 - 0.18 * Math.cos(-2 * t)), 0];
+                    const target = [(0.5 + 0.24 * Math.sin(-1.5 * t / 3 + 1)), (0.5 - 0.18 * Math.cos(-2 * t)), 0];
                     const d = diff(target, p)
-                    return prod(d, 0.05);
+                    return prod(d, 0.07);
                 },
                 getIntraSpheresForce: (t, p, v, a, m, r, c, other) => {
                     const d = diff(other.lastState.position, p);
-                    const f = prod(d, (abs(d) - 0.08))
+                    const f = prod(d, (abs(d) - 0.18))
                     return f;
                 },
                 getCenterForce: (t, p, v, a, m, r, c) => {
-                    const target = [0.5, 0.5, 0];
+                    const target = [0.3, 0.3, 0];
                     const d = diff(target, p);
                     return prod(d, 0.0);
                 },

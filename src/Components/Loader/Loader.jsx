@@ -183,6 +183,8 @@ useEffect(() => {
             defaults: { ease: "power4.inOut" },
             onComplete: () => {
               setPhase("done");
+              window.__heroEnter = true;
+              window.dispatchEvent(new Event("hero:enter"));
               onDone?.();
             },
           });
