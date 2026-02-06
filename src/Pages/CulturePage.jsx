@@ -15,7 +15,7 @@ import card1 from '../assets/pages_items/card1.jpg';
 import card2 from '../assets/pages_items/card2.png';
 import card3 from '../assets/pages_items/card3.jpg';
 import card4 from '../assets/pages_items/card4.png';
-
+import { SlideInAnimation, FadeInScaleAnimation, FadeInAnimation } from "../animations/index";
 
 export default function CulturePage() {
   const whiteBlockRef = useRef(null);
@@ -72,47 +72,54 @@ export default function CulturePage() {
 
       <section id='industrial-tech' className="">
         <div className="md:px-9 lg:mx-9 py-9 px-3 flex flex-col  gap-6.5" >
-          <Typography
+          <SlideInAnimation y={50} delay={0.5} repeat={true}><Typography
             variant="headline-medium"
             className=""
 
           >EMPOWERING INDUSTRIES BY <br className="md:block hidden" /> MASTERING THE ART OF {" "} <span className="      bg-gradient-to-b  from-[#7513FF] via-[#4348F3]  to-[#0093CE]      bg-clip-text text-transparent    ">INDUSTRIAL  <br className="md:block hidden" /> TECHNOLOGY </span> CURATION</Typography>
-
+          </SlideInAnimation>
           <div className="flex justify-center w-full ">
             <div className="flex flex-col gap-4 text-text-secondary w-full md:w-industry-card">
-              <Typography
+              <SlideInAnimation delay={0.6} ><Typography
                 variant="title-body">
                 At RTS Group, we view technology as only the beginning<br /> — our true value lies in integrating it into holistic solutions <br />that transform the way our clients operate.
               </Typography>
+              </SlideInAnimation>
+              <SlideInAnimation delay={0.7} >
+                <Typography
+                  variant="body-md">
+                  Whether it’s through our PODs or customized projects, we combine the best tools in the industry to deliver unmatched value, efficiency, and performance. This approach enables our clients to thrive in a competitive, data- driven world.
+                </Typography>
+              </SlideInAnimation>
+              <SlideInAnimation delay={0.8} >
 
-              <Typography
-                variant="body-md">
-                Whether it’s through our PODs or customized projects, we combine the best tools in the industry to deliver unmatched value, efficiency, and performance. This approach enables our clients to thrive in a competitive, data- driven world.
-              </Typography>
+                <Typography
+                  variant="title-body">
+                  What do we expect about our future?
+                </Typography>
+              </SlideInAnimation>
+              <SlideInAnimation delay={0.9} >
 
-              <Typography
-                variant="title-body">
-                What do we expect about our future?
-              </Typography>
+                <Typography
+                  variant="body-md">
+                  To be the global leader in industrial automation, data-driven solutions, <br />and IT/OT convergence, setting the benchmark for innovation, operational excellence, and sustainability.<br /><br />
 
-              <Typography
-                variant="body-md">
-                To be the global leader in industrial automation, data-driven solutions, <br />and IT/OT convergence, setting the benchmark for innovation, operational excellence, and sustainability.<br /><br />
-
-                We envision a future where industries achieve unparalleled efficiency <br />and resilience through advanced technology, guided by our expertise <br />and commitment to delivering transformative solutions.
-              </Typography>
+                  We envision a future where industries achieve unparalleled efficiency <br />and resilience through advanced technology, guided by our expertise <br />and commitment to delivering transformative solutions.
+                </Typography>
+              </SlideInAnimation>
 
             </div>
           </div>
 
           <div className="relative overflow-hidden rounded-xl flex justify-center group">
             {/* Imagen principal */}
-            <img
-              src={pannel}
-              alt="Technology"
-              className="w-full  min-h-[500px] md:h-[550px] rounded-xl  object-cover"
-            />
-
+            <FadeInAnimation delay={1} >
+              <img
+                src={pannel}
+                alt="Technology"
+                className="w-full  min-h-[500px] md:h-[550px] rounded-xl  object-cover"
+              />
+            </FadeInAnimation>
             {/* Overlay con gradiente */}
             <div
               className="absolute inset-0 rounded-xl"
@@ -125,28 +132,29 @@ export default function CulturePage() {
                 transition: 'opacity 0.3s ease',
               }}
             />
-
-            {/* Botón de play centrado */}
-            <button
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+          {/* Botón de play centrado */}
+          <FadeInAnimation delay={1} >
+          <button
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
                w-16 h-16 md:w-20 md:h-20 bg-background-inverse bg-opacity-40 rounded-full 
                flex items-center justify-center shadow-lg 
                hover:scale-110 transition-all duration-300 
                hover:shadow-2xl "
-              aria-label="Play video"
-              onClick={() => {/* Tu función para reproducir video */ }}
-            >
-              {/* Icono de play */}
+            aria-label="Play video"
+            onClick={() => {/* Tu función para reproducir video */ }}
+          >
+            <FadeInAnimation delay={1.2} >
               <RiPlayFill className="w-icon-sm h-icon-sm md:w-10 md:h-10 text-white " />
-            </button>
-
-            {/* Efecto de pulso opcional */}
-            {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+            </FadeInAnimation>
+          </button>
+</FadeInAnimation>
+          {/* Efecto de pulso opcional */}
+          {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
                   w-20 h-20 md:w-24 md:h-24 bg-white/30 rounded-full 
                   animate-pulse pointer-events-none" /> */}
-          </div>
         </div>
-      </section>
+      </div>
+    </section >
 
       <section id='our-approach' className="relative overflow-hidden bg-background-primary">
         {/* Contenedor para la imagen de fondo */}
@@ -198,6 +206,7 @@ export default function CulturePage() {
                 { title: 'Empowering Collaboration', icon: <Handshake className="w-5 h-5 text-primary-500" />, info: "Foster active client engagement, enabling them to co-create and contribute to the project's success." },
                 { title: 'Achieving Early Wins', icon: <PackageCheck className="w-5 h-5 text-primary-500" />, info: 'Focus on quick, tangible outcomes to build confidence, momentum, and proof of success.' },
               ].map((card, index) => (
+                <SlideInAnimation key={`culture-card-1-${index}`} delay={(index + 1) * 0.3} >
                 <div
                   key={`culture-card-1-${index}`}
                   className="bg-white rounded-md shadow-md p-5 flex flex-col gap-4 md:justify-between md:h-hub-card"
@@ -212,8 +221,9 @@ export default function CulturePage() {
                   </div>
                   <Typography variant="body-md" children={card.info} />
                 </div>
+                </SlideInAnimation>
               ))}
-
+<SlideInAnimation  delay={(3) * 0.3} >
               <div className="bg-white rounded-md shadow-md p-5 flex flex-col gap-4 md:justify-between md:h-hub-card"
               >
                 <div className="flex flex-col gap-3">
@@ -226,12 +236,13 @@ export default function CulturePage() {
                 </div>
                 <Typography variant="body-md" children={"Integrate the project’s outcomes into the client’s processes, ensuring long-term value and transformation."} />
               </div>
-
+</SlideInAnimation>
               <div className="rounded-md bg-transparent p-5  h-hub-card hidden md:flex"
               />
 
 
               {/* Texto como última card */}
+              <SlideInAnimation  delay={(3) * 0.3} ></SlideInAnimation>
               <div
                 className=" rounded-md h-auto md:h-hub-card flex flex-col justify-end md:p-5 "
               >
@@ -241,6 +252,7 @@ export default function CulturePage() {
                   children={'This structured approach ensures every project not only achieves its objectives but also creates lasting change for our clients.'}
                 />
               </div>
+              </SlideInAnimation>
             </div>
           </div>
         </div>
