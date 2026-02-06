@@ -12,6 +12,7 @@ import coders from "../../assets/hub/coders.jpg";
 import { CircleCheck, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { useMediaQuery } from "../../hooks/useMediaQuery.js";
+import {SlideInAnimation} from "../../animations/index.js";
 export default function BelowTheLineSection() {
     const sectionRef = useRef(null);
     const horizontalContainerRef = useRef(null);
@@ -47,8 +48,10 @@ export default function BelowTheLineSection() {
                 <div className=" md:px-7 px-3 my-9">
                     <div className="flex flex-col gap-12">
                         <div className="flex flex-col gap-3">
+                            <SlideInAnimation y={50} repeat={true}>
                             <Typography variant="subtitle-large">- 01</Typography>
                             <Typography variant="display-sm">BELOW THE LINE</Typography>
+                            </SlideInAnimation>
                         </div>
 
                         {/* Contenedor que será "pinned" */}

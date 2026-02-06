@@ -1,11 +1,11 @@
 import { Typography, Button } from "../../index";
 
 import heroCultureBackground from "../../../assets/Backgrounds/culture_background.png";
-
+import { SlideInAnimation } from "../../../animations/index";
 
 export default function HeroIndustries() {
 
-    return (
+    return ( 
         <section
             id="hero-energy"
             className="relative w-full h-screen "
@@ -21,10 +21,10 @@ export default function HeroIndustries() {
             <div className="absolute inset-0 bg-black/50"></div>
             <div className="relative z-10 w-full h-full md:px-7 py-9 px-3">
                 <div className="pt-9 flex flex-col gap-6 md:gap-4">
-                    <Typography variant="headline-large" className="md:text-display-lg ">
+                    <SlideInAnimation y={50} delay={0.5} repeat={true}><Typography variant="headline-large" className="md:text-display-lg ">
                        CULTURE
                     </Typography>
-                    
+                    </SlideInAnimation>
                 </div>
             </div>
         </section>
