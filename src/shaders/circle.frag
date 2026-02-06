@@ -27,22 +27,37 @@ float smoothNoise(vec2 p) {
   return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);
 }
 
+// Fractal Brownian Motion — layered octaves of smoothNoise
+float fbm(vec2 p, int octaves, float lacunarity, float gain) {
+  float value = 0.0;
+  float amplitude = 0.5;
+  float frequency = 1.0;
+
+  for (int i = 0; i < 8; i++) {   // unrolled; guard with octaves
+    if (i >= octaves) break;
+    value += amplitude * smoothNoise(p * frequency);
+    frequency *= lacunarity;
+    amplitude *= gain;
+  }
+  return value;
+}
+
 float whiteNoise(vec2 p) {
   return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
 }
 
 float getIntensity(vec2 uv) {
-  float radious = 0.002;
+  float radious = 0.005;
   float intensity = 0.0;
 
   for(int i = 0; i < uPointCount; i++) {
     float dist = distance(uv, uPositions[i].xy);
-    intensity += (radious / (dist * dist));
+    float extraRadius = 0.0025 * sin(float(i) + uTime / 40.0);
+    intensity += ((radious + extraRadius) / (dist * dist));
 
-    float _smoothNoise = (smoothNoise(uv * 40.0 + uTime / 0.5) - 0.5) * 0.003;  // animate with time
-    float _whiteNoise = (whiteNoise(uv * 20.0 + uTime / 20.0) - 0.5) * 0.01;  // animate with time
-    //float _whiteNoise = 0.0;
-    intensity += (_smoothNoise + _whiteNoise);
+    float _fbmNoise = (fbm(uv * 40.0 + uTime / 0.5, 5, 2.0, 0.5) - 0.5) * 0.003;
+    float _whiteNoise = (whiteNoise(uv * 20.0 + uTime / 20.0) - 0.5) * 0.01;
+    intensity += (_fbmNoise + _whiteNoise);
 
   }
 
@@ -67,19 +82,18 @@ vec3 getColor(vec2 uv) {
   for(int i = 0; i < uPointCount; i++) {
     vec2 delta = uv - uPositions[i].xy;
 
-    float _smoothNoise = (smoothNoise(uv * 40.0 + uTime / 0.5) - 0.5) * 0.015;  // animate with time
-    //float _smoothNoise2 = (smoothNoise(uv * 200.0 + uTime / 0.5) - 0.5) * 0.005;  // animate with time
+    float _fbmNoise = (fbm(uv * 40.0 + uTime / 2.5, 5, 2.0, 0.5) - 0.5) * 0.015;
     float _whiteNoise = (whiteNoise(uv * 20.0 + floor(uTime * 20.0) / 40.0) - 0.5) * 0.07; 
     //float _whiteNoise = (smoothNoise(uv * 2000.0 + floor(uTime * 5000.0) / 40.0) - 0.5) * 0.07;
-    float _mouseDist = max(distance(uMouse, uv), 0.000005);
+    float _mouseDist = max(distance(uMouse, uv), 0.000015);
     //float _mouseNoise = min((smoothNoise(uv * 40.0 + uTime / 1.0) - 0.5) * (0.0005 / (_mouseDist * _mouseDist)), 0.005);
     
-    delta += (_smoothNoise + _whiteNoise);
+    delta += (_fbmNoise + _whiteNoise);
 
     float distSq = dot(delta, delta);
 
     // Use inverse squared distance as weight (avoid division by zero)
-    float weight = 1.0 / max(distSq, 0.000001);
+    float weight = 1.0 / max(distSq, 0.000007);
 
     sumWeighted += uColors[i] * weight;
     sumWeights += weight;
