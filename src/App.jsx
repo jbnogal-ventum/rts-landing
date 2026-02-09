@@ -1,5 +1,5 @@
 // src/App.jsx
-import { useEffect, useRef, useState} from "react";
+import { useEffect, useRef, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Lenis from "@studio-freight/lenis";
 
@@ -63,11 +63,11 @@ export default function App() {
 
     //lenis.on("scroll", ({ scroll }) => setScroll(scroll));
 
-    
+
 
     return () => {
       cancelAnimationFrame(rafIdRef.current);
-     
+
       lenis.destroy();
       lenisRef.current = null;
     };
@@ -76,13 +76,13 @@ export default function App() {
   useEffect(() => {
     if (!loaderDone) return;
     if (location.pathname !== "/") return;
-   
+
   }, [loaderDone]);
 
   useEffect(() => {
     // Resetear scroll al top cuando se monta el componente
     window.scrollTo({ top: 0, behavior: 'instant' });
-    
+
   }, [location.pathname]);
 
   return (
@@ -91,7 +91,7 @@ export default function App() {
         <Loader isReady={isReady} onDone={() => setLoaderDone(true)} />
       )}
 
-    <Molecule />
+      <Molecule />
       <Transition ref={transitionRef} enabled={loaderDone} lenisRef={lenisRef}>
         <Navbar />
         <FloatingNode phase={phase} />
@@ -101,7 +101,7 @@ export default function App() {
             className="scroll-container"
             style={{ position: "relative", zIndex: 3, background: "transparent" }}
           >
-             <Routes>
+            <Routes>
               <Route
                 path="/"
                 element={<HomePage onPhase={setPhase} />}
@@ -109,7 +109,7 @@ export default function App() {
               <Route path="/molecule" element={<MoleculePage />} />
               <Route
                 path="/hub"
-                element={<HubPage onPhase={setPhase}  />}
+                element={<HubPage onPhase={setPhase} />}
               />
               <Route
                 path="/automation-controls"
