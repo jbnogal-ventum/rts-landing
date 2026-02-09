@@ -36,7 +36,7 @@ export default function HeroHub() {
                         HUB
                     </Typography>
                 </SlideInAnimation>
-                <SlideInAnimation className="flex justify-end md:pr-9 pr-3 w-full" delay={0.7}>
+                <SlideInAnimation className="flex justify-end md:pr-9 pr-3 w-full text-secondary" delay={0.7}>
                     <Typography
                         variant="title-small"
                         className="w-2/3 hidden md:block"

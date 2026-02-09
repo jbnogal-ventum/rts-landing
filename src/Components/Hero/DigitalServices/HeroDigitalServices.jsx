@@ -115,7 +115,7 @@ export default function HeroDigitalServices() {
                     <Typography variant="headline-large" className="md:text-display-lg">
                         DIGITAL SKILLS
                     </Typography>
-                    <div className="flex md:justify-center justify-end pr-3">
+                    <div className="flex md:justify-center justify-end pr-3 text-secondary">
                         <Typography
                             variant="title-small"
                             className="w-2/3 md:w-1/3 md:text-title-medium"

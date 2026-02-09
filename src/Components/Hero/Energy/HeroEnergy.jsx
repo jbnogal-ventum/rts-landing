@@ -31,7 +31,7 @@ export default function HeroEnergy() {
                         & INFRA-
                         STRUCTURE
                     </Typography>
-                    <div className="flex justify-end lg:pr-9">
+                    <div className="flex justify-end lg:pr-9 text-secondary">
                         <Typography
                             variant="title-small"
                             className="w-3/4 md:w-3/5 md:text-title-medium"

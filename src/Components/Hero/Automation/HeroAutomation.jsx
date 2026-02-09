@@ -25,7 +25,7 @@ export default function HeroAutomation() {
                     <Typography variant="headline-large" className="md:text-display-lg">
                         AUTOMATION<br/>& CONTROLS
                     </Typography>
-                    <div className="flex justify-end md:justify-center md:mr-5 "> 
+                    <div className="flex justify-end md:justify-center md:mr-5 text-secondary"> 
                         <Typography
                             variant="title-small"
                             className="w-4/5 md:w-3/5 md:text-title-medium"

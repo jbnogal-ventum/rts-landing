@@ -211,25 +211,25 @@ export default {
 
       // ===== TIPOGRAFÍA - ESPACIADO DE LETRAS =====
       letterSpacing: {
-        'display-lg': '0.05em',              // Uso: tracking-display-lg
+        'display-lg': '4.2px',              // Uso: tracking-display-lg
         'display-md': '-0.0em',             // Uso: tracking-display-md
         'display-sm': '-0.0em',             // Uso: tracking-display-sm
 
-        'headline-large': '0.05em',          // Uso: tracking-headline-large
-        'headline-small': '0.05em',          // Uso: tracking-headline-small
-        'headline-medium': '0.05em',         // Uso: tracking-headline-medium
+        'headline-large': '2.3px',          // Uso: tracking-headline-large
+        'headline-medium': '2px',         // Uso: tracking-headline-medium
+        'headline-small': '1.4px',          // Uso: tracking-headline-small
 
-        'title-large': '-0.01em',                // Uso: tracking-title-large
-        'title-medium': '-0.01em',               // Uso: tracking-title-medium
-        'title-body': '-0.01em',                 // Uso: tracking-title-body
-        'title-small': '-0.01em',            // Uso: tracking-title-small
+        'title-large': '-0.6px',                // Uso: tracking-title-large
+        'title-medium': '-0.52px',               // Uso: tracking-title-medium
+        'title-body': '-0.44px',                 // Uso: tracking-title-body
+        'title-small': '-0.36px',            // Uso: tracking-title-small
 
-        'body-lg': '0%',                 // Uso: tracking-body-lg
-        'body-md': '0%',                 // Uso: tracking-body-md
-        'body-sm': '0%',                 // Uso: tracking-body-sm
-        'body-default': '0%',            // Uso: tracking-body-default
+        'body-lg': '0px',      // En lugar de '0%'
+'body-md': '0px',
+'body-sm': '0px',
+'body-default': '0px',
 
-          'subtitle-md': '0.05em',   
+          'subtitle-md': '0.0em',   
       },
 
       // ===== TIPOGRAFÍA - PESOS =====

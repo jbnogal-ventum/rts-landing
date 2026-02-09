@@ -216,13 +216,12 @@ body {
   font-display: swap;
 }
 
-.headline-medium {
+/* .headline-medium {
   font-size: var(--headline-medium-size);
   font-weight: var(--headline-medium-weight);
   line-height: var(--d-medium-line);
   letter-spacing: 120%;
   font-family: var(--font-display);
-  /* text-transform: uppercase; */
 
 }
 
@@ -233,7 +232,7 @@ body {
   line-height: 110%;
   letter-spacing: -0.02em;
 
-}
+} */
 
 
 /* =========================================================
@@ -263,7 +262,7 @@ h6 {
 /* =========================================================
    TYPOGRAPHY CLASSES (UTILITARIAS)
 ========================================================= */
-.display-lg {
+/* .display-lg {
   font-size: var(--display-lg-size);
   font-weight: var(--display-lg-weight);
   line-height: var(--display-lg-line);
@@ -308,32 +307,30 @@ h6 {
   letter-spacing: -2%;
   font-weight: semibold;
   font-family: Geist;
-}
-
+} */
+/* 
 .subtitle-md {
   font-family: var(--font-base);
   font-size: 12px;
   font-weight: 600;
   line-height: 140%;
   letter-spacing: 0.05em;
-  /* text-transform: uppercase; */
 }
 
 .highlight-violet {
   display: inline-block;
   color: #6a5cff;
-  /* fallback */
   background: linear-gradient(90deg, #6a5cff 0%, #2e86ff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-}
+} */
 
 /* =========================================================
    RESPONSIVE OVERRIDES
 ========================================================= */
 @media (max-width: 1068px) {
-  .display-md {
+  /* .display-md {
     font-size: var(--headline-small-size) !important;
     font-weight: var(--headline-small-weight) !important;
     line-height: var(--headline-small-line) !important;
@@ -353,7 +350,7 @@ h6 {
   .body-sm {
     font-size: 14px;
     line-height: 150%;
-  }
+  } */
 }
 
 /* =========================================================
