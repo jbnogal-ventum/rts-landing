@@ -1,7 +1,7 @@
 // src/Components/Loader/Loader.jsx
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
-
+import * as THREE from "three";
 import "./Loader.css";
 
 export default function Loader({ isReady, onDone }) {
@@ -69,6 +69,43 @@ export default function Loader({ isReady, onDone }) {
       window.scrollTo(0, scrollY);
     };
   }, []);
+
+  /* =====================================================
+     THREE.js Loading Manager
+  ===================================================== */
+  useEffect(() => {
+    const m = THREE.DefaultLoadingManager;
+
+    const prevStart = m.onStart;
+    const prevProgress = m.onProgress;
+    const prevLoad = m.onLoad;
+
+    m.onStart = (_url, loaded, total) => {
+      if (total > 0) {
+        hasRealProgressRef.current = true;
+        setProgress(Math.min(100, Math.round((loaded / total) * 100)));
+      }
+    };
+
+    m.onProgress = (_url, loaded, total) => {
+      if (total > 0) {
+        hasRealProgressRef.current = true;
+        setProgress(Math.min(100, Math.round((loaded / total) * 100)));
+      }
+    };
+
+    m.onLoad = () => {
+      hasRealProgressRef.current = true;
+      setProgress(100);
+    };
+
+    return () => {
+      m.onStart = prevStart;
+      m.onProgress = prevProgress;
+      m.onLoad = prevLoad;
+    };
+  }, []);
+
   /* =====================================================
      Intro animation (aparece loader)
   ===================================================== */
