@@ -25,7 +25,7 @@ export default function HorizontalCarousel() {
     target: sectionRef
   });
 
-  const xDesktop = useTransform(scrollYProgress, [0, 1], ["0%", "-60%"]);
+  const xDesktop = useTransform(scrollYProgress, [0, 1], ["0%", "-40%"]);
   const xTablet = useTransform(scrollYProgress, [0, 1], ["0%", "-85%"]);
   const xMobile = useTransform(scrollYProgress, [0, 1], ["0%", "-90%"]);
 

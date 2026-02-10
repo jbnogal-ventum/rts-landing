@@ -1,7 +1,10 @@
 
 import { Typography, Button } from "../";
 import logo from "../../assets/logos/R_.svg";
+import { useNavigate } from "react-router-dom";
+import { useTransition } from "../Transition/Transition";
 export default function Footer() {
+  const { go } = useTransition();
   return (
     <footer>
       <div className="py-7 md:px-6.5 px-3 flex flex-col md:flex-row gap-7 bg-background-interactive justify-between align-start ">
@@ -19,38 +22,48 @@ export default function Footer() {
           </Typography>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-7">
+        <div className="flex flex-col md:flex-row md:gap-9 gap-6">
           <div className="flex flex-col gap-3">
             <Typography
               variant="title-body"
               className="font-bold font-haffer"
               children="Departments"
             />
-            <Typography variant="body-md" className='font-haffer font-medium'>Automation & Controls</Typography>
-            <Typography variant="body-md" className='font-haffer font-medium'>Digital Skills</Typography>
-            <Typography variant="body-md" className='font-haffer font-medium'>Energy & Infrastructure</Typography>
+            <Button variant='navbar-text-dark' onClick={() => go("/automation-controls")} className=''>Automation & Controls</Button>
+            <Button variant='navbar-text-dark' onClick={() => go("/digital")} className=''>Digital Skills</Button>
+            <Button variant='navbar-text-dark' onClick={() => go("/energy")} className=''>Energy & Infrastructure</Button>
           </div>
 
-          <div className="footer-column">
+          <div className="flex flex-col gap-3">
             <Typography
               variant="title-body"
               className="font-bold font-haffer"
-              children="Departments"
+              children="Resources"
             />
-            <Typography variant="body-md" className='font-haffer font-medium'>Media kit</Typography>
+            <Button variant='navbar-text-dark' className=''>Media kit</Button>
+          </div>
+
+          <div className="flex flex-col gap-3 md:hidden">
+            <Typography
+              variant="title-body"
+              className="font-bold font-haffer"
+              children="Policy"
+            />
+            <Button variant='navbar-text-dark' className=''>Privacy Policy</Button>
+            <Button variant='navbar-text-dark' className=''>Cookie Settings</Button>
           </div>
         </div>
       </div>
 
-      <div className="flex justify-between items-center px-6 hidden md:flex">
-        <div className="flex gap-6">
+      <div className="flex justify-center md:justify-between items-center px-6 py-3 md:py-0">
+        <div className=" gap-6  hidden md:flex">
           <Typography variant="body-sm" children="Privacy Policy" />
           <Typography variant="body-sm" children="Cookie Settings" />
         </div>
 
-        <Typography variant="body-sm" className="text-text-disabled" children="All Rights Reserved ©2025 RTS Group" />
+        <Typography variant="body-md" className="text-secondary md:text-body-sm" children="All Rights Reserved ©2025 RTS Group" />
 
-        <div className="flex gap-6">
+        <div className=" gap-6 hidden md:flex">
           <Button variant="text-dark" children={"LinkedIn"} className="text-body-sm " onClick={() => window.open("https://www.linkedin.com/company/rtsgroup/")} />
           <Button variant="text-dark" children={"Youtube"} className="text-body-sm " onClick={() => window.open("https://www.youtube.com/@rts_group")} />
           <Button variant="text-dark" children={"Discord"} className="text-body-sm " onClick={() => window.open("https://discord.com/invite/rtsgroup")} />

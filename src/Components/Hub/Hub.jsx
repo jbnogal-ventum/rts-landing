@@ -87,7 +87,7 @@ export default function Hub() {
 
                   </div>
                   <img src={imgAcademy} className="hidden md:block w-[252px] h-[252px]" />
-                  <div className="flex flex-col gap-2 text-secondary">
+                  <div className="flex flex-col gap-2 text-secondary items-center align-middle justify-center">
                     <Typography variant="title-body">
                       Below-the-line powerhouse—a creative and experiential unit where ideas meet industry.
                     </Typography>
@@ -119,12 +119,14 @@ export default function Hub() {
 
                   </div>
                   <img src={imgBTL} className="hidden md:block w-[252px] h-[252px]" />
-                  <div className="flex flex-col gap-2 text-secondary">
+                  <div className="flex flex-col gap-2 text-secondary items-center align-middle justify-center">
                     <Typography variant="title-body">
-                      Below-the-line powerhouse—a creative and experiential unit where ideas meet industry.
+                      Dedicated to advancing technical skills and knowledge in industrial automation, OT/IT convergence, and advanced data analytics.
                     </Typography>
                     <Typography >
-                      Through initiatives like Rocking the Industry and the Data-Driven LAB, we go beyond traditional services to spark interaction, collaboration, and thought leadership.
+                      It serves as a center of excellence
+both for our internal teams and for clients, helping professionals stay ahead in a
+rapidly evolving industry.
                     </Typography>
                   </div>
                 </div>
@@ -151,12 +153,12 @@ export default function Hub() {
 
                   </div>
                   <img src={imgInnovation} className="hidden md:block w-[252px] h-[252px]" />
-                  <div className="flex flex-col gap-2 text-secondary">
+                  <div className="flex flex-col gap-2 text-secondary items-center align-middle justify-center">
                     <Typography variant="title-body">
-                      Below-the-line powerhouse—a creative and experiential unit where ideas meet industry.
+                     Is more than a testing ground—it is a laboratory of ideas and execution. 
                     </Typography>
                     <Typography >
-                      Through initiatives like Rocking the Industry and the Data-Driven LAB, we go beyond traditional services to spark interaction, collaboration, and thought leadership.
+                      Here, we develop new technologies, provide industrial tech consulting, and design pilot projects that bring innovation into real practice. It is where  concepts are tested, validated, and transformed into solutions that empower industries.
                     </Typography>
                   </div>
                 </div>

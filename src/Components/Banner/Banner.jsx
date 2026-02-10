@@ -105,7 +105,7 @@ export default function Banner({
             <div className=" w-full flex flex-col items-center " >
               <div className="flex flex-col gap-3 items-center w-fit">
                 {buttons.map((b, idx) => (
-                  <FadeInAnimation key={`button-${idx}-${b.label}`} repeat={true}>
+                  <FadeInAnimation key={`button-${idx}-${b.label}`} repeat={true} className={b.className ?? ''}>
                   <Button key={`button-${idx}-${b.label}`} {...b} />
                   </FadeInAnimation>
                 ))}

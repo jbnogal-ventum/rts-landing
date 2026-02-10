@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button, Typography } from "../index";
 import { Plus } from "lucide-react";
+import { SlideInAnimation, FadeInAnimation} from "../../animations";
 export default function Accordion({
   items = [],
   defaultOpen = 0,
@@ -25,8 +26,9 @@ export default function Accordion({
         const isOpen = i === openIndex;
 
         return (
+          < SlideInAnimation delay={0.3 * i}  key={it.id ?? i + it.title}>
           <article
-            key={it.id ?? i + it.title}
+           
             className={`
               backdrop-blur-md
               bg-background-soft
@@ -34,6 +36,7 @@ export default function Accordion({
               transition-all duration-200
             `}
           >
+            
             <header className="block">
               <button
                 className="w-full flex items-center justify-between gap-3.5 p-0 border-0 bg-transparent text-inherit cursor-pointer text-left"
@@ -102,6 +105,7 @@ export default function Accordion({
               )}
             </AnimatePresence>
           </article>
+            </ SlideInAnimation>
         );
       })}
     </div>

@@ -1,6 +1,6 @@
 import { Typography, Button } from "../index";
 import { cn } from '../../lib/utils'
-import { col } from "framer-motion/client";
+import { SlideInAnimation, FadeInAnimation } from "../../animations";
 export default function Table({
   columns = ["Service", "Focus", "Description", "Main technologies"],
   rows = [],
@@ -14,12 +14,14 @@ export default function Table({
         {/* Header sticky - Siempre visible al scrollear */}
         <div className={cn(isLightMode ? ` bg-background-primary ` : `bg-background-inverse`, `sticky top-[100px] z-10 rounded-md  p-3 gap-4 grid grid-cols-4`)}>
           {columns.map((c, i) => (
+            <FadeInAnimation key={c + i} delay={0.2 * i}>
             <Typography
               key={c + i}
               children={c}
               variant="subtitle-lg"
               className={isLightMode ? "text-text-primary" : "text-text-on-white-primary"}
             />
+            </FadeInAnimation>
           ))}
         </div>
 
@@ -33,20 +35,23 @@ export default function Table({
               >
                 {r.map((c, colIndex) => (
                   <div key={`${rowIndex}-${colIndex}`} className="flex">
+                    
                     {Array.isArray(c.children) ? (
                       <ul className="flex flex-col list-disc pl-4">
                         {c.children.map((item, itemIndex) => (
                           <li key={`${rowIndex}-${colIndex}-${itemIndex}`}>
+                             <FadeInAnimation  delay={0.1 * itemIndex}>
                             <Typography
                               children={` ${item}`}
                               variant={c.variant}
                             />
+                            </FadeInAnimation>
                           </li>
                         ))}
                       </ul>
                     ) : (
                       <div className="flex flex-col items-start gap-2">
-                        
+                         <FadeInAnimation  delay={0.2 * colIndex}>
                         <Typography
                           children={c.children}
                           variant={c.variant}
@@ -66,6 +71,7 @@ export default function Table({
                               </div>
                           </div>
                         )}
+                        </FadeInAnimation>
                       </div>
                     )}
                   </div>

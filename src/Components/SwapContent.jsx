@@ -41,20 +41,20 @@ export default function SwapContent() {
   // Animaciones para los textos
   const contentAOpacity = useTransform(
     scrollYProgress,
-    [0, 0.4, 0.6, 0.8],
-    [1, 1, 0, 0]
+    [0, 0.4, 0.5,  0.6, 0.8],
+    [1, 1, 0, 0, 0]
   );
 
   const contentAY = useTransform(
     scrollYProgress,
     [0, 0.3],
-    ["0%", "-10%"]
+    ["0%", "0%"]
   );
 
   const contentBOpacity = useTransform(
     scrollYProgress,
-    [0, 0.4, 0.6, 0.8],
-    [0, 0, 1, 1]
+    [0, 0.4, 0.5, 0.6, 0.8],
+    [0, 0, 0, 1, 1]
   );
 
   const contentBY = useTransform(
@@ -101,7 +101,7 @@ export default function SwapContent() {
       ref={containerRef}
       className="min-h-[300vh] w-full bg-background"
     >
-      <div className="sticky top-0 h-screen w-full flex flex-col pt-9 md:pt-0">
+      <div className="sticky top-0 h-screen w-full flex flex-col pt-9 md:pt-7">
         {/* Contenedor de imágenes */}
         <div className="relative w-[100%]  h-[266px] md:h-[400px] overflow-hidden">
           {/* Imagen base */}
@@ -134,18 +134,18 @@ export default function SwapContent() {
 
         {/* Contenedor de contenido */}
         <div className="flex-1 md:flex-auto flex items-center w-full">
-          <div className=" w-full relative h-full mt-5">
+          <div className=" w-full relative h-full ">
 
             {/* Panel A */}
             <motion.div
-              className="absolute inset-0  flex items-center "
+              className="absolute inset-0  flex items-center md:mt-0"
               style={{
                 opacity: contentAOpacity,
                 y: contentAY,
               }}
             >
-              <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-6.5 px-3 md:px-7 ">
-                <div className="text-primary flex flex-col gap-3">
+              <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6.5 px-3 md:px-7 ">
+                <div className="text-primary space-y-3">
                   <Typography variant="subtitle-large">
                     {kicker}
                   </Typography>
@@ -165,13 +165,13 @@ export default function SwapContent() {
 
             {/* Panel B */}
             <motion.div
-              className="absolute inset-0  flex items-start mt-5 "
+              className="absolute inset-0  flex items-start md:mt-7 mt-4 "
               style={{
                 opacity: contentBOpacity,
                 y: contentBY,
               }}
             >
-              <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 px-3 md:px-7 ">
+              <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-5 px-3 md:px-7 ">
                 <div className="text-primary flex flex-col gap-3">
                   <Typography variant="subtitle-large">
                     {nextKicker}

@@ -1,13 +1,11 @@
 // src/Pages/DigitalServicesPage.jsx
 import { useRef, useEffect } from "react";
 import { Typography, Button } from "../Components/index";
-import Accordeon from "../Components/UI/Accordeon";
+import Accordeon from "../Components/UI/Accordeon"; 
 import Banner from "../Components/Banner/Banner";
 import Table from "../Components/UI/Table";
 
-import innovationLabBackgroundImage from "../assets/Backgrounds/innovationLabBackgroung.jpg";
-import academyCardBackgroundImage from "../assets/Backgrounds/academyCardBackground.png";
-import { Grip, } from "lucide-react";
+import {SlideInAnimation, FadeInAnimation} from "../animations";
 import { useTheme } from "../contexts/ThemeContext";
 import partnersImg from "../assets/pages_items/ds_partners.png";
 import HeroDigitalServices from "../Components/Hero/DigitalServices/HeroDigitalServices.jsx";
@@ -95,19 +93,19 @@ export default function DigitalServicesPage() {
 
   useEffect(() => {
     if (!whiteBlockRef.current) {
-      console.log('⚠️ whiteBlockRef.current aún no existe');
+      //console.log('⚠️ whiteBlockRef.current aún no existe');
       return;
     }
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          console.log('🔍 IntersectionObserver entry:', {
-            isIntersecting: entry.isIntersecting,
-            intersectionRatio: entry.intersectionRatio,
-            boundingClientRect: entry.boundingClientRect,
-            rootBounds: entry.rootBounds,
-            time: entry.time
-          });
+          // console.log('🔍 IntersectionObserver entry:', {
+          //   isIntersecting: entry.isIntersecting,
+          //   intersectionRatio: entry.intersectionRatio,
+          //   boundingClientRect: entry.boundingClientRect,
+          //   rootBounds: entry.rootBounds,
+          //   time: entry.time
+          // });
 
           if (entry.isIntersecting) {
             //console.log('✅ EN VISTA - Cambiando a light');
@@ -129,7 +127,7 @@ export default function DigitalServicesPage() {
     observer.observe(whiteBlockRef.current);
 
     return () => {
-      console.log('🧹 Limpiando observer');
+      //console.log('🧹 Limpiando observer');
       observer.disconnect();
     };
   }, [setTheme]);
@@ -141,16 +139,18 @@ export default function DigitalServicesPage() {
       <section id='digital-pod' className="flex flex-col md:flex-row gap-8 pt-9 pb-9 md:pb-7 px-3 md:px-8  bg-background-primary ">
 
         <div className="flex flex-col gap-5 md:gap-7 w-full md:w-1/2 " >
-
+          <SlideInAnimation delay={0.1} y={50}>
           <Typography variant="title-medium" className="text-secondary font-base" >
             Through our POD services framework, we merge OT experience, process knowledge, and computer science to engineer the digital core of industrial operations.
           </Typography>
-
+          </SlideInAnimation>
+           <SlideInAnimation delay={0.3}>
           <Button
             variant="filled-dark"
             children="Book a meeting now"
             className="w-fit"
           />
+          </SlideInAnimation>
         </div>
         <div className="flex flex-col gap-4  w-full md:w-1/2">
           <Accordeon items={items} defaultOpen={0} allowCollapse />
@@ -158,7 +158,7 @@ export default function DigitalServicesPage() {
       </section>
       <section id='meet-our-pods' className='felx flex-col py-9 px-3 md:px-7 bg-background'>
 
-        <Typography
+         <SlideInAnimation delay={0.1} y={50}><Typography
           variant="headline-medium"
           className="md:text-display-sm md:text-center text-text-primary pb-4  md:pb-7">
           MEET <br className="md:hidden" /> OUR {" "}
@@ -166,6 +166,7 @@ export default function DigitalServicesPage() {
             PODS
           </span>
         </Typography>
+        </SlideInAnimation>
         <Table rows={tableRows} columns={["Service", "Focus", "Description", "Main technologies"]} mode='dark' />
 
       </section>
@@ -192,22 +193,28 @@ export default function DigitalServicesPage() {
           {/* Contenido existente con z-index para que esté por encima del fondo */}
           <div className="relative z-10 flex flex-col gap-6 w-full md:w-3/5">
             <div className="flex flex-col gap-4">
+              <SlideInAnimation delay={0.2} y={-50} >
               <Typography variant="subtitle-md" className="text-secondary" >
                 DIGITAL SOLUTIONS
               </Typography>
-              <Typography variant="headline-small" className="md:text-headline-medium" >
+              </SlideInAnimation>
+              <SlideInAnimation delay={0.1} y={50} ><Typography variant="headline-small" className="md:text-headline-medium" >
                 WE CAREFULLY SELECT AND IMPLEMENT CUTTING-EDGE PLATFORMS
               </Typography>
+                </SlideInAnimation>
             </div>
             <div className="flex w-full md:justify-center">
-              <Typography variant="body-lg" className="text-tsecondary md:w-ds-parteners-img" >
+              <SlideInAnimation delay={0.3} y={50}><Typography variant="body-lg" className="text-tsecondary md:w-ds-parteners-img" >
                 At RTS Group, we seamlessly integrate industry-leading technology solutions into our PODs to achieve the specific outcomes of each project.
               </Typography>
+              </SlideInAnimation>
             </div>
           </div>
 
           <div className="relative z-10">
+            <FadeInAnimation delay={0.5} >
             <img src={partnersImg} alt="Partners" className="md:h-ds-parteners-img md:w-ds-parteners-img w-full h-auto" />
+            </FadeInAnimation>
           </div>
 
         </section>

@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 
 // Versión con animaciones
 const buttonVariants = cva(
-  "inline-flex items-center justify-center font-base transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-border-interactive focus-visible:ring-offset-2 focus-visible:ring-offset-background-primary disabled:pointer-events-none relative overflow-hidden",
+  "inline-flex items-center justify-center font-base transition-colors duration-200 focus:outline-none   disabled:pointer-events-none relative overflow-hidden",
   {
     variants: {
       variant: {

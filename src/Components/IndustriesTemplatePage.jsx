@@ -133,21 +133,21 @@ export function IndustriesTemplatePage({ content }) {
                 <div className="flex flex-col md:flex-row gap-7 md:gap-9 py-9 px-3 md:px-7 bg-background text-color text-secondary">
 
                     <div className="w-full md:w-2/5 flex flex-col md:gap-7 gap-5  ">
-                        <SlideInAnimation y={50} delay={0.3} > <Typography variant="title-body">
+                        <SlideInAnimation y={50} delay={0.4} > <Typography variant="title-body">
                             {content?.clientsSection?.title}
                         </Typography>
                         </SlideInAnimation>
-                        <SlideInAnimation y={50} delay={0.3} ><Button variant="filled-dark">Book a meeting now</Button>
+                        <SlideInAnimation y={50} delay={0.5} ><Button variant="filled-dark">Book a meeting now</Button>
                         </SlideInAnimation>
                     </div>
 
                     <div className="w-full md:w-3/5 flex flex-col gap-7 md:gap-6.5 ">
-                        <SlideInAnimation y={50} delay={0.4} ><Typography variant={'body-md'}>
+                        <SlideInAnimation y={50} delay={0.6} ><Typography variant={'body-md'}>
                             {content?.clientsSection?.info}
                         </Typography>
                         </SlideInAnimation>
                         <div className="flex flex-col gap-3">
-                            <SlideInAnimation y={50} delay={0.4} className="text-center" ><Typography variant={'subtitle-lg'} className={'text-center'}>
+                            <SlideInAnimation y={50} delay={0.7} className="text-center" ><Typography variant={'subtitle-lg'} className={'text-center'}>
                                 OUR CLIENTS
                             </Typography>
                             </SlideInAnimation>
@@ -159,7 +159,7 @@ export function IndustriesTemplatePage({ content }) {
                                     : '[&>*]:w-[calc(45%-0.5rem)] lg:[&>*]:w-[calc(30%-0.667rem)]'
                             )}>
                                 {Object.entries(content?.clientsSection.clientsLogos || {}).map(([logoKey, importFn]) => (
-                                    <SlideInAnimation y={50} delay={0.4} ><LazyLogo
+                                    <SlideInAnimation y={50} delay={0.7} ><LazyLogo
                                         key={logoKey}
                                         logoImport={importFn}
                                         alt={`${logoKey.replace('Logo', '')} logo`}

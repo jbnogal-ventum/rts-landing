@@ -5,6 +5,7 @@ import { use, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown, ChevronRight, TextAlignStart } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useTransition } from "../../Transition/Transition";
 import { useTheme } from "../../../contexts/ThemeContext";
 import { Typography, Button } from "../../index";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
@@ -23,7 +24,7 @@ const industriesItems = [
   { label: "Pulp & Paper", href: "industries/pulp-and-paper" },
 ];
 export default function Navbar() {
-  const navigate = useNavigate();
+  const { go } = useTransition();
   const { theme } = useTheme();
   const isTablet = useMediaQuery("(min-width: 768px)");
   const [open, setOpen] = useState(false);
@@ -97,7 +98,7 @@ export default function Navbar() {
   };
 
   const handleNavigate = (href) => {
-    navigate(href);
+    go(href);
     closeDropdowns();
     closeMobileMenuHard();
   };

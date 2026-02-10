@@ -220,9 +220,9 @@ export default {
         'headline-small': '1.4px',          // Uso: tracking-headline-small
 
         'title-large': '-0.6px',                // Uso: tracking-title-large
-        'title-medium': '-0.52px',               // Uso: tracking-title-medium
-        'title-body': '-0.44px',                 // Uso: tracking-title-body
-        'title-small': '-0.36px',            // Uso: tracking-title-small
+        'title-medium': '-0.5px',               // Uso: tracking-title-medium
+        'title-body': '-0.4px',                 // Uso: tracking-title-body
+        'title-small': '-0.3px',            // Uso: tracking-title-small
 
         'body-lg': '0px',      // En lugar de '0%'
 'body-md': '0px',

@@ -182,16 +182,17 @@ export default function CulturePage() {
           <div className="flex flex-col md:flex-row md:justify-between gap-4 " >
             <div className="flex flex-row md:w-2/3">
 
-              <Typography
+             <SlideInAnimation y={50} className="" delay={0.3}> <Typography
                 variant="headline-large"
                 className=""
 
               >OUR APPROACH</Typography>
+              </SlideInAnimation>
             </div>
             <div className="md:w-1/2 flex md:justify-end md:items-end text-text-secondary">
-
+<SlideInAnimation y={50} className="" delay={0.5}>
               <Typography variant={'body-md'} children={"We approach digital transformation in Industry 4.0 with a proven, strategic framework designed to deliver impactful and sustainable results. "} />
-
+</SlideInAnimation>
             </div>
 
           </div>

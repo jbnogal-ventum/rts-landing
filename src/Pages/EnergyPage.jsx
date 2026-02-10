@@ -14,7 +14,7 @@ import HeroEnergy from "../Components/Hero/Energy/HeroEnergy.jsx";
 import energy1 from "../assets/pages_items/energy_generation1.png";
 import energy2 from "../assets/pages_items/energy_generation2.jpg";
 import bannerImg from "../assets/Banners/moon_20.png";
-
+import { SlideInAnimation, FadeInAnimation } from "../animations/index";
 const items = [
   {
     title: "Electrical Systems Engineering",
@@ -74,7 +74,7 @@ export default function EnergyPage() {
     observer.observe(whiteBlockRef.current);
 
     return () => {
-      console.log('🧹 Limpiando observer');
+      //console.log('🧹 Limpiando observer');
       observer.disconnect();
     };
   }, [setTheme]);
@@ -87,18 +87,19 @@ export default function EnergyPage() {
 
         <div className="flex flex-col gap-5 md:gap-7 w-full md:w-1/2 " >
 
-          <Typography variant="title-medium" className="text-secondary font-base" >
+           <SlideInAnimation delay={0.1} y={50}><Typography variant="title-medium" className="text-secondary font-base" >
             Dedicated to delivering innovative and reliable <br />energy solutions, optimizing power infrastructure,  and supporting industrial and commercial operations with efficient energy management strategies.
           </Typography>
-
-          <Button
-            variant="filled-dark"
+</SlideInAnimation>
+           <SlideInAnimation delay={0.3}><Button
+            variant="filled-dark" 
             children="Book a meeting now"
             className="w-fit"
           />
+          </SlideInAnimation>
         </div>
         <div className="flex flex-col gap-4  w-full md:w-1/2">
-          <Typography variant="subtitle-large" className="text-secondary hidden md:block" children='Key areas of expertise' />
+          <SlideInAnimation delay={0.3}><Typography variant="subtitle-large" className="text-secondary hidden md:block" children='Key areas of expertise' /></SlideInAnimation>
           <Accordeon items={items} defaultOpen={0} allowCollapse />
         </div>
       </section>
@@ -161,22 +162,30 @@ export default function EnergyPage() {
           <div className="relative z-10 flex flex-col gap-6 w-full md:w-3/5">
             <div className="flex flex-col gap-4">
 
-              <Typography variant="headline-small" className="md:text-headline-medium" >
+             <SlideInAnimation delay={0.1} y={50}> <Typography variant="headline-small" className="md:text-headline-medium" >
                 HIGH-PERFORMANCE<br /> ELECTRICAL & ENERGY<br />SOLUTIONS
               </Typography>
+              </SlideInAnimation>
             </div>
-            <div className="flex w-full md:pl-9">
-              <Typography variant="body-lg" className="text-text-on-white-secondary " >
-                With deep industry expertise and a commitment to engineering excellence, innovation, and operational reliability, RTS Energy & Infrastructure stands as a trusted partner in providing state-of-the-art electrical and energy solutions that meet the highest industry standards.<br /><br />
-                The department is dedicated to delivering innovative and reliable energy solutions, optimizing power infrastructure, and supporting industrial and commercial operations with efficient energy management strategies.
+            <div className="flex flex-col w-full md:pl-9 text-text-on-white-secondary">
+               <SlideInAnimation delay={0.3} y={50}>
+              <Typography variant="body-lg" className=" " >
+                With deep industry expertise and a commitment to engineering excellence, innovation, and operational reliability, RTS Energy & Infrastructure stands as a trusted partner in providing state-of-the-art electrical and energy solutions that meet the highest industry standards.
+                <br/><br/>
               </Typography>
+              </SlideInAnimation>
+              <SlideInAnimation delay={0.6} y={50}>
+              <Typography variant="body-lg" className="" >
+The department is dedicated to delivering innovative and reliable energy solutions, optimizing power infrastructure, and supporting industrial and commercial operations with efficient energy management strategies.
+              </Typography>
+              </SlideInAnimation>
             </div>
           </div>
 
           {/* Contenedor de imágenes - Ajustado para el posicionamiento específico */}
-          <div className="relative z-10 w-full md:w-ds-parteners-img h-[400px] md:h-[500px]">
+          <FadeInAnimation delay={0.7}> <div className="relative z-10 w-full md:w-ds-parteners-img h-[400px] md:h-[500px]">
             {/* Imagen 1: esquina superior izquierda */}
-            <img
+           <img
               src={energy1}
               alt="Energy Generation 1"
               className="absolute top-0 left-0 md:w-[272px] w-[214px] h-auto aspect-square rounded-md z-20"
@@ -191,7 +200,7 @@ export default function EnergyPage() {
 
             />
           </div>
-
+            </FadeInAnimation>
         </section>
       </div>
       <Banner

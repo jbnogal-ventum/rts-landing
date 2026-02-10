@@ -88,7 +88,7 @@ export default function Location() {
   }, [setTheme]);
   return (
     <section className="presence-section bg-background-inverse" id="location" ref={whiteBlockRef}>
-      <div className="py-9 flex flex-col md:flex-row gap-3 md:gap-0 pt-0 sm:pt-9">
+      <div className="py-9 flex flex-col md:flex-row gap-3 md:gap-0 pt-9">
         <div className="w-full md:w-2/5 pt-4 flex flex-col gap-3 md:gap-4 text-text-on-white-primary pl-3 md:pl-7">
           <Typography variant="subtitle-md">LOCATION</Typography>
           <Typography variant="headline-small" className="text-headline-medium">
@@ -97,7 +97,7 @@ export default function Location() {
           <Typography variant="body-md" className="text-body-lg">
             From America to Europe, we deliver world-class engineering, integration, and field services. With offices and partners across key regions, we combine global experience with local insight to support every stage of your industrial automation journey
           </Typography>
-          <Button>Book a meeting now</Button>
+          <Button className="hidden md:block">Book a meeting now</Button>
         </div>
 
         <div className="w-full md:w-3/5 relative overflow-hidden">

@@ -15,7 +15,7 @@ import HeroAutomation from "../Components/Hero/Automation/HeroAutomation";
 import ovalPods from "../assets/pages_items/oval_pods.svg";
 import circlePods from "../assets/pages_items/circle_pods.svg";
 import dicePods from "../assets/pages_items/dice_pods.svg";
-
+import { SlideInAnimation, FadeInAnimation } from "../animations";
 import integrationsImg from "../assets/integrations.png";
 import expertiseBackground from "../assets/Backgrounds/innovationLabBackgroung.jpg";
 
@@ -258,27 +258,29 @@ export default function AutomationControlsPage({ setNavMode }) {
         </div>
 
 
-        <div className="flex flex-col pt-9 pb-9 md:pb-7 px-3 md:px-7 gap-7 relative z-10 ">
+        <div className="flex flex-col pt-9  px-3 md:px-7 gap-7 relative z-10 ">
           <div className="flex flex-col md:flex-row  gap-7 ">
             <div className="flex flex-col gap-5 md:gap-7 w-full md:w-1/2">
-              <Typography variant="title-medium">
+               <SlideInAnimation delay={0.1} y={50}><Typography variant="title-medium">
                 Devoted to maintaining, innovating,<br className="md:block hidden" /> and enhancing industrial control systems, <br className="md:hidden" />we engineer projects across various industries.
-              </Typography>
-
+              </Typography></SlideInAnimation>
+               <SlideInAnimation delay={0.3}>
               <Button variant="filled-dark" className="w-fit">
                 Book a meeting now
               </Button>
+              </SlideInAnimation>
             </div>
 
             <div className="flex flex-col gap-4 w-full md:w-1/2">
-              <Typography variant="subtitle-lg" className="text-secondary">
+              <SlideInAnimation delay={0.2}><Typography variant="subtitle-lg" className="text-secondary">
                 Key areas of expertise
               </Typography>
+              </SlideInAnimation>
               <Accordeon items={items} defaultOpen={0} allowCollapse />
             </div>
           </div>
           <div className="hidden md:block pt-9">
-            <Typography
+            <SlideInAnimation delay={0.1} y={50}><Typography
               variant="headline-large"
               className="text-center"
             >
@@ -287,6 +289,7 @@ export default function AutomationControlsPage({ setNavMode }) {
                 EFFICIENT<br /> AND RELIABLE
               </span> SOLUTIONS
             </Typography>
+            </SlideInAnimation>
           </div>
         </div>
       </section>
@@ -338,16 +341,17 @@ export default function AutomationControlsPage({ setNavMode }) {
 
 
           <div className="relative z-10 px-3 md:px-7 pt-9 ">
-            <div className="flex flex-col md:flex-row gap-6">
+            <div className="flex flex-col md:flex-row gap-6 md:gap-9">
               <div className="flex flex-col gap-6 md:gap-4 w-full md:w-1/2">
-                <Typography variant="headline-medium" className="md:text-headline-large">
+                <SlideInAnimation delay={0.1} y={50}><Typography variant="headline-medium" className="md:text-headline-large">
                   <span className="bg-gradient-to-br from-[#7513FF] via-[#4348F3] to-[#0093CE] bg-clip-text text-transparent">
                     HONEYWELL
                   </span> <br />
-                  ELITE TEAM WORLDWIDE
-                </Typography>
+                  ELITE TEAM <br />WORLDWIDE
+                </Typography></SlideInAnimation>
+            
                 <img
-                  className="w-full h-auto"
+                  className=" h-auto w-full max-w-[530px]"
                   src={integrationsImg}
                   alt="Honeywell integrations diagram"
                   loading="lazy"
@@ -356,28 +360,35 @@ export default function AutomationControlsPage({ setNavMode }) {
 
               <div className="flex flex-col gap-6 w-full md:w-1/2 text-secondary">
 
-                <Typography variant="title-medium" className="">
+                <SlideInAnimation delay={0.3}><Typography variant="title-medium" className="font-base">
                   This team ensures that every customer using Honeywell technologies benefits from world-class expertise and global support.
-                </Typography>
+                </Typography></SlideInAnimation>
 
+<SlideInAnimation delay={0.4} >
                 <Typography className="">
                   At RTS, we support end customers operating with Honeywell technologies by providing integration, configuration, and lifecycle services that ensure safe, reliable, and optimized operations.
                   <br /><br />
                   To meet the highest quality standards, we established the Honeywell Elite Team — a specialized group of engineers focused on Honeywell Process Solutions (HPS) and the seamless integration of Honeywell platforms with third-party systems.
                 </Typography>
+                </SlideInAnimation>
 
+                <SlideInAnimation delay={0.5}>
                 <Typography variant="title-body" className="">
                   Engineering Services Abroad Department
                 </Typography>
+</SlideInAnimation>
 
+<SlideInAnimation delay={0.6} >
                 <Typography className="">
                   To further extend our reach, we created the Engineering Services Abroad Department, delivering high-performance back-office engineering and implementation support for Honeywell-based operations around the world.
                   <br /> <br />
                   As a Value Added Reseller (VAR) for Honeywell Process Solutions, <br className="hidden md:block" />RTS is also authorized to offer, distribute, and integrate HPS products <br className="hidden md:block" />and hardware, from controllers and field instruments to advanced automation systems.
                 </Typography>
+</SlideInAnimation>
 
+<SlideInAnimation delay={0.7} >
                 <Button children="Book a meeting now" />
-
+</SlideInAnimation>
               </div>
 
             </div>
@@ -390,10 +401,10 @@ export default function AutomationControlsPage({ setNavMode }) {
         <section id="honey-well-technologies" className="px-3 md:px-7 py-9">
 
           <div className="flex flex-col md:gap-5 gap-6">
-            <Typography variant="title-large" className="text-center">
+           <SlideInAnimation delay={0.1} className="text-center"><Typography variant="title-large" >
               Capabilities with Honeywell technologies
             </Typography>
-
+            </SlideInAnimation>
             <Table columns={['Service', 'Focus', 'Description', 'Main technologies']} rows={tableRows} />
           </div>
 
@@ -405,23 +416,34 @@ export default function AutomationControlsPage({ setNavMode }) {
       <section id="industrial-intelligence">
         <div className="flex flex-col md:flex-row gap-6 py-9 px-3 md:px-7">
           <div className="w-full md:hidden flex flex-col gap-6 ">
-            <Typography variant="headline-small">
+           <SlideInAnimation delay={0.1}> <Typography variant="headline-small">
               ENGINEERING<br />SERVICES ABROAD
             </Typography>
+            </SlideInAnimation>
+            <SlideInAnimation delay={0.2}>
             <Button children="Book a meeting now" />
+            </SlideInAnimation>
           </div>
           <div className="hidden md:flex w-1/2  flex-col gap-7">
-            <Typography variant="title-medium">
+           <div className="space-y-4">
+            <SlideInAnimation delay={0.3}><Typography variant="title-body">
               RTS Engineering Workforce
             </Typography>
-            <Typography variant="headline-medium">
+            </SlideInAnimation>
+             <SlideInAnimation delay={0.2}><Typography variant="headline-medium">
               AUGMENTING<br />
               <span className="bg-gradient-to-br from-[#7513FF] via-[#4348F3] to-[#0093CE] bg-clip-text text-transparent">INDUSTRIAL</span><br />
               INTELLIGENCE
             </Typography>
-            <Typography variant="body-default">
+             </SlideInAnimation>
+             <SlideInAnimation delay={0.4}><Typography variant="body-default">
               A flexible, cost-effective solution designed to expand your operational and technical capabilities without increasing permanent headcount.
             </Typography>
+        </SlideInAnimation>
+            </div>
+             <SlideInAnimation delay={0.5}>
+           <Button children="Book a meeting now" />
+           </SlideInAnimation>
           </div>
 
           <div className="w-full md:w-1/2">
@@ -434,13 +456,13 @@ export default function AutomationControlsPage({ setNavMode }) {
 
       <section id={'engineering-cards'}>
         <div className="flex flex-col gap-7  px-3 md:px-7 pt-4 pb-9">
-          <Typography variant="title-medium" className="md:text-center">
+          <SlideInAnimation delay={0.1}><Typography variant="title-medium" className="md:text-center">
             Engineering services with expert support
-          </Typography>
+          </Typography></SlideInAnimation>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 ">
 
           {engineeringCards.map((card, index) => (
-            <div key={`engineering-card-${index}`} className="flex flex-col justify-between p-5 bg-background-white border border-1 border-surface-primary rounded-md text-text-on-white-primary h-hub-card">
+            <SlideInAnimation key={`engineering-card-${index}`} delay={index * 0.2}><div className="flex flex-col justify-between p-5 bg-background-white border border-1 border-surface-primary rounded-md text-text-on-white-primary h-hub-card">
               <div className="">
                 <img
                   className="w-icon-xl h-icon-xl"
@@ -456,6 +478,7 @@ export default function AutomationControlsPage({ setNavMode }) {
                 {card.body}
               </Typography>
             </div>
+            </SlideInAnimation>
           ))}
         </div>
 </div>

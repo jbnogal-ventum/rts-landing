@@ -182,7 +182,6 @@ export default function FloatingNode() {
       window.removeEventListener("hero:enter", onEnter);
     };
   }, []);
-  console.log({theme})
   return (
     <div className="floating-node" ref={nodeRef}>
       {!isExpanded ? (
