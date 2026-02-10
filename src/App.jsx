@@ -25,27 +25,17 @@ import "./App.css";
 import "./index.css";
 import DigitalServicesPage from "./Pages/DigitalServicesPage";
 import MoleculePage from "./Pages/MoleculePage";
-import { SlideInAnimation, FadeInAnimation } from "./animations/index";
 
 export default function App() {
-  const location = useLocation();
+ const location = useLocation();
   const transitionRef = useRef(null);
   const [phase, setPhase] = useState(0);
-
-  const [isReady, setIsReady] = useState(false);
-  const [loaderDone, setLoaderDone] = useState(false);
 
   const lenisRef = useRef(null);
   const rafIdRef = useRef(0);
 
   useEffect(() => {
-    const t = setTimeout(() => setIsReady(true), 1200);
-    return () => clearTimeout(t);
-  }, []);
-
-  useEffect(() => {
-    if (!loaderDone) return;
-
+    // Inicializar Lenis inmediatamente (sin esperar loader)
     const lenis = new Lenis({
       duration: 1.2,
       smoothWheel: true,
@@ -61,38 +51,22 @@ export default function App() {
     };
     rafIdRef.current = requestAnimationFrame(raf);
 
-    //lenis.on("scroll", ({ scroll }) => setScroll(scroll));
-
-
-
     return () => {
       cancelAnimationFrame(rafIdRef.current);
-
       lenis.destroy();
       lenisRef.current = null;
     };
-  }, [loaderDone]);
+  }, []); // ¡Sin dependencia de loaderDone!
 
   useEffect(() => {
-    if (!loaderDone) return;
-    if (location.pathname !== "/") return;
-
-  }, [loaderDone]);
-
-  useEffect(() => {
-    // Resetear scroll al top cuando se monta el componente
+    // Resetear scroll al cambiar de página
     window.scrollTo({ top: 0, behavior: 'instant' });
-
   }, [location.pathname]);
 
   return (
     <>
-      {!loaderDone && (
-        <Loader isReady={isReady} onDone={() => setLoaderDone(true)} />
-      )}
-
       <Molecule />
-      <Transition ref={transitionRef} enabled={loaderDone} lenisRef={lenisRef}>
+      <Transition ref={transitionRef} lenisRef={lenisRef}>
         <Navbar />
         <FloatingNode phase={phase} />
 
@@ -149,7 +123,7 @@ export default function App() {
                   element={<PowerIndustryPage key="power" />}
                 />
                 <Route
-                  path="mining"
+                  path="metals-and-mining"
                   element={<MiningIndustryPage key="mining" />}
                 />
               </Route>

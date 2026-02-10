@@ -128,7 +128,9 @@
 // src/Components/Transition/Transition.jsx - Versión con desintegración simple
 // src/Components/Transition/Transition.jsx
 // src/Components/Transition/Transition.jsx
-import { useRef, useImperativeHandle, forwardRef, useContext, createContext, useState, useEffect } from 'react';
+// src/Components/Transition/Transition.jsx
+// src/Components/Transition/Transition.jsx
+import { useRef, useImperativeHandle, forwardRef, useContext, createContext, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -143,6 +145,7 @@ const Transition = forwardRef(({ children, enabled, lenisRef }, ref) => {
   const isAnimating = useRef(false);
   const pendingNavigation = useRef(null);
   const pendingCallback = useRef(null);
+  const completedAnimations = useRef(0);
 
   const go = (to, callback) => {
     if (isAnimating.current || to === location.pathname) return;
@@ -150,6 +153,7 @@ const Transition = forwardRef(({ children, enabled, lenisRef }, ref) => {
     isAnimating.current = true;
     pendingNavigation.current = to;
     pendingCallback.current = callback;
+    completedAnimations.current = 0;
 
     if (lenisRef.current) lenisRef.current.stop();
     setIsVisible(true);
@@ -165,15 +169,22 @@ const Transition = forwardRef(({ children, enabled, lenisRef }, ref) => {
         lenisRef.current.scrollTo(0, { immediate: true });
       }
 
-      // Iniciar desintegración después de un breve delay
       setTimeout(() => {
         setPhase('dissolving');
       }, 100);
     }
   };
 
-  const handleDissolveComplete = () => {
-    // Resetear todo
+  const handleAnimationComplete = () => {
+    completedAnimations.current += 1;
+    const totalAnimations = gridItems.length;
+    
+    if (completedAnimations.current === totalAnimations) {
+      handleAllAnimationsComplete();
+    }
+  };
+
+  const handleAllAnimationsComplete = () => {
     setIsVisible(false);
     setPhase('idle');
     isAnimating.current = false;
@@ -187,42 +198,46 @@ const Transition = forwardRef(({ children, enabled, lenisRef }, ref) => {
   useImperativeHandle(ref, () => ({ go }));
 
   // Crear la grilla de cuadraditos
-  const gridSize = 6; // 12x12 = 144 cuadraditos
+  const gridSize = 10; // 10x10 = 100 persianas
   const gridItems = [];
+  
+  let maxDelay = 0;
 
   for (let row = 0; row < gridSize; row++) {
     for (let col = 0; col < gridSize; col++) {
       let baseDelay = 0;
 
       // Asignamos delays por patrones de columnas
-      const colMod = col % 10; // Usamos módulo 10 para más variedad
-
       if (col % 7 === 0) {
-        baseDelay = 0; // Columna 0, 7, 14, 21... (múltiplos de 7)
+        baseDelay = 0;
       } else if (col % 5 === 0) {
-        baseDelay = 0.15; // Columna 0, 5, 10, 15... (múltiplos de 5)
+        baseDelay = 0.15;
       } else if (col % 3 === 0) {
-        baseDelay = 0.3; // Columna 0, 3, 6, 9... (múltiplos de 3)
+        baseDelay = 0.3;
       } else if (col % 2 === 0) {
-        baseDelay = 0.45; // Todas las columnas pares
+        baseDelay = 0.45;
       } else {
-        baseDelay = 0.6; // Columnas impares restantes
+        baseDelay = 0.6;
       }
 
-      // Añadimos variación aleatoria suave (opcional, para efecto más orgánico)
       const randomVariation = Math.random() * 0.1;
-
-      // Pequeño delay adicional basado en fila
-      const rowFactor = (row / gridSize) * 0.05;
+      const rowFactor = (row / gridSize) * 0.1; // Aumentado para más efecto de fila
+      const delay = baseDelay + randomVariation + rowFactor;
+      
+      if (delay > maxDelay) {
+        maxDelay = delay;
+      }
 
       gridItems.push({
         id: `${row}-${col}`,
         row,
         col,
-        delay: baseDelay + randomVariation + rowFactor,
+        delay: delay,
       });
     }
   }
+
+  const totalAnimationTime = maxDelay + 1.0 + 0.5; // 1.0s de duración + 0.3s margen
 
   return (
     <TransitionContext.Provider value={{ go }}>
@@ -237,14 +252,15 @@ const Transition = forwardRef(({ children, enabled, lenisRef }, ref) => {
                 inset: 0,
                 zIndex: 9999,
                 pointerEvents: 'none',
+                overflow: 'hidden',
               }}
             >
-              {/* Telón negro que sube - este se oculta cuando empieza la desintegración */}
+              {/* Telón negro que sube */}
               <motion.div
                 key="curtain"
                 initial={{ y: '100%' }}
                 animate={{
-                  y: phase === 'curtain-up' ? '0%' : '0%',
+                  y: '0%',
                   opacity: phase === 'dissolving' ? 0 : 1
                 }}
                 transition={{
@@ -260,7 +276,7 @@ const Transition = forwardRef(({ children, enabled, lenisRef }, ref) => {
                 }}
               />
 
-              {/* Grilla de cuadraditos para desintegrar */}
+              {/* Grilla de persianas que se levantan */}
               {phase === 'dissolving' && (
                 <div
                   style={{
@@ -277,45 +293,45 @@ const Transition = forwardRef(({ children, enabled, lenisRef }, ref) => {
                     <motion.div
                       key={item.id}
                       initial={{
-                        scale: 1,
-                        opacity: 1,
-                        borderRadius: '0%',
-                        y: 0
+                        scaleY: 1,
+                        transformOrigin: 'top', // ¡IMPORTANTE! Se enrolla desde arriba
                       }}
                       animate={{
-                        scale: 1,
-                        opacity: 1,
-                        borderRadius: '0%',
-                        y: -100
+                        scaleY: 0, // Se "aplasta" verticalmente hasta desaparecer
                       }}
                       transition={{
-                        duration: 0.3,
-                        ease: "easeInOut",
+                        duration: 0.7, // Duración del efecto de persiana
+                        ease: [0.65, 0, 0.35, 1], // Misma curva que el telón
                         delay: item.delay,
                       }}
+                      onAnimationComplete={handleAnimationComplete}
                       style={{
                         background: '#000102',
-                        transformOrigin: 'center',
+                        willChange: 'transform',
+                        // Opcional: borde para efecto de persiana
+                        //borderRight: '1px solid rgba(255,255,255,0.1)',
+                        //borderBottom: '1px solid rgba(255,255,255,0.1)',
                       }}
                     />
                   ))}
                 </div>
               )}
 
-              {/* Temporizador para manejar el final de todas las animaciones */}
+              {/* Fallback timer */}
               {phase === 'dissolving' && (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 0 }}
                   transition={{
-                    duration: 5,
-                    delay: gridItems[gridItems.length - 1].delay + 0.5, // Un poco después del último cuadradito
+                    duration: 0.1,
+                    delay: totalAnimationTime,
                   }}
-                  onAnimationComplete={handleDissolveComplete}
+                  onAnimationComplete={handleAllAnimationsComplete}
                   style={{
                     position: 'absolute',
                     inset: 0,
-                    zIndex: 3
+                    zIndex: 3,
+                    pointerEvents: 'none',
                   }}
                 />
               )}

@@ -1,230 +1,279 @@
 // src/Components/Loader/Loader.jsx
 import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import * as THREE from "three";
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
+
 import "./Loader.css";
 
 export default function Loader({ isReady, onDone }) {
-  const rootRef = useRef(null);
-  const curtainRef = useRef(null);
-  const contentRef = useRef(null);
-
   const [progress, setProgress] = useState(0);
   const [phase, setPhase] = useState("loading"); // loading | finishing | leaving | done
-
+  const [isVisible, setIsVisible] = useState(true);
+  
+  const contentControls = useAnimation();
+  const curtainControls = useAnimation();
+  const rootControls = useAnimation();
+  
   const hasRealProgressRef = useRef(false);
-  const simTweenRef = useRef(null);
+  const progressIntervalRef = useRef(null);
+  const simProgressRef = useRef(0);
 
-/* =====================================================
-   SCROLL LOCK mientras el Loader está montado
-===================================================== */
-useEffect(() => {
-  // (opcional) si querés forzar que arranque siempre arriba:
-  // window.scrollTo(0, 0);
-
-  const body = document.body;
-  const html = document.documentElement;
-
-  const scrollY = window.scrollY || 0;
-
-  // Guardamos estilos previos por si tenés cosas custom
-  const prev = {
-    bodyPosition: body.style.position,
-    bodyTop: body.style.top,
-    bodyLeft: body.style.left,
-    bodyRight: body.style.right,
-    bodyWidth: body.style.width,
-    bodyOverflow: body.style.overflow,
-    htmlOverflow: html.style.overflow,
-  };
-
-  // Lock tipo iOS-safe (evita “bounce”)
-  html.style.overflow = "hidden";
-  body.style.overflow = "hidden";
-  body.style.position = "fixed";
-  body.style.top = `-${scrollY}px`;
-  body.style.left = "0";
-  body.style.right = "0";
-  body.style.width = "100%";
-
-  // Extra-hard lock (wheel/touch/keys)
-  const prevent = (e) => e.preventDefault();
-
-  const preventKeys = (e) => {
-    const keys = ["Space", "ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End"];
-    if (keys.includes(e.code)) e.preventDefault();
-  };
-
-  window.addEventListener("wheel", prevent, { passive: false });
-  window.addEventListener("touchmove", prevent, { passive: false });
-  window.addEventListener("keydown", preventKeys, { passive: false });
-
-  return () => {
-    window.removeEventListener("wheel", prevent);
-    window.removeEventListener("touchmove", prevent);
-    window.removeEventListener("keydown", preventKeys);
-
-    // Restore estilos
-    body.style.position = prev.bodyPosition;
-    body.style.top = prev.bodyTop;
-    body.style.left = prev.bodyLeft;
-    body.style.right = prev.bodyRight;
-    body.style.width = prev.bodyWidth;
-    body.style.overflow = prev.bodyOverflow;
-    html.style.overflow = prev.htmlOverflow;
-
-    // Volvemos al scroll donde estaba
-    window.scrollTo(0, scrollY);
-  };
-}, []);
-
+  /* =====================================================
+     SCROLL LOCK mientras el Loader está montado
+  ===================================================== */
   useEffect(() => {
-    const m = THREE.DefaultLoadingManager;
+    const body = document.body;
+    const html = document.documentElement;
+    const scrollY = window.scrollY || 0;
 
-    const prevStart = m.onStart;
-    const prevProgress = m.onProgress;
-    const prevLoad = m.onLoad;
-
-    m.onStart = (_url, loaded, total) => {
-      if (total > 0) {
-        hasRealProgressRef.current = true;
-        setProgress(Math.min(100, Math.round((loaded / total) * 100)));
-      }
+    const prev = {
+      bodyPosition: body.style.position,
+      bodyTop: body.style.top,
+      bodyLeft: body.style.left,
+      bodyRight: body.style.right,
+      bodyWidth: body.style.width,
+      bodyOverflow: body.style.overflow,
+      htmlOverflow: html.style.overflow,
     };
 
-    m.onProgress = (_url, loaded, total) => {
-      if (total > 0) {
-        hasRealProgressRef.current = true;
-        setProgress(Math.min(100, Math.round((loaded / total) * 100)));
-      }
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+
+    const prevent = (e) => e.preventDefault();
+    const preventKeys = (e) => {
+      const keys = ["Space", "ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End"];
+      if (keys.includes(e.code)) e.preventDefault();
     };
 
-    m.onLoad = () => {
-      hasRealProgressRef.current = true;
-      setProgress(100);
-    };
+    window.addEventListener("wheel", prevent, { passive: false });
+    window.addEventListener("touchmove", prevent, { passive: false });
+    window.addEventListener("keydown", preventKeys, { passive: false });
 
     return () => {
-      m.onStart = prevStart;
-      m.onProgress = prevProgress;
-      m.onLoad = prevLoad;
+      window.removeEventListener("wheel", prevent);
+      window.removeEventListener("touchmove", prevent);
+      window.removeEventListener("keydown", preventKeys);
+
+      body.style.position = prev.bodyPosition;
+      body.style.top = prev.bodyTop;
+      body.style.left = prev.bodyLeft;
+      body.style.right = prev.bodyRight;
+      body.style.width = prev.bodyWidth;
+      body.style.overflow = prev.bodyOverflow;
+      html.style.overflow = prev.htmlOverflow;
+
+      window.scrollTo(0, scrollY);
     };
   }, []);
-
   /* =====================================================
-     Intro (aparece loader)
+     Intro animation (aparece loader)
   ===================================================== */
   useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-
-    gsap.set(root, { autoAlpha: 1 });
-    gsap.set(curtainRef.current, { yPercent: 0 });
-    gsap.set(contentRef.current, { autoAlpha: 0, y: 12, filter: "blur(10px)" });
-
-    gsap.to(contentRef.current, {
-      autoAlpha: 1,
-      y: 0,
-      filter: "blur(0px)",
-      duration: 0.85,
-      ease: "power3.out",
-      delay: 0.12,
-    });
-  }, []);
-
-  /* =====================================================
-     Fallback (si NO hay assets reales): simula hasta 92%
-  ===================================================== */
-  useEffect(() => {
-    if (phase !== "loading") return;
-
-    const t = setTimeout(() => {
-      if (hasRealProgressRef.current) return;
-
-      simTweenRef.current?.kill();
-
-      const obj = { p: progress };
-      simTweenRef.current = gsap.to(obj, {
-        p: 92,
-        duration: 2.2,
-        ease: "power1.out",
-        onUpdate: () => setProgress(Math.min(100, Math.round(obj.p))),
+    const startIntro = async () => {
+      // Inicializamos estados
+      await curtainControls.start({ 
+        y: "0%", 
+        transition: { duration: 0 }
       });
-    }, 300);
-
-    return () => clearTimeout(t);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [phase]);
+      
+      await rootControls.start({ 
+        opacity: 1, 
+        transition: { duration: 0 }
+      });
+      
+      // Animación del contenido
+      await contentControls.start({
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        transition: {
+          duration: 0.85,
+          ease: [0.16, 1, 0.3, 1], // power3.out aproximado
+          delay: 0.12,
+        }
+      });
+    };
+    
+    startIntro();
+  }, [contentControls, curtainControls, rootControls]);
 
   /* =====================================================
-     FINISH + EXIT: llega a 100, lo muestra 1 frame y sale
+     Fallback progress simulation
   ===================================================== */
   useEffect(() => {
-    if (!isReady) return;
     if (phase !== "loading") return;
+    
+    const timeoutId = setTimeout(() => {
+      if (hasRealProgressRef.current) return;
+      
+      // Limpiar intervalo previo
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+      }
+      
+      // Simular progreso hasta 92%
+      simProgressRef.current = progress;
+      const targetProgress = 92;
+      const duration = 2200; // 2.2 segundos
+      const steps = 60;
+      const increment = (targetProgress - progress) / steps;
+      const stepTime = duration / steps;
+      
+      let currentStep = 0;
+      progressIntervalRef.current = setInterval(() => {
+        if (currentStep >= steps) {
+          clearInterval(progressIntervalRef.current);
+          return;
+        }
+        
+        simProgressRef.current += increment;
+        setProgress(Math.min(92, Math.round(simProgressRef.current)));
+        currentStep++;
+      }, stepTime);
+      
+    }, 300);
+    
+    return () => {
+      clearTimeout(timeoutId);
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+      }
+    };
+  }, [phase, progress]);
 
+  /* =====================================================
+     Finish + Exit when isReady
+  ===================================================== */
+  useEffect(() => {
+    if (!isReady || phase !== "loading") return;
+    
+    // Limpiar simulación
+    if (progressIntervalRef.current) {
+      clearInterval(progressIntervalRef.current);
+    }
+    
     setPhase("finishing");
-    simTweenRef.current?.kill();
+    
+    // Animación para llegar a 100%
+    const animateTo100 = async () => {
+      const duration = 550; // 0.55 segundos
+      const steps = 30;
+      const startProgress = progress;
+      const increment = (100 - startProgress) / steps;
+      const stepTime = duration / steps;
+      
+      let currentStep = 0;
+      const interval = setInterval(() => {
+        if (currentStep >= steps) {
+          clearInterval(interval);
+          setProgress(100);
+          startExitAnimation();
+          return;
+        }
+        
+        const newProgress = startProgress + (increment * (currentStep + 1));
+        setProgress(Math.min(100, Math.round(newProgress)));
+        currentStep++;
+      }, stepTime);
+    };
+    
+    animateTo100();
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isReady, phase]);
 
-    const obj = { p: progress };
-
-    gsap.to(obj, {
-      p: 100,
-      duration: 0.55,
-      ease: "power2.out",
-      onUpdate: () => setProgress(Math.min(100, Math.round(obj.p))),
-      onComplete: () => {
-        setProgress(100);
-
-        requestAnimationFrame(() => {
-          setPhase("leaving");
-
-          const tl = gsap.timeline({
-            defaults: { ease: "power4.inOut" },
-            onComplete: () => {
-              setPhase("done");
-              window.__heroEnter = true;
-              window.dispatchEvent(new Event("hero:enter"));
-              onDone?.();
-            },
-          });
-
-          tl.to(contentRef.current, {
-            autoAlpha: 0,
-            y: -10,
-            filter: "blur(10px)",
-            duration: 0.35,
-            ease: "power3.in",
-          });
-
-          tl.to(
-            curtainRef.current,
-            { yPercent: -110, duration: 1.05 },
-            "<0.05"
-          );
-
-          tl.to(rootRef.current, { autoAlpha: 0, duration: 0.2 }, ">-0.18");
-        });
-      },
+  /* =====================================================
+     Exit animation
+  ===================================================== */
+  const startExitAnimation = async () => {
+    setPhase("leaving");
+    
+    // Animación de salida
+    await contentControls.start({
+      opacity: 0,
+      y: -10,
+      filter: "blur(10px)",
+      transition: {
+        duration: 0.35,
+        ease: [0.64, 0, 0.78, 0], // power3.in aproximado
+      }
     });
-  }, [isReady, phase, progress, onDone]);
+    
+    // Cortina sube y root desaparece
+    await Promise.all([
+      curtainControls.start({
+        y: "-110%",
+        transition: {
+          duration: 1.05,
+          ease: [0.76, 0, 0.24, 1], // power4.inOut aproximado
+          delay: 0.05,
+        }
+      }),
+      rootControls.start({
+        opacity: 0,
+        transition: {
+          duration: 0.2,
+          ease: "linear",
+          delay: 0.87, // 1.05 - 0.18
+        }
+      })
+    ]);
+    
+    // Finalizar
+    setPhase("done");
+    setIsVisible(false);
+    onDone?.();
+  };
 
-  if (phase === "done") return null;
+  if (!isVisible || phase === "done") return null;
 
   return (
-    <div ref={rootRef} className="loader-root" aria-hidden={false}>
-      <div ref={curtainRef} className="loader-curtain" />
+    <motion.div
+      className="loader-root"
+      aria-hidden={false}
+      initial={{ opacity: 0 }}
+      animate={rootControls}
+      style={{ opacity: 0 }}
+    >
+      <motion.div
+        className="loader-curtain"
+        initial={{ y: "0%" }}
+        animate={curtainControls}
+      />
 
-      <div ref={contentRef} className="loader-content">
+      <motion.div
+        className="loader-content"
+        ref={(el) => {
+          if (el) contentControls.set({
+            opacity: 0,
+            y: 12,
+            filter: "blur(10px)"
+          });
+        }}
+        animate={contentControls}
+      >
         <div className="loader-title">Loading</div>
 
         <div className="loader-meter">
           <div className="loader-bar">
-            <div className="loader-barFill" style={{ width: `${progress}%` }} />
+            <motion.div 
+              className="loader-barFill" 
+              initial={{ width: "0%" }}
+              animate={{ width: `${progress}%` }}
+              transition={{ 
+                type: "tween",
+                ease: "easeOut",
+                duration: 0.2 
+              }}
+            />
           </div>
           <div className="loader-pct">{progress}%</div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
