@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 
 // Versión con animaciones
 const buttonVariants = cva(
-  "inline-flex items-center justify-center font-base transition-colors duration-200 focus:outline-none   disabled:pointer-events-none relative overflow-hidden",
+  "inline-flex items-center justify-center font-base transition-colors duration-300 focus:outline-none   disabled:pointer-events-none relative overflow-hidden",
   {
     variants: {
       variant: {
@@ -28,6 +28,8 @@ const buttonVariants = cva(
         "navbar-light": "bg-transparent text-text-on-white-primary rounded-md disabled:bg-background-disabled py-1 px-3 hover:bg-navbar-button-hover-primary",
         "navbar-text-light": "bg-transparent text-text-on-white-primary relative relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-background-soft after:transition-all after:duration-300 after:ease-out after:w-0 hover:after:w-full disabled:text-text-disabled py-1",
         "navbar-filled-light": "hover:bg-background-interactive hover:text-text-primary text-text-on-white-primary rounded-md disabled:bg-background-disabled py-2 px-3 bg-bg-light",
+
+        "text-node": "bg-transparent text-core-violet  relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-border-interactive after:transition-all after:duration-300 after:ease-out after:w-0 hover:after:w-full disabled:text-text-disabled ",
       },
       size: {
         default: "",
@@ -57,35 +59,35 @@ const Button = React.forwardRef(({
   children,
   ...props
 }, ref) => {
-  
+
   // Si se usa el modo antiguo (variant + mode), convertimos
   let finalVariant = variant;
   if (mode && !variant.includes('-')) {
     finalVariant = `${variant}-${mode}`;
   }
-  
+
   // Estado para controlar la animación
   const [isHovered, setIsHovered] = React.useState(false);
   const [showNewText, setShowNewText] = React.useState(false);
-  
+
   // Manejar el hover
   const handleMouseEnter = () => {
     setIsHovered(true);
     // Después de que comience la animación del círculo, mostramos el nuevo texto
     setTimeout(() => setShowNewText(true), 100);
   };
-  
+
   const handleMouseLeave = () => {
     setIsHovered(false);
     setShowNewText(false);
   };
-  
+
   const Comp = asChild ? Slot : "button";
-  
+
   // Solo aplicamos animación a filled-dark y filled-light
-  const isAnimatedBackground = finalVariant === "filled-dark" || finalVariant === "filled-light";
+  const isAnimatedBackground = ["filled-dark","filled-light"]?.includes(finalVariant);
   const hoverColor = hoverColors[finalVariant];
-  
+
   // if (!isAnimatedVariant || !hoverColor) {
   //   // Para variantes sin animación especial
   //   return (
@@ -100,7 +102,7 @@ const Button = React.forwardRef(({
   //     </Comp>
   //   );
   // }
-  
+
   return (
     <Comp
       className={cn('w-fit',
@@ -117,7 +119,7 @@ const Button = React.forwardRef(({
           className={`absolute inset-0 ${hoverColor} rounded-full`}
           initial={{ scale: 0, borderRadius: "9999px", y: "100%" }}
           animate={{
-            scale: isHovered ? 2 : 0,
+            scale: isHovered ? 1.5 : 0,
             y: isHovered ? "0%" : "100%",
           }}
           transition={{
@@ -129,7 +131,7 @@ const Button = React.forwardRef(({
           }}
         />
       )}
-      
+
       {/* Contenedor del texto con overflow hidden */}
       <div className="relative z-10 overflow-hidden h-full flex items-center justify-center">
         <AnimatePresence mode="wait">
@@ -148,7 +150,7 @@ const Button = React.forwardRef(({
               {children}
             </motion.span>
           )}
-          
+
           {/* Texto "nuevo" - entra desde abajo */}
           {showNewText && (
             <motion.span
@@ -161,7 +163,7 @@ const Button = React.forwardRef(({
               }}
               exit={{
                 opacity: 1,
-               // y: -15,
+                // y: -15,
                 transition: { duration: 0.2, delay: 0.1 }
               }}
               className="flex"

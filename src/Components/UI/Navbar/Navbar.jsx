@@ -9,6 +9,7 @@ import { useTransition } from "../../Transition/Transition";
 import { useTheme } from "../../../contexts/ThemeContext";
 import { Typography, Button } from "../../index";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
+import { useNavbarTextColor } from "../../../hooks/useNavbarTextColor";
 const whatWeDoItems = [
   { label: "Automation & Controls", href: "automation-controls" },
   { label: "Digitalization", href: "digital" },
@@ -18,7 +19,7 @@ const whatWeDoItems = [
 const industriesItems = [
   { label: "Oil & Gas", href: "industries/oil-and-gas" },
   { label: "Power Generation", href: "industries/power-generation" },
-  { label: "Mining", href: "industries/mining" },
+  { label: "Mining", href: "industries/metals-and-mining" },
   { label: "Pharma", href: "industries/pharma" },
   { label: "Chemicals", href: "industries/chemicals" },
   { label: "Pulp & Paper", href: "industries/pulp-and-paper" },
@@ -27,6 +28,7 @@ export default function Navbar() {
   const { go } = useTransition();
   const { theme } = useTheme();
   const isTablet = useMediaQuery("(min-width: 768px)");
+  const { buttonTheme, navbarRef } = useNavbarTextColor()
   const [open, setOpen] = useState(false);
   const [ddOpen, setDdOpen] = useState(null);
   const [ddMobileOpen, setDdMobileOpen] = useState(null);
@@ -96,7 +98,22 @@ export default function Navbar() {
       }
     })
   };
+// Determinar qué variante usar para cada botón
+  const getNavbarVariant = () => {
+    // Priorizamos el tema adaptativo para el navbar
+    const themeForNavbar = buttonTheme; // 'light' o 'dark'
+    return themeForNavbar === 'light' ? 'navbar-light' : 'navbar-dark';
+  };
 
+  const getNavbarTextVariant = () => {
+    const themeForNavbar = buttonTheme;
+    return themeForNavbar === 'light' ? 'navbar-text-light' : 'navbar-text-dark';
+  };
+
+  const getNavbarFilledVariant = () => {
+    const themeForNavbar = buttonTheme;
+    return themeForNavbar === 'light' ? 'navbar-filled-light' : 'navbar-filled-dark';
+  };
   const handleNavigate = (href) => {
     go(href);
     closeDropdowns();
@@ -145,7 +162,7 @@ export default function Navbar() {
     >
       <Button
         key={item.label + item.href + "mobile"}
-        variant={theme === "light" ? "navbar-text-light" : "navbar-text-dark"}
+        variant={getNavbarTextVariant()}
         className="flex items-center "
         onClick={() => handleNavigate(item.href)}
       >
@@ -158,7 +175,7 @@ export default function Navbar() {
   const renderDropdownItemMobile = (item) => (
     <Button
       key={item.label + item.href + "mobile"}
-      variant={theme === "light" ? "navbar-text-light" : "navbar-text-dark"}
+       variant={getNavbarTextVariant()}
       className="flex items-center "
       onClick={() => handleNavigate(item.href)}
     >
@@ -172,16 +189,18 @@ export default function Navbar() {
       closeMobileMenuHard();
     }
   }, [isTablet]);
+   const logoFilter = buttonTheme === 'light' ? 'invert(0)' : 'invert(1)';
   return (
     <>
-      <div className="fixed top-[30px]  z-[999] flex justify-center w-full bg-transparent px-3  md:px-7">
+      <div className="fixed top-[30px]  z-[990] flex justify-center w-full bg-transparent px-3  md:px-7">
         <motion.nav
+        ref={navbarRef} // Añadimos la ref aquí
           variants={navbarVariants}
           initial="hidden"
           animate="visible"
-          className={`flex justify-between items-center w-full h-navbar py-2 pl-3 pr-2 rounded-md backdrop-blur-[20px] backdrop-saturate-[140%] transition-all duration-300 ${theme === "light"
-            ? "bg-white/7  text-[#1a1a1a] shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
-            : "bg-navbar-background-primary"
+          className={`flex justify-between items-center w-full h-navbar py-2 pl-3 pr-2 rounded-md backdrop-blur-[8px] backdrop-saturate-[140%] backdrop-brightness-[100%]  transition-all duration-300 ${theme === "light"
+            ? "bg-white/30   shadow-sm "
+            : "bg-navbar-background-primary "
             }`}
         >
           <div className="flex flex-row  items-center gap-4">
@@ -193,18 +212,14 @@ export default function Navbar() {
                 src={logo}
                 className="w-[44px] h-[21px] "
                 alt="RTS Logo"
-                style={{
-                  filter: theme === "light"
-                    ? "invert(0)"
-                    : "invert(1)"
-                }}
+                  style={{ filter: logoFilter }}
               />
             </a>
 
             <div className="hidden md:flex flex-row gap-3 ">
 
               <Button
-                variant={theme === "light" ? "navbar-light" : "navbar-dark"}
+                 variant={getNavbarVariant()}
                 className={`${ddOpen === "what" ? "!bg-navbar-background-primary" :""}`}
                 onClick={() => openDropdown("what")}
               >
@@ -217,7 +232,7 @@ export default function Navbar() {
               </Button>
 
               <Button
-                variant={theme === "light" ? "navbar-light" : "navbar-dark"}
+                 variant={getNavbarVariant()}
                 className={`${ddOpen === "industries" ? "!bg-navbar-background-primary" :""}`}
                 onClick={() => openDropdown("industries")}
               >
@@ -227,7 +242,7 @@ export default function Navbar() {
                 />
               </Button>
               <Button
-                variant={theme === "light" ? "navbar-light" : "navbar-dark"}
+                variant={getNavbarVariant()}
                 className="flex items-center gap-2"
                 onClick={() => handleNavigate('/hub')}
               >
@@ -235,7 +250,7 @@ export default function Navbar() {
               </Button>
 
               <Button
-                variant={theme === "light" ? "navbar-light" : "navbar-dark"}
+                variant={getNavbarVariant()}
                 className="flex items-center gap-2"
                 onClick={() => handleNavigate('/culture')}
               >
@@ -282,9 +297,9 @@ export default function Navbar() {
                         animate="visible"
                         exit="hidden"
                         className={`flex flex-col gap-2 rounded-xs p-5 
-                              backdrop-blur-[25px] backdrop-saturate-[140%]
+                              backdrop-blur-[10px] backdrop-saturate-[140%]
                               ${theme === "light"
-                            ? "bg-white/7  text-[#1a1a1a] shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
+                            ? "bg-white/30  text-[#1a1a1a] shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
                             : "bg-navbar-background-primary"
                           }`}
                       >
@@ -306,9 +321,9 @@ export default function Navbar() {
                         animate="visible"
                         exit="hidden"
                         className={`flex flex-col gap-2 rounded-xs p-5 
-                              backdrop-blur-[25px] backdrop-saturate-[140%]
+                              backdrop-blur-[10px] backdrop-saturate-[140%]
                               ${theme === "light"
-                            ? "bg-white/7  text-[#1a1a1a] shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
+                            ? "bg-white/30  text-[#1a1a1a] shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
                             : "bg-navbar-background-primary"
                           }`}
                       >
@@ -332,12 +347,12 @@ export default function Navbar() {
             initial="hidden"
             animate="visible"
             exit="hidden"
-            className={`bg-navbar-menu-primary fixed top-[100px] left-3 right-3 p-5  rounded-md flex flex-col gap-6 z-[199999999] backdrop-blur-[25px] backdrop-saturate-[160%] `}
+            className={`bg-navbar-menu-primary fixed top-[100px] left-3 right-3 p-5  rounded-md flex flex-col gap-6 z-[199999999] backdrop-blur-[10px] backdrop-saturate-[160%] `}
           >
             <div className="flex flex-col gap-4">
               <div className="flex flex-col">
                 <Button
-                  variant={theme === "light" ? "navbar-light" : "navbar-dark"}
+                  variant={getNavbarVariant()}
                   className={` ${ddMobileOpen === "what" && "bg-navbar-button-hover-primary"}`}
                   onClick={() => toggleMobileDropdown("what")}
                 >
@@ -362,7 +377,7 @@ export default function Navbar() {
               </div>
               <div className="flex flex-col">
                 <Button
-                  variant={theme === "light" ? "navbar-light" : "navbar-dark"}
+                   variant={getNavbarTextVariant()}
                   className={` ${ddMobileOpen === "industries" && "bg-navbar-button-hover-primary"}`}
                   onClick={() => toggleMobileDropdown("industries")}
                 >
@@ -389,14 +404,14 @@ export default function Navbar() {
               </div>
 
               <Button
-                variant={theme === "light" ? "navbar-light" : "navbar-dark"}
+                variant={getNavbarTextVariant()}
                 onClick={() => handleNavigate('/hub')}
               >
                 HUB
               </Button>
 
               <Button
-                variant={theme === "light" ? "navbar-light" : "navbar-dark"}
+                 variant={getNavbarTextVariant()}
                 onClick={() => handleNavigate('/culture')}
               >
                 Culture
@@ -404,7 +419,7 @@ export default function Navbar() {
 
 
               <Button
-                variant={theme === "light" ? "navbar-filled-light" : "navbar-filled-dark"}
+                variant={getNavbarFilledVariant()}
                 className=""
                 onClick={closeMobileMenuHard}
               >

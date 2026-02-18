@@ -159,8 +159,8 @@ export const industriesContent = {
     },
     pharmaceuticals: {
         hero: {
-            title: <>Pharma<br className="md:hidden" />ceuticals
-            </>,
+            title: <span>Pharma<br className="md:hidden" />ceuticals
+            </span>,
             img: () => import('../assets/Backgrounds/hero_pharmaceuticals.png'),
         },
         clientsSection: {

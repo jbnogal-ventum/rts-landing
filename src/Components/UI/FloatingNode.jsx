@@ -1,10 +1,12 @@
 // src/Components/UI/FloatingNode.jsx
 import { useEffect, useRef, useState, useCallback } from "react";
+import { Typography, Button } from "../index";
 import { motion, AnimatePresence } from "framer-motion";
 import { SendHorizonal, X } from "lucide-react";
 import "./FloatingNode.css";
 import { useTheme } from "../../contexts/ThemeContext";
 import { cn } from "../../lib/utils";
+import { useSelector } from "react-redux";
 
 const WEBHOOK_URL =
   "https://ruana-ai-d9eshse0hxcqfrae.eastus2-01.azurewebsites.net/webhook/660ac8f6-f8c3-4af3-b6ff-3f17007faf96";
@@ -17,6 +19,7 @@ export default function FloatingNode() {
   const inputRef = useRef(null);
 
   const [isExpanded, setIsExpanded] = useState(false);
+  const { isBar } = useSelector((state) => state.node);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -91,15 +94,15 @@ export default function FloatingNode() {
       setIsVisible(true);
     };
 
-      requestAnimationFrame(playIntro);
+    requestAnimationFrame(playIntro);
 
   }, []);
 
   return (
     <motion.div
       ref={nodeRef}
-      className="floating-node"
-      initial={{ 
+      className={cn("fixed z-[995]  bg-transparent cursor-pointer", isExpanded ? 'bottom-0 right-0 sm:bottom-5 sm:right-5' : 'bottom-5 right-5')}
+      initial={{
         opacity: 0,
         y: 40,
         filter: "blur(14px)",
@@ -125,7 +128,7 @@ export default function FloatingNode() {
         {!isExpanded ? (
           <motion.div
             key="collapsed"
-            className="fn-collapsed"
+            className="w-node-collapsed h-node-collapsed rounded-full flex items-center justify-center cursor-pointer translate-x-0 translate-y-0"
             onClick={() => {
               if (!hasGreeted.current) {
                 hasGreeted.current = true;
@@ -139,8 +142,8 @@ export default function FloatingNode() {
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
             <div className={cn(
-              theme === "dark" ? "fn-outer-circle-dark" : "fn-outer-circle-light",
-              "transition-colors duration-700 ease-in-out fn-outer-circle"
+              theme === "dark" ? "bg-assistant-background-dark" : "bg-assistant-background-light",
+              "transition-colors duration-700 ease-in-out w-full h-full rounded-full flex items-center justify-center backdrop-blur "
             )}>
               <div className="fn-ring" />
             </div>
@@ -148,16 +151,16 @@ export default function FloatingNode() {
         ) : (
           <motion.div
             key="panel"
-            className="fn-chat-panel bg-assistant-background rounded-md shadow-md"
-            initial={{ 
+            className=" bg-background-white text-text-on-white-primary rounded-md shadow-md backdrop-blur-md flex flex-col gap-3 py-4 overflow-hidden transform origin-bottom-right sm:w-chat-panel sm:h-chat-panel w-[100vw] h-[100vh]"
+            initial={{
               scale: 0.3,
               opacity: 0
             }}
-            animate={{ 
+            animate={{
               scale: 1,
               opacity: 1
             }}
-            exit={{ 
+            exit={{
               scale: 0.3,
               opacity: 0
             }}
@@ -167,115 +170,85 @@ export default function FloatingNode() {
               damping: 20,
               mass: 0.8,
             }}
-            style={{ 
+            style={{
               originX: 1,
-              originY: 1 
+              originY: 1
             }}
           >
             {/* Header */}
-            <div className="fn-chat-header">
-              <div className="fn-chat-header-left">
-                <div className="fn-chat-header-ring" />
-                <span className="fn-chat-header-title">RTS Assistant</span>
+            <div className="flex flex-row items-center justify-between 3 px-4">
+              <div className="flex items-center gap-1">
+                <div class={cn("gradient-border rounded-full w-icon-md h-icon-md transition-opacity duration-300", messages.length > 0 || isLoading ? "opacity-0 hidden" : "opacity-100 block")} />
+                <Typography className="">RTS Assistant</Typography>
               </div>
-              <motion.button 
-                className="fn-chat-close"
+              <Button
+                variant="text-node"
+                className=""
                 onClick={() => setIsExpanded(false)}
-                type="button"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
-                <X size={16} />
-              </motion.button>
+                Close
+              </Button>
             </div>
 
             {/* Messages */}
-            <div className="fn-chat-messages">
+            <div className="fn-chat-messages px-4">
               {messages.map((msg, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: i * 0.05 }}
-                  className={`fn-chat-bubble ${
-                    msg.role === "user"
-                      ? "fn-chat-bubble-user"
+                  className={` ${msg.role === "user"
+                      ? "bg-background-inverse max-w-[85%] p-3 rounded-xl rounded-br-none text-text-on-white-primary text-body-sm flex self-end"
                       : msg.role === "error"
-                      ? "fn-chat-bubble-error"
-                      : "fn-chat-bubble-assistant"
-                  }`}
+                        ? "fn-chat-bubble-error"
+                        : "fn-chat-bubble-assistant"
+                    }`}
                 >
                   {msg.content}
                 </motion.div>
               ))}
               {isLoading && (
-                <motion.div 
-                  className="fn-typing"
+                <motion.div
+                  className="flex items-center gap-1"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <motion.div 
-                    className="fn-typing-dot"
-                    animate={{ 
-                      y: [0, -8, 0],
-                    }}
-                    transition={{
-                      duration: 0.6,
-                      repeat: Infinity,
-                      repeatType: "loop",
-                      ease: "easeInOut",
-                    }}
-                  />
-                  <motion.div 
-                    className="fn-typing-dot"
-                    animate={{ 
-                      y: [0, -8, 0],
-                    }}
-                    transition={{
-                      duration: 0.6,
-                      repeat: Infinity,
-                      repeatType: "loop",
-                      ease: "easeInOut",
-                      delay: 0.1,
-                    }}
-                  />
-                  <motion.div 
-                    className="fn-typing-dot"
-                    animate={{ 
-                      y: [0, -8, 0],
-                    }}
-                    transition={{
-                      duration: 0.6,
-                      repeat: Infinity,
-                      repeatType: "loop",
-                      ease: "easeInOut",
-                      delay: 0.2,
-                    }}
-                  />
+                   <div class="gradient-border rounded-full w-icon-md h-icon-md" />
+                  <Typography variant='body-sm' className="text-text-on-white-primary ">
+                    Thinking ...
+                  </Typography>
                 </motion.div>
               )}
               <div ref={messagesEndRef} />
             </div>
 
             {/* Input */}
-            <motion.div 
-              className="fn-chat-input-bar"
+            <motion.div
+              className="flex flex-col items-center gap-1 px-4"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.1 }}
             >
               <input
                 ref={inputRef}
-                className="fn-chat-input"
+                className={cn(
+              "flex w-full rounded-md border-[2px] border-border-subtle-selected px-3 py-2 text-sm ",
+              "file:border-0 file:bg-transparent file:text-sm file:font-medium",
+              "placeholder:text-text-on-white-primary",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+              "disabled:cursor-not-allowed disabled:opacity-50",
+              false && "border-sentiment-negative focus-visible:ring-sentiment-negative",
+              
+            )}
                 type="text"
-                placeholder="Type a message…"
+                placeholder="Write here"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
               />
-              <motion.button
+              {/* <motion.button
                 className="fn-chat-send"
                 type="button"
                 onClick={sendMessage}
@@ -285,7 +258,10 @@ export default function FloatingNode() {
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
                 <SendHorizonal size={18} />
-              </motion.button>
+              </motion.button> */}
+              <Typography variant='subtitle-md' className="text-text-helper ">
+               RTS can make mistakes. Check important info.
+              </Typography>
             </motion.div>
           </motion.div>
         )}

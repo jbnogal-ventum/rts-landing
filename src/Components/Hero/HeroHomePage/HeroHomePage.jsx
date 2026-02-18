@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
-import { useMediaQuery } from "../../../hooks/useMediaQuery";
+
 import { Typography, Button } from "../../index";
 import { useNavigate } from "react-router-dom";
 export default function HeroHomePage({ onPhase }) {

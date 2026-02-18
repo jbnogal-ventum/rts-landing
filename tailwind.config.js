@@ -82,6 +82,8 @@ export default {
           background: '#3C3C3C',             // Uso: bg-assistant-background
           hover: '#4B4B4B',                  // Uso: bg-assistant-hover
           prompt: '#5A5A5A',                 // Uso: bg-assistant-prompt
+          'background-light': '#e3e8ff99',
+          'background-dark': '#3c3c3c80'
         },
 
         navbar: {
@@ -290,8 +292,10 @@ export default {
         'icon-md': '24px',                   // Uso: h-icon-md
         'icon-lg': '32px',                   // Uso: h-icon-lg
         'icon-xl': '38px',                   // Uso: h-icon-xl
+        'node-collapsed': '60px',             // Uso: h-node-collapsed
         'ds-parteners-img': '403px',          // Uso: h-ds-parteners-img
         'industry-card': '409px',             // Uso: h-industry-card
+        'chat-panel': '480px',               // Uso: h-chat-panel
 
       },
       width: {
@@ -303,9 +307,11 @@ export default {
         'icon-md': '24px',                   // Uso: w-icon-md
         'icon-lg': '32px',                   // Uso: w-icon-lg
         'icon-xl': '38px',                   // Uso: w-icon-xl
+        'node-collapsed': '60px',             // Uso: w-node-collapsed
         'hub-card': '357px',                 // Uso: w-hub-card
         'ds-parteners-img': '454px',         // Uso: w-ds-parteners-img
         'industry-card': '535px',             // Uso: w-industry-card
+        'chat-panel': '380px',               // Uso: w-chat-panel
       },
     },
     plugins: [

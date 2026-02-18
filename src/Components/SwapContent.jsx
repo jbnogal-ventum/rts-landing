@@ -41,7 +41,7 @@ export default function SwapContent() {
   // Animaciones para los textos
   const contentAOpacity = useTransform(
     scrollYProgress,
-    [0, 0.4, 0.5,  0.6, 0.8],
+    [0, 0.4, 0.45,  0.6, 0.8],
     [1, 1, 0, 0, 0]
   );
 
@@ -53,7 +53,7 @@ export default function SwapContent() {
 
   const contentBOpacity = useTransform(
     scrollYProgress,
-    [0, 0.4, 0.5, 0.6, 0.8],
+    [0, 0.4, 0.45, 0.5, 0.8],
     [0, 0, 0, 1, 1]
   );
 
@@ -138,7 +138,7 @@ export default function SwapContent() {
 
             {/* Panel A */}
             <motion.div
-              className="absolute inset-0  flex items-center md:mt-0"
+              className="absolute inset-0  flex items-center md:mt-4"
               style={{
                 opacity: contentAOpacity,
                 y: contentAY,
@@ -165,7 +165,7 @@ export default function SwapContent() {
 
             {/* Panel B */}
             <motion.div
-              className="absolute inset-0  flex items-start md:mt-7 mt-4 "
+              className="absolute inset-0  flex items-start  mt-4 "
               style={{
                 opacity: contentBOpacity,
                 y: contentBY,

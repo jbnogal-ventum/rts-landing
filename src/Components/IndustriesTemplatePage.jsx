@@ -61,7 +61,7 @@ export function IndustriesTemplatePage({ content }) {
 
     useEffect(() => {
         if (!whiteBlockRef.current) {
-            console.log('⚠️ whiteBlockRef.current aún no existe');
+            //console.log('⚠️ whiteBlockRef.current aún no existe');
             return;
         }
         const observer = new IntersectionObserver(
@@ -95,13 +95,13 @@ export function IndustriesTemplatePage({ content }) {
         observer.observe(whiteBlockRef.current);
 
         return () => {
-            console.log('🧹 Limpiando observer');
+           // console.log('🧹 Limpiando observer');
             observer.disconnect();
         };
     }, [setTheme]);
 
     const arrayClientsLogos = Object.entries(logos).map(([key, logo]) => ({ key, logo }));
-    console.log({ arrayClientsLogos }, arrayClientsLogos.length % 2 === 0 && !arrayClientsLogos.length <= 4 ? 'lg:grid-cols-2' : 'lg:grid-cols-3');
+    //console.log({ arrayClientsLogos }, arrayClientsLogos.length % 2 === 0 && !arrayClientsLogos.length <= 4 ? 'lg:grid-cols-2' : 'lg:grid-cols-3');
     return (
         <section id="industry">
 
@@ -122,7 +122,7 @@ export function IndustriesTemplatePage({ content }) {
                         <SlideInAnimation y={50} delay={0.2} > <Typography
                             variant="headline-large"
                             className="md:text-display-lg"
-                            htmlContent={content?.hero.title}
+                            children={content?.hero.title}
                         />
                         </SlideInAnimation>
                     </div>
@@ -251,17 +251,18 @@ export function IndustriesTemplatePage({ content }) {
                             <div
                                 className="absolute inset-0 rounded-md"
                                 style={{
-                                    background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 81.81%), rgba(0, 0, 0, 0)`,
-                                    opacity: '0.8', transition: 'opacity 0.3s ease',
+                                    background: `linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 81.81%), rgba(0, 0, 0, 0)`,
+                                    opacity: '0.5', transition: 'opacity 0.3s ease',
                                 }}
                             />
                             <div className="absolute bottom-0 left-0 right-0 md:right-auto md:bottom-4 md:left-4 p-4 md:p-0">
-                                <div className="flex justify-center md:justify-start ">
-                                    <SlideInAnimation y={50} delay={0} >
+                                <div className="flex justify-center md:justify-start w-full">
                                         {/* Logo con efecto glass que funciona */}
                                         <div className="relative w-full">
+                                    <SlideInAnimation y={50} delay={0} >
                                             {/* Fondo glass que SÍ funciona */}
                                             <div className="
+                                            h-[135px]
                                                          bg-white/20 
                                                             backdrop-blur-sm
                                                             rounded-xs
@@ -281,8 +282,8 @@ export function IndustriesTemplatePage({ content }) {
                                                     <div className="h-8 md:h-10 w-24 md:w-32 bg-gray-400/30 rounded animate-pulse"></div>
                                                 )}
                                             </div>
-                                        </div>
                                     </SlideInAnimation>
+                                        </div>
                                 </div>
                             </div>
                         </div>
