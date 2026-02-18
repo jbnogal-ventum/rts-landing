@@ -113,17 +113,17 @@ export default function HeroEnergy() {
             {/* Contenido */}
             <div className="relative z-10 w-full h-full md:px-7 py-9 px-3">
                 <div className="pt-9 flex flex-col gap-7 md:gap-6 w-fit">
-                    <SlideInAnimation y={50} delay={0.5}><Typography variant="display-lg" className=" hidden md:block w-fit">
+                    <SlideInAnimation y={50} delay={1}><Typography variant="display-lg" className=" hidden md:block w-fit">
                         ENERGY  & <br /> INFRASTRUCTURE
                     </Typography>
                     </SlideInAnimation>
-                    <SlideInAnimation y={50} delay={0.5}><Typography variant="headline-large" className="md:hidden w-fit">
+                    <SlideInAnimation y={50} delay={1}><Typography variant="headline-large" className="md:hidden w-fit">
                         ENERGY <br />
                         & INFRA-
                         STRUCTURE
                     </Typography>
                     </SlideInAnimation>
-                     <SlideInAnimation delay={0.8}>
+                     <SlideInAnimation delay={1.3}>
                     <div className="flex justify-end lg:pr-9 text-secondary">
                         <Typography
                             variant="title-small"

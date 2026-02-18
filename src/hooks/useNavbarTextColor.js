@@ -47,28 +47,28 @@ export function useNavbarTextColor() {
     calculateBrightness(bgColor);
     
   } catch (error) {
-    console.error('Error detecting background:', error);
+    //console.error('Error detecting background:', error);
   }
 }, []);
   const calculateBrightness = (bgColor) => {
     const rgb = bgColor.match(/\d+/g);
     if (rgb && rgb.length >= 3) {
       const brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000;
-      console.log('Brightness:', brightness);
+      //console.log('Brightness:', brightness);
       
-      const newTheme = brightness < 230 ? 'dark' : 'light';
-      console.log('New theme:', newTheme);
+      const newTheme = brightness < 228 ? 'dark' : 'light';
+      //console.log('New theme:', newTheme);
       
       setButtonTheme(prevTheme => {
         if (prevTheme !== newTheme) {
-          console.log('Theme changed from', prevTheme, 'to', newTheme);
+          //console.log('Theme changed from', prevTheme, 'to', newTheme);
           return newTheme;
         }
         return prevTheme;
       });
     } else {
       // Si no podemos obtener RGB, asumimos light por defecto
-      console.log('Could not parse RGB, keeping current theme');
+      //console.log('Could not parse RGB, keeping current theme');
     }
   };
 

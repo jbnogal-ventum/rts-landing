@@ -98,6 +98,7 @@ export default function Navbar() {
       }
     })
   };
+ // console.log({buttonTheme})
 // Determinar qué variante usar para cada botón
   const getNavbarVariant = () => {
     // Priorizamos el tema adaptativo para el navbar
@@ -267,11 +268,11 @@ export default function Navbar() {
           </div>
 
           <button
-            className={` md:hidden w-[40px] h-[40px] rounded-xs flex items-center justify-center transition-colors duration-300 ${theme === "light" ? "bg-white" : "bg-white/15"
+            className={` md:hidden w-[40px] h-[40px] rounded-xs flex items-center justify-center transition-colors duration-300 ${buttonTheme === "light" ? "bg-white" : "bg-white/15"
               }`}
             onClick={toggleMenu}
           >
-            <TextAlignStart className={`absolute transition-all duration-500 ${open ? 'rotate-90 opacity-0 ' : 'rotate-0 opacity-100 '}`} />
+            <TextAlignStart className={`absolute transition-all duration-500 ${open ? 'rotate-90 opacity-0 ' : 'rotate-0 opacity-100 '} ${buttonTheme === "light" ? "text-black" : "text-white"}`} />
             <X className={`absolute  transition-all duration-500 ${open ? 'rotate-0 opacity-100' : 'rotate-90 opacity-0'}`} />
           </button>
         </motion.nav>
@@ -377,7 +378,7 @@ export default function Navbar() {
               </div>
               <div className="flex flex-col">
                 <Button
-                   variant={getNavbarTextVariant()}
+                   variant={getNavbarVariant()}
                   className={` ${ddMobileOpen === "industries" && "bg-navbar-button-hover-primary"}`}
                   onClick={() => toggleMobileDropdown("industries")}
                 >
@@ -404,14 +405,14 @@ export default function Navbar() {
               </div>
 
               <Button
-                variant={getNavbarTextVariant()}
+                variant={getNavbarVariant()}
                 onClick={() => handleNavigate('/hub')}
               >
                 HUB
               </Button>
 
               <Button
-                 variant={getNavbarTextVariant()}
+                 variant={getNavbarVariant()}
                 onClick={() => handleNavigate('/culture')}
               >
                 Culture

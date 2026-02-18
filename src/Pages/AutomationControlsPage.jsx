@@ -415,16 +415,8 @@ export default function AutomationControlsPage({ setNavMode }) {
 
       <section id="industrial-intelligence">
         <div className="flex flex-col md:flex-row gap-6 py-9 px-3 md:px-7">
-          <div className="w-full md:hidden flex flex-col gap-6 ">
-           <SlideInAnimation delay={0.1}> <Typography variant="headline-small">
-              ENGINEERING<br />SERVICES ABROAD
-            </Typography>
-            </SlideInAnimation>
-            <SlideInAnimation delay={0.2}>
-            <Button children="Book a meeting now" />
-            </SlideInAnimation>
-          </div>
-          <div className="hidden md:flex w-1/2  flex-col gap-7">
+         
+          <div className="flex w-full md:w-1/2  flex-col gap-7">
            <div className="space-y-4">
             <SlideInAnimation delay={0.3}><Typography variant="title-body">
               RTS Engineering Workforce

@@ -47,7 +47,7 @@ export default function Story() {
     observer.observe(storySectionRef.current);
 
     return () => {
-      console.log('🧹 Limpiando observer');
+     // console.log('🧹 Limpiando observer');
       observer.disconnect();
     };
   }, [setTheme]);

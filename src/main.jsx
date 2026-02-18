@@ -16,7 +16,7 @@ const BASENAME = import.meta.env.BASE_URL;
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-        <BrowserRouter basename={BASENAME}>
+        <BrowserRouter >
       <ThemeProvider>
           <App />
       </ThemeProvider>

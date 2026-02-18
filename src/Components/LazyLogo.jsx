@@ -20,7 +20,7 @@ export function LazyLogo({
     logoImport().then(module => {
       setLogo(module.default);
     }).catch(error => {
-      console.error('Error loading logo:', error);
+      //console.error('Error loading logo:', error);
     });
   }, [logoImport]);
 

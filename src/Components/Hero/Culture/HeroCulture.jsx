@@ -42,10 +42,6 @@ export default function HeroIndustries() {
         const brightness = isHovering ? 1 + (distance * 0.5) : 1;
         const scale =  1;
 
-        // Rotación sutil basada en la posición
-        const rotateX = isHovering ? (mousePosition.y - centerY) * 4 : 0;
-        const rotateY = isHovering ? (mousePosition.x - centerX) * 4 : 0;
-
         return {
             blur: `${blur}px`,
             brightness,
@@ -111,7 +107,7 @@ export default function HeroIndustries() {
             {/* Contenido */}
             <div className="relative z-10 w-full h-full md:px-7 py-9 px-3">
                 <div className="pt-9 flex flex-col gap-6 md:gap-4">
-                    <SlideInAnimation y={50} delay={0.5} repeat={true}><Typography variant="headline-large" className="md:text-display-lg ">
+                    <SlideInAnimation y={50} delay={1} repeat={true}><Typography variant="headline-large" className="md:text-display-lg ">
                        CULTURE
                     </Typography>
                     </SlideInAnimation>

@@ -1,5 +1,5 @@
 // src/Pages/HubPage.jsx
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Typography, Button } from "../Components/index";
 import HeroCulture from "../Components/Hero/Culture/HeroCulture.jsx";
 import Banner from "../Components/Banner/Banner";
@@ -20,6 +20,8 @@ import { SlideInAnimation, FadeInScaleAnimation, FadeInAnimation } from "../anim
 export default function CulturePage() {
   const whiteBlockRef = useRef(null);
   const { setTheme } = useTheme();
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoId = "LXb3EKWsInQ"; // ID del video de YouTube
 
   useEffect(() => {
     if (!whiteBlockRef.current) {
@@ -60,7 +62,7 @@ export default function CulturePage() {
     observer.observe(whiteBlockRef.current);
 
     return () => {
-      console.log('🧹 Limpiando observer');
+      //console.log('🧹 Limpiando observer');
       observer.disconnect();
     };
   }, [setTheme]);
@@ -111,7 +113,7 @@ export default function CulturePage() {
             </div>
           </div>
 
-          <div className="relative overflow-hidden rounded-xl flex justify-center group">
+          {!isPlaying ? (<div className="relative overflow-hidden rounded-xl flex justify-center group">
             {/* Imagen principal */}
             <FadeInAnimation delay={1} >
               <img
@@ -124,37 +126,48 @@ export default function CulturePage() {
             <div
               className="absolute inset-0 rounded-xl"
               style={{
-                background: `
-        linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 81.81%),
-        linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4))
-      `,
+                background: `  linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 81.81%), linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4))`,
                 opacity: '0.8',
                 transition: 'opacity 0.3s ease',
               }}
             />
-          {/* Botón de play centrado */}
-          <FadeInAnimation delay={1} >
-          <button
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+            {/* Botón de play centrado */}
+            <FadeInAnimation delay={1} >
+              <button
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
                w-16 h-16 md:w-20 md:h-20 bg-background-inverse bg-opacity-40 rounded-full 
                flex items-center justify-center shadow-lg 
                hover:scale-110 transition-all duration-300 
                hover:shadow-2xl "
-            aria-label="Play video"
-            onClick={() => {/* Tu función para reproducir video */ }}
-          >
-            <FadeInAnimation delay={1.2} >
-              <RiPlayFill className="w-icon-sm h-icon-sm md:w-10 md:h-10 text-white " />
+                aria-label="Play video"
+                onClick={() => setIsPlaying(true)}
+              >
+        
+                  <RiPlayFill className="w-icon-sm h-icon-sm md:w-10 md:h-10 text-white " />
+      
+              </button>
             </FadeInAnimation>
-          </button>
-</FadeInAnimation>
-          {/* Efecto de pulso opcional */}
-          {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
-                  w-20 h-20 md:w-24 md:h-24 bg-white/30 rounded-full 
-                  animate-pulse pointer-events-none" /> */}
+            {/* Efecto de pulso opcional */}
+
+          </div>) : (
+              /* Video de YouTube */
+                 <FadeInAnimation delay={0.4} >
+              <div className="relative overflow-hidden rounded-xl flex justify-center ">
+                <iframe
+                  width="200%"
+                  height="100%"
+                  src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`}
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full  md:h-[550px] rounded-xl "
+                ></iframe>
+              </div>
+                </FadeInAnimation>
+            )}
         </div>
-      </div>
-    </section >
+      </section >
 
       <section id='our-approach' className="relative overflow-hidden bg-background-primary">
         {/* Contenedor para la imagen de fondo */}
@@ -182,7 +195,7 @@ export default function CulturePage() {
           <div className="flex flex-col md:flex-row md:justify-between gap-4 " >
             <div className="flex flex-row md:w-2/3">
 
-             <SlideInAnimation y={50} className="" delay={0.3}> <Typography
+              <SlideInAnimation y={50} className="" delay={0.3}> <Typography
                 variant="headline-large"
                 className=""
 
@@ -190,9 +203,9 @@ export default function CulturePage() {
               </SlideInAnimation>
             </div>
             <div className="md:w-1/2 flex md:justify-end md:items-end text-text-secondary">
-<SlideInAnimation y={50} className="" delay={0.5}>
-              <Typography variant={'body-md'} children={"We approach digital transformation in Industry 4.0 with a proven, strategic framework designed to deliver impactful and sustainable results. "} />
-</SlideInAnimation>
+              <SlideInAnimation y={50} className="" delay={0.5}>
+                <Typography variant={'body-md'} children={"We approach digital transformation in Industry 4.0 with a proven, strategic framework designed to deliver impactful and sustainable results. "} />
+              </SlideInAnimation>
             </div>
 
           </div>
@@ -208,51 +221,51 @@ export default function CulturePage() {
                 { title: 'Achieving Early Wins', icon: <PackageCheck className="w-5 h-5 text-primary-500" />, info: 'Focus on quick, tangible outcomes to build confidence, momentum, and proof of success.' },
               ].map((card, index) => (
                 <SlideInAnimation key={`culture-card-1-${index}`} delay={(index + 1) * 0.3} >
-                <div
-                  key={`culture-card-1-${index}`}
-                  className="bg-white rounded-md shadow-md p-5 flex flex-col gap-4 md:justify-between md:h-hub-card"
-                >
-                  <div className="flex flex-col gap-3">
-                    {card.icon}
-                    <Typography
-                      variant="title-small"
-                      className="font-bold"
-                      children={card.title}
-                    />
+                  <div
+                    key={`culture-card-1-${index}`}
+                    className="bg-white rounded-md shadow-md p-5 flex flex-col gap-4 md:justify-between md:h-hub-card"
+                  >
+                    <div className="flex flex-col gap-3">
+                      {card.icon}
+                      <Typography
+                        variant="title-small"
+                        className="font-bold"
+                        children={card.title}
+                      />
+                    </div>
+                    <Typography variant="body-md" children={card.info} />
                   </div>
-                  <Typography variant="body-md" children={card.info} />
-                </div>
                 </SlideInAnimation>
               ))}
-<SlideInAnimation  delay={(3) * 0.3} >
-              <div className="bg-white rounded-md shadow-md p-5 flex flex-col gap-4 md:justify-between md:h-hub-card"
-              >
-                <div className="flex flex-col gap-3">
-                  <Pyramid className="w-5 h-5 " />
-                  <Typography
-                    variant="title-body"
-                    className="font-bold"
-                    children={'Embedding Lasting Change'}
-                  />
+              <SlideInAnimation delay={(3) * 0.3} >
+                <div className="bg-white rounded-md shadow-md p-5 flex flex-col gap-4 md:justify-between md:h-hub-card"
+                >
+                  <div className="flex flex-col gap-3">
+                    <Pyramid className="w-5 h-5 " />
+                    <Typography
+                      variant="title-body"
+                      className="font-bold"
+                      children={'Embedding Lasting Change'}
+                    />
+                  </div>
+                  <Typography variant="body-md" children={"Integrate the project’s outcomes into the client’s processes, ensuring long-term value and transformation."} />
                 </div>
-                <Typography variant="body-md" children={"Integrate the project’s outcomes into the client’s processes, ensuring long-term value and transformation."} />
-              </div>
-</SlideInAnimation>
+              </SlideInAnimation>
               <div className="rounded-md bg-transparent p-5  h-hub-card hidden md:flex"
               />
 
 
               {/* Texto como última card */}
-              <SlideInAnimation  delay={(3) * 0.3} >
-              <div
-                className=" rounded-md h-auto md:h-hub-card flex flex-col justify-end md:p-5 "
-              >
-                <Typography
-                  variant="title-small"
-                  className="text-text-primary"
-                  children={'This structured approach ensures every project not only achieves its objectives but also creates lasting change for our clients.'}
-                />
-              </div>
+              <SlideInAnimation delay={(3) * 0.3} >
+                <div
+                  className=" rounded-md h-auto md:h-hub-card flex flex-col justify-end md:p-5 "
+                >
+                  <Typography
+                    variant="title-small"
+                    className="text-text-primary"
+                    children={'This structured approach ensures every project not only achieves its objectives but also creates lasting change for our clients.'}
+                  />
+                </div>
               </SlideInAnimation>
             </div>
           </div>
@@ -277,7 +290,7 @@ export default function CulturePage() {
           {/* Contenido (titulos y cards) */}
           <div className="md:px-7 py-9 px-3 relative flex flex-col gap-4  md:gap-7" style={{ zIndex: 2 }}>
 
-             <SlideInAnimation y={50} delay={0.3} repeat={true}><Typography
+            <SlideInAnimation y={50} delay={0.3} repeat={true}><Typography
               variant="headline-small"
               className="md:text-headline-large md:text-center"
               children={"SOLUTIONS THAT TRANSFORM \nTHE WAY OUR CLIENTS OPAREATE"}
@@ -293,22 +306,22 @@ export default function CulturePage() {
                 { title: "EXPERT IMPLEMENTATION", img: card4, info: "Our team’s deep expertise with these \nplatforms guarantees smooth integration, minimal disruption, and maximum ROI." },
               ].map((card, index) => (
                 <SlideInAnimation key={`culture-card-1-${index}`} delay={(index + 1) * 0.3} >
-                <div
-                 
-                  className="bg-white rounded-xl  grid grid-cols-1 md:grid-cols-3 gap-4 md:items-center w-full p-5 border border-border-subtle"
-                >
+                  <div
+
+                    className="bg-white rounded-xl  grid grid-cols-1 md:grid-cols-3 gap-4 md:items-center w-full p-5 border border-border-subtle"
+                  >
 
 
-                  <Typography
-                    variant="headline-small"
-                    className="  bg-gradient-to-br  from-[#7513FF] via-[#4348F3]  to-[#0093CE]      bg-clip-text text-transparent   "
-                    children={card.title}
-                  />
+                    <Typography
+                      variant="headline-small"
+                      className="  bg-gradient-to-br  from-[#7513FF] via-[#4348F3]  to-[#0093CE]      bg-clip-text text-transparent   "
+                      children={card.title}
+                    />
 
-                  <img className="w-full md:w-[252px] h-[252px] object-cover rounded-xs" src={card.img} alt="" />
+                    <img className="w-full md:w-[252px] h-[252px] object-cover rounded-xs" src={card.img} alt="" />
 
-                  <Typography variant="body-md" children={card.info} />
-                </div>
+                    <Typography variant="body-md" children={card.info} />
+                  </div>
                 </SlideInAnimation>
               ))}
             </div>

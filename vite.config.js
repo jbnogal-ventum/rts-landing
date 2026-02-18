@@ -11,7 +11,7 @@ export default defineConfig({
       },
     }),
   ],
-  base: '/RTS/', // GitHub Pages base path
+  base: './', // GitHub Pages base path
   css: {
     postcss: './postcss.config.js', // ← Asegura que Vite use PostCSS
   },

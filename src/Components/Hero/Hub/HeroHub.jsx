@@ -31,12 +31,12 @@ export default function HeroHub() {
         <div className="absolute inset-0 bg-black/50 z-10"></div>
         <div className="relative z-20  w-full h-full md:px-7 py-9 px-3 " >
             <div className="py-9 flex flex-col gap-7 md:gap-4">
-                <SlideInAnimation y={50} className="" delay={0.5}>
+                <SlideInAnimation y={50} className="" delay={1}>
                     <Typography variant="headline-large" className="md:text-display-lg " >
                         HUB
                     </Typography>
                 </SlideInAnimation>
-                <SlideInAnimation className="flex justify-end md:pr-9 pr-3 w-full text-secondary" delay={0.8}>
+                <SlideInAnimation className="flex justify-end md:pr-9 pr-3 w-full text-secondary" delay={1.3}>
                     <Typography
                         variant="title-small"
                         className="w-2/3 hidden md:block"

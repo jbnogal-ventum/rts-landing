@@ -119,7 +119,7 @@ export function IndustriesTemplatePage({ content }) {
                 <div className="absolute inset-0 bg-black/0"></div>
                 <div className="relative z-10 w-full h-full md:px-7 py-9 px-3">
                     <div className="pt-9 flex  gap-6 md:gap-4 h-full items-center">
-                        <SlideInAnimation y={50} delay={0.2} > <Typography
+                        <SlideInAnimation y={50} delay={1} > <Typography
                             variant="headline-large"
                             className="md:text-display-lg"
                             children={content?.hero.title}
@@ -133,7 +133,7 @@ export function IndustriesTemplatePage({ content }) {
                 <div className="flex flex-col md:flex-row gap-7 md:gap-9 py-9 px-3 md:px-7 bg-background text-color text-secondary">
 
                     <div className="w-full md:w-2/5 flex flex-col md:gap-7 gap-5  ">
-                        <SlideInAnimation y={50} delay={0.4} > <Typography variant="title-body">
+                        <SlideInAnimation y={50} delay={1.2} > <Typography variant="title-body">
                             {content?.clientsSection?.title}
                         </Typography>
                         </SlideInAnimation>
@@ -142,7 +142,7 @@ export function IndustriesTemplatePage({ content }) {
                     </div>
 
                     <div className="w-full md:w-3/5 flex flex-col gap-7 md:gap-6.5 ">
-                        <SlideInAnimation y={50} delay={0.6} ><Typography variant={'body-md'}>
+                        <SlideInAnimation y={50} delay={1.3} ><Typography variant={'body-md'}>
                             {content?.clientsSection?.info}
                         </Typography>
                         </SlideInAnimation>

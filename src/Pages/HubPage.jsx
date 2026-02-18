@@ -22,7 +22,7 @@ export default function HubPage() {
 
   useEffect(() => {
     if (!whiteBlockRef.current) {
-      console.log('⚠️ whiteBlockRef.current aún no existe');
+      //console.log('⚠️ whiteBlockRef.current aún no existe');
       return;
     }
 
@@ -31,13 +31,13 @@ export default function HubPage() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          console.log('🔍 IntersectionObserver entry:', {
-            isIntersecting: entry.isIntersecting,
-            intersectionRatio: entry.intersectionRatio,
-            boundingClientRect: entry.boundingClientRect,
-            rootBounds: entry.rootBounds,
-            time: entry.time
-          });
+          // console.log('🔍 IntersectionObserver entry:', {
+          //   isIntersecting: entry.isIntersecting,
+          //   intersectionRatio: entry.intersectionRatio,
+          //   boundingClientRect: entry.boundingClientRect,
+          //   rootBounds: entry.rootBounds,
+          //   time: entry.time
+          // });
 
           if (entry.isIntersecting) {
             //console.log('✅ EN VISTA - Cambiando a light');
@@ -59,7 +59,7 @@ export default function HubPage() {
     observer.observe(whiteBlockRef.current);
 
     return () => {
-      console.log('🧹 Limpiando observer');
+      //console.log('🧹 Limpiando observer');
       observer.disconnect();
     };
   }, [setTheme]);
