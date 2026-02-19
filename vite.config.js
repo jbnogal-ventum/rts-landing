@@ -1,3 +1,4 @@
+// vite.config.js
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
@@ -10,8 +11,9 @@ export default defineConfig({
         icon: true, // Opcional: para optimizar como iconos
       },
     }),
+   
   ],
-  base: './', // GitHub Pages base path
+  base: './', 
   css: {
     postcss: './postcss.config.js', // ← Asegura que Vite use PostCSS
   },
@@ -30,4 +32,5 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  
 })

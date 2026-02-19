@@ -140,7 +140,7 @@ export default function CulturePage() {
                hover:scale-110 transition-all duration-300 
                hover:shadow-2xl "
                 aria-label="Play video"
-                onClick={() => setIsPlaying(true)}
+                onClick={() => setIsPlaying(false)}
               >
         
                   <RiPlayFill className="w-icon-sm h-icon-sm md:w-10 md:h-10 text-white " />

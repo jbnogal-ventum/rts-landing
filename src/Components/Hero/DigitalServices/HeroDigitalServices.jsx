@@ -38,16 +38,16 @@ export default function HeroDigitalServices() {
         const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
         // Efectos basados en la posición del mouse
-        const blur = isHovering ? distance * 7 : 0;
+        //const blur = isHovering ? distance * 7 : 0;
         const brightness = isHovering ? 1 + (distance * 0.5) : 1;
-        const scale = isHovering ? 1 + (distance * 0.5) : 1;
+        const scale = isHovering ? 1 + (distance * 0.3) : 1;
 
         // Rotación sutil basada en la posición
         const rotateX = isHovering ? (mousePosition.y - centerY) * 4 : 0;
         const rotateY = isHovering ? (mousePosition.x - centerX) * 4 : 0;
 
         return {
-            blur: `${blur}px`,
+            //blur: `${blur}px`,
             brightness,
             scale,
             rotateX: `${rotateX}deg`,
@@ -77,7 +77,7 @@ export default function HeroDigitalServices() {
                         backgroundPosition: 'center center',
                         backgroundRepeat: 'no-repeat',
                         filter: `
-                            blur(${distortion.blur})
+                            //blur(${distortion.blur})
                             brightness(${distortion.brightness})
                         `,
                         transform: `

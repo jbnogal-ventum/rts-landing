@@ -37,16 +37,16 @@ export default function HeroAutomation() {
         const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
         
         // Efectos basados en la posición del mouse
-        const blur = isHovering ? distance * 7 : 0;
+       // const blur = isHovering ? distance * 7 : 0;
         const brightness = isHovering ? 1 + (distance * 0.5) : 1;
-        const scale = isHovering ? 1 + (distance * 0.5) : 1;
+        const scale = isHovering ? 1 + (distance * 0.3) : 1;
         
         // Rotación sutil basada en la posición
         const rotateX = isHovering ? (mousePosition.y - centerY) * 4 : 0;
         const rotateY = isHovering ? (mousePosition.x - centerX) * 4 : 0;
         
         return {
-            blur: `${blur}px`,
+          //  blur: `${blur}px`,
             brightness,
             scale,
             rotateX: `${rotateX}deg`,
@@ -61,7 +61,7 @@ export default function HeroAutomation() {
         <section
             id="hero-automation"
             ref={rootRef}
-            className="relative w-full h-full min-h-screen overflow-hidden cursor-pointer"
+            className="relative w-full h-full min-h-screen overflow-hidden "
             onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -69,14 +69,13 @@ export default function HeroAutomation() {
             {/* Contenedor de la imagen con efecto */}
             <div className="absolute inset-0 w-full h-full flex items-center justify-center">
                 <div 
-                    className="w-full h-full md:max-w-[90%] md:max-h-[90%] relative"
+                    className="w-full h-full md:max-w-[90%] md:max-h-[90%] relative" 
                     style={{
                         backgroundImage: `url(${heroHubBackground})`,
                         backgroundSize: 'contain',
                         backgroundPosition: 'center center',
                         backgroundRepeat: 'no-repeat',
                         filter: `
-                            blur(${distortion.blur})
                             brightness(${distortion.brightness})
                         `,
                         transform: `
@@ -87,7 +86,8 @@ export default function HeroAutomation() {
                         `,
                         transformOrigin: 'center center',
                         transition: distortion.transition,
-                        willChange: 'transform, filter'
+                        willChange: 'transform, filter',
+                        
                     }}
                 />
             </div>

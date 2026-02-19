@@ -1,0 +1,27 @@
+<IfModule mod_rewrite.c>
+  Options -MultiViews
+  RewriteEngine On
+  RewriteBase /
+  
+  # NO redirigir archivos reales (JS, CSS, imágenes, etc.)
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+  
+  # NO redirigir archivos con extensiones específicas
+  RewriteCond %{REQUEST_URI} \.(js|css|png|jpg|jpeg|gif|svg|ico|json|webp|woff|woff2|ttf|eot)$ [NC]
+  RewriteRule ^ - [L]
+  
+  # Redirigir todo lo demás a index.html
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Forzar MIME types correctos
+<IfModule mod_mime.c>
+  AddType application/javascript .js
+  AddType text/css .css
+  AddType image/png .png
+  AddType image/jpeg .jpg .jpeg
+  AddType image/svg+xml .svg
+  AddType application/json .json
+</IfModule>

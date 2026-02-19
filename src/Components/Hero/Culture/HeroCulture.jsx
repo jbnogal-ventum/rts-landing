@@ -38,16 +38,13 @@ export default function HeroIndustries() {
         const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
         // Efectos basados en la posición del mouse
-        const blur = isHovering ? distance * 7 : 0;
+       // const blur = isHovering ? distance * 7 : 0;
         const brightness = isHovering ? 1 + (distance * 0.5) : 1;
-        const scale =  1;
 
         return {
-            blur: `${blur}px`,
+           // blur: `${blur}px`,
             brightness,
-            scale,
-            // rotateX: `${rotateX}deg`,
-            // rotateY: `${rotateY}deg`,
+            
             transition: isHovering ? 'all 0.7s cubic-bezier(0.23, 1, 0.32, 1)' : 'all 0.7s ease'
         };
     };
@@ -73,16 +70,11 @@ export default function HeroIndustries() {
                         backgroundPosition: 'center center',
                         backgroundRepeat: 'no-repeat',
                         filter: `
-                            blur(${distortion.blur})
+                            //blur(${distortion.blur})
                             brightness(${distortion.brightness})
                         `,
-                        transform: `
-                            perspective(1000px)
-                     
-                        `,
-                        transformOrigin: 'center center',
-                        transition: distortion.transition,
-                        willChange: 'transform, filter'
+                       
+                        willChange: 'filter'
                     }}
                 />
             </div>

@@ -30,6 +30,7 @@ const buttonVariants = cva(
         "navbar-filled-light": "hover:bg-background-interactive hover:text-text-primary text-text-on-white-primary rounded-md disabled:bg-background-disabled py-2 px-3 bg-bg-light",
 
         "text-node": "bg-transparent text-core-violet  relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-border-interactive after:transition-all after:duration-300 after:ease-out after:w-0 hover:after:w-full disabled:text-text-disabled ",
+        "carousel-project": "py-1 px-4 border-2 border-background-white rounded-full bg-background-white text-text-on-white-primary disabled:bg-background-disabled disabled:text-text-disabled data-[selected=true]:border-background-soft data-[selected=true]:bg-background-soft data-[selected=true]:text-text-secondary data-[selected=false]:hover:border-2 data-[selected=false]:hover:border-core-violet data-[selected=false]:hover:text-core-violet",
       },
       size: {
         default: "",
@@ -57,6 +58,7 @@ const Button = React.forwardRef(({
   mode,
   asChild = false,
   children,
+  selected = false,
   ...props
 }, ref) => {
 
@@ -109,6 +111,7 @@ const Button = React.forwardRef(({
         buttonVariants({ variant: finalVariant, size, className })
       )}
       ref={ref}
+       data-selected={selected ? "true" : "false"} 
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       {...props}

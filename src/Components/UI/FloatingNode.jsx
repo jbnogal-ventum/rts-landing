@@ -179,7 +179,7 @@ export default function FloatingNode() {
             <div className="flex flex-row items-center justify-between 3 px-4">
               <div className="flex items-center gap-1">
                 <div class={cn("gradient-border rounded-full w-icon-md h-icon-md transition-opacity duration-300", messages.length > 0 || isLoading ? "opacity-0 hidden" : "opacity-100 block")} />
-                <Typography className="">RTS Assistant</Typography>
+                <Typography className="">RTS Node</Typography>
               </div>
               <Button
                 variant="text-node"
@@ -234,10 +234,9 @@ export default function FloatingNode() {
               <input
                 ref={inputRef}
                 className={cn(
-              "flex w-full rounded-md border-[2px] border-border-subtle-selected px-3 py-2 text-sm ",
+              "flex w-full rounded-md border-[2px] border-border-subtle-selected px-3 py-2 text-sm focus:outline-none",
               "file:border-0 file:bg-transparent file:text-sm file:font-medium",
               "placeholder:text-text-on-white-primary",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
               "disabled:cursor-not-allowed disabled:opacity-50",
               false && "border-sentiment-negative focus-visible:ring-sentiment-negative",
               

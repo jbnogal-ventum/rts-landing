@@ -13,7 +13,7 @@ export default {
         'display': ['"Neue Power Ultra"', 'sans-serif'], // Uso: font-display
         'haffer': ['"Haffer"', 'sans-serif'],       // Uso: font-haffer
       },
-
+ 
       // ===== COLORES (Reorganizados para mejor acceso) =====
       colors: {
         // Colores planos individuales (mantener para compatibilidad)
