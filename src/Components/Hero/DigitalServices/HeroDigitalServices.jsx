@@ -1,6 +1,6 @@
 import { Typography } from "../../index";
 import { useRef, useState } from "react";
-import heroHubBackground from "../../../assets/Backgrounds/HeroDigitalServices.png";
+import heroHubBackground from "../../../assets/Backgrounds/HeroDigitalServices.webp";
 import { SlideInAnimation } from "../../../animations";
 
 export default function HeroDigitalServices() {

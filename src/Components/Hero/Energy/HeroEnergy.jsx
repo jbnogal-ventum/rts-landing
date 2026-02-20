@@ -1,6 +1,6 @@
 import { Typography, Button } from "../../index";
 import { useEffect, useRef, useState } from "react";
-import heroEnergyBackground from "../../../assets/Backgrounds/hero_energy.png";
+import heroEnergyBackground from "../../../assets/Backgrounds/hero_energy.webp";
 import { SlideInAnimation } from "../../../animations";
 
 export default function HeroEnergy() {

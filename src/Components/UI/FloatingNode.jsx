@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { Typography, Button } from "../index";
 import { motion, AnimatePresence } from "framer-motion";
-import { SendHorizonal, X } from "lucide-react";
+import { ChevronLeft, SendHorizonal, X } from "lucide-react";
 import "./FloatingNode.css";
 import { useTheme } from "../../contexts/ThemeContext";
 import { cn } from "../../lib/utils";
@@ -11,7 +11,11 @@ import { useSelector } from "react-redux";
 const WEBHOOK_URL =
   "https://ruana-ai-d9eshse0hxcqfrae.eastus2-01.azurewebsites.net/webhook/660ac8f6-f8c3-4af3-b6ff-3f17007faf96";
 
-const GREETING = "What technical challenge are you facing today?";
+const suggestions = [
+  { title: "🔌 Connectivity", description: "Do you face gaps in real-time data \nflow  between your industrial assets \nand enterprise systems?", message: "We face gaps in real-time data \nflow  between our industrial assets \nand enterprise systems. " },
+  { title: "🏭 Integration", description: "Are you experiencing difficulties getting \nyour IT systems and OT operations to work seamlessly together?", message: "We are experiencing difficulties getting \nour IT systems and OT operations to work seamlessly together. " },
+  { title: "👾 Security", description: "How confident are you that your OT environments are protected against evolving cybersecurity threats?", message: "We are not confident that our OT environments are protected against evolving cybersecurity threats. " },
+]
 
 export default function FloatingNode() {
   const nodeRef = useRef(null);
@@ -24,7 +28,7 @@ export default function FloatingNode() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-
+  const [suggestionsPannelOpen, setSuggestionsPanelOpen] = useState(false);
   const hasGreeted = useRef(false);
 
   const { theme } = useTheme();
@@ -42,8 +46,8 @@ export default function FloatingNode() {
     }
   }, [isExpanded]);
 
-  const sendMessage = useCallback(async () => {
-    const text = input.trim();
+  const sendMessage = useCallback(async (msg) => {
+    const text = (msg || input).trim();
     if (!text || isLoading) return;
 
     const userMsg = { role: "user", content: text };
@@ -105,18 +109,16 @@ export default function FloatingNode() {
       initial={{
         opacity: 0,
         y: 40,
-        filter: "blur(14px)",
+
         pointerEvents: "none"
       }}
       animate={isVisible ? {
         opacity: 1,
         y: 0,
-        filter: "blur(0px)",
         pointerEvents: "auto"
       } : {
         opacity: 0,
         y: 40,
-        filter: "blur(14px)",
         pointerEvents: "none"
       }}
       transition={{
@@ -132,7 +134,7 @@ export default function FloatingNode() {
             onClick={() => {
               if (!hasGreeted.current) {
                 hasGreeted.current = true;
-                setMessages([{ role: "assistant", content: GREETING }]);
+
               }
               setIsExpanded(true);
             }}
@@ -151,9 +153,9 @@ export default function FloatingNode() {
         ) : (
           <motion.div
             key="panel"
-            className=" bg-background-white text-text-on-white-primary rounded-md shadow-md backdrop-blur-md flex flex-col gap-3 py-4 overflow-hidden transform origin-bottom-right sm:w-chat-panel sm:h-chat-panel w-[100vw] h-[100vh]"
+            className="flex flex-col gap-3 py-3 bg-background-white text-text-on-white-primary rounded-md shadow-md backdrop-blur-md transform origin-bottom-right sm:w-chat-panel sm:h-chat-panel w-[100vw] h-[100vh]"
             initial={{
-              scale: 0.3,
+              scale: 0,
               opacity: 0
             }}
             animate={{
@@ -161,7 +163,7 @@ export default function FloatingNode() {
               opacity: 1
             }}
             exit={{
-              scale: 0.3,
+              scale: 0,
               opacity: 0
             }}
             transition={{
@@ -177,8 +179,10 @@ export default function FloatingNode() {
           >
             {/* Header */}
             <div className="flex flex-row items-center justify-between 3 px-4">
-              <div className="flex items-center gap-1">
-                <div class={cn("gradient-border rounded-full w-icon-md h-icon-md transition-opacity duration-300", messages.length > 0 || isLoading ? "opacity-0 hidden" : "opacity-100 block")} />
+              <div className="flex items-center space-x-3">
+                {suggestionsPannelOpen && <button onClick={() => setSuggestionsPanelOpen(false)} className="w-icon-md h-icon-md border border-border-subtle rounded-[4px] flex items-center hover:bg-assistant-background-light">
+                  <ChevronLeft className="" />
+                </button>}
                 <Typography className="">RTS Node</Typography>
               </div>
               <Button
@@ -189,80 +193,113 @@ export default function FloatingNode() {
                 Close
               </Button>
             </div>
+            {suggestionsPannelOpen ? (<div className="flex flex-col gap-3 px-4 h-full overflow-y-auto ">
 
-            {/* Messages */}
-            <div className="fn-chat-messages px-4">
-              {messages.map((msg, i) => (
+              <Typography variant="title-large" className="">
+                <span className="bg-gradient-to-br from-[#1c56ff] to-[#a463ff] bg-clip-text text-transparent">Examples RTS <br />can help you with</span>
+              </Typography>
+
+              {suggestions.map((s, i) => (
                 <motion.div
-                  key={i}
+                  key={i + 'suggestion'}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: i * 0.05 }}
-                  className={` ${msg.role === "user"
-                      ? "bg-background-inverse max-w-[85%] p-3 rounded-xl rounded-br-none text-text-on-white-primary text-body-sm flex self-end"
-                      : msg.role === "error"
-                        ? "fn-chat-bubble-error"
-                        : "fn-chat-bubble-assistant"
-                    }`}
+                  className={`p-3 rounded-xl flex flex-col gap-2 border border-border-subtle`}
+                  onClick={() => {
+                    setMessages([]);
+                    sendMessage(s.message);
+                    setSuggestionsPanelOpen(false);
+                  }}
                 >
-                  {msg.content}
-                </motion.div>
-              ))}
-              {isLoading && (
-                <motion.div
-                  className="flex items-center gap-1"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.2 }}
-                >
-                   <div class="gradient-border rounded-full w-icon-md h-icon-md" />
-                  <Typography variant='body-sm' className="text-text-on-white-primary ">
-                    Thinking ...
+                  <Typography variant="subtitle-lg" className="text-text-on-white-primary">
+                    {s.title}
+                  </Typography>
+                  <Typography variant="body-sm" className="text-text-on-white-secondary whitespace-pre-wrap">
+                    {s.description}
                   </Typography>
                 </motion.div>
-              )}
-              <div ref={messagesEndRef} />
-            </div>
+              ))
+              }
 
-            {/* Input */}
-            <motion.div
-              className="flex flex-col items-center gap-1 px-4"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
-            >
-              <input
-                ref={inputRef}
-                className={cn(
-              "flex w-full rounded-md border-[2px] border-border-subtle-selected px-3 py-2 text-sm focus:outline-none",
-              "file:border-0 file:bg-transparent file:text-sm file:font-medium",
-              "placeholder:text-text-on-white-primary",
-              "disabled:cursor-not-allowed disabled:opacity-50",
-              false && "border-sentiment-negative focus-visible:ring-sentiment-negative",
-              
-            )}
-                type="text"
-                placeholder="Write here"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-              />
-              {/* <motion.button
-                className="fn-chat-send"
-                type="button"
-                onClick={sendMessage}
-                disabled={!input.trim() || isLoading}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              >
-                <SendHorizonal size={18} />
-              </motion.button> */}
-              <Typography variant='subtitle-md' className="text-text-helper ">
-               RTS can make mistakes. Check important info.
-              </Typography>
-            </motion.div>
+            </div>)
+              : <div className="flex flex-col gap-3 h-full min-h-0">
+                
+                {messages.length === 0 && (
+                  <div className="flex flex-col gap-2 px-4">
+                  <Typography variant="title-large" > <span className="bg-gradient-to-br from-[#1c56ff] to-[#a463ff] bg-clip-text text-transparent">Got a technical challenge? </span></Typography>
+                  <Typography variant="body-sm" children="Tell me about it, and I’ll show you how we can help you reach your goals." />
+                </div>)}
+
+                {/* Messages */}
+                <div className="fn-chat-messages pl-4 pr-0.5 mr-0.5">
+
+                  {messages.map((msg, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: i * 0.05 }}
+                      className={` ${msg.role === "user"
+                        ? "bg-background-inverse max-w-[85%] p-3 rounded-xl rounded-br-none text-text-on-white-primary text-body-sm flex self-end"
+                        : msg.role === "error"
+                          ? "fn-chat-bubble-error"
+                          : "flex flex-row gap-2"
+                        }`}
+                    >
+                      {msg.role === "assistant" && <div class="gradient-border rounded-full w-icon-md h-icon-md shrink-0" />}
+                      {msg.content}
+                    </motion.div>
+                  ))}
+                  {isLoading && (
+                    <motion.div
+                      className="flex items-center gap-1"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <div class="gradient-border rounded-full w-icon-md h-icon-md" />
+                      <Typography variant='body-sm' className="text-text-on-white-primary ">
+                        Thinking ...
+                      </Typography>
+                    </motion.div>
+                  )}
+                  <div ref={messagesEndRef} />
+                </div>
+                {messages.length === 0 && <Button variant="chip-node" className="mx-4 mt-2 self-end" onClick={() => {
+                  setSuggestionsPanelOpen(true)
+                }}>Here’s how I can help</Button>}
+                {/* Input */}
+                <motion.div
+                  className="flex flex-col items-center gap-1 px-4"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: 0.1 }}
+                >
+                  <input
+                    ref={inputRef}
+                    className={cn(
+                      "flex w-full rounded-md border-[2px] border-border-subtle-selected px-3 py-2 text-sm focus:outline-none",
+                      "hover:border-border-strong focus:border-border-strong",
+                      "placeholder:text-text-on-white-primary",
+                      "disabled:cursor-not-allowed disabled:opacity-50",
+                      input.split("").length > 3 && "border-border-inverse focus:border-border-inverse hover:border-border-inverse"
+
+                    )}
+                    type="text"
+                    placeholder="Write here"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                  />
+                  <Typography variant='subtitle-md' className="text-text-helper ">
+                    RTS can make mistakes. Check important info.
+                  </Typography>
+                </motion.div>
+              </div>
+            }
           </motion.div>
+
         )}
       </AnimatePresence>
     </motion.div>

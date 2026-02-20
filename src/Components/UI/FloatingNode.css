@@ -92,14 +92,18 @@
 
 /* — Messages — */
 .fn-chat-messages {
-  flex: 1;
-  overflow-y: auto;
+  flex: 1 1 0;           /* ← Permite que el contenedor se estire/contraiga */
+  min-height: 0;          /* ← IMPORTANTE: necesario para flexbox */
+  overflow-y: auto;       /* ← Activa el scroll */
   display: flex;
   flex-direction: column;
   gap: 16px;
+  
+  /* Estilos del scrollbar */
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+  scrollbar-color: #E4E5EE transparent;
 }
+
 
 .fn-chat-messages::-webkit-scrollbar {
   width: 4px;
@@ -110,7 +114,7 @@
 }
 
 .fn-chat-messages::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
+  background: #E4E5EE;
   border-radius: 4px;
 }
 
@@ -124,9 +128,6 @@
   word-wrap: break-word;
 }
 
-.fn-chat-bubble-assistant {
-  align-self: flex-start;
-}
 
 .fn-chat-bubble-user {
   align-self: flex-end;

@@ -1,6 +1,6 @@
 import { Typography, Button } from "../../index";
 import { useEffect, useRef, useState } from "react";
-import heroHubBackground from "../../../assets/Backgrounds/hero_a_y_c.png";
+import heroHubBackground from "../../../assets/Backgrounds/hero_a_y_c.webp";
 import { SlideInAnimation } from "../../../animations";
 export default function HeroAutomation() {
  const rootRef = useRef(null);

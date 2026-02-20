@@ -55,7 +55,7 @@ export default function HorizontalCarousel() {
                     variant="headline-medium"
                     className=" hidden md:block       "        >
                     WE NAVIGATE AND SERVE THE MOST <br />COMPLEX{" "}
-                    <span className="      bg-gradient-to-r from-[#1c56ff] to-[#a463ff]      bg-clip-text text-transparent    ">
+                    <span className="bg-gradient-to-r from-[#1c56ff] to-[#a463ff] bg-clip-text text-transparent ">
                       INDUSTRIAL GALAXIES
                     </span>
                   </Typography>
@@ -63,7 +63,7 @@ export default function HorizontalCarousel() {
                     variant="headline-small"
                     className=" md:hidden        "        >
                     WE NAVIGATE AND SERVE THE MOST <br />COMPLEX{" "}
-                    <span className="      bg-gradient-to-r from-[#1c56ff] to-[#a463ff]      bg-clip-text text-transparent    ">
+                    <span className="bg-gradient-to-r from-[#1c56ff] to-[#a463ff] bg-clip-text text-transparent ">
                       INDUSTRIAL GALAXIES
                     </span>
                   </Typography>

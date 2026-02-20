@@ -4,7 +4,7 @@ export const industriesContent = {
     oilgas: {
         hero: {
             title: "Oil & Gas",
-            img: () => import('../assets/Backgrounds/hero_oilgas.png'),
+            img: () => import('../assets/Backgrounds/hero_oilgas.webp'),
         },
         clientsSection: {
             title: "A dense and high-pressure orbit, where precision and safety define every move.",
@@ -75,7 +75,7 @@ export const industriesContent = {
     power: {
         hero: {
             title: "Power generation",
-            img: () => import('../assets/Backgrounds/hero_power.png'),
+            img: () => import('../assets/Backgrounds/hero_power.webp'),
         },
         clientsSection: {
             title: "Where uptime is currency and control is everything this universe demands robust, adaptive systems.",
@@ -109,7 +109,7 @@ export const industriesContent = {
     chemicals: {
         hero: {
             title: "Chemicals & Petrochemicals",
-            img: () => import('../assets/Backgrounds/hero_chemicals.png'),
+            img: () => import('../assets/Backgrounds/hero_chemicals.webp'),
         },
         clientsSection: {
             title: "A volatile but high-potential galaxy, where operational efficiency and data intelligence rule.",
@@ -139,7 +139,7 @@ export const industriesContent = {
     pulpPaper: {
         hero: {
             title: "Pulp & Paper",
-            img: () => import('../assets/Backgrounds/hero_pulp.png'),
+            img: () => import('../assets/Backgrounds/hero_pulp.webp'),
         },
         clientsSection: {
             title: "Heavily industrial terrain requiring resilient networks and smooth modernization paths.",
@@ -182,7 +182,7 @@ export const industriesContent = {
     mining: {
         hero: {
             title: "Metals & Mining",
-            img: () => import('../assets/Backgrounds/hero_mining.png'),
+            img: () => import('../assets/Backgrounds/hero_mining.webp'),
         },
         clientsSection: {
             title: "Harsh environments and remote locations—requiring diagnostics that go deep and networks that endure.",
@@ -227,7 +227,7 @@ export const industriesContent = {
         hero: {
             title: <span>Pharma<br className="md:hidden" />ceuticals
             </span>,
-            img: () => import('../assets/Backgrounds/hero_pharmaceuticals.png'),
+            img: () => import('../assets/Backgrounds/hero_pharmaceuticals.webp'),
         },
         clientsSection: {
             title: "An emerging universe with strict laws of motion—traceability, accuracy, and real-time compliance.",

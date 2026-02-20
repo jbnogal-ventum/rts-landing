@@ -1,6 +1,6 @@
 import { Typography, Button } from "../../index";
 import { useEffect, useRef, useState } from "react";
-import heroCultureBackground from "../../../assets/Backgrounds/culture_background.png";
+import heroCultureBackground from "../../../assets/Backgrounds/culture_background.webp";
 import { SlideInAnimation } from "../../../animations/index";
 
 export default function HeroIndustries() {

@@ -1,6 +1,6 @@
 import { Typography, Button } from "../../index";
 import { useEffect, useRef } from "react";
-import heroHubBackground from "../../../assets/Backgrounds/heroHubBackground.jpg";
+import heroHubBackground from "../../../assets/Backgrounds/heroHubBackground.webp";
 import { SlideInAnimation } from "../../../animations/index";
 export default function HeroHub() {
     return (<section

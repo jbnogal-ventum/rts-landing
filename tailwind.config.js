@@ -295,7 +295,7 @@ export default {
         'node-collapsed': '60px',             // Uso: h-node-collapsed
         'ds-parteners-img': '403px',          // Uso: h-ds-parteners-img
         'industry-card': '409px',             // Uso: h-industry-card
-        'chat-panel': '480px',               // Uso: h-chat-panel
+        'chat-panel': '563px',               // Uso: h-chat-panel
 
       },
       width: {
