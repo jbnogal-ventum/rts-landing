@@ -82,7 +82,7 @@ export default function HubPage() {
               </SlideInAnimation>
             </div>
             <div className="md:w-1/2 flex md:justify-end md:items-end">
-              <SlideInAnimation delay={0.5}>
+              <SlideInAnimation delay={0}>
                 <Typography variant={'body-md'} children={"It brings together a single ecosystem where knowledge, experimentation, and collaboration converge. Here, learning becomes practice, innovation turns into solutions, and communities spark industrial brilliance."} />
               </SlideInAnimation>
             </div>
@@ -147,7 +147,7 @@ export default function HubPage() {
                 </SlideInAnimation>
               </div>
               <div className="md:w-1/2 flex md:justify-end md:items-end">
-                <SlideInAnimation delay={0.5} >
+                <SlideInAnimation delay={0.3} >
                   <Typography variant={'body-md'} children={"Dedicated to enhancing technical skills and knowledge in the fields of industrial automation, IT-OT convergence, and advanced data analytics."} />
                 </SlideInAnimation>
               </div>
@@ -161,7 +161,7 @@ export default function HubPage() {
                   { title: 'Technical Growth Programs', icon: <Sprout className="w-5 h-5 text-primary-500" />, info: 'Workshops and tailored courses to support customers and partners in adopting best practices' },
                   { title: 'Technical Excellence Hub', icon: <DatabaseZap className="w-5 h-5 text-primary-500" />, info: 'Technical training programs in automation, controls, data integration, analytics, and visualization tools.' },
                 ].map((card, index) => (
-                  <SlideInAnimation key={`hub-card-academy-1-${index}`} delay={0.4} >
+                  <SlideInAnimation key={`hub-card-academy-1-${index}`} delay={(index + 1) * 0.2} >
                     <div
                       className="bg-white rounded-md border border-surface-primary p-5 flex flex-col justify-between h-hub-card"
                     >
@@ -183,7 +183,7 @@ export default function HubPage() {
                   { title: 'Engineering Skills Development', icon: <Brain className="w-5 h-5 text-primary-500" />, info: 'E-learning and on-demand content \n(modules, video tutorials, virtual labs) \nfor flexible, remote access.' },
                   { title: 'Professional Training \n& Certification', icon: <GraduationCap className="w-5 h-5 text-primary-500" />, info: 'Industry-recognized certifications \nfor engineers and technicians' },
                 ].map((card, index) => (
-                  <SlideInAnimation key={`hub-card-academy-2-${index}`} delay={0.7} >
+                  <SlideInAnimation key={`hub-card-academy-2-${index}`} delay={(index + 1) * 0.2} >
                     <div
 
                       className="bg-white rounded-md border border-surface-primary p-5 flex flex-col justify-between h-hub-card"
@@ -202,7 +202,7 @@ export default function HubPage() {
                 ))}
 
                 {/* Imagen como última card */}
-                <SlideInAnimation delay={0.7} >
+                <SlideInAnimation delay={3 * 0.2} >
                   <div
                     key={'image-hub-academy'}
                     className="bg-white rounded-md shadow-md h-hub-card"
@@ -260,16 +260,16 @@ export default function HubPage() {
             </SlideInAnimation>
           </div>
           <div className="md:w-1/2 flex flex-col gap-6">
-            <SlideInAnimation delay={0.5}>
+            <SlideInAnimation delay={0}>
               <Typography variant={'title-medium'} children={'More than a testing ground\n—it is a laboratory of ideas and execution.'} className="font-base" />
             </SlideInAnimation>
-            <SlideInAnimation delay={0.6}>
-              <Typography variant={'body-md'} children={"Here, we develop new technologies, provide industrial tech consulting, \nand design pilot projects that bring innovation into real practice. It is \nwhere concepts are tested, validated, and transformed into solutions \nthat empower industries"} />
+            <SlideInAnimation delay={0.2}>
+              <Typography variant={'body-md'} children={"Here, we develop new technologies, provide industrial tech consulting, \nand design pilot projects that bring innovation into real practice. It is \nwhere concepts are tested, validated, and transformed into solutions \nthat empower industries."} />
             </SlideInAnimation>
-            <SlideInAnimation delay={0.7}>
+            <SlideInAnimation delay={0.3}>
               <Typography variant={'title-medium'} children={'The LAB Infrastructure'} className="font-base" />
             </SlideInAnimation>
-            <SlideInAnimation delay={0.8}><Typography variant={'body-md'} children={`The most effective strategy for delivering a high-security on-site service \nis to thoroughly test deployments in-house, ensuring their robustness \nand reliability. Additionally, preparing resources to handle any potential uncertainties equips the team to respond proactively and maintain seamless operations under any circumstances.
+            <SlideInAnimation delay={0.4}><Typography variant={'body-md'} children={`The most effective strategy for delivering a high-security on-site service \nis to thoroughly test deployments in-house, ensuring their robustness \nand reliability. Additionally, preparing resources to handle any potential uncertainties equips the team to respond proactively and maintain seamless operations under any circumstances.
                \nWe developed the RTS LAB, a cyber-physical environment where our\nglobal resources can emulate and deploy projects.`} />
             </SlideInAnimation>
           </div>
@@ -287,7 +287,7 @@ export default function HubPage() {
         titleMobile={"WOULD YOU LIKE TO KNOW MORE ABOUT OUR EXPERIENCE?"}
 
         buttons={[
-          { children: "Book a meeting now", variant: "filled-dark" },
+          { children: "Book a meeting now", variant: "filled-dark", onClick: () => window.open("https://outlook.office.com/book/IntroducingRTSSparkIndustrialBrilliance@gruports.com/?ismsaljsauthenabled=true", "_blank") },
         ]}
         backgroundPosition="center scale-150 md:scale-100 "
       />

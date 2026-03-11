@@ -17,7 +17,7 @@ export default function CardHub({
 
    
       <div className="hub-center">
-        <img src={image} alt="" />
+        <img src={image} alt={title} />
       </div>
 
       {/* RIGHT — text block */}

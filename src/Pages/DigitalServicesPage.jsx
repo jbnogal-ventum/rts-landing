@@ -43,7 +43,7 @@ const tableRows = [
   [
     { children: "IT/OT\n Convergence", variant: "title-small", Icon: (<OvalPods className="w-icon-xl h-icon-xl text-core-violet md:text-text-primary  fill-current" />) },
     { children: "Bridging operational\nand digital worlds with \nculture approach", variant: "title-body" },
-    { children: "Guiding organizations in developing a culture that bridges the gap between Information Technology (IT)  and Operational Technology (OT). This POD emphasizes fostering collaboration, shared goals, and mutual understanding between teams, unlocking \nthe full potential of digital transformation.", variant: "body-sm" },
+    { children: "Guiding organizations in developing a culture that bridges the gap between Information Technology (IT)  and Operational Technology (OT). This POD emphasizes fostering collaboration, shared goals, and mutual understanding between teams, unlocking the full potential of digital transformation.", variant: "body-sm" },
     {
       children: [
         " Cultural alignment",
@@ -144,11 +144,12 @@ export default function DigitalServicesPage() {
             Through our POD services framework, we merge OT experience, process knowledge, and computer science to engineer the digital core of industrial operations.
           </Typography>
           </SlideInAnimation>
-           <SlideInAnimation delay={0.3}>
+           <SlideInAnimation delay={0.2}>
           <Button
             variant="filled-dark"
             children="Book a meeting now"
             className="w-fit"
+            onClick={() => window.open("https://outlook.office.com/book/IntroducingRTSSparkIndustrialBrilliance@gruports.com/?ismsaljsauthenabled=true", "_blank")}
           />
           </SlideInAnimation>
         </div>
@@ -232,7 +233,7 @@ export default function DigitalServicesPage() {
             children: "Download the full document",
             variant: "outlined-dark",
           },
-          { children: "Book a meeting now", variant: "filled-dark", className: "w-full" },
+          { children: "Book a meeting now", variant: "filled-dark", className: "w-full", onClick:() => window.open("https://outlook.office.com/book/IntroducingRTSSparkIndustrialBrilliance@gruports.com/?ismsaljsauthenabled=true", "_blank") },
         ]}
       />
 

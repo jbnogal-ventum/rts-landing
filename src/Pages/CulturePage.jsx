@@ -21,7 +21,7 @@ export default function CulturePage() {
   const whiteBlockRef = useRef(null);
   const { setTheme } = useTheme();
   const [isPlaying, setIsPlaying] = useState(false);
-  const videoId = "LXb3EKWsInQ"; // ID del video de YouTube
+  const videoId = "jscUo4mnq2U"; // ID del video de YouTube
 
   useEffect(() => {
     if (!whiteBlockRef.current) {
@@ -74,7 +74,7 @@ export default function CulturePage() {
 
       <section id='industrial-tech' className="">
         <div className="md:px-9 lg:mx-9 py-9 px-3 flex flex-col  gap-6.5" >
-          <SlideInAnimation y={50} delay={0.5} repeat={true}><Typography
+          <SlideInAnimation y={50} delay={0.1} repeat={true}><Typography
             variant="headline-medium"
             className=""
 
@@ -82,25 +82,25 @@ export default function CulturePage() {
           </SlideInAnimation>
           <div className="flex justify-center w-full ">
             <div className="flex flex-col gap-4 text-text-secondary w-full md:w-industry-card">
-              <SlideInAnimation delay={0.6} ><Typography
+              <SlideInAnimation delay={0.1} ><Typography
                 variant="title-body">
                 At RTS Group, we view technology as only the beginning<br /> — our true value lies in integrating it into holistic solutions <br />that transform the way our clients operate.
               </Typography>
               </SlideInAnimation>
-              <SlideInAnimation delay={0.7} >
+              <SlideInAnimation delay={0.1} >
                 <Typography
                   variant="body-md">
                   Whether it’s through our PODs or customized projects, we combine the best tools in the industry to deliver unmatched value, efficiency, and performance. This approach enables our clients to thrive in a competitive, data- driven world.
                 </Typography>
               </SlideInAnimation>
-              <SlideInAnimation delay={0.8} >
+              <SlideInAnimation delay={0.1} >
 
                 <Typography
                   variant="title-body">
                   What do we expect about our future?
                 </Typography>
               </SlideInAnimation>
-              <SlideInAnimation delay={0.9} >
+              <SlideInAnimation delay={0.1} >
 
                 <Typography
                   variant="body-md">
@@ -115,7 +115,7 @@ export default function CulturePage() {
 
           {!isPlaying ? (<div className="relative overflow-hidden rounded-xl flex justify-center group">
             {/* Imagen principal */}
-            <FadeInAnimation delay={1} >
+            <FadeInAnimation delay={0.1} >
               <img
                 src={pannel}
                 alt="Technology"
@@ -132,7 +132,7 @@ export default function CulturePage() {
               }}
             />
             {/* Botón de play centrado */}
-            <FadeInAnimation delay={1} >
+            <FadeInAnimation delay={0.1} >
               <button
                 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
                w-16 h-16 md:w-20 md:h-20 bg-background-inverse bg-opacity-40 rounded-full 
@@ -140,7 +140,7 @@ export default function CulturePage() {
                hover:scale-110 transition-all duration-300 
                hover:shadow-2xl "
                 aria-label="Play video"
-                onClick={() => setIsPlaying(false)}
+                onClick={() => setIsPlaying(true)}
               >
         
                   <RiPlayFill className="w-icon-sm h-icon-sm md:w-10 md:h-10 text-white " />
@@ -151,7 +151,7 @@ export default function CulturePage() {
 
           </div>) : (
               /* Video de YouTube */
-                 <FadeInAnimation delay={0.4} >
+                 <FadeInAnimation delay={0.1} >
               <div className="relative overflow-hidden rounded-xl flex justify-center ">
                 <iframe
                   width="200%"
@@ -174,7 +174,7 @@ export default function CulturePage() {
         <div className="absolute inset-0 hidden md:block">
           <img
             src={approachBackgroundImage}
-            alt="Background"
+            alt="Background Image"
             style={{
               position: 'absolute',
               bottom: '-35%',
@@ -195,7 +195,7 @@ export default function CulturePage() {
           <div className="flex flex-col md:flex-row md:justify-between gap-4 " >
             <div className="flex flex-row md:w-2/3">
 
-              <SlideInAnimation y={50} className="" delay={0.3}> <Typography
+              <SlideInAnimation y={50} className="" delay={0.1}> <Typography
                 variant="headline-large"
                 className=""
 
@@ -203,7 +203,7 @@ export default function CulturePage() {
               </SlideInAnimation>
             </div>
             <div className="md:w-1/2 flex md:justify-end md:items-end text-text-secondary">
-              <SlideInAnimation y={50} className="" delay={0.5}>
+              <SlideInAnimation y={50} className="" delay={0.1}>
                 <Typography variant={'body-md'} children={"We approach digital transformation in Industry 4.0 with a proven, strategic framework designed to deliver impactful and sustainable results. "} />
               </SlideInAnimation>
             </div>
@@ -220,7 +220,7 @@ export default function CulturePage() {
                 { title: 'Empowering Collaboration', icon: <Handshake className="w-5 h-5 text-primary-500" />, info: "Foster active client engagement, enabling them to co-create and contribute to the project's success." },
                 { title: 'Achieving Early Wins', icon: <PackageCheck className="w-5 h-5 text-primary-500" />, info: 'Focus on quick, tangible outcomes to build confidence, momentum, and proof of success.' },
               ].map((card, index) => (
-                <SlideInAnimation key={`culture-card-1-${index}`} delay={(index + 1) * 0.3} >
+                <SlideInAnimation key={`culture-card-1-${index}`} delay={(index + 1) * 0.1} >
                   <div
                     key={`culture-card-1-${index}`}
                     className="bg-white rounded-md shadow-md p-5 flex flex-col gap-4 md:justify-between md:h-hub-card"
@@ -237,7 +237,7 @@ export default function CulturePage() {
                   </div>
                 </SlideInAnimation>
               ))}
-              <SlideInAnimation delay={(3) * 0.3} >
+              <SlideInAnimation delay={(3) * 0.1} >
                 <div className="bg-white rounded-md shadow-md p-5 flex flex-col gap-4 md:justify-between md:h-hub-card"
                 >
                   <div className="flex flex-col gap-3">
@@ -256,7 +256,7 @@ export default function CulturePage() {
 
 
               {/* Texto como última card */}
-              <SlideInAnimation delay={(3) * 0.3} >
+              <SlideInAnimation delay={(3) * 0.1} >
                 <div
                   className=" rounded-md h-auto md:h-hub-card flex flex-col justify-end md:p-5 "
                 >
@@ -290,7 +290,7 @@ export default function CulturePage() {
           {/* Contenido (titulos y cards) */}
           <div className="md:px-7 py-9 px-3 relative flex flex-col gap-4  md:gap-7" style={{ zIndex: 2 }}>
 
-            <SlideInAnimation y={50} delay={0.3} repeat={true}><Typography
+            <SlideInAnimation y={50} delay={0.1} repeat={true}><Typography
               variant="headline-small"
               className="md:text-headline-large md:text-center"
               children={"SOLUTIONS THAT TRANSFORM \nTHE WAY OUR CLIENTS OPAREATE"}
@@ -305,7 +305,7 @@ export default function CulturePage() {
                 { title: "SCALABILITY AND FUTURE-READINESS", img: card3, info: "Our solutions are built to adapt and \nscaleas client operations grow, ensuring long-term value." },
                 { title: "EXPERT IMPLEMENTATION", img: card4, info: "Our team’s deep expertise with these \nplatforms guarantees smooth integration, minimal disruption, and maximum ROI." },
               ].map((card, index) => (
-                <SlideInAnimation key={`culture-card-1-${index}`} delay={(index + 1) * 0.3} >
+                <SlideInAnimation key={`culture-card-1-${index}`} delay={(index + 1) * 0.1} >
                   <div
 
                     className="bg-white rounded-xl  grid grid-cols-1 md:grid-cols-3 gap-4 md:items-center w-full p-5 border border-border-subtle"
@@ -318,7 +318,7 @@ export default function CulturePage() {
                       children={card.title}
                     />
 
-                    <img className="w-full md:w-[252px] h-[252px] object-cover rounded-xs" src={card.img} alt="" />
+                    <img className="w-full md:w-[252px] h-[252px] object-cover rounded-xs" src={card.img} alt={card.title} />
 
                     <Typography variant="body-md" children={card.info} />
                   </div>
@@ -338,7 +338,7 @@ export default function CulturePage() {
         titleMobile={"WOULD YOU LIKE TO KNOW MORE ABOUT OUR EXPERIENCE?"}
         backgroundPosition="center"
         buttons={[
-          { children: "Book a meeting now", variant: "filled-dark" },
+          { children: "Book a meeting now", variant: "filled-dark", onClick:() => window.open("https://outlook.office.com/book/IntroducingRTSSparkIndustrialBrilliance@gruports.com/?ismsaljsauthenabled=true", "_blank")},
         ]}
       />
 

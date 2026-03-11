@@ -1,10 +1,9 @@
 import { useEffect, useRef } from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
-
+import { useTransition } from "../../Transition/Transition";
 import { Typography, Button } from "../../index";
-import { useNavigate } from "react-router-dom";
 export default function HeroHomePage({ onPhase }) {
-  const navigate = useNavigate();
+  const { go } = useTransition();
   const heroHomeSectionRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: heroHomeSectionRef
@@ -27,12 +26,14 @@ export default function HeroHomePage({ onPhase }) {
   const opacityPannel5 = useTransform(scrollYProgress, opacityRange, opacityRangePannel5);
 
   // Mejora las animaciones Y para que sean reversibles
-  const yOffsetPannel1 = useTransform(scrollYProgress, [0, 0.1, 0.2,1], ["0px", "-50px", "0px", "0px"]);
-  const yOffsetPannel2 = useTransform(scrollYProgress, [0, 0.1, 0.2, 0.4, 1], ["0px", "20px", "0px", "-50px", "0px"]);
+  const yOffsetPannel1 = useTransform(scrollYProgress, [0, 0.1, 0.2, 1], ["0px", "-50px", "0px", "0px"]);
+  const yOffsetPannel2 = useTransform(scrollYProgress, [0, 0.1, 0.2, 0.4, 1], ["0px", "20px", "0px", "0px", "0px"]);
   const yOffsetPannel3 = useTransform(scrollYProgress, [0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1], ["0px", "0px", "0px", "30px", '0px', "0px", "0px", "0px", "0px", "0px"]);
-
+  const zIndexPannel3 = useTransform(scrollYProgress, [0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1], [0, 0, 0, 0, 2, 0, 0, 0, 0, 0]);
+  const zIndexPannel4 = useTransform(scrollYProgress, [0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1], [0, 0, 0, 0, 0, 0, 2, 0, 0, 0]);
+  const zIndexPannel5 = useTransform(scrollYProgress, [0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1], [0, 0, 0, 0, 0, 0, 0, 0, 2, 2]);
   return (
-    <section id="hero-home-section" className="relative w-full h-[1000vh] " ref={heroHomeSectionRef}>
+    <section id="hero-home-section" className="relative w-full h-[500vh] " ref={heroHomeSectionRef}>
       <div className="sticky top-0 h-screen bg-gradient-to-b from-transparent via-transparent to-background-primary ">
 
         <div className="flex items-center justify-center overflow-hidden ">
@@ -53,7 +54,7 @@ export default function HeroHomePage({ onPhase }) {
                 <div className="flex flex-col gap-9 md:gap-4 w-full h-screen py-9 px-3 md:px-7 mt-9">
 
                   <Typography variant="display-sm" className="md:text-display-lg md:pr-9 ">
-                    SPARK INDUSTRIAL<br/>BRILLANCE
+                    SPARK INDUSTRIAL<br />BRILLANCE
                   </Typography>
 
                   <div className="w-full justify-items-end text-text-secondary pb-9">
@@ -95,8 +96,9 @@ export default function HeroHomePage({ onPhase }) {
                 className=" w-full absolute overflow-hidden"
                 style={{
                   opacity: opacityPannel3,
-                  y: yOffsetPannel3
-                 
+                  y: yOffsetPannel3,
+                  zIndex: zIndexPannel3, // Asegura que el panel activo esté por encima de los demás
+
                 }}
               >
                 <div className="flex flex-col  gap-6 w-full md:w-3/5 h-screen py-9 pl-3 pr-3 md:pl-7 md:pr-0 mt-9">
@@ -132,7 +134,7 @@ export default function HeroHomePage({ onPhase }) {
                     </div>
                   </div>
 
-                  <Button variant="filled-light" className="" children="Our approach" onClick={() => navigate("/automation-controls")} />
+                  <Button variant="filled-light" className="" children="Our approach" onClick={() => go("/automation-controls")} />
                 </div>
               </motion.div>
 
@@ -142,6 +144,7 @@ export default function HeroHomePage({ onPhase }) {
                 className=" w-full absolute overflow-hidden"
                 style={{
                   opacity: opacityPannel4,
+                  zIndex: zIndexPannel4, // Asegura que el panel activo esté por encima de los demás
                 }}
               >
                 <div className="flex flex-col  gap-6 w-full md:w-3/5 h-screen py-9 pl-3 pr-3 md:pl-7 md:pr-0 mt-9">
@@ -168,11 +171,11 @@ export default function HeroHomePage({ onPhase }) {
 
                   <div className="w-full  text-text-secondary ">
                     <Typography variant="body-md" className="md:text-title-body font-base ">
-                      In the RTS ecosystem, Digital Skills turns industrial data into actionable intelligence. Through our POD Services framework,  we merge OT experience, process knowledge, and computer  science to engineer <br className='' />the digital core of industrial operations.
+                      In the RTS ecosystem, Digital Skills turns<br className="lg:hidden" /> industrial data into actionable<br className="hidden lg:block" /> intelligence.<br className="lg:hidden" /> Through our POD Services framework,  we merge<br className="lg:hidden" /> OT<br className="hidden lg:block" /> experience, process knowledge, and<br className="lg:hidden" /> computer  science to engineer <br className='hidden lg:block' />the digital core of<br className="lg:hidden" /> industrial operations.
                     </Typography>
                   </div>
 
-                  <Button variant="filled-light" className="" children="Our approach" onClick={() => navigate("/digital")} />
+                  <Button variant="filled-light" className="" children="Our approach" onClick={() => go("/digital")} />
                 </div>
               </motion.div>
 
@@ -183,6 +186,7 @@ export default function HeroHomePage({ onPhase }) {
                 className=" w-full absolute overflow-hidden bg-gradient-to-b from-transparent via-transparent to-background-primary"
                 style={{
                   opacity: opacityPannel5,
+                  zIndex: zIndexPannel5, // Asegura que el panel activo esté por encima de los demás
                 }}
               >
                 <div className="flex flex-col  gap-6 w-full md:w-3/5 h-screen py-9 pl-3 pr-3 md:pl-7 md:pr-0 mt-9">
@@ -209,11 +213,11 @@ export default function HeroHomePage({ onPhase }) {
 
                   <div className="w-full  text-text-secondary ">
                     <Typography variant="body-md" className="md:text-title-body font-base ">
-                      Our mission is to provide innovative, efficient, and reliable energy and infrastructure solutions that enhance operational performance, ensure sustainability, and drive industrial progress.
+                      Our mission is to provide innovative, efficient,<br className="lg:hidden" /> and reliable energy and<br className="hidden lg:block" /> infrastructure solutions<br className="lg:hidden" /> that enhance operational performance, ensure<br className="" /> sustainability, and drive industrial progress.
                     </Typography>
                   </div>
 
-                  <Button variant="filled-light" className="" children="Our approach" onClick={() => navigate("/energy")} />
+                  <Button variant="filled-light" className="" children="Our approach" onClick={() => go("/energy")} />
                 </div>
               </motion.div>
             </div>

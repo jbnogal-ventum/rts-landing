@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { useMediaQuery } from "../../hooks/useMediaQuery.js";
 import { Typography, Button } from "../index";
-
+import { useTransition } from "../Transition/Transition.jsx";
 
 import OvalPods from '../../assets/pages_items/oval_pods_mono.svg?react';
 import CirclePods from '../../assets/pages_items/circle_pods_mono.svg?react';
@@ -14,7 +14,7 @@ import imgAcademy from "../../assets/hub/academy.png";
 import imgBTL from "../../assets/hub/below.png";
 export default function Hub() {
   const hubSectionRef = useRef(null);
-
+  const { go } = useTransition();
   // Detectar dispositivos
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
@@ -25,7 +25,7 @@ export default function Hub() {
   });
 
   // Ajustar la altura del contenedor según dispositivo
-  const containerHeight = isDesktop ? "400vh" : isTablet ? "500vh" : "600vh";
+  const containerHeight = isDesktop ? "300vh" : isTablet ? "450vh" : "450vh";
 
   // Valores de progreso para el scroll (0 a 1)
   // Dividimos el scroll en 3 secciones para las 3 cards
@@ -60,8 +60,10 @@ export default function Hub() {
                 variant="headline-small"
                 className="md:text-headline-medium "
 
-              ><span className="text-core-violet">RTS HUB</span> S OUR LABORATORY  <br />OF IDEAS AND EXECUTION</Typography>
-              <Button className="h-fit">Learn more</Button>
+              ><span className="text-core-violet">RTS HUB</span> IS OUR LABORATORY  <br />OF IDEAS AND EXECUTION</Typography>
+              <Button className="h-fit" onClick={() => go('/hub')}>
+                Learn more
+              </Button>
             </div>
             {/* Contenedor relativo para las cards superpuestas */}
             <div className="relative w-full h-full mb-9  ">
@@ -86,7 +88,7 @@ export default function Hub() {
                     ><span className="bg-gradient-to-r from-[#7513FF] via-[#4348F3] to-[#0093CE] bg-clip-text text-transparent">BELOW THE LINE</span>  </Typography>
 
                   </div>
-                  <img src={imgAcademy} className="hidden md:block w-[252px] h-[252px]" />
+                  <img src={imgAcademy} alt="Academy image" className="hidden md:block w-[252px] h-[252px]" />
                   <div className="flex flex-col gap-2 text-secondary items-center align-middle justify-center">
                     <Typography variant="title-body">
                       Below-the-line powerhouse—a creative and experiential unit where ideas meet industry.
@@ -118,7 +120,7 @@ export default function Hub() {
                     ><span className="bg-gradient-to-r from-[#7513FF] via-[#4348F3] to-[#0093CE] bg-clip-text text-transparent">ACADEMY</span>  </Typography>
 
                   </div>
-                  <img src={imgBTL} className="hidden md:block w-[252px] h-[252px]" />
+                  <img src={imgBTL} alt="Below-the-line image" className="hidden md:block w-[252px] h-[252px]" />
                   <div className="flex flex-col gap-2 text-secondary items-center align-middle justify-center">
                     <Typography variant="title-body">
                       Dedicated to advancing technical skills and knowledge in industrial automation, OT/IT convergence, and advanced data analytics.
@@ -152,7 +154,7 @@ rapidly evolving industry.
                     ><span className="bg-gradient-to-r from-[#7513FF] via-[#4348F3] to-[#0093CE] bg-clip-text text-transparent">INNOVATION LAB</span>  </Typography>
 
                   </div>
-                  <img src={imgInnovation} className="hidden md:block w-[252px] h-[252px]" />
+                  <img src={imgInnovation} alt="Innovation image" className="hidden md:block w-[252px] h-[252px]" />
                   <div className="flex flex-col gap-2 text-secondary items-center align-middle justify-center">
                     <Typography variant="title-body">
                      Is more than a testing ground—it is a laboratory of ideas and execution. 

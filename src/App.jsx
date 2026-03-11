@@ -29,7 +29,6 @@ import MoleculePage from "./Pages/MoleculePage";
 export default function App() {
  const location = useLocation();
   const transitionRef = useRef(null);
-  const [phase, setPhase] = useState(0);
 
   const lenisRef = useRef(null);
   const rafIdRef = useRef(0);
@@ -37,10 +36,10 @@ export default function App() {
   useEffect(() => {
     // Inicializar Lenis inmediatamente (sin esperar loader)
     const lenis = new Lenis({
-      duration: 1.2,
-      smoothWheel: true,
-      wheelMultiplier: 0.7,
-      easing: (t) => 1 - Math.pow(1 - t, 3),
+     duration: 0.7,        // ANTES: 1.2 → Reducilo a 0.8 o menos
+  smoothWheel: true,
+  wheelMultiplier: 1.2,
+      easing: (t) => 1 - Math.pow(1 - t, 1),
     });
 
     lenisRef.current = lenis;
@@ -68,7 +67,7 @@ export default function App() {
       <Molecule />
       <Transition ref={transitionRef} lenisRef={lenisRef}>
         <Navbar />
-        <FloatingNode phase={phase} />
+        <FloatingNode lenisRef={lenisRef} />
 
         <div className="main-container" style={{ background: "transparent" }}>
           <div
@@ -78,19 +77,19 @@ export default function App() {
             <Routes>
               <Route
                 path="/"
-                element={<HomePage onPhase={setPhase} />}
+                element={<HomePage />}
               />
               <Route path="/molecule" element={<MoleculePage />} />
               <Route
                 path="/hub"
-                element={<HubPage onPhase={setPhase} />}
+                element={<HubPage  />}
               />
               <Route
                 path="/automation-controls"
                 element={<AutomationControlsPage key="automation" />}
               />
               <Route
-                path="/digital"
+                path="/digital" 
                 element={<DigitalServicesPage key="digital" />}
               />
               <Route
@@ -115,7 +114,7 @@ export default function App() {
                   element={<PulpPaperIndustryPage key="pulp-paper" />}
                 />
                 <Route
-                  path="pharma"
+                  path="pharmaceuticals"
                   element={<PharmaceuticalsIndustryPage key="pharma" />}
                 />
                 <Route
@@ -129,7 +128,7 @@ export default function App() {
               </Route>
               <Route
                 path="*"
-                element={<HomePage onPhase={setPhase} key="default" />}
+                element={<HomePage key="default" />}
               />
             </Routes>
             <Footer />

@@ -26,7 +26,7 @@ export default function Accordion({
         const isOpen = i === openIndex;
 
         return (
-          < SlideInAnimation delay={0.3 * i}  key={it.id ?? i + it.title}>
+          < SlideInAnimation delay={0.2 * i}  key={it.id ?? i + it.title}>
           <article
            
             className={`

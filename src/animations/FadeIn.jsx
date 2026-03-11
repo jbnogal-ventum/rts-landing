@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
 
-const FadeInScaleAnimation = ({ children, className, delay, duration=0.6, ...props}) => {
+const FadeInScaleAnimation = ({ children, className, delay, duration=0.5, ...props}) => {
   const ref = useRef(null);
   const isInView = useInView(ref, {});
   const controls = useAnimation();

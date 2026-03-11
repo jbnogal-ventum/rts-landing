@@ -41,25 +41,25 @@ export default function SwapContent() {
   // Animaciones para los textos
   const contentAOpacity = useTransform(
     scrollYProgress,
-    [0, 0.4, 0.45,  0.6, 0.8],
-    [1, 1, 0, 0, 0]
+    [0, 0.25, 0.3, ],
+    [1, 1, 0,]
   );
 
   const contentAY = useTransform(
     scrollYProgress,
-    [0, 0.3],
+    [0, 0.4],
     ["0%", "0%"]
   );
 
   const contentBOpacity = useTransform(
     scrollYProgress,
-    [0, 0.4, 0.45, 0.5, 0.8],
+    [0, 0.25, 0.3, 0.6, 0.8],
     [0, 0, 0, 1, 1]
   );
 
   const contentBY = useTransform(
     scrollYProgress,
-    [0.4, 0.6],
+    [0.5, 0.7],
     ["10%", "0%"]
   );
 
@@ -141,7 +141,7 @@ export default function SwapContent() {
               className="absolute inset-0  flex items-center md:mt-4"
               style={{
                 opacity: contentAOpacity,
-                y: contentAY,
+                //y: contentAY,
               }}
             >
               <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6.5 px-3 md:px-7 ">
@@ -168,7 +168,7 @@ export default function SwapContent() {
               className="absolute inset-0  flex items-start  mt-4 "
               style={{
                 opacity: contentBOpacity,
-                y: contentBY,
+                //y: contentBY,
               }}
             >
               <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-5 px-3 md:px-7 ">

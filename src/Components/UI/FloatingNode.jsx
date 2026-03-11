@@ -2,10 +2,10 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { Typography, Button } from "../index";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, SendHorizonal, X } from "lucide-react";
+import { ArrowUp, ChevronLeft, SendHorizonal, X } from "lucide-react";
 import "./FloatingNode.css";
 import { useTheme } from "../../contexts/ThemeContext";
-import { cn } from "../../lib/utils";
+import { cn, parseAssistantMessage } from "../../lib/utils";
 import { useSelector } from "react-redux";
 
 const WEBHOOK_URL =
@@ -17,7 +17,49 @@ const suggestions = [
   { title: "👾 Security", description: "How confident are you that your OT environments are protected against evolving cybersecurity threats?", message: "We are not confident that our OT environments are protected against evolving cybersecurity threats. " },
 ]
 
-export default function FloatingNode() {
+export default function FloatingNode({ lenisRef }) {
+  const touchStartY = useRef(0);
+
+const handleTouchStart = (e) => {
+  touchStartY.current = e.touches[0].clientY;
+};
+
+const handleTouchMove = (e) => {
+  const el = chatMessagesRef.current;
+  if (!el) return;
+
+  const deltaY = touchStartY.current - e.touches[0].clientY;
+  touchStartY.current = e.touches[0].clientY;
+
+  const atTop = el.scrollTop === 0;
+  const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight;
+
+  // Solo prevenir el default si el contenedor puede scrollear en esa dirección
+  if (!(atTop && deltaY < 0) && !(atBottom && deltaY > 0)) {
+    e.stopPropagation();
+    el.scrollTop += deltaY;
+  }
+};
+// 1. Agregar ref al contenedor de mensajes
+const chatMessagesRef = useRef(null);
+
+// 2. Reemplazar los handlers por esta versión mejorada
+const handleMouseEnter = () => {
+  lenisRef?.current?.stop();
+};
+
+const handleMouseLeave = () => {
+  lenisRef?.current?.start();
+};
+
+// 3. Handler de wheel que delega el scroll al contenedor de mensajes
+const handleWheel = (e) => {
+  const el = chatMessagesRef.current;
+  if (!el) return;
+  
+  e.stopPropagation();
+  el.scrollTop += e.deltaY;
+};
   const nodeRef = useRef(null);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
@@ -105,7 +147,7 @@ export default function FloatingNode() {
   return (
     <motion.div
       ref={nodeRef}
-      className={cn("fixed z-[995]  bg-transparent cursor-pointer", isExpanded ? 'bottom-0 right-0 sm:bottom-5 sm:right-5' : 'bottom-5 right-5')}
+      className={cn("fixed z-[995]  bg-transparent ", isExpanded ? 'bottom-0 right-0 sm:bottom-5 sm:right-5' : 'bottom-5 right-5')}
       initial={{
         opacity: 0,
         y: 40,
@@ -153,6 +195,11 @@ export default function FloatingNode() {
         ) : (
           <motion.div
             key="panel"
+            onMouseEnter={handleMouseEnter}
+  onMouseLeave={handleMouseLeave}
+  onWheel={handleWheel} 
+   onTouchStart={handleTouchStart}
+  onTouchMove={handleTouchMove}
             className="flex flex-col gap-3 py-3 bg-background-white text-text-on-white-primary rounded-md shadow-md backdrop-blur-md transform origin-bottom-right sm:w-chat-panel sm:h-chat-panel w-[100vw] h-[100vh]"
             initial={{
               scale: 0,
@@ -205,7 +252,7 @@ export default function FloatingNode() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: i * 0.05 }}
-                  className={`p-3 rounded-xl flex flex-col gap-2 border border-border-subtle`}
+                  className={`p-3 rounded-xl flex flex-col gap-2 border border-border-subtle hover:bg-surface-primary hover:border-surface-primary cursor-pointer transition-colors duration-300`}
                   onClick={() => {
                     setMessages([]);
                     sendMessage(s.message);
@@ -224,15 +271,15 @@ export default function FloatingNode() {
 
             </div>)
               : <div className="flex flex-col gap-3 h-full min-h-0">
-                
+
                 {messages.length === 0 && (
                   <div className="flex flex-col gap-2 px-4">
-                  <Typography variant="title-large" > <span className="bg-gradient-to-br from-[#1c56ff] to-[#a463ff] bg-clip-text text-transparent">Got a technical challenge? </span></Typography>
-                  <Typography variant="body-sm" children="Tell me about it, and I’ll show you how we can help you reach your goals." />
-                </div>)}
+                    <Typography variant="title-large" > <span className="bg-gradient-to-br from-[#0093CE] via-[#6367FF] to-[#8027FD] bg-clip-text text-transparent">Got a technical challenge? </span></Typography>
+                    <Typography variant="body-sm" children="Tell me about it, and I’ll show you how we can help you reach your goals." />
+                  </div>)}
 
                 {/* Messages */}
-                <div className="fn-chat-messages pl-4 pr-0.5 mr-0.5">
+                <div ref={chatMessagesRef}  className="fn-chat-messages pl-4 pr-0.5 mr-0.5">
 
                   {messages.map((msg, i) => (
                     <motion.div
@@ -248,7 +295,10 @@ export default function FloatingNode() {
                         }`}
                     >
                       {msg.role === "assistant" && <div class="gradient-border rounded-full w-icon-md h-icon-md shrink-0" />}
-                      {msg.content}
+                      {msg.role === "assistant"
+  ? parseAssistantMessage(msg.content)
+  : msg.content
+}
                     </motion.div>
                   ))}
                   {isLoading && (
@@ -258,7 +308,7 @@ export default function FloatingNode() {
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <div class="gradient-border rounded-full w-icon-md h-icon-md" />
+                      <div className="gradient-border rounded-full w-icon-md h-icon-md" />
                       <Typography variant='body-sm' className="text-text-on-white-primary ">
                         Thinking ...
                       </Typography>
@@ -276,22 +326,27 @@ export default function FloatingNode() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: 0.1 }}
                 >
-                  <input
-                    ref={inputRef}
-                    className={cn(
-                      "flex w-full rounded-md border-[2px] border-border-subtle-selected px-3 py-2 text-sm focus:outline-none",
-                      "hover:border-border-strong focus:border-border-strong",
-                      "placeholder:text-text-on-white-primary",
-                      "disabled:cursor-not-allowed disabled:opacity-50",
-                      input.split("").length > 3 && "border-border-inverse focus:border-border-inverse hover:border-border-inverse"
+                  <div className="relative w-full">
+                    <input
+                      ref={inputRef}
+                      className={cn(
+                        "flex w-full rounded-md border-[2px] border-border-subtle-selected px-3 py-2 text-sm focus:outline-none",
+                        "hover:border-border-strong focus:border-border-strong",
+                        "placeholder:text-text-on-white-primary",
+                        "disabled:cursor-not-allowed disabled:opacity-50",
+                        input.split("").length > 3 && input.split("").length < 251 && "!border-border-inverse focus:border-border-inverse hover:border-border-inverse"
 
-                    )}
-                    type="text"
-                    placeholder="Write here"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                  />
+                      )}
+                      type="text"
+                      placeholder="Write here"
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                      onKeyDown={handleKeyDown}
+                    />
+                    <button onClick={() => sendMessage(input)} className={cn("absolute right-2 top-1/2 -translate-y-1/2 h-icon-lg w-icon-lg p-0.5 rounded-full bg-background-inverse", input.split("").length > 3 && input.split("").length < 251 && "!bg-border-inverse")}>
+                      <ArrowUp className={cn("w-full h-full text-background-inverse-disabled", input.split("").length > 3 && input.split("").length < 251 && "!text-background-white")} />
+                    </button>
+                  </div>
                   <Typography variant='subtitle-md' className="text-text-helper ">
                     RTS can make mistakes. Check important info.
                   </Typography>

@@ -50,7 +50,7 @@ const items = [
 const tableRows = [
   [
     { children: "Experion Architecture\n& Control System", variant: "title-small" },
-    { children: "We provide expert guidance to help clients select, design, and ", variant: "title-body" },
+    { children: "We build, expand, and sustain control architectures across the entire Honeywell Experion ecosystem.", variant: "title-body" },
     { children: "From system design to logic configuration and safety integration, RTS engineers ensure seamless performance across PKS, TPS, and ControlEdge environments.", variant: "body-sm" },
 
     { children: ["Experion PKS", "TPS", "Control Edge", "Safety Manager"], variant: "body-sm" },
@@ -261,13 +261,13 @@ export default function AutomationControlsPage({ setNavMode }) {
         <div className="flex flex-col pt-9  px-3 md:px-7 gap-7 relative z-10 ">
           <div className="flex flex-col md:flex-row  gap-7 ">
             <div className="flex flex-col gap-5 md:gap-7 w-full md:w-1/2">
-               <SlideInAnimation delay={0.1} y={50}><Typography variant="title-medium">
+              <SlideInAnimation delay={0.1} y={50}><Typography variant="title-medium">
                 Devoted to maintaining, innovating,<br className="md:block hidden" /> and enhancing industrial control systems, <br className="md:hidden" />we engineer projects across various industries.
               </Typography></SlideInAnimation>
-               <SlideInAnimation delay={0.3}>
-              <Button variant="filled-dark" className="w-fit">
-                Book a meeting now
-              </Button>
+              <SlideInAnimation delay={0.2}>
+                <Button variant="filled-dark" className="w-fit" onClick={() => window.open("https://outlook.office.com/book/IntroducingRTSSparkIndustrialBrilliance@gruports.com/?ismsaljsauthenabled=true", "_blank")}>
+                  Book a meeting now
+                </Button>
               </SlideInAnimation>
             </div>
 
@@ -349,7 +349,7 @@ export default function AutomationControlsPage({ setNavMode }) {
                   </span> <br />
                   ELITE TEAM <br />WORLDWIDE
                 </Typography></SlideInAnimation>
-            
+
                 <img
                   className=" h-auto w-full max-w-[530px]"
                   src={integrationsImg}
@@ -360,35 +360,35 @@ export default function AutomationControlsPage({ setNavMode }) {
 
               <div className="flex flex-col gap-6 w-full md:w-1/2 text-secondary">
 
-                <SlideInAnimation delay={0.3}><Typography variant="title-medium" className="font-base">
+                <SlideInAnimation delay={0.1}><Typography variant="title-medium" className="font-base">
                   This team ensures that every customer using Honeywell technologies benefits from world-class expertise and global support.
                 </Typography></SlideInAnimation>
 
-<SlideInAnimation delay={0.4} >
-                <Typography className="">
-                  At RTS, we support end customers operating with Honeywell technologies by providing integration, configuration, and lifecycle services that ensure safe, reliable, and optimized operations.
-                  <br /><br />
-                  To meet the highest quality standards, we established the Honeywell Elite Team — a specialized group of engineers focused on Honeywell Process Solutions (HPS) and the seamless integration of Honeywell platforms with third-party systems.
-                </Typography>
+                <SlideInAnimation delay={0.2} >
+                  <Typography className="">
+                    At RTS, we support end customers operating with Honeywell technologies by providing integration, configuration, and lifecycle services that ensure safe, reliable, and optimized operations.
+                    <br /><br />
+                    To meet the highest quality standards, we established the Honeywell Elite Team — a specialized group of engineers focused on Honeywell Process Solutions (HPS) and the seamless integration of Honeywell platforms with third-party systems.
+                  </Typography>
                 </SlideInAnimation>
 
-                <SlideInAnimation delay={0.5}>
-                <Typography variant="title-body" className="">
-                  Engineering Services Abroad Department
-                </Typography>
-</SlideInAnimation>
+                <SlideInAnimation delay={0.2}>
+                  <Typography variant="title-body" className="">
+                    Engineering Services Abroad Department
+                  </Typography>
+                </SlideInAnimation>
 
-<SlideInAnimation delay={0.6} >
-                <Typography className="">
-                  To further extend our reach, we created the Engineering Services Abroad Department, delivering high-performance back-office engineering and implementation support for Honeywell-based operations around the world.
-                  <br /> <br />
-                  As a Value Added Reseller (VAR) for Honeywell Process Solutions, <br className="hidden md:block" />RTS is also authorized to offer, distribute, and integrate HPS products <br className="hidden md:block" />and hardware, from controllers and field instruments to advanced automation systems.
-                </Typography>
-</SlideInAnimation>
+                <SlideInAnimation delay={0.2} >
+                  <Typography className="">
+                    To further extend our reach, we created the Engineering Services Abroad Department, delivering high-performance back-office engineering and implementation support for Honeywell-based operations around the world.
+                    <br /> <br />
+                    As a Value Added Reseller (VAR) for Honeywell Process Solutions, <br className="hidden md:block" />RTS is also authorized to offer, distribute, and integrate HPS products <br className="hidden md:block" />and hardware, from controllers and field instruments to advanced automation systems.
+                  </Typography>
+                </SlideInAnimation>
 
-<SlideInAnimation delay={0.7} >
-                <Button children="Book a meeting now" />
-</SlideInAnimation>
+                <SlideInAnimation delay={0.2} >
+                  <Button children="Book a meeting now" onClick={() => window.open("https://outlook.office.com/book/IntroducingRTSSparkIndustrialBrilliance@gruports.com/?ismsaljsauthenabled=true", "_blank")} />
+                </SlideInAnimation>
               </div>
 
             </div>
@@ -401,7 +401,7 @@ export default function AutomationControlsPage({ setNavMode }) {
         <section id="honey-well-technologies" className="px-3 md:px-7 py-9">
 
           <div className="flex flex-col md:gap-5 gap-6">
-           <SlideInAnimation delay={0.1} className="text-center"><Typography variant="title-large" >
+            <SlideInAnimation delay={0.1} className="text-center"><Typography variant="title-large" >
               Capabilities with Honeywell technologies
             </Typography>
             </SlideInAnimation>
@@ -415,27 +415,27 @@ export default function AutomationControlsPage({ setNavMode }) {
 
       <section id="industrial-intelligence">
         <div className="flex flex-col md:flex-row gap-6 py-9 px-3 md:px-7">
-         
+
           <div className="flex w-full md:w-1/2  flex-col gap-7">
-           <div className="space-y-4">
-            <SlideInAnimation delay={0.3}><Typography variant="title-body">
-              RTS Engineering Workforce
-            </Typography>
-            </SlideInAnimation>
-             <SlideInAnimation delay={0.2}><Typography variant="headline-medium">
-              AUGMENTING<br />
-              <span className="bg-gradient-to-br from-[#7513FF] via-[#4348F3] to-[#0093CE] bg-clip-text text-transparent">INDUSTRIAL</span><br />
-              INTELLIGENCE
-            </Typography>
-             </SlideInAnimation>
-             <SlideInAnimation delay={0.4}><Typography variant="body-default">
-              A flexible, cost-effective solution designed to expand your operational and technical capabilities without increasing permanent headcount.
-            </Typography>
-        </SlideInAnimation>
+            <div className="space-y-4">
+              <SlideInAnimation delay={0.1}><Typography variant="title-body">
+                RTS Engineering Workforce
+              </Typography>
+              </SlideInAnimation>
+              <SlideInAnimation delay={0.2}><Typography variant="headline-medium">
+                AUGMENTING<br />
+                <span className="bg-gradient-to-br from-[#7513FF] via-[#4348F3] to-[#0093CE] bg-clip-text text-transparent">INDUSTRIAL</span><br />
+                INTELLIGENCE
+              </Typography>
+              </SlideInAnimation>
+              <SlideInAnimation delay={0.2}><Typography variant="body-default">
+                A flexible, cost-effective solution designed to expand your operational and technical capabilities without increasing permanent headcount.
+              </Typography>
+              </SlideInAnimation>
             </div>
-             <SlideInAnimation delay={0.5}>
-           <Button children="Book a meeting now" />
-           </SlideInAnimation>
+            <SlideInAnimation delay={0.2}>
+              <Button children="Book a meeting now" onClick={() => window.open("https://outlook.office.com/book/IntroducingRTSSparkIndustrialBrilliance@gruports.com/?ismsaljsauthenabled=true", "_blank")} />
+            </SlideInAnimation>
           </div>
 
           <div className="w-full md:w-1/2">
@@ -451,29 +451,29 @@ export default function AutomationControlsPage({ setNavMode }) {
           <SlideInAnimation delay={0.1}><Typography variant="title-medium" className="md:text-center">
             Engineering services with expert support
           </Typography></SlideInAnimation>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 ">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 ">
 
-          {engineeringCards.map((card, index) => (
-            <SlideInAnimation key={`engineering-card-${index}`} delay={index * 0.2}><div className="flex flex-col justify-between p-5 bg-background-white border border-1 border-surface-primary rounded-md text-text-on-white-primary h-hub-card">
-              <div className="">
-                <img
-                  className="w-icon-xl h-icon-xl"
-                  src={card.icon}
-                  alt={card.title}
-                  loading="lazy"
-                />
-                <Typography variant="title-small" className="mt-3">
-                  {card.title}
+            {engineeringCards.map((card, index) => (
+              <SlideInAnimation key={`engineering-card-${index}`} delay={index * 0.2}><div className="flex flex-col justify-between p-5 bg-background-white border border-1 border-surface-primary rounded-md text-text-on-white-primary h-hub-card">
+                <div className="">
+                  <img
+                    className="w-icon-xl h-icon-xl"
+                    src={card.icon}
+                    alt={card.title}
+                    loading="lazy"
+                  />
+                  <Typography variant="title-small" className="mt-3">
+                    {card.title}
+                  </Typography>
+                </div>
+                <Typography variant="body-small" className="">
+                  {card.body}
                 </Typography>
               </div>
-              <Typography variant="body-small" className="">
-                {card.body}
-              </Typography>
-            </div>
-            </SlideInAnimation>
-          ))}
+              </SlideInAnimation>
+            ))}
+          </div>
         </div>
-</div>
       </section>
       <Banner
         titleClassName="headline-medium"
@@ -487,7 +487,7 @@ export default function AutomationControlsPage({ setNavMode }) {
             children: "Download the full document",
             variant: "outlined-dark",
           },
-          { children: "Book a meeting now", variant: "filled-dark", className: "w-full" },
+          { children: "Book a meeting now", variant: "filled-dark", className: "w-full", onClick: () => window.open("https://outlook.office.com/book/IntroducingRTSSparkIndustrialBrilliance@gruports.com/?ismsaljsauthenabled=true", "_blank") },
         ]}
       />
     </main>

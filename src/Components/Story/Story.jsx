@@ -3,10 +3,11 @@ import { useEffect, useRef } from "react";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { Typography, Button } from "../index";
 import { useTheme } from "../../contexts/ThemeContext";
-
+import { useTransition } from "../Transition/Transition";
 export default function Story() {
   const storySectionRef = useRef(null);
   const { setTheme } = useTheme();
+  const { go } = useTransition();
 
   useEffect(() => {
     if (!storySectionRef.current) {
@@ -57,7 +58,7 @@ export default function Story() {
   });
 
   // Para el efecto fade in/out más preciso
-  const opacityRange = [0, 0.3, 0.4, 0.51, 0.7, 1]; 
+  const opacityRange = [0, 0.2, 0.4, 0.5, 0.6, 1]; 
   const opacityRangePannel1 = [0, 1, 1, 0, 0, 0];
   const opacityRangePannel2 = [0, 0, 0, 0, 1,1];
 
@@ -69,7 +70,7 @@ export default function Story() {
   const yOffsetPannel2 = useTransform(scrollYProgress, [0.3, 0.8], ["20px", "0px"]);
 
   return (
-    <section id="story-section" className="relative w-full md:h-[500vh] h-[300vh] " ref={storySectionRef}>
+    <section id="story-section" className="relative w-full md:h-[300vh] h-[300vh] " ref={storySectionRef}>
       <div className="sticky top-0 h-screen bg-gradient-to-b from-transparent via-transparent to-background-inverse ">
         <div className="pt-9 px-3 md:px-7">
           <Typography variant="subtitle-md" children={"OUR STORY"} className="text-text-on-white-primary" />
@@ -132,7 +133,7 @@ export default function Story() {
                       OUR STORY ISN’T<br />ONE OF CHANGE,<br /> BUT OF CONTINUOS<br />EVOLUTION
                     </Typography>
 
-                    <Button children="Learn more about our culture" variant="filled-light" />
+                    <Button children="Learn more about our culture" variant="filled-light" onClick={() => go("/culture")} />
                   </div>
                   <div className="w-full flex justify-end">
                     <Typography variant="title-medium" className="text-text-on-white-disabled font-base pb-9">

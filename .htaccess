@@ -3,20 +3,16 @@
   RewriteEngine On
   RewriteBase /
   
-  # NO redirigir archivos reales (JS, CSS, imágenes, etc.)
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
   
-  # NO redirigir archivos con extensiones específicas
   RewriteCond %{REQUEST_URI} \.(js|css|png|jpg|jpeg|gif|svg|ico|json|webp|woff|woff2|ttf|eot)$ [NC]
   RewriteRule ^ - [L]
   
-  # Redirigir todo lo demás a index.html
   RewriteRule ^ index.html [L]
 </IfModule>
 
-# Forzar MIME types correctos
 <IfModule mod_mime.c>
   AddType application/javascript .js
   AddType text/css .css
@@ -24,4 +20,25 @@
   AddType image/jpeg .jpg .jpeg
   AddType image/svg+xml .svg
   AddType application/json .json
+  AddType image/webp .webp
+</IfModule>
+
+# --- CACHÉ DE ASSETS ESTÁTICOS ---
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/png  "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/css "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(webp|png|jpg|jpeg|js|css)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # El index.html nunca debe cachearse (para que siempre cargue la versión nueva)
+  <FilesMatch "index\.html$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+  </FilesMatch>
 </IfModule>

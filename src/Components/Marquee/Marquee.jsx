@@ -75,7 +75,7 @@ export default function Marquee() {
         <div className="marquee-track marquee-left" ref={topTrackRef}>
           {duplicatedTop.map((src, i) => (
             <div className="logo-box" key={"t" + i}>
-              <img src={src} alt="" />
+              <img src={src} alt={`Logo ${i + 1} de la marca`} />
             </div>
           ))}
         </div>
@@ -83,7 +83,7 @@ export default function Marquee() {
         <div className="marquee-track marquee-right " ref={bottomTrackRef}>
           {duplicatedBottom.map((src, i) => (
             <div className="logo-box" key={"b" + i}>
-              <img src={src} alt="" />
+              <img src={src} alt={`Logo ${i + 1} de la marca`} />
             </div>
           ))}
         </div>

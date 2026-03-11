@@ -97,14 +97,18 @@ export function IndustriesTemplatePage({ content }) {
 
             <section id="hero-industries"
                 className="relative w-full h-[450px] rounded-none "
-                style={{
-                    backgroundImage: `url(${heroImage})`,
-                    backgroundSize: 'cover', // Cambiado a 'contain'
-                    backgroundPosition: 'center center', // Centrado vertical y horizontal
-                    backgroundRepeat: 'no-repeat',
-                    //backgroundColor: '#f5f5f5' // Agregado para rellenar espacio vacío
-                }}
+               
             >
+                <div className="absolute inset-0 w-full h-full">
+                    <img
+                        src={heroImage}
+                        alt="Imagen de header de la industria"
+                        fetchpriority="high"     // Le dice al browser: esto es crítico, cargalo primero
+                        decoding="async"
+                        className="w-full h-full object-cover object-center"
+                     
+                    />
+                </div>
                 {/* Overlay opcional si el texto no se ve bien */}
                 <div className="absolute inset-0 bg-black/0"></div>
                 <div className="relative z-10 w-full h-full md:px-7 py-9 px-3">
@@ -127,7 +131,7 @@ export function IndustriesTemplatePage({ content }) {
                             {content?.clientsSection?.title}
                         </Typography>
                         </SlideInAnimation>
-                        <SlideInAnimation y={50} delay={0.5} ><Button variant="filled-dark">Book a meeting now</Button>
+                        <SlideInAnimation y={50} delay={0.5} ><Button variant="filled-dark" onClick={() => window.open("https://outlook.office.com/book/IntroducingRTSSparkIndustrialBrilliance@gruports.com/?ismsaljsauthenabled=true", "_blank")}>Book a meeting now</Button>
                         </SlideInAnimation>
                     </div>
 
@@ -190,22 +194,6 @@ export function IndustriesTemplatePage({ content }) {
                             }}
                         />
 
-                        {/* Segundo gradiente para suavizar bordes */}
-                        {/* <div
-                            className="absolute"
-                            style={{
-                                background: 'radial-gradient(145.3% 70.02% at 45.94% 35.79%, rgba(255, 168, 0, 1) 24.04%, rgba(255, 0, 0, 1) 60.58%, rgba(255, 71, 214, 1) 100%)',
-                                filter: 'blur(400px)',
-                                opacity: '0.4',
-                                width: '80vw',
-                                height: '130vh',
-                                top: '-15%',
-                                left: '10%', // Posicionado más a la derecha
-                                transform: 'rotate(15deg)', // Rotación opcional
-                                mixBlendMode: 'screen', // Mezcla con el primer gradiente
-                            }}
-                        /> */}
-
                         {/* Primer gradiente principal */}
                         <div
                             className="absolute md:hidden"
@@ -247,8 +235,8 @@ export function IndustriesTemplatePage({ content }) {
                         {
                             content?.projectSection?.length > 1 ?
                                 (<div className="flex flex-col">
-                                   <AnimatePresence  initial={false} mode="wait"> <ProjectSection key={'project-' + selectedProject} projectSection={content.projectSection[selectedProject]} />
-                                </AnimatePresence>
+                                    <AnimatePresence initial={false} mode="wait"> <ProjectSection key={'project-' + selectedProject} projectSection={content.projectSection[selectedProject]} />
+                                    </AnimatePresence>
                                 </div>) :
                                 (content?.projectSection?.map((project, index) => (
                                     <ProjectSection key={'project-' + index} projectSection={project} />
@@ -271,7 +259,7 @@ export function IndustriesTemplatePage({ content }) {
                 titleMobile={"WOULD YOU LIKE TO KNOW MORE ABOUT OUR EXPERIENCE?"}
                 backgroundPosition="center"
                 buttons={[
-                    { children: "Book a meeting now", variant: "filled-dark" },
+                    { children: "Book a meeting now", variant: "filled-dark", onClick: () => window.open("https://outlook.office.com/book/IntroducingRTSSparkIndustrialBrilliance@gruports.com/?ismsaljsauthenabled=true", "_blank") },
                 ]}
             />
         </section>

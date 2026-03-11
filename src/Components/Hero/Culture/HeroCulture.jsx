@@ -4,7 +4,7 @@ import heroCultureBackground from "../../../assets/Backgrounds/culture_backgroun
 import { SlideInAnimation } from "../../../animations/index";
 
 export default function HeroIndustries() {
- const rootRef = useRef(null);
+    const rootRef = useRef(null);
     const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
     const [isHovering, setIsHovering] = useState(false);
 
@@ -38,13 +38,13 @@ export default function HeroIndustries() {
         const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
         // Efectos basados en la posición del mouse
-       // const blur = isHovering ? distance * 7 : 0;
+        // const blur = isHovering ? distance * 7 : 0;
         const brightness = isHovering ? 1 + (distance * 0.5) : 1;
 
         return {
-           // blur: `${blur}px`,
+            // blur: `${blur}px`,
             brightness,
-            
+
             transition: isHovering ? 'all 0.7s cubic-bezier(0.23, 1, 0.32, 1)' : 'all 0.7s ease'
         };
     };
@@ -60,25 +60,21 @@ export default function HeroIndustries() {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            {/* Contenedor de la imagen con efecto */}
-            <div className="absolute inset-0 w-full h-full flex items-center justify-center">
-                <div
-                    className="w-full h-full relative"
+            {/* Imagen de fondo con distorsión dinámica */}
+            <div className="absolute inset-0 w-full h-full">
+                <img
+                    src={heroCultureBackground}
+                    alt="Image of Culture Hero Background"
+                    fetchpriority="high"     // Le dice al browser: esto es crítico, cargalo primero
+                    decoding="async"
+                    className="w-full h-full object-cover object-center"
                     style={{
-                        backgroundImage: `url(${heroCultureBackground})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center center',
-                        backgroundRepeat: 'no-repeat',
-                        filter: `
-                            //blur(${distortion.blur})
-                            brightness(${distortion.brightness})
-                        `,
-                       
-                        willChange: 'filter'
+                        filter: `brightness(${distortion.brightness})`,
+                        willChange: 'filter',
+                        transition: distortion.transition,
                     }}
                 />
             </div>
-
             {/* Overlay con gradiente dinámico basado en mouse */}
             <div
                 className="absolute inset-0 pointer-events-none"
@@ -100,7 +96,7 @@ export default function HeroIndustries() {
             <div className="relative z-10 w-full h-full md:px-7 py-9 px-3">
                 <div className="pt-9 flex flex-col gap-6 md:gap-4">
                     <SlideInAnimation y={50} delay={1} repeat={true}><Typography variant="headline-large" className="md:text-display-lg ">
-                       CULTURE
+                        CULTURE
                     </Typography>
                     </SlideInAnimation>
                 </div>

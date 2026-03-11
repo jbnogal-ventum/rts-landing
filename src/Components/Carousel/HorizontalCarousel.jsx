@@ -40,7 +40,7 @@ export default function HorizontalCarousel() {
   }
 
   return (
-    <section ref={sectionRef} className="relative h-[300vh] bg-background-primary" >
+    <section ref={sectionRef} className="relative h-[250vh] bg-background-primary" >
       <div className="sticky top-0  h-[95vh]  flex items-center overflow-hidden w-full bg-background">
         <div className=" px-3 md:px-7 w-full">
 
@@ -96,7 +96,7 @@ export default function HorizontalCarousel() {
                 />
                 <Card
                   title="Chemicals & Petrochemicals"
-                  to="/industries/chemicals-and-petrochemicals"
+                  to="/industries/chemicals"
                   image={img2}
                   description="We enable smarter, safer, and more efficient operations by digitalizing processes and connecting critical data from field to boardroom."
                 />

@@ -8,8 +8,8 @@ import { cn } from "../lib/utils";
 const SlideInAnimation = ({ 
   children,
   x = 0,
-  y = 40,
-  duration = 0.8,
+  y = 80,
+  duration = 0.4,
   delay = 0,
   className = '',
   repeat = false,

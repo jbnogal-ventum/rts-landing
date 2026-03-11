@@ -40,7 +40,7 @@ export default function HeroEnergy() {
         // Efectos basados en la posición del mouse
         //const blur = isHovering ? distance * 7 : 0;
         const brightness = isHovering ? 1 + (distance * 0.5) : 1;
-        const scale = isHovering ? 1 + (distance * 0.3) : 1;
+        const scale = isHovering ? 1 + (distance * 0.1) : 1;
 
         // Rotación sutil basada en la posición
         const rotateX = isHovering ? (mousePosition.y - centerY) * 4 : 0;
@@ -67,32 +67,30 @@ export default function HeroEnergy() {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            {/* Contenedor de la imagen con efecto */}
-            <div className="absolute inset-0 w-full h-full flex items-center justify-center">
-                <div
-                    className="w-full h-full md:max-w-[90%] md:max-h-[90%] relative"
+           
+
+{/* Imagen de fondo con distorsión dinámica */}
+            <div className="absolute inset-0 w-full h-full">
+                <img
+                    src={heroEnergyBackground}
+                    alt="Image of Energy Hero Background"
+                    fetchpriority="high"     // Le dice al browser: esto es crítico, cargalo primero
+                    decoding="async"
+                    className="w-full h-full object-contain object-center"
                     style={{
-                        backgroundImage: `url(${heroEnergyBackground})`,
-                        backgroundSize: 'contain',
-                        backgroundPosition: 'center center',
-                        backgroundRepeat: 'no-repeat',
-                        filter: `
-                                       //blur(${distortion.blur})
-                                       brightness(${distortion.brightness})
-                                   `,
-                        transform: `
-                                       scale(${distortion.scale})
-                                       perspective(1000px)
-                                       rotateX(${distortion.rotateX})
-                                       rotateY(${distortion.rotateY})
-                                   `,
-                        transformOrigin: 'center center',
+                        filter: `brightness(${distortion.brightness})`,
+                        willChange: 'filter',
                         transition: distortion.transition,
-                        willChange: 'transform, filter'
+                        transform: `
+                            scale(${distortion.scale})
+                            perspective(1000px)
+                            rotateX(${distortion.rotateX})
+                            rotateY(${distortion.rotateY})
+                        `,
+                        transformOrigin: 'center center'
                     }}
                 />
             </div>
-
             {/* Overlay con gradiente dinámico basado en mouse */}
             <div
                 className="absolute inset-0 pointer-events-none"

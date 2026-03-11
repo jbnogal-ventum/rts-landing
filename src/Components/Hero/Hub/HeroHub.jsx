@@ -8,25 +8,34 @@ export default function HeroHub() {
         className="relative w-full h-screen overflow-hidden"
 
     >
-        {/* Imagen de fondo para desktop (oculta en mobile) */}
-        <div
-            className="hidden md:block absolute inset-0 bg-cover bg-no-repeat bg-center md:scale-110"
-            style={{
-                backgroundImage: `url(${heroHubBackground})`,
-                zIndex: 1
-            }}
-        ></div>
 
+        {/* Imagen de fondo con distorsión dinámica */}
+        <div className="hidden md:block absolute inset-0 bg-cover bg-no-repeat bg-center md:scale-110">
+            <img
+                src={heroHubBackground}
+                alt="Image of Hub Hero Background"
+                fetchpriority="high"     // Le dice al browser: esto es crítico, cargalo primero
+                decoding="async"
+                className="w-full h-full object-cover object-center"
+                style={{
+
+                }}
+            />
+        </div>
         {/* Imagen para mobile (posicionada en el fondo) */}
-        <div
-            className="md:hidden absolute bottom-0 left-0 right-0 translate-x-50 translate-y-50 h-2/3 bg-cover bg-no-repeat "
-            style={{
-                backgroundImage: `url(${heroHubBackground})`,
-                backgroundPosition: '43% center',
-                zIndex: 1
-            }}
-        ></div>
 
+        <div className="md:hidden absolute bottom-0 left-0 right-0 translate-x-50 translate-y-50 h-2/3 bg-cover bg-no-repeat ">
+            <img
+                src={heroHubBackground}
+                alt="Image of Hub Hero Background"
+                fetchpriority="high"     // Le dice al browser: esto es crítico, cargalo primero
+                decoding="async"
+                className="w-full h-full object-cover object-center"
+                style={{
+
+                }}
+            />
+        </div>
         {/* Overlay oscuro para mejorar legibilidad */}
         <div className="absolute inset-0 bg-black/50 z-10"></div>
         <div className="relative z-20  w-full h-full md:px-7 py-9 px-3 " >

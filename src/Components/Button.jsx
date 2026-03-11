@@ -17,7 +17,7 @@ const buttonVariants = cva(
         "carruselLeft-dark": "bg-assistant-hover text-background-white rounded-l-md rounded-r-none border-r-0 hover:bg-assistant-prompt hover:text-background-inverse disabled:bg-assistant-background disabled:text-background-disabled py-2 px-3",
         "carruselRight-dark": "bg-assistant-hover text-background-white rounded-r-md rounded-l-none border-l-0 hover:bg-assistant-prompt hover:text-background-inverse disabled:bg-assistant-background disabled:text-background-disabled py-2 px-3",
         "navbar-dark": "bg-transparent text-text-primary rounded-md disabled:bg-background-disabled py-1 px-3 hover:bg-navbar-button-hover-primary",
-        "navbar-text-dark": "bg-transparent text-text-primary relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-border-subtle after:transition-all after:duration-500 after:ease-out after:w-0 hover:after:w-full disabled:text-text-disabled py-1",
+        "navbar-text-dark": "bg-transparent text-text-primary relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-border-subtle after:transition-all after:duration-300 after:ease-out after:w-0 hover:after:w-full disabled:text-text-disabled py-1",
         "navbar-filled-dark": "hover:bg-background-interactive text-text-primary rounded-md disabled:bg-background-disabled py-2 px-3 bg-navbar-button-active-primary",
         // LIGHT  
         "filled-light": "bg-background-interactive text-text-primary rounded-md disabled:bg-background-inverse-disabled disabled:text-text-on-white-disabled py-2 px-3",
@@ -127,7 +127,7 @@ const Button = React.forwardRef(({
             y: isHovered ? "0%" : "100%",
           }}
           transition={{
-            duration: 0.5,
+            duration: 0.3,
             ease: "easeOut"
           }}
           style={{

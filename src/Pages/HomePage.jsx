@@ -16,7 +16,7 @@ export default function HomePage({ onPhase }) {
         
      <div style={{height: "1px"}} />
       <HeroHomePage onPhase={onPhase} />
-
+ 
       <HorizontalCarousel />
       <Marquee />
 
@@ -39,7 +39,7 @@ export default function HomePage({ onPhase }) {
           "Every challenge is an opportunity.\nShare yours, and let's explore how to\nbring your vision to life."
         }
         buttons={[
-          { children: "Book a meeting now", onClick: () => window.open("https://tu-url.com", "_blank"), variant: "filled-dark" },
+          { children: "Book a meeting now", onClick: () => window.open("https://outlook.office.com/book/IntroducingRTSSparkIndustrialBrilliance@gruports.com/?ismsaljsauthenabled=true", "_blank"), variant: "filled-dark" },
         ]}
       />
     </main>

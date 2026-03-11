@@ -14,7 +14,7 @@ export default function Table({
         {/* Header sticky - Siempre visible al scrollear */}
         <div className={cn(isLightMode ? ` bg-background-primary ` : `bg-background-inverse`, `sticky top-[100px] z-10 rounded-md  p-3 gap-4 grid grid-cols-4`)}>
           {columns.map((c, i) => (
-            <FadeInAnimation key={c + i} delay={0.2 * i}>
+            <FadeInAnimation key={c + i} delay={0.1 * i}>
             <Typography
               key={c + i}
               children={c}

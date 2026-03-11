@@ -178,7 +178,7 @@ const Transition = forwardRef(({ children, enabled, lenisRef }, ref) => {
   const handleAnimationComplete = () => {
     completedAnimations.current += 1;
     const totalAnimations = gridItems.length;
-    
+
     if (completedAnimations.current === totalAnimations) {
       handleAllAnimationsComplete();
     }
@@ -200,7 +200,7 @@ const Transition = forwardRef(({ children, enabled, lenisRef }, ref) => {
   // Crear la grilla de cuadraditos
   const gridSize = 10; // 10x10 = 100 persianas
   const gridItems = [];
-  
+
   let maxDelay = 0;
 
   for (let row = 0; row < gridSize; row++) {
@@ -223,7 +223,7 @@ const Transition = forwardRef(({ children, enabled, lenisRef }, ref) => {
       const randomVariation = Math.random() * 0.1;
       const rowFactor = (row / gridSize) * 0.1; // Aumentado para más efecto de fila
       const delay = baseDelay + randomVariation + rowFactor;
-      
+
       if (delay > maxDelay) {
         maxDelay = delay;
       }
@@ -247,95 +247,87 @@ const Transition = forwardRef(({ children, enabled, lenisRef }, ref) => {
         <AnimatePresence>
           {isVisible && (
             <div
-              style={{
-                position: 'fixed',
-                inset: 0,
-                zIndex: 9999,
-                pointerEvents: 'none',
-                overflow: 'hidden',
-              }}
-            >
-              {/* Telón negro que sube */}
-              <motion.div
-                key="curtain"
-                initial={{ y: '100%' }}
-                animate={{
-                  y: '0%',
-                  opacity: phase === 'dissolving' ? 0 : 1
-                }}
-                transition={{
-                  duration: 0.6,
-                  ease: [0.65, 0, 0.35, 1],
-                }}
-                onAnimationComplete={handleCurtainUpComplete}
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  background: '#000102',
-                  zIndex: 1,
-                }}
-              />
+  style={{
+    position: 'fixed',
+    inset: 0,
+    zIndex: 9999,
+    pointerEvents: 'none',
+    overflow: 'hidden',
+  }}
+>
+  <div
+    style={{
+      position: 'absolute',
+      inset: 0,
+      display: 'grid',
+      gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
+      gridTemplateRows: `repeat(${gridSize}, 1fr)`,
+      gap: '0px',
+    }}
+  >
+    {gridItems.map((item) => (
+      <motion.div
+        key={item.id}
+        initial={{
+          scaleY: 0,
+          transformOrigin: 'top', // Se despliegan desde arriba
+        }}
+        animate={
+          phase === 'curtain-up'
+            ? {
+                scaleY: 1, // Se despliegan tipo cortina bajando
+              }
+            : {
+                scaleY: 0, // Se enrollan tipo cortina subiendo
+                transformOrigin: 'top',
+              }
+        }
+        transition={
+          phase === 'curtain-up'
+            ? {
+                duration: 0.5,
+                ease: [0.65, 0, 0.35, 1],
+                delay: item.delay * 0.2,
+              }
+            : {
+                duration: 0.5,
+                ease: [0.65, 0, 0.35, 1],
+                delay: item.delay,
+              }
+        }
+        onAnimationComplete={
+          phase === 'dissolving' ? handleAnimationComplete : undefined
+        }
+        style={{
+          background: '#000102',
+          willChange: 'transform',
+        }}
+      />
+    ))}
+  </div>
 
-              {/* Grilla de persianas que se levantan */}
-              {phase === 'dissolving' && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    display: 'grid',
-                    gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
-                    gridTemplateRows: `repeat(${gridSize}, 1fr)`,
-                    gap: '0px',
-                    zIndex: 2,
-                  }}
-                >
-                  {gridItems.map((item) => (
-                    <motion.div
-                      key={item.id}
-                      initial={{
-                        scaleY: 1,
-                        transformOrigin: 'top', // ¡IMPORTANTE! Se enrolla desde arriba
-                      }}
-                      animate={{
-                        scaleY: 0, // Se "aplasta" verticalmente hasta desaparecer
-                      }}
-                      transition={{
-                        duration: 0.7, // Duración del efecto de persiana
-                        ease: [0.65, 0, 0.35, 1], // Misma curva que el telón
-                        delay: item.delay,
-                      }}
-                      onAnimationComplete={handleAnimationComplete}
-                      style={{
-                        background: '#000102',
-                        willChange: 'transform',
-                        // Opcional: borde para efecto de persiana
-                        //borderRight: '1px solid rgba(255,255,255,0.1)',
-                        //borderBottom: '1px solid rgba(255,255,255,0.1)',
-                      }}
-                    />
-                  ))}
-                </div>
-              )}
+  {/* Trigger para cambiar a fase dissolving */}
+  {phase === 'curtain-up' && (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 0 }}
+      transition={{ duration: 0.1, delay: 0.9 }}
+      onAnimationComplete={handleCurtainUpComplete}
+      style={{ position: 'absolute', pointerEvents: 'none' }}
+    />
+  )}
 
-              {/* Fallback timer */}
-              {phase === 'dissolving' && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0 }}
-                  transition={{
-                    duration: 0.1,
-                    delay: totalAnimationTime,
-                  }}
-                  onAnimationComplete={handleAllAnimationsComplete}
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    zIndex: 3,
-                    pointerEvents: 'none',
-                  }}
-                />
-              )}
-            </div>
+  {/* Fallback timer */}
+  {phase === 'dissolving' && (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 0 }}
+      transition={{ duration: 0.1, delay: totalAnimationTime }}
+      onAnimationComplete={handleAllAnimationsComplete}
+      style={{ position: 'absolute', pointerEvents: 'none' }}
+    />
+  )}
+</div>
           )}
         </AnimatePresence>
       </div>

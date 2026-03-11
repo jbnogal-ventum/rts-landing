@@ -64,9 +64,9 @@ export default function Footer() {
         <Typography variant="body-md" className="text-secondary md:text-body-sm" children="All Rights Reserved ©2025 RTS Group" />
 
         <div className=" gap-6 hidden md:flex">
-          <Button variant="text-dark" children={"LinkedIn"} className="text-body-sm " onClick={() => window.open("https://www.linkedin.com/company/rtsgroup/")} />
-          <Button variant="text-dark" children={"Youtube"} className="text-body-sm " onClick={() => window.open("https://www.youtube.com/@rts_group")} />
-          <Button variant="text-dark" children={"Discord"} className="text-body-sm " onClick={() => window.open("https://discord.com/invite/rtsgroup")} />
+          <Button variant="text-dark" children={"LinkedIn"} className="text-body-sm " onClick={() => window.open("https://ar.linkedin.com/company/rts-group-acds", "_blank")} />
+          <Button variant="text-dark" children={"Youtube"} className="text-body-sm " onClick={() => window.open("https://www.youtube.com/@RockingTheIndustry", "_blank")} />
+          <Button variant="text-dark" children={"Discord"} className="text-body-sm " onClick={() => window.open("https://discord.com/invite/rtsgroup", "_blank")} />
         </div>
       </div>
 

@@ -3,50 +3,50 @@ import { useEffect, useRef, useState } from "react";
 import heroHubBackground from "../../../assets/Backgrounds/hero_a_y_c.webp";
 import { SlideInAnimation } from "../../../animations";
 export default function HeroAutomation() {
- const rootRef = useRef(null);
+    const rootRef = useRef(null);
     const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
     const [isHovering, setIsHovering] = useState(false);
-    
+
     const handleMouseMove = (e) => {
         if (!rootRef.current) return;
-        
+
         const rect = rootRef.current.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width;
         const y = (e.clientY - rect.top) / rect.height;
-        
+
         setMousePosition({ x, y });
     };
-    
+
     const handleMouseEnter = () => {
         setIsHovering(true);
     };
-    
+
     const handleMouseLeave = () => {
         setIsHovering(false);
         setMousePosition({ x: 0.5, y: 0.5 }); // Vuelve al centro
     };
-    
+
     // Calculamos los valores de distorsión
     const getDistortionValues = () => {
         const centerX = 0.5;
         const centerY = 0.5;
-        
+
         // Distancia desde el centro (0 a 0.707 máximo)
         const distanceX = Math.abs(mousePosition.x - centerX);
         const distanceY = Math.abs(mousePosition.y - centerY);
         const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-        
+
         // Efectos basados en la posición del mouse
-       // const blur = isHovering ? distance * 7 : 0;
+        // const blur = isHovering ? distance * 7 : 0;
         const brightness = isHovering ? 1 + (distance * 0.5) : 1;
-        const scale = isHovering ? 1 + (distance * 0.3) : 1;
-        
+        const scale = isHovering ? 1 + (distance * 0.1) : 1;
+
         // Rotación sutil basada en la posición
         const rotateX = isHovering ? (mousePosition.y - centerY) * 4 : 0;
         const rotateY = isHovering ? (mousePosition.x - centerX) * 4 : 0;
-        
+
         return {
-          //  blur: `${blur}px`,
+            //  blur: `${blur}px`,
             brightness,
             scale,
             rotateX: `${rotateX}deg`,
@@ -54,7 +54,7 @@ export default function HeroAutomation() {
             transition: isHovering ? 'all 0.7s cubic-bezier(0.23, 1, 0.32, 1)' : 'all 0.7s ease'
         };
     };
-    
+
     const distortion = getDistortionValues();
 
     return (
@@ -66,34 +66,30 @@ export default function HeroAutomation() {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            {/* Contenedor de la imagen con efecto */}
-            <div className="absolute inset-0 w-full h-full flex items-center justify-center">
-                <div 
-                    className="w-full h-full md:max-w-[90%] md:max-h-[90%] relative" 
+            {/* Imagen de fondo con distorsión dinámica */}
+            <div className="absolute inset-0 w-full h-full">
+                <img
+                    src={heroHubBackground}
+                    alt="Image of Automation & Controls Hero Background"
+                    fetchpriority="high"     // Le dice al browser: esto es crítico, cargalo primero
+                    decoding="async"
+                    className="w-full h-full object-contain object-center"
                     style={{
-                        backgroundImage: `url(${heroHubBackground})`,
-                        backgroundSize: 'contain',
-                        backgroundPosition: 'center center',
-                        backgroundRepeat: 'no-repeat',
-                        filter: `
-                            brightness(${distortion.brightness})
-                        `,
-                        transform: `
-                            scale(${distortion.scale})
-                            perspective(1000px)
-                            rotateX(${distortion.rotateX})
-                            rotateY(${distortion.rotateY})
-                        `,
-                        transformOrigin: 'center center',
+                        filter: `brightness(${distortion.brightness})`,
+                        willChange: 'filter',
                         transition: distortion.transition,
-                        willChange: 'transform, filter',
-                        
+                        transform: `
+                                        scale(${distortion.scale})
+                                        perspective(1000px)
+                                        rotateX(${distortion.rotateX})
+                                        rotateY(${distortion.rotateY})
+                                    `,
+                        transformOrigin: 'center center'
                     }}
                 />
             </div>
-            
             {/* Overlay con gradiente dinámico basado en mouse */}
-            <div 
+            <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
                     background: `
@@ -108,7 +104,7 @@ export default function HeroAutomation() {
                     transition: 'background 0.3s ease'
                 }}
             />
-            
+
             {/* Contenido */}
             <div className="relative z-10 w-full h-full md:px-7 py-9 px-3">
                 <div className="pt-9 flex flex-col gap-8 md:gap-4">
@@ -117,15 +113,15 @@ export default function HeroAutomation() {
                     </Typography>
                     </SlideInAnimation>
                     <SlideInAnimation delay={1.3} className="">
-                    <div className="flex justify-end md:justify-center md:mr-5 text-secondary">
-                        <Typography
-                            variant="title-small"
-                            className="w-4/5 md:w-3/5 md:text-title-medium"
-                        >
-                            — provide expert guidance to<br className="md:block hidden" /> design and integrate control systems
+                        <div className="flex justify-end md:justify-center md:mr-5 text-secondary">
+                            <Typography
+                                variant="title-small"
+                                className="w-4/5 md:w-3/5 md:text-title-medium"
+                            >
+                                — provide expert guidance to<br className="md:block hidden" /> design and integrate control systems
 
-                        </Typography>
-                    </div>
+                            </Typography>
+                        </div>
                     </SlideInAnimation>
                 </div>
             </div>

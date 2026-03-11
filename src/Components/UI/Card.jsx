@@ -2,9 +2,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Typography } from "../index";
-
+import { useTransition } from "../Transition/Transition";
 export default function Card({ title, description, image, to, children }) {
-  const navigate = useNavigate();
+
+  const { go } = useTransition();
   
   return (
     <div className="
@@ -34,7 +35,6 @@ export default function Card({ title, description, image, to, children }) {
         inset-0
         p-4
         bg-black/60
-        //backdrop-blur
         opacity-0
         flex
         flex-col
@@ -56,7 +56,7 @@ export default function Card({ title, description, image, to, children }) {
         <Button 
           variant="navbar-filled-light" 
          
-          onClick={() => navigate(to)}
+          onClick={() => go(to)}
         >
           Learn more
         </Button>

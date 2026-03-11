@@ -1,6 +1,6 @@
 // src/Components/Navbar/Navbar.jsx
 import logo from "../../../assets/logo-rts.svg";
-// src/Components/Navbar/Navbar.jsx
+import { preloadImage, routeImageMap } from "../../../lib/utils";
 import { use, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown, ChevronRight, TextAlignStart } from "lucide-react";
@@ -20,7 +20,7 @@ const industriesItems = [
   { label: "Oil & Gas", href: "industries/oil-and-gas" },
   { label: "Power Generation", href: "industries/power-generation" },
   { label: "Mining", href: "industries/metals-and-mining" },
-  { label: "Pharma", href: "industries/pharma" },
+  { label: "Pharma", href: "industries/pharmaceuticals" },
   { label: "Chemicals", href: "industries/chemicals" },
   { label: "Pulp & Paper", href: "industries/pulp-and-paper" },
 ];
@@ -98,8 +98,8 @@ export default function Navbar() {
       }
     })
   };
- // console.log({buttonTheme})
-// Determinar qué variante usar para cada botón
+  // console.log({buttonTheme})
+  // Determinar qué variante usar para cada botón
   const getNavbarVariant = () => {
     // Priorizamos el tema adaptativo para el navbar
     const themeForNavbar = buttonTheme; // 'light' o 'dark'
@@ -160,6 +160,10 @@ export default function Navbar() {
       animate="visible"
       className="flex items-center "
       onClick={() => handleNavigate(item.href)}
+      onMouseEnter={() => {
+        const img = routeImageMap[item.href];
+        if (img) preloadImage(img);
+      }}
     >
       <Button
         key={item.label + item.href + "mobile"}
@@ -176,9 +180,13 @@ export default function Navbar() {
   const renderDropdownItemMobile = (item) => (
     <Button
       key={item.label + item.href + "mobile"}
-       variant={getNavbarTextVariant()}
+      variant={getNavbarTextVariant()}
       className="flex items-center "
       onClick={() => handleNavigate(item.href)}
+       onMouseEnter={() => {
+      const img = routeImageMap[item.href];
+      if (img) preloadImage(img);
+    }}
     >
       ↳
       <span className="text-sm ml-2">{item.label}</span>
@@ -190,12 +198,12 @@ export default function Navbar() {
       closeMobileMenuHard();
     }
   }, [isTablet]);
-   const logoFilter = buttonTheme === 'light' ? 'invert(0)' : 'invert(1)';
+  const logoFilter = buttonTheme === 'light' ? 'invert(0)' : 'invert(1)';
   return (
     <>
       <div className="fixed top-[30px]  z-[990] flex justify-center w-full bg-transparent px-3  md:px-7">
         <motion.nav
-        ref={navbarRef} // Añadimos la ref aquí
+          ref={navbarRef} // Añadimos la ref aquí
           variants={navbarVariants}
           initial="hidden"
           animate="visible"
@@ -213,15 +221,15 @@ export default function Navbar() {
                 src={logo}
                 className="w-[44px] h-[21px] "
                 alt="RTS Logo"
-                  style={{ filter: logoFilter }}
+                style={{ filter: logoFilter }}
               />
             </a>
 
             <div className="hidden md:flex flex-row gap-3 ">
 
               <Button
-                 variant={getNavbarVariant()}
-                className={`${ddOpen === "what" ? "!bg-navbar-background-primary" :""}`}
+                variant={getNavbarVariant()}
+                className={`${ddOpen === "what" ? "!bg-navbar-background-primary" : ""}`}
                 onClick={() => openDropdown("what")}
               >
                 <div className="flex flex-row items-center gap-2 ">
@@ -233,8 +241,8 @@ export default function Navbar() {
               </Button>
 
               <Button
-                 variant={getNavbarVariant()}
-                className={`${ddOpen === "industries" ? "!bg-navbar-background-primary" :""}`}
+                variant={getNavbarVariant()}
+                className={`${ddOpen === "industries" ? "!bg-navbar-background-primary" : ""}`}
                 onClick={() => openDropdown("industries")}
               >
                 <span>Industries</span>
@@ -246,6 +254,10 @@ export default function Navbar() {
                 variant={getNavbarVariant()}
                 className="flex items-center gap-2"
                 onClick={() => handleNavigate('/hub')}
+                onMouseEnter={() => {
+                  const img = routeImageMap['/hub'];
+                  if (img) preloadImage(img);
+                }}
               >
                 HUB
               </Button>
@@ -254,6 +266,10 @@ export default function Navbar() {
                 variant={getNavbarVariant()}
                 className="flex items-center gap-2"
                 onClick={() => handleNavigate('/culture')}
+                onMouseEnter={() => {
+                  const img = routeImageMap['/culture'];
+                  if (img) preloadImage(img);
+                }}
               >
                 Culture
 
@@ -262,7 +278,7 @@ export default function Navbar() {
           </div>
 
           <div className="hidden md:block">
-            <Button size="sm" onClick={closeMobileMenuHard}>
+            <Button size="sm" onClick={() => window.open("https://outlook.office.com/book/IntroducingRTSSparkIndustrialBrilliance@gruports.com/?ismsaljsauthenabled=true", "_blank")}>
               Book a meeting
             </Button>
           </div>
@@ -288,7 +304,7 @@ export default function Navbar() {
 
             <div className="hidden md:flex flex-row gap-3 ">
               <div className="relative ">
-                
+
                 <AnimatePresence>
                   {ddOpen === "what" && (
                     <div className={`absolute top-[20px] left-0 mt-3 min-w-[330px] rounded-xs`}>
@@ -312,7 +328,7 @@ export default function Navbar() {
               </div>
 
               <div className="relative ">
-                
+
                 <AnimatePresence>
                   {ddOpen === "industries" && (
                     <div className={`absolute ml-2 top-[20px] left-[140px] mt-3 min-w-[330px] rounded-xs`}>
@@ -378,7 +394,7 @@ export default function Navbar() {
               </div>
               <div className="flex flex-col">
                 <Button
-                   variant={getNavbarVariant()}
+                  variant={getNavbarVariant()}
                   className={` ${ddMobileOpen === "industries" && "bg-navbar-button-hover-primary"}`}
                   onClick={() => toggleMobileDropdown("industries")}
                 >
@@ -407,13 +423,21 @@ export default function Navbar() {
               <Button
                 variant={getNavbarVariant()}
                 onClick={() => handleNavigate('/hub')}
+                onMouseEnter={() => {
+                  const img = routeImageMap['/hub'];
+                  if (img) preloadImage(img);
+                }}
               >
                 HUB
               </Button>
 
               <Button
-                 variant={getNavbarVariant()}
+                variant={getNavbarVariant()}
                 onClick={() => handleNavigate('/culture')}
+                onMouseEnter={() => {
+                  const img = routeImageMap['/culture'];
+                  if (img) preloadImage(img);
+                }}
               >
                 Culture
               </Button>
@@ -422,7 +446,7 @@ export default function Navbar() {
               <Button
                 variant={getNavbarFilledVariant()}
                 className=""
-                onClick={closeMobileMenuHard}
+                onClick={() => window.open("https://outlook.office.com/book/IntroducingRTSSparkIndustrialBrilliance@gruports.com/?ismsaljsauthenabled=true", "_blank")}
               >
                 Book a meeting
               </Button>

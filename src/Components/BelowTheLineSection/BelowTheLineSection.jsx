@@ -1,6 +1,6 @@
 import { Button, Typography } from "../index.js";
 import { useEffect, useRef, useState } from "react";
-
+import { useTransition } from "../Transition/Transition.jsx";
 import technologyImg from "../../assets/hub/technology.jpg";
 import entryCards from "../../assets/hub/entryCards.jpg";
 import rockingIndustryImg from "../../assets/hub/rockingIndustryLogo.png";
@@ -14,6 +14,7 @@ import { motion, useTransform, useScroll } from "framer-motion";
 import { useMediaQuery } from "../../hooks/useMediaQuery.js";
 import {SlideInAnimation} from "../../animations/index.js";
 export default function BelowTheLineSection() {
+    const { go } = useTransition();
     const sectionRef = useRef(null);
     const horizontalContainerRef = useRef(null);
    
@@ -122,7 +123,7 @@ export default function BelowTheLineSection() {
                                     <div className="rounded-md overflow-hidden">
                                         <img
                                             src={entryCards}
-                                            alt="Entry Cards"
+                                            alt="Image of Entry Cards"
                                             className="w-[192px] h-[192px] rounded-md transform hover:scale-105 
                                                  transition-transform duration-500"
                                         />
@@ -142,7 +143,7 @@ export default function BelowTheLineSection() {
                                         <Typography variant={'body-md'} className="text-text-on-white-primary">
                                             A two days event that brings together innovation,<br /> collaboration, and cutting-edge solutions to<br /> address the sector's most pressing challenges.
                                         </Typography>
-                                        <Button variant="filled-light">
+                                        <Button variant="filled-light" onClick={() => window.open("http://www.rockingindustry.com/", "_blank")}>
                                             Learn more about the event
                                         </Button>
                                     </div>
@@ -152,7 +153,7 @@ export default function BelowTheLineSection() {
                                     <div className="rounded-md overflow-hidden">
                                         <img
                                             src={pannel}
-                                            alt="Panel"
+                                            alt="Image of Pannel"
                                             className="w-auto h-[391px] rounded-md transform hover:scale-105 
                                                  transition-transform duration-500"
                                         />
@@ -176,7 +177,7 @@ export default function BelowTheLineSection() {
                                         <div className="rounded-md overflow-hidden w-full flex justify-end pr-2">
                                             <img
                                                 src={coders}
-                                                alt="Programadores"
+                                                alt="Photos of coders"
                                                 className="w-auto h-[136px] rounded-md transform hover:scale-105 
                                                  transition-transform duration-500 "
                                             />
@@ -184,7 +185,7 @@ export default function BelowTheLineSection() {
                                         <div className="rounded-md overflow-hidden">
                                             <img
                                                 src={participants}
-                                                alt="Participantes"
+                                                alt="Photos of participants"
                                                 className="w-auto h-[172px] rounded-md transform hover:scale-105 
                                                  transition-transform duration-500"
                                             />
@@ -223,7 +224,7 @@ export default function BelowTheLineSection() {
                                         <div className="rounded-md overflow-hidden">
                                             <img
                                                 src={exposition1}
-                                                alt="Exposicion 1"
+                                                alt="Image of Exhibition 1"
                                                 className="w-auto h-[230px] rounded-md transform hover:scale-105 
                                                  transition-transform duration-500 "
                                             />
@@ -244,7 +245,7 @@ export default function BelowTheLineSection() {
                                         <div className="rounded-md overflow-hidden">
                                             <img
                                                 src={exposition2}
-                                                alt="Exposicion 2"
+                                                alt="Image of Exhibition 2"
                                                 className="w-auto h-[161px] rounded-md transform hover:scale-105 
                                                  transition-transform duration-500"
                                             />

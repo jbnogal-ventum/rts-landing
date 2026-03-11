@@ -13,7 +13,7 @@ export default {
         'display': ['"Neue Power Ultra"', 'sans-serif'], // Uso: font-display
         'haffer': ['"Haffer"', 'sans-serif'],       // Uso: font-haffer
       },
- 
+
       // ===== COLORES (Reorganizados para mejor acceso) =====
       colors: {
         // Colores planos individuales (mantener para compatibilidad)
@@ -24,7 +24,7 @@ export default {
         'gradient-violet': '#6a5cff',        // Uso: text-gradient-violet / bg-gradient-violet
         'gradient-blue': '#2e86ff',          // Uso: text-gradient-blue / bg-gradient-blue
         secondary: 'var(--color-text-secondary)',
-        
+
         // Sistema de colores organizado
         core: {
           violet: '#5B25D4',                 // Uso: text-core-violet / bg-core-violet / border-core-violet
@@ -173,7 +173,7 @@ export default {
         'title-medium': '26px',              // Uso: text-title-medium
         'title-small': '22px',               // Uso: text-title-small
         'title-body': '18px',                // Uso: text-title-body
-        
+
 
         // Body
         'body-lg': '18px',                   // Uso: text-body-lg
@@ -224,14 +224,14 @@ export default {
         'title-large': '-0.6px',                // Uso: tracking-title-large
         'title-medium': '-0.5px',               // Uso: tracking-title-medium
         'title-body': '-0.4px',                 // Uso: tracking-title-body
-        'title-small': '-0.3px',            // Uso: tracking-title-small
+        'title-small': '0.3px',            // Uso: tracking-title-small
 
         'body-lg': '0px',      // En lugar de '0%'
-'body-md': '0px',
-'body-sm': '0px',
-'body-default': '0px',
+        'body-md': '0px',
+        'body-sm': '0px',
+        'body-default': '0px',
 
-          'subtitle-md': '0.0em',   
+        'subtitle-md': '0.0em',
       },
 
       // ===== TIPOGRAFÍA - PESOS =====

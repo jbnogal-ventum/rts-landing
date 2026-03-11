@@ -256,7 +256,7 @@ h5,
 h6 {
   font-family: var(--font-display);
   /* text-transform: uppercase; */
-  letter-spacing: 2px;
+  /* letter-spacing: 2px; */
 }
 
 /* =========================================================
