@@ -34,14 +34,12 @@ export default function Navbar() {
   const [ddMobileOpen, setDdMobileOpen] = useState(null);
   // Animaciones para Framer Motion
   const navbarVariants = {
-    hidden: { y: -60, opacity: 0, filter: "blur(10px)" },
+    hidden: {  opacity: 0, filter: "blur(10px)" },
     visible: {
-      y: 0,
       opacity: 1,
       filter: "blur(0px)",
       transition: {
-        duration: 1.2,
-        ease: [0.22, 1, 0.36, 1],
+        duration: 0.6,
         delay: 0.2
       }
     }

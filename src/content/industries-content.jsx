@@ -35,8 +35,8 @@ export const industriesContent = {
                 "Automated reporting via Seeq Organizer",
                 "Time–depth data transformation to enhance decision-making",
             ],
-            img: () => import('../assets/Backgrounds/project_oilgas.jpg'),
-            companyLogo: () => import('../assets/clients/ypf.png'),
+            img: () => import('../assets/Backgrounds/project_oilgas_1.webp'),
+            companyLogo: null,//() => import('../assets/clients/ypf.png'),
         },
         {
             location: "Argentina",
@@ -51,7 +51,7 @@ export const industriesContent = {
                 "Unified monitoring for Caterpillar, Waukesha, and other OEMs",
                 "Standardized KPIs, analytics and operational dashboards"
             ],
-            img: () => import('../assets/Backgrounds/project_oilgas.jpg'),
+            img: () => import('../assets/Backgrounds/project_oilgas_2.webp'),
             companyLogo: () => import('../assets/clients/enerflex.png'),
         },
         {
@@ -59,15 +59,15 @@ export const industriesContent = {
             sumary: "PI System governance, advanced analytics, and remote operations enablement",
             info: "End-to-end PI System and Data Analytics support for Shell’s upstream operations. The project included the commissioning of the ROC (Remote Operations Center), AF structuring, migration and optimization of 450+ PI Vision displays, and data reliability work for future predictive maintenance initiatives.",
             technicalItems: [
-                "ROC (Remote Operation Control) enablement AF hierarchy structuring and template development",
+                 "ROC (Remote Operation Control) enablement AF hierarchy structuring and template development",
                 "Migration and optimization of 450+ PI Vision screens",
                 "Standardization across Facilities and WellPads",
                 "PI System + Seeq integration within the Data-Driven POD",
                 "Data reliability and validation for critical assets",
-                "Technical review of databoooks, alarm catalogs, Modbus tables, etc.",
+                "Technical review of databoooks, alarm catalogs, Modbus tables",
                 "Technical reports supporting future predictive maintenance"
             ],
-            img: () => import('../assets/Backgrounds/project_oilgas.jpg'),
+            img: () => import('../assets/Backgrounds/project_oilgas_3.webp'),
             companyLogo: () => import('../assets/clients/shell.png'),
         }
         ]
@@ -97,12 +97,12 @@ export const industriesContent = {
                 "Centralized historization in PI Data Archive",
                 "Template creation for scalable asset onboarding",
                 "Event notifications for critical equipment behavior",
-                //"High-complexity operational dashboards with rich interaction",
+                "High-complexity operational dashboards with rich interaction",
                 "End-to-end PI System implementation and development",
-                //"Seeq deployment and AI pilot integration",
-                //"Foundation for corporate digital transformation",
+                "Seeq deployment and AI pilot integration",
+                "Foundation for corporate digital transformation",
             ],
-            img: () => import('../assets/Backgrounds/project_power.jpg'),
+            img: () => import('../assets/Backgrounds/project_power.webp'),
             companyLogo: () => import('../assets/clients/centralPuerto.png'),
         }]
     },
@@ -121,9 +121,9 @@ export const industriesContent = {
             }
         },
         projectSection: [{
-            location: "San Luis, Argentina",
-            sumary: "Long-Term Honeywell DCS Operations & Maintenance RTS has delivered long-term contracts for the comprehensive operation and maintenance of Honeywell control systems, including Distributed Control Systems (DCS) and associated platforms, in continuous process and mission-critical environments.",
-            info: "Our service integrates preventive, corrective, and predictive maintenance with advanced technical analysis, system health monitoring, and full lifecycle management of the control platform.",
+            location: "Poliresinas – San Luis, Argentina",
+            sumary: "Long-Term Honeywell DCS Operations & Maintenance",
+            info: "RTS has delivered long-term contracts for the comprehensive operation and maintenance of Honeywell control systems, including Distributed Control Systems (DCS) and associated platforms, in continuous process and mission-critical environments. \n\nOur service integrates preventive, corrective, and predictive maintenance with advanced technical analysis, system health monitoring, and full lifecycle management of the control platform.",
             technicalItems: [
                 "Maximizing DCS availability and operational reliability",
                 "Anticipating system degradation and preventing failures",
@@ -132,8 +132,8 @@ export const industriesContent = {
                 "With more than a decade sustaining critical operations, RTS has established itself as a specialized Honeywell technology partner, combining deep industrial process knowledge with a strong commitment to operational continuity.",
 
             ],
-            img: () => import('../assets/Backgrounds/project_chemicals.png'),
-            companyLogo: () => import('../assets/clients/shell.png'),
+            img: () => import('../assets/Backgrounds/project_chemicals.webp'),
+            companyLogo: null,//() => import('../assets/clients/shell.png'),
         }]
     },
     pulpPaper: {
@@ -150,9 +150,9 @@ export const industriesContent = {
             }
         },
         projectSection: [{
-            location: "Fray Bentos, Uruguay",
-            sumary: "BOTNIA demonstrates RTS’s ability to execute large-scale, high-complexity DCS implementations under strict timelines, meeting world-class engineering standards. ",
-            info: "Full DCS Program Management & Commissioning at One of Latin America’s Largest Pulp Mills. RTS played a strategic and mission-critical role in the development of the BOTNIA pulp mill, a flagship facility in the region.",
+            location: "Argentina – Sierras Blancas",
+            sumary: "Full DCS program management & commissioning at one  of latin america’s largest pulp mills.",
+            info: "RTS played a strategic and mission-critical role in the development of the BOTNIA pulp mill, a flagship facility in the region.",
             technicalItems: [
                 "Led a 25 elite RTS team, providing project management, technical leadership, and execution across the entire DCS deployment",
                 "Delivered full configuration of the Honeywell Experion PKS R301 system, ensuring seamless integration across all plant areas.",
@@ -160,22 +160,23 @@ export const industriesContent = {
                 "Acted as a technical bridge between the client, EPCs, and technology suppliers—RTS became the operational backbone of the automation environment.",
                 "Ensured operational reliability, safety, and alignment with global pulp-and-paper best practices."
             ],
-            img: () => import('../assets/Backgrounds/project_pulp.jpg'),
-            companyLogo: () => import('../assets/clients/honeywell.png'),
+            img: () => import('../assets/Backgrounds/project_pulp_1.webp'),
+            companyLogo: null,//() => import('../assets/clients/honeywell.png'),
         },
         {
-            location: "Finland & Uruguay",
+            location: "UPM (Finland & Uruguay)",
             sumary: "Advanced DCS Integration in Two of the World’s Most High-Tech Pulp Mills",
-            info: "RTS contributed engineering expertise to UPM/Metso Botnia facilities in Finland (Varkaus) and Uruguay, both recognized as benchmark plants in the global pulp industry.",
+            info: "RTS contributed engineering expertise to UPM/Metso Botnia facilities in Finland (Varkaus) and Uruguay, both recognized as benchmark plants in the global pulp industry. These projects demonstrate that RTS performs successfully within top-tier global industrial ecosystems, integrating complex systems and aligning with international engineering norms.",
             technicalItems: [
                 "Provided advanced integration and engineering services on Honeywell systems in environments with extreme quality, safety, and performance requirements.",
                 "Worked under European engineering methodologies, ensuring compliance with rigorous industrial and environmental standards.",
                 "Delivered configuration, database management, process graphics, communication setup, and on-site validation.",
                 "Supported commissioning and operational readiness with a strong focus on availability, reliability, and long-term maintainability.",
+                "Ensured operational reliability, safety, and alignment with global pulp-and-paper best practices."
 
             ],
-            img: () => import('../assets/Backgrounds/project_pulp.jpg'),
-            companyLogo: () => import('../assets/clients/upm.png'),
+            img: () => import('../assets/Backgrounds/project_pulp_2.webp'),
+            companyLogo: null,//() => import('../assets/clients/upm.png'),
         }
         ]
     },
@@ -194,7 +195,7 @@ export const industriesContent = {
         },
         projectSection: [
             {
-                location: "El Teniente Mine Rancagua, Chile",
+                location: "CODELCO – Santiago, Chile",
                 sumary: "New Outokumpu Flotation Cells Integration",
                 info: "RTS led the control strategy development and advanced visualization configuration for the integration of new Outokumpu flotation cells within one of the world’s largest underground copper operations.",
                 technicalItems: [
@@ -204,13 +205,13 @@ export const industriesContent = {
                     "Commissioning and stabilization of the new flotation control architecture.",
                     "The project required deep understanding of mineral processing dynamics, tight integration with legacy control infrastructure, and zero-disruption implementation in a high-demand production environment.",
                 ],
-                img: () => import('../assets/Backgrounds/project_mining.jpg'),
-                companyLogo: () => import('../assets/clients/codelco.png'),
+                img: () => import('../assets/Backgrounds/project_mining_1.webp'),
+                companyLogo: null,//() => import('../assets/clients/codelco.png'),
             },
             {
-                location: "Santiago, Chile",
-                sumary: "Comprehensive DCS Integration for Rio Tinto’s New Copper Mine",
-                info: "Enterprise Control Access & Monitoring Infrastructure Enhancement RTS executed the modernization and stabilization of CODELCO’s control access and central visualization systems.",
+                location: "CODELCO – Santiago, Chile",
+                sumary: "Enterprise Control Access &amp; Monitoring Infrastructure Enhancement",
+                info: "RTS executed the modernization and stabilization of CODELCO’s control access and central visualization systems.",
                 technicalItems: [
                     "Engineering and deployment of secure control access architecture",
                     "Enhancement of central office visualization and operational monitoring",
@@ -218,8 +219,8 @@ export const industriesContent = {
                     "Reconfiguration and hardening of system architecture to improve reliability and performance",
                     "This engagement strengthened operational transparency, improved system resilience, and ensured reliable data availability for decision-making across critical mining operations."
                 ],
-                img: () => import('../assets/Backgrounds/project_mining.jpg'),
-                companyLogo: () => import('../assets/clients/codelco.png'),
+                img: () => import('../assets/Backgrounds/project_mining_2.webp'),
+                companyLogo: null,//() => import('../assets/clients/codelco.png'),
             }
         ]
     },
@@ -240,8 +241,8 @@ export const industriesContent = {
         projectSection: [
             {
                 location: "Guaynabo, Puerto Rico",
-                sumary: "The project demanded strict environmental stability, compliance alignment, and zero-tolerance operational performance within regulated manufacturing environments",
-                info: "RTS engineered and configured the environmental control architecture for GMP-regulated pharmaceutical production facilities",
+                sumary: "Wyeth Pharmaceutical",
+                info: "RTS engineered and configured the environmental control architecture for GMP-regulated pharmaceutical production facilities. \n\nThe project demanded strict environmental stability, compliance alignment, and zero-tolerance operational performance within regulated manufacturing environments",
                 technicalItems: [
                     "Cleanroom atmospheric control systems",
                     "Filtration and air handling integration",
@@ -249,12 +250,12 @@ export const industriesContent = {
                     "Temperature, airflow, and humidity regulation",
                     "Full Honeywell system configuration and validation support"
                 ],
-                img: () => import('../assets/Backgrounds/project_pharmaceuticals.png'),
-                companyLogo: () => import('../assets/clients/molinos.png'),
+                img: () => import('../assets/Backgrounds/project_pharmaceuticals_1.webp'),
+                companyLogo: null,//() => import('../assets/clients/molinos.png'),
             },
             {
                 location: "Buenos Aires, Argentina",
-                sumary: "Unified asset modeling and real-time visibility across distributed field operations",
+                sumary: "Pfizer Argentina.",
                 info: "Honeywell Control & EBI (Excel 5000) Platform Management. RTS executed configuration, maintenance, and optimization of control and EBI systems based on Honeywell Excel 5000 controllers.",
                 technicalItems: [
                     "Database engineering and system configuration",
@@ -262,8 +263,8 @@ export const industriesContent = {
                     "Schematic design and documentation",
                     "Continuous operational support in GMP production environments"
                 ],
-                img: () => import('../assets/Backgrounds/project_pharmaceuticals.png'),
-                companyLogo: () => import('../assets/clients/molinos.png'),
+                img: () => import('../assets/Backgrounds/project_pharmaceuticals_2.webp'),
+                companyLogo: null,//() => import('../assets/clients/molinos.png'),
             },
 
         ]

@@ -14,7 +14,11 @@ export function ProjectSection({ projectSection, key }) {
 
     // Cargar logo del proyecto
     useEffect(() => {
-        projectSection?.companyLogo().then(module => setProjectClientLogo(module.default));
+        if (projectSection?.companyLogo) {
+            projectSection?.companyLogo().then(module => setProjectClientLogo(module.default));
+        } else {
+            setProjectClientLogo(null);
+        }
     }, [projectSection?.companyLogo]);
     return (
         <motion.div key={key} initial={{ opacity: 0, x: 100 }} animate={{ opacity: 1, x: 0 }} exit={{opacity:0, duration: 0.2, x: -60}}
@@ -38,7 +42,7 @@ export function ProjectSection({ projectSection, key }) {
                 <div className="absolute bottom-0 left-0 right-0 md:right-auto md:bottom-4 md:left-4 p-4 md:p-0">
                     <div className="flex justify-center md:justify-start w-full">
                         {/* Logo con efecto glass que funciona */}
-                        <div className="relative w-full">
+                        {projectClientLogo && <div className="relative w-full">
                                 {/* Fondo glass que SÍ funciona */}
                                 <div className="
                                             h-[135px]
@@ -61,7 +65,7 @@ export function ProjectSection({ projectSection, key }) {
                                         <div className="h-8 md:h-10 w-24 md:w-32 bg-gray-400/30 rounded animate-pulse"></div>
                                     )}
                                 </div>
-                        </div>
+                        </div>}
                     </div>
                 </div>
             </div>

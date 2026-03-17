@@ -3,10 +3,8 @@ import { useRef, useEffect, useState } from "react";
 import { Typography, Button } from "../Components/index";
 import HeroCulture from "../Components/Hero/Culture/HeroCulture.jsx";
 import Banner from "../Components/Banner/Banner";
-import approachBackgroundImage from "../assets/Backgrounds/approach_background.jpg";
-import bannerImg from "../assets/Banners/HubBanner.png";
-import innovationLabBackgroundImage from "../assets/Backgrounds/innovationLabBackgroung.jpg";
-import academyCardBackgroundImage from "../assets/Backgrounds/academyCardBackground.png";
+import approachBackgroundImage from "../assets/Backgrounds/approach_background.webp";
+
 import { Brain, DatabaseZap, Goal, GraduationCap, Grip, GripHorizontal, GripVertical, Handshake, PackageCheck, Play, PlayIcon, Pyramid, RadioTower, Sprout, Telescope, View } from "lucide-react";
 import { useTheme } from "../contexts/ThemeContext";
 import pannel from "../assets/hub/pannel.jpg";
