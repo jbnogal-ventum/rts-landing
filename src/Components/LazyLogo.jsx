@@ -1,7 +1,7 @@
 // src/Components/LazyLogo.jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 
-export function LazyLogo({
+export const LazyLogo = memo(function LazyLogo({
   logoImport,
   alt = "Client logo",
   className = "",
@@ -75,4 +75,4 @@ export function LazyLogo({
       />
     </div>
   );
-}
+});

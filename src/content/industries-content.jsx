@@ -24,6 +24,7 @@ export const industriesContent = {
             }
         },
         projectSection: [{
+            label: "Downstream",
             sumary: "Maximizing operational insight through PI System & advanced analytics",
             location: "PAE Argentina",
             info: "Development of advanced PI System solutions for specialized visualization and deep analytics in downstream operations. Work included custom PI Vision symbols, angular vs. depth visual analysis, and the implementation of advanced analytics and machine learning models in Seeq to optimize critical process variables and maintenance strategies.",
@@ -39,6 +40,7 @@ export const industriesContent = {
             companyLogo: null,//() => import('../assets/clients/ypf.png'),
         },
         {
+            label: "Midstream",
             location: "Argentina",
             sumary: "Unified asset modeling and real-time visibility across distributed field operations",
             info: "Implementation of a centralized asset model in PI System for 25,000+ tags collected through EXEMYS, covering geographically distributed compression units. Hybrid visualization (PI Vision + Ignition) and KPI dashboards were developed to support daily operations, trend analysis, and management decision-making.",
@@ -52,9 +54,11 @@ export const industriesContent = {
                 "Standardized KPIs, analytics and operational dashboards"
             ],
             img: () => import('../assets/Backgrounds/project_oilgas_2.webp'),
+     
             companyLogo: () => import('../assets/clients/enerflex.png'),
         },
         {
+                label: "Upstream",
             location: "Argentina – Sierras Blancas, CASO, Cruz de Lorena, Bajada de Añelo",
             sumary: "PI System governance, advanced analytics, and remote operations enablement",
             info: "End-to-end PI System and Data Analytics support for Shell’s upstream operations. The project included the commissioning of the ROC (Remote Operations Center), AF structuring, migration and optimization of 450+ PI Vision displays, and data reliability work for future predictive maintenance initiatives.",
@@ -103,6 +107,7 @@ export const industriesContent = {
                 "Foundation for corporate digital transformation",
             ],
             img: () => import('../assets/Backgrounds/project_power.webp'),
+            objectPosition: "top",
             companyLogo: () => import('../assets/clients/centralPuerto.png'),
         }]
     },
@@ -150,6 +155,7 @@ export const industriesContent = {
             }
         },
         projectSection: [{
+            label: "Botnia",
             location: "Argentina – Sierras Blancas",
             sumary: "Full DCS program management & commissioning at one  of latin america’s largest pulp mills.",
             info: "RTS played a strategic and mission-critical role in the development of the BOTNIA pulp mill, a flagship facility in the region.",
@@ -164,6 +170,7 @@ export const industriesContent = {
             companyLogo: null,//() => import('../assets/clients/honeywell.png'),
         },
         {
+            label: "UPM",
             location: "UPM (Finland & Uruguay)",
             sumary: "Advanced DCS Integration in Two of the World’s Most High-Tech Pulp Mills",
             info: "RTS contributed engineering expertise to UPM/Metso Botnia facilities in Finland (Varkaus) and Uruguay, both recognized as benchmark plants in the global pulp industry. These projects demonstrate that RTS performs successfully within top-tier global industrial ecosystems, integrating complex systems and aligning with international engineering norms.",
@@ -176,6 +183,7 @@ export const industriesContent = {
 
             ],
             img: () => import('../assets/Backgrounds/project_pulp_2.webp'),
+            objectPosition: "top",
             companyLogo: null,//() => import('../assets/clients/upm.png'),
         }
         ]
@@ -195,6 +203,7 @@ export const industriesContent = {
         },
         projectSection: [
             {
+                label: "Flotation cells",
                 location: "CODELCO – Santiago, Chile",
                 sumary: "New Outokumpu Flotation Cells Integration",
                 info: "RTS led the control strategy development and advanced visualization configuration for the integration of new Outokumpu flotation cells within one of the world’s largest underground copper operations.",
@@ -209,6 +218,7 @@ export const industriesContent = {
                 companyLogo: null,//() => import('../assets/clients/codelco.png'),
             },
             {
+                label: "Infrastructure",
                 location: "CODELCO – Santiago, Chile",
                 sumary: "Enterprise Control Access &amp; Monitoring Infrastructure Enhancement",
                 info: "RTS executed the modernization and stabilization of CODELCO’s control access and central visualization systems.",
@@ -220,6 +230,7 @@ export const industriesContent = {
                     "This engagement strengthened operational transparency, improved system resilience, and ensured reliable data availability for decision-making across critical mining operations."
                 ],
                 img: () => import('../assets/Backgrounds/project_mining_2.webp'),
+                
                 companyLogo: null,//() => import('../assets/clients/codelco.png'),
             }
         ]
@@ -240,6 +251,7 @@ export const industriesContent = {
         },
         projectSection: [
             {
+                label: "Wyeth Pharmaceutical",
                 location: "Guaynabo, Puerto Rico",
                 sumary: "Wyeth Pharmaceutical",
                 info: "RTS engineered and configured the environmental control architecture for GMP-regulated pharmaceutical production facilities. \n\nThe project demanded strict environmental stability, compliance alignment, and zero-tolerance operational performance within regulated manufacturing environments",
@@ -251,9 +263,11 @@ export const industriesContent = {
                     "Full Honeywell system configuration and validation support"
                 ],
                 img: () => import('../assets/Backgrounds/project_pharmaceuticals_1.webp'),
+                objectPosition: "top",
                 companyLogo: null,//() => import('../assets/clients/molinos.png'),
             },
             {
+                label: "Pfizer Argentina",
                 location: "Buenos Aires, Argentina",
                 sumary: "Pfizer Argentina.",
                 info: "Honeywell Control & EBI (Excel 5000) Platform Management. RTS executed configuration, maintenance, and optimization of control and EBI systems based on Honeywell Excel 5000 controllers.",
@@ -264,9 +278,9 @@ export const industriesContent = {
                     "Continuous operational support in GMP production environments"
                 ],
                 img: () => import('../assets/Backgrounds/project_pharmaceuticals_2.webp'),
+                objectPosition: "top",
                 companyLogo: null,//() => import('../assets/clients/molinos.png'),
             },
-
         ]
     }
 

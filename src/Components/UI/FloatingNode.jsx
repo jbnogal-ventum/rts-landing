@@ -124,7 +124,7 @@ const handleWheel = (e) => {
   }, [input, isLoading]);
 
   const handleKeyDown = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey && input.split("").length > 3 && input.split("").length < 251 && !isLoading) {
       e.preventDefault();
       sendMessage();
     }
@@ -294,7 +294,9 @@ const handleWheel = (e) => {
                           : "flex flex-row gap-2"
                         }`}
                     >
-                      {msg.role === "assistant" && <div class="gradient-border rounded-full w-icon-md h-icon-md shrink-0" />}
+                      {msg.role === "assistant" && i === messages.length - 1 && (
+                        <div class="gradient-border rounded-full w-icon-md h-icon-md shrink-0" />
+                      )}
                       {msg.role === "assistant"
   ? parseAssistantMessage(msg.content)
   : msg.content
@@ -310,7 +312,7 @@ const handleWheel = (e) => {
                     >
                       <div className="gradient-border rounded-full w-icon-md h-icon-md" />
                       <Typography variant='body-sm' className="text-text-on-white-primary ">
-                        Thinking ...
+                        Writing ...
                       </Typography>
                     </motion.div>
                   )}
@@ -348,7 +350,7 @@ const handleWheel = (e) => {
                     </button>
                   </div>
                   <Typography variant='subtitle-md' className="text-text-helper ">
-                    RTS can make mistakes. Check important info.
+                    RTS Node can make mistakes. Check important info.
                   </Typography>
                 </motion.div>
               </div>

@@ -27,7 +27,7 @@ import DigitalServicesPage from "./Pages/DigitalServicesPage";
 import MoleculePage from "./Pages/MoleculePage";
 
 export default function App() {
-  const location = useLocation();
+ const location = useLocation();
   const transitionRef = useRef(null);
 
   const lenisRef = useRef(null);
@@ -36,35 +36,25 @@ export default function App() {
   useEffect(() => {
     // Inicializar Lenis inmediatamente (sin esperar loader)
     const lenis = new Lenis({
-      duration: 0.7,        // ANTES: 1.2 → Reducilo a 0.8 o menos
-
-      smoothTouch: false, // Desactiva smooth en touch para mejor performance móvil
-      wheelMultiplier: 0.8, // Reduce para más control
-      // wheelMultiplier: 1.2,
-      touchMultiplier: 1.5,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Easing más suave
-      smoothWheel: true,
+     duration: 0.7,        // ANTES: 1.2 → Reducilo a 0.8 o menos
+  smoothWheel: true,
+  wheelMultiplier: 1.0,
+   //easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Easing más suave
+      easing: (t) => 1 - Math.pow(1 - t, 1),
     });
 
     lenisRef.current = lenis;
 
-    // Optimización del RAF
-    function raf(time) {
-      if (!lenisRef.current?.isStopped) {
-        lenisRef.current?.raf(time);
-      }
+    const raf = (time) => {
+      lenis.raf(time);
       rafIdRef.current = requestAnimationFrame(raf);
-    }
-
+    };
     rafIdRef.current = requestAnimationFrame(raf);
 
     return () => {
-      if (rafIdRef.current) {
-        cancelAnimationFrame(rafIdRef.current);
-      }
-      if (lenisRef.current) {
-        lenisRef.current.destroy();
-      }
+      cancelAnimationFrame(rafIdRef.current);
+      lenis.destroy();
+      lenisRef.current = null;
     };
   }, []); // ¡Sin dependencia de loaderDone!
 
@@ -93,14 +83,14 @@ export default function App() {
               <Route path="/molecule" element={<MoleculePage />} />
               <Route
                 path="/hub"
-                element={<HubPage />}
+                element={<HubPage  />}
               />
               <Route
                 path="/automation-controls"
                 element={<AutomationControlsPage key="automation" />}
               />
               <Route
-                path="/digital"
+                path="/digital" 
                 element={<DigitalServicesPage key="digital" />}
               />
               <Route
