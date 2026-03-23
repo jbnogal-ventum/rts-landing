@@ -12,7 +12,7 @@ import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import { useNavbarTextColor } from "../../../hooks/useNavbarTextColor";
 const whatWeDoItems = [
   { label: "Automation & Controls", href: "automation-controls" },
-  { label: "Digitalization", href: "digital" },
+  { label: "Digital Skills", href: "digital" },
   { label: "Energy & Infrastructure", href: "energy" },
 ];
 
@@ -312,10 +312,10 @@ export default function Navbar() {
                         animate="visible"
                         exit="hidden"
                         className={`flex flex-col gap-2 rounded-xs p-5 
-                              backdrop-blur-[10px] backdrop-saturate-[140%]
+                             
                               ${theme === "light"
-                            ? "bg-white/30  text-[#1a1a1a] shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
-                            : "bg-navbar-background-primary"
+                            ? "bg-background-inverse  text-[#1a1a1a] shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
+                            : "bg-background-primary"
                           }`}
                       >
                         {whatWeDoItems.map((item, index) => renderDropdownItemDesktop(item, index))}
@@ -336,10 +336,10 @@ export default function Navbar() {
                         animate="visible"
                         exit="hidden"
                         className={`flex flex-col gap-2 rounded-xs p-5 
-                              backdrop-blur-[10px] backdrop-saturate-[140%]
+                              
                               ${theme === "light"
-                            ? "bg-white/30  text-[#1a1a1a] shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
-                            : "bg-navbar-background-primary"
+                            ? "bg-background-inverse  text-[#1a1a1a] shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
+                            : "bg-background-primary"
                           }`}
                       >
                         {industriesItems.map((item, index) => renderDropdownItemDesktop(item, index))}

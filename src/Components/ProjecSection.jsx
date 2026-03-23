@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 export function ProjectSection({ projectSection, preloadedImages, key }) {
     // Usar imágenes precargadas si existen
     const [projectImage, setProjectImage] = useState(preloadedImages?.img || null);
-    const [projectClientLogo, setProjectClientLogo] = useState(preloadedImages?.companyLogo || null);
+    // const [projectClientLogo, setProjectClientLogo] = useState(preloadedImages?.companyLogo || null);
 
     // Fallback: cargar imágenes solo si no están precargadas
     useEffect(() => {
@@ -17,13 +17,13 @@ export function ProjectSection({ projectSection, preloadedImages, key }) {
         }
     }, [projectSection?.img, preloadedImages?.img]);
 
-    useEffect(() => {
-        if (!preloadedImages?.companyLogo && projectSection?.companyLogo) {
-            projectSection?.companyLogo().then(module => setProjectClientLogo(module.default));
-        } else if (!projectSection?.companyLogo) {
-            setProjectClientLogo(null);
-        }
-    }, [projectSection?.companyLogo, preloadedImages?.companyLogo]);
+    // useEffect(() => {
+    //     if (!preloadedImages?.companyLogo && projectSection?.companyLogo) {
+    //         projectSection?.companyLogo().then(module => setProjectClientLogo(module.default));
+    //     } else if (!projectSection?.companyLogo) {
+    //         setProjectClientLogo(null);
+    //     }
+    // }, [projectSection?.companyLogo, preloadedImages?.companyLogo]);
 
     return (
         <motion.div 
@@ -55,7 +55,7 @@ export function ProjectSection({ projectSection, preloadedImages, key }) {
                     }}
                 />
                 
-                <div className="absolute bottom-0 left-0 right-0 md:right-auto md:bottom-4 md:left-4 p-4 md:p-0">
+                {/* <div className="absolute bottom-0 left-0 right-0 md:right-auto md:bottom-4 md:left-4 p-4 md:p-0">
                     <div className="flex justify-center md:justify-start w-full">
                         {projectClientLogo && (
                             <div className="relative w-full">
@@ -69,7 +69,7 @@ export function ProjectSection({ projectSection, preloadedImages, key }) {
                             </div>
                         )}
                     </div>
-                </div>
+                </div> */}
             </div>
 
             <div className="flex flex-col md:flex-row gap-4 md:gap-6 text-text-on-white-secondary">

@@ -2,7 +2,7 @@ import { Typography, Button } from "../../index";
 import { useEffect, useRef, useState } from "react";
 import heroCultureBackground from "../../../assets/Backgrounds/culture_background.webp";
 import { SlideInAnimation } from "../../../animations/index";
-
+import { motion } from "framer-motion";
 export default function HeroIndustries() {
     const rootRef = useRef(null);
     const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
@@ -100,6 +100,39 @@ export default function HeroIndustries() {
                     </Typography>
                     </SlideInAnimation>
                 </div>
+            </div>
+            {/* Scroll indicator - bottom center */}
+            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+                <svg width="26" height="44" viewBox="0 0 20 44" fill="none" className="overflow-visible">
+                    <motion.rect
+                        x="1"
+                        y="1"
+                        width="24"
+                        height="42"
+                        rx="12"
+                        stroke="rgba(255,255,255,0.6)"
+                        strokeWidth="2"
+                        fill="none"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{
+                            duration: 1.2, delay: 0.5,
+                            ease: "easeInOut",
+                        }}
+                    />
+                </svg>
+                {/* Puntito animado posicionado encima del SVG */}
+                <motion.div
+                    className="absolute top-2 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-white/80"
+                    initial={{ opacity: 0 }}
+                    animate={{ y: [0, 12, 0], opacity: [1, 0, 0] }}
+                    transition={{
+                        duration: 1.9,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 1.2, // arranca cuando termina de dibujarse el óvalo
+                    }}
+                />
             </div>
         </section>
     )

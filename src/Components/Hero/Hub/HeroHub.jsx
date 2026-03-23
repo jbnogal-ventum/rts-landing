@@ -2,6 +2,7 @@ import { Typography, Button } from "../../index";
 import { useEffect, useRef } from "react";
 import heroHubBackground from "../../../assets/Backgrounds/heroHubBackground.webp";
 import { SlideInAnimation } from "../../../animations/index";
+import { motion } from "framer-motion";
 export default function HeroHub() {
     return (<section
         id="hero-hub"
@@ -11,7 +12,7 @@ export default function HeroHub() {
 
         {/* Imagen de fondo con distorsión dinámica */}
         <div className="hidden md:block absolute inset-0 bg-cover bg-no-repeat bg-center md:scale-110">
-            <img
+            <img    
                 src={heroHubBackground}
                 alt="Image of Hub Hero Background"
                 fetchpriority="high"     // Le dice al browser: esto es crítico, cargalo primero
@@ -61,6 +62,38 @@ export default function HeroHub() {
                 </SlideInAnimation>
             </div>
         </div>
-
+  {/* Scroll indicator - bottom center */}
+            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+                <svg width="26" height="44" viewBox="0 0 20 44" fill="none" className="overflow-visible">
+                    <motion.rect
+                        x="1"
+                        y="1"
+                        width="24"
+                        height="42"
+                        rx="12"
+                        stroke="rgba(255,255,255,0.6)"
+                        strokeWidth="2"
+                        fill="none"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{
+                            duration: 1.2, delay: 0.5,
+                            ease: "easeInOut",
+                        }}
+                    />
+                </svg>
+                {/* Puntito animado posicionado encima del SVG */}
+                <motion.div
+                    className="absolute top-2 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-white/80"
+                    initial={{ opacity: 0 }}
+                    animate={{ y: [0, 12, 0], opacity: [1, 0, 0] }}
+                    transition={{
+                        duration: 1.9,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 1.2, // arranca cuando termina de dibujarse el óvalo
+                    }}
+                />
+            </div>
     </section>)
 }

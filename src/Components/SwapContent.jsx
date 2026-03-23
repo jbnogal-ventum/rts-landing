@@ -74,8 +74,8 @@ export default function SwapContent() {
     if (!Array.isArray(l) || !Array.isArray(r) || !l.length || !r.length) return null;
 
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2  gap-2 md:gap-6.5 ">
-        <ul className="space-y-2">
+      <div className="grid grid-cols-1 md:grid-cols-2  gap-1 md:gap-6.5 ">
+        <ul className="md:space-y-2 space-y-1">
           {l.map((t) => (
             <div key={t} className="flex flex-row items-center gap-3">
               <CircleCheck className="w-icon-sm h-icon-sm text-sentimental-positive" />
@@ -84,7 +84,7 @@ export default function SwapContent() {
           ))}
         </ul>
 
-        <ul className="space-y-2">
+        <ul className="md:space-y-2 space-y-1">
           {r.map((t) => (
             <div key={t} className="flex items-start gap-3">
               <CircleCheck className="w-icon-sm h-icon-sm text-sentimental-positive" />
@@ -101,7 +101,7 @@ export default function SwapContent() {
       ref={containerRef}
       className="min-h-[300vh] w-full bg-background"
     >
-      <div className="sticky top-0 h-screen w-full flex flex-col pt-9 md:pt-7">
+      <div className="sticky top-0 h-screen w-full flex flex-col pt-0 md:pt-7">
         {/* Contenedor de imágenes */}
         <div className="relative w-[100%]  h-[266px] md:h-[400px] overflow-hidden">
           {/* Imagen base */}

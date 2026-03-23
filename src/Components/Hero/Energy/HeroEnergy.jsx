@@ -2,7 +2,7 @@ import { Typography, Button } from "../../index";
 import { useEffect, useRef, useState } from "react";
 import heroEnergyBackground from "../../../assets/Backgrounds/hero_energy.webp";
 import { SlideInAnimation } from "../../../animations";
-
+import { motion } from "framer-motion";
 export default function HeroEnergy() {
     const rootRef = useRef(null);
     const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
@@ -67,9 +67,9 @@ export default function HeroEnergy() {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-           
 
-{/* Imagen de fondo con distorsión dinámica */}
+
+            {/* Imagen de fondo con distorsión dinámica */}
             <div className="absolute inset-0 w-full h-full">
                 <img
                     src={heroEnergyBackground}
@@ -110,7 +110,7 @@ export default function HeroEnergy() {
 
             {/* Contenido */}
             <div className="relative z-10 w-full h-full md:px-7 py-9 px-3">
-                <div className="pt-9 flex flex-col gap-7 md:gap-6 w-fit">
+                <div className="md:pt-9 pt-2 flex flex-col gap-7 md:gap-6 w-fit">
                     <SlideInAnimation y={50} delay={1}><Typography variant="display-lg" className=" hidden md:block w-fit">
                         ENERGY  & <br /> INFRASTRUCTURE
                     </Typography>
@@ -121,17 +121,50 @@ export default function HeroEnergy() {
                         STRUCTURE
                     </Typography>
                     </SlideInAnimation>
-                     <SlideInAnimation delay={1.3}>
-                    <div className="flex justify-end lg:pr-9 text-secondary">
-                        <Typography
-                            variant="title-small"
-                            className="w-3/4 md:w-3/5 md:text-title-medium"
-                        >
-                            — stands to ensure technical excellence, operational reliability, and seamless project execution.
-                        </Typography>
-                    </div>
+                    <SlideInAnimation delay={1.3}>
+                        <div className="flex justify-end lg:pr-9 text-secondary">
+                            <Typography
+                                variant="title-small"
+                                className="w-3/4 md:w-3/5 md:text-title-medium"
+                            >
+                                — stands to ensure technical excellence, operational reliability, and seamless project execution.
+                            </Typography>
+                        </div>
                     </SlideInAnimation>
                 </div>
+            </div>
+            {/* Scroll indicator - bottom center */}
+            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+                <svg width="26" height="44" viewBox="0 0 20 44" fill="none" className="overflow-visible">
+                    <motion.rect
+                        x="1"
+                        y="1"
+                        width="24"
+                        height="42"
+                        rx="12"
+                        stroke="rgba(255,255,255,0.6)"
+                        strokeWidth="2"
+                        fill="none"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{
+                            duration: 1.2, delay: 0.5,
+                            ease: "easeInOut",
+                        }}
+                    />
+                </svg>
+                {/* Puntito animado posicionado encima del SVG */}
+                <motion.div
+                    className="absolute top-2 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-white/80"
+                    initial={{ opacity: 0 }}
+                    animate={{ y: [0, 12, 0], opacity: [1, 0, 0] }}
+                    transition={{
+                        duration: 1.9,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: 1.2, // arranca cuando termina de dibujarse el óvalo
+                    }}
+                />
             </div>
         </section>
     )

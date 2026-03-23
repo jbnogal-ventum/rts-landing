@@ -66,7 +66,7 @@ export default function Footer() {
         <div className=" gap-6 hidden md:flex">
           <Button variant="text-dark" children={"LinkedIn"} className="text-body-sm " onClick={() => window.open("https://ar.linkedin.com/company/rts-group-acds", "_blank")} />
           <Button variant="text-dark" children={"Youtube"} className="text-body-sm " onClick={() => window.open("https://www.youtube.com/@RockingTheIndustry", "_blank")} />
-          <Button variant="text-dark" children={"Discord"} className="text-body-sm " onClick={() => window.open("https://discord.com/invite/rtsgroup", "_blank")} />
+          {/* <Button variant="text-dark" children={"Discord"} className="text-body-sm " onClick={() => window.open("https://discord.com/invite/rtsgroup", "_blank")} /> */}
         </div>
       </div>
 

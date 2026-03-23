@@ -401,7 +401,7 @@ export default function AutomationControlsPage({ setNavMode }) {
         <section id="honey-well-technologies" className="px-3 md:px-7 py-9">
 
           <div className="flex flex-col md:gap-5 gap-6">
-            <SlideInAnimation delay={0.1} className="text-center"><Typography variant="title-large" >
+            <SlideInAnimation delay={0.1} className="md:text-center"><Typography variant="title-large" >
               Capabilities with Honeywell technologies
             </Typography>
             </SlideInAnimation>

@@ -93,7 +93,8 @@ export default function HeroHomePage({ onPhase }) {
               {/* Panel 3 */}
               <motion.div
                 id='panel3'
-                className=" w-full absolute overflow-hidden"
+               className="w-full absolute overflow-hidden"
+
                 style={{
                   opacity: opacityPannel3,
                   y: yOffsetPannel3,
@@ -101,8 +102,8 @@ export default function HeroHomePage({ onPhase }) {
 
                 }}
               >
-                <div className="flex flex-col  gap-6 w-full md:w-3/5 h-screen py-9 pl-3 pr-3 md:pl-7 md:pr-0 mt-9">
-                  <div className="flex flex-row gap-5 mt-9 pt-6 md:pt-0 md:mt-0">
+                 <div className="flex flex-col gap-6 w-full md:w-3/5 py-9 pl-3 pr-3 md:pl-7 md:pr-0 mt-[30vh] md:mt-9 md:h-screen">
+                  <div className="flex flex-row gap-5 ">
                     <Typography variant="subtitle-medium" className="">
                       OUR DEPARTMENTS
                     </Typography>
@@ -126,9 +127,9 @@ export default function HeroHomePage({ onPhase }) {
                   <div className="w-full  text-text-secondary ">
                     <div className="flex flex-col gap-2">
                       <Typography variant="body-md" className="md:text-title-body font-base ">
-                        We specialize in developing, integrating, building, <br className='' />and analyzing  end-to-end systems to meet the <br className='' />unique automation needs of our clients.
+                        We specialize in developing, integrating, building, <br className='hidden lg:block' />and analyzing  end-to-end systems to meet the <br className='hidden lg:block' />unique automation needs of our clients.
                       </Typography>
-                      <Typography variant="body-md" className="md:hidden ">
+                      <Typography variant="body-md" className="hidden ">
                         Within this department, we have a specialized Honeywell Elite Team dedicated exclusively to supporting companies implementing Honeywell-based hardware and control systems.
                       </Typography>
                     </div>
@@ -141,14 +142,15 @@ export default function HeroHomePage({ onPhase }) {
               {/* Panel 4 */}
               <motion.div
                 id='panel4'
-                className=" w-full absolute overflow-hidden"
+                className="w-full absolute overflow-hidden"
+
                 style={{
                   opacity: opacityPannel4,
                   zIndex: zIndexPannel4, // Asegura que el panel activo esté por encima de los demás
                 }}
               >
-                <div className="flex flex-col  gap-6 w-full md:w-3/5 h-screen py-9 pl-3 pr-3 md:pl-7 md:pr-0 mt-9">
-                  <div className="flex flex-row gap-5  mt-9  pt-6 md:pt-0 md:mt-0">
+                 <div className="flex flex-col gap-6 w-full md:w-3/5 py-9 pl-3 pr-3 md:pl-7 md:pr-0 mt-[30vh] md:mt-9 md:h-screen">
+                  <div className="flex flex-row gap-5    ">
                     <Typography variant="subtitle-medium" className="">
                       OUR DEPARTMENTS
                     </Typography>
@@ -171,7 +173,7 @@ export default function HeroHomePage({ onPhase }) {
 
                   <div className="w-full  text-text-secondary ">
                     <Typography variant="body-md" className="md:text-title-body font-base ">
-                      In the RTS ecosystem, Digital Skills turns<br className="lg:hidden" /> industrial data into actionable<br className="hidden lg:block" /> intelligence.<br className="lg:hidden" /> Through our POD Services framework,  we merge<br className="lg:hidden" /> OT<br className="hidden lg:block" /> experience, process knowledge, and<br className="lg:hidden" /> computer  science to engineer <br className='hidden lg:block' />the digital core of<br className="lg:hidden" /> industrial operations.
+                      In the RTS ecosystem, Digital Skills turns industrial data into actionable <br className="hidden lg:block" />intelligence. Through our POD Services framework,  we merge OT<br className="hidden lg:block" /> experience, process knowledge, and computer  science to engineer <br className='hidden lg:block' />the digital core of industrial operations.
                     </Typography>
                   </div>
 
@@ -183,14 +185,14 @@ export default function HeroHomePage({ onPhase }) {
               {/* Panel 5 */}
               <motion.div
                 id='panel5'
-                className=" w-full absolute overflow-hidden bg-gradient-to-b from-transparent via-transparent to-background-primary"
+                className="w-full absolute overflow-hidden bg-gradient-to-b from-transparent via-transparent to-background-primary"
                 style={{
                   opacity: opacityPannel5,
                   zIndex: zIndexPannel5, // Asegura que el panel activo esté por encima de los demás
                 }}
               >
-                <div className="flex flex-col  gap-6 w-full md:w-3/5 h-screen py-9 pl-3 pr-3 md:pl-7 md:pr-0 mt-9">
-                  <div className="flex flex-row gap-5  mt-9  pt-6 md:pt-0 md:mt-0">
+                 <div className="flex flex-col gap-6 w-full md:w-3/5 py-9 pl-3 pr-3 md:pl-7 md:pr-0 mt-[30vh] md:mt-9 md:h-screen">
+                  <div className="flex flex-row gap-5 ">
                     <Typography variant="subtitle-medium" className="">
                       OUR DEPARTMENTS
                     </Typography>
@@ -213,7 +215,7 @@ export default function HeroHomePage({ onPhase }) {
 
                   <div className="w-full  text-text-secondary ">
                     <Typography variant="body-md" className="md:text-title-body font-base ">
-                      Our mission is to provide innovative, efficient,<br className="lg:hidden" /> and reliable energy and<br className="hidden lg:block" /> infrastructure solutions<br className="lg:hidden" /> that enhance operational performance, ensure<br className="" /> sustainability, and drive industrial progress.
+                      Our mission is to provide innovative, efficient, and reliable energy and<br className="hidden lg:block" /> infrastructure solutions that enhance operational performance, ensure<br className="hidden lg:block" /> sustainability, and drive industrial progress.
                     </Typography>
                   </div>
 

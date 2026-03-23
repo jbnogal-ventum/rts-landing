@@ -102,7 +102,7 @@ export default function Story() {
                     RTS WAS BORN <br />IN THE WORLD OF<br /> OPERATIONAL <br />TECHNOLOGY
                   </Typography>
 
-                  <div className="w-full flex justify-end text-text-on-white-disabled">
+                  <div className="w-full flex justify-end text-text-on-white-primary">
                     <Typography variant="title-medium" className=" hidden md:block font-base pb-9">
                       — and evolved to engineer<br />the future through curated<br />industrial innovation.
                     </Typography>
@@ -136,7 +136,7 @@ export default function Story() {
                     <Button children="Learn more about our culture" variant="filled-light" onClick={() => go("/culture")} />
                   </div>
                   <div className="w-full flex justify-end">
-                    <Typography variant="title-medium" className="text-text-on-white-disabled font-base pb-9">
+                    <Typography variant="title-medium" className="text-text-on-white-primary font-base pb-9">
                       — from control systems<br />to intelligent ecosystems.
                     </Typography>
                   </div>
