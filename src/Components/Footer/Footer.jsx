@@ -35,30 +35,30 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col gap-3">
-            <Typography
+            {/* <Typography
               variant="title-body"
               className="font-bold font-haffer"
               children="Resources"
             />
-            <Button variant='navbar-text-dark' className=''>Media kit</Button>
+            <Button variant='navbar-text-dark' className=''>Media kit</Button> */}
           </div>
 
           <div className="flex flex-col gap-3 md:hidden">
-            <Typography
+            {/* <Typography
               variant="title-body"
               className="font-bold font-haffer"
               children="Policy"
             />
             <Button variant='navbar-text-dark' className=''>Privacy Policy</Button>
-            <Button variant='navbar-text-dark' className=''>Cookie Settings</Button>
+            <Button variant='navbar-text-dark' className=''>Cookie Settings</Button> */}
           </div>
         </div>
       </div>
 
       <div className="flex justify-center md:justify-between items-center px-6 py-3 md:py-0">
         <div className=" gap-6  hidden md:flex">
-          <Typography variant="body-sm" children="Privacy Policy" />
-          <Typography variant="body-sm" children="Cookie Settings" />
+          {/* <Typography variant="body-sm" children="Privacy Policy" />
+          <Typography variant="body-sm" children="Cookie Settings" /> */}
         </div>
 
         <Typography variant="body-md" className="text-secondary md:text-body-sm" children="All Rights Reserved ©2025 RTS Group" />

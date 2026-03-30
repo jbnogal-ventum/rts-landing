@@ -51,7 +51,7 @@ export default function HeroHomePage({ onPhase }) {
                   y: yOffsetPannel1
                 }}
               >
-                <div className="flex flex-col gap-9 md:gap-4 w-full h-screen py-9 px-3 md:px-7 mt-9">
+                <div className="flex flex-col gap-9 md:gap-4 w-full h-screen py-9 px-3 md:px-7 md:mt-9 mt-7">
 
                   <Typography variant="display-sm" className="md:text-display-lg md:pr-9 ">
                     SPARK INDUSTRIAL<br />BRILLANCE
@@ -62,6 +62,39 @@ export default function HeroHomePage({ onPhase }) {
                       — We merge decades of OT expertise with cutting-edge IT innovation to empower industries with smarter, more efficient, and connected operations.
                     </Typography>
                   </div>
+                </div>
+                {/* Scroll indicator - bottom center */}
+                <div className="absolute bottom-7 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+                  <svg width="26" height="44" viewBox="0 0 20 44" fill="none" className="overflow-visible">
+                    <motion.rect
+                      x="1"
+                      y="1"
+                      width="24"
+                      height="42"
+                      rx="12"
+                      stroke="rgba(255,255,255,0.6)"
+                      strokeWidth="2"
+                      fill="none"
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
+                      transition={{
+                        duration: 1.2, delay: 0.5,
+                        ease: "easeInOut",
+                      }}
+                    />
+                  </svg>
+                  {/* Puntito animado posicionado encima del SVG */}
+                  <motion.div
+                    className="absolute top-2 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-white/80"
+                    initial={{ opacity: 0 }}
+                    animate={{ y: [0, 12, 0], opacity: [1, 0, 0] }}
+                    transition={{
+                      duration: 1.9,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 1.2, // arranca cuando termina de dibujarse el óvalo
+                    }}
+                  />
                 </div>
               </motion.div>
 
@@ -93,7 +126,7 @@ export default function HeroHomePage({ onPhase }) {
               {/* Panel 3 */}
               <motion.div
                 id='panel3'
-               className="w-full absolute overflow-hidden"
+                className="w-full absolute overflow-hidden"
 
                 style={{
                   opacity: opacityPannel3,
@@ -102,7 +135,7 @@ export default function HeroHomePage({ onPhase }) {
 
                 }}
               >
-                 <div className="flex flex-col gap-6 w-full md:w-3/5 py-9 pl-3 pr-3 md:pl-7 md:pr-0 mt-[30vh] md:mt-9 md:h-screen">
+                <div className="flex flex-col gap-6 w-full md:w-3/5 py-9 pl-3 pr-3 md:pl-7 md:pr-0 mt-[30vh] md:mt-9 md:h-screen">
                   <div className="flex flex-row gap-5 ">
                     <Typography variant="subtitle-medium" className="">
                       OUR DEPARTMENTS
@@ -149,7 +182,7 @@ export default function HeroHomePage({ onPhase }) {
                   zIndex: zIndexPannel4, // Asegura que el panel activo esté por encima de los demás
                 }}
               >
-                 <div className="flex flex-col gap-6 w-full md:w-3/5 py-9 pl-3 pr-3 md:pl-7 md:pr-0 mt-[30vh] md:mt-9 md:h-screen">
+                <div className="flex flex-col gap-6 w-full md:w-3/5 py-9 pl-3 pr-3 md:pl-7 md:pr-0 mt-[30vh] md:mt-9 md:h-screen">
                   <div className="flex flex-row gap-5    ">
                     <Typography variant="subtitle-medium" className="">
                       OUR DEPARTMENTS
@@ -191,7 +224,7 @@ export default function HeroHomePage({ onPhase }) {
                   zIndex: zIndexPannel5, // Asegura que el panel activo esté por encima de los demás
                 }}
               >
-                 <div className="flex flex-col gap-6 w-full md:w-3/5 py-9 pl-3 pr-3 md:pl-7 md:pr-0 mt-[30vh] md:mt-9 md:h-screen">
+                <div className="flex flex-col gap-6 w-full md:w-3/5 py-9 pl-3 pr-3 md:pl-7 md:pr-0 mt-[30vh] md:mt-9 md:h-screen">
                   <div className="flex flex-row gap-5 ">
                     <Typography variant="subtitle-medium" className="">
                       OUR DEPARTMENTS
