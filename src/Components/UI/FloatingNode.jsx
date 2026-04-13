@@ -9,7 +9,7 @@ import { cn, parseAssistantMessage } from "../../lib/utils";
 import { useSelector } from "react-redux";
 
 const WEBHOOK_URL =
-  "https://ruana-ai-d9eshse0hxcqfrae.eastus2-01.azurewebsites.net/webhook/660ac8f6-f8c3-4af3-b6ff-3f17007faf96";
+  "https://n8n-n8n.kuwsz0.easypanel.host/webhook/660ac8f6-f8c3-4af3-b6ff-3f17007faf96";
 
 const suggestions = [
   { title: "🔌 Connectivity", description: "Do you face gaps in real-time data \nflow  between your industrial assets \nand enterprise systems?", message: "We face gaps in real-time data \nflow  between our industrial assets \nand enterprise systems. " },
@@ -20,46 +20,46 @@ const suggestions = [
 export default function FloatingNode({ lenisRef }) {
   const touchStartY = useRef(0);
 
-const handleTouchStart = (e) => {
-  touchStartY.current = e.touches[0].clientY;
-};
+  const handleTouchStart = (e) => {
+    touchStartY.current = e.touches[0].clientY;
+  };
 
-const handleTouchMove = (e) => {
-  const el = chatMessagesRef.current;
-  if (!el) return;
+  const handleTouchMove = (e) => {
+    const el = chatMessagesRef.current;
+    if (!el) return;
 
-  const deltaY = touchStartY.current - e.touches[0].clientY;
-  touchStartY.current = e.touches[0].clientY;
+    const deltaY = touchStartY.current - e.touches[0].clientY;
+    touchStartY.current = e.touches[0].clientY;
 
-  const atTop = el.scrollTop === 0;
-  const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight;
+    const atTop = el.scrollTop === 0;
+    const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight;
 
-  // Solo prevenir el default si el contenedor puede scrollear en esa dirección
-  if (!(atTop && deltaY < 0) && !(atBottom && deltaY > 0)) {
+    // Solo prevenir el default si el contenedor puede scrollear en esa dirección
+    if (!(atTop && deltaY < 0) && !(atBottom && deltaY > 0)) {
+      e.stopPropagation();
+      el.scrollTop += deltaY;
+    }
+  };
+  // 1. Agregar ref al contenedor de mensajes
+  const chatMessagesRef = useRef(null);
+
+  // 2. Reemplazar los handlers por esta versión mejorada
+  const handleMouseEnter = () => {
+    lenisRef?.current?.stop();
+  };
+
+  const handleMouseLeave = () => {
+    lenisRef?.current?.start();
+  };
+
+  // 3. Handler de wheel que delega el scroll al contenedor de mensajes
+  const handleWheel = (e) => {
+    const el = chatMessagesRef.current;
+    if (!el) return;
+
     e.stopPropagation();
-    el.scrollTop += deltaY;
-  }
-};
-// 1. Agregar ref al contenedor de mensajes
-const chatMessagesRef = useRef(null);
-
-// 2. Reemplazar los handlers por esta versión mejorada
-const handleMouseEnter = () => {
-  lenisRef?.current?.stop();
-};
-
-const handleMouseLeave = () => {
-  lenisRef?.current?.start();
-};
-
-// 3. Handler de wheel que delega el scroll al contenedor de mensajes
-const handleWheel = (e) => {
-  const el = chatMessagesRef.current;
-  if (!el) return;
-  
-  e.stopPropagation();
-  el.scrollTop += e.deltaY;
-};
+    el.scrollTop += e.deltaY;
+  };
   const nodeRef = useRef(null);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
@@ -106,7 +106,12 @@ const handleWheel = (e) => {
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-      const data = await res.json();
+      const raw = await res.text();
+      console.log("Raw text:", raw);
+
+      const data = JSON.parse(raw);
+      console.log("Parsed data:", data);
+
       const reply = data.output || data.message || data.response || JSON.stringify(data);
 
       setMessages((prev) => [
@@ -114,6 +119,7 @@ const handleWheel = (e) => {
         { role: "assistant", content: reply },
       ]);
     } catch (err) {
+      console.error("Error completo:", err);
       setMessages((prev) => [
         ...prev,
         { role: "error", content: "Something went wrong. Please try again." },
@@ -196,10 +202,10 @@ const handleWheel = (e) => {
           <motion.div
             key="panel"
             onMouseEnter={handleMouseEnter}
-  onMouseLeave={handleMouseLeave}
-  onWheel={handleWheel} 
-   onTouchStart={handleTouchStart}
-  onTouchMove={handleTouchMove}
+            onMouseLeave={handleMouseLeave}
+            onWheel={handleWheel}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
             className="flex flex-col gap-3 py-3 bg-background-white text-text-on-white-primary rounded-md shadow-md backdrop-blur-md transform origin-bottom-right sm:w-chat-panel sm:h-chat-panel w-[100vw] h-[100vh]"
             initial={{
               scale: 0,
@@ -279,7 +285,7 @@ const handleWheel = (e) => {
                   </div>)}
 
                 {/* Messages */}
-                <div ref={chatMessagesRef}  className="fn-chat-messages pl-4 pr-0.5 mr-0.5">
+                <div ref={chatMessagesRef} className="fn-chat-messages pl-4 pr-0.5 mr-0.5">
 
                   {messages.map((msg, i) => (
                     <motion.div
@@ -298,9 +304,9 @@ const handleWheel = (e) => {
                         <div class="gradient-border rounded-full w-icon-md h-icon-md shrink-0" />
                       )}
                       {msg.role === "assistant"
-  ? parseAssistantMessage(msg.content)
-  : msg.content
-}
+                        ? parseAssistantMessage(msg.content)
+                        : msg.content
+                      }
                     </motion.div>
                   ))}
                   {isLoading && (

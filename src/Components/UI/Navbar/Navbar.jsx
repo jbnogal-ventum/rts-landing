@@ -10,6 +10,7 @@ import { useTheme } from "../../../contexts/ThemeContext";
 import { Typography, Button } from "../../index";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import { useNavbarTextColor } from "../../../hooks/useNavbarTextColor";
+import { cn } from "../../../lib/utils";
 const whatWeDoItems = [
   { label: "Automation & Controls", href: "automation-controls" },
   { label: "Digital Skills", href: "digital" },
@@ -165,7 +166,7 @@ export default function Navbar() {
     >
       <Button
         key={item.label + item.href + "mobile"}
-        variant={getNavbarTextVariant()}
+        variant={theme === "light" ? "navbar-text-light" : "navbar-text-dark"}
         className="flex items-center "
         onClick={() => handleNavigate(item.href)}
       >
@@ -178,7 +179,7 @@ export default function Navbar() {
   const renderDropdownItemMobile = (item) => (
     <Button
       key={item.label + item.href + "mobile"}
-      variant={getNavbarTextVariant()}
+      variant={theme === "light" ? "navbar-text-light" : "navbar-text-dark"}
       className="flex items-center "
       onClick={() => handleNavigate(item.href)}
        onMouseEnter={() => {
@@ -362,7 +363,7 @@ export default function Navbar() {
             initial="hidden"
             animate="visible"
             exit="hidden"
-            className={`bg-navbar-menu-primary fixed top-[100px] left-3 right-3 p-5  rounded-md flex flex-col gap-6 z-[199999999] backdrop-blur-[10px] backdrop-saturate-[160%] `}
+            className={`${theme === "light" ? "bg-background-inverse text-text-on-white-primary" : "bg-background-primary text-text-primary"} transition-colors duration-300 fixed top-[100px] left-3 right-3 p-5  rounded-md flex flex-col gap-6 z-[199999999] `}
           >
             <div className="flex flex-col gap-4">
               <div className="flex flex-col">
@@ -371,7 +372,7 @@ export default function Navbar() {
                   className={` ${ddMobileOpen === "what" && "bg-navbar-button-hover-primary"}`}
                   onClick={() => toggleMobileDropdown("what")}
                 >
-                  <div className="flex flex-row items-center gap-2 ">
+                  <div className={cn("flex flex-row items-center gap-2 ", theme === "light" ? "text-text-on-white-primary" : "text-text-primary")}>
                     <Typography>What we do</Typography>
                     <ChevronDown
                       className={` transition-transform duration-500 ${ddMobileOpen === "what" ? "rotate-180" : ""}`}
@@ -393,11 +394,10 @@ export default function Navbar() {
               <div className="flex flex-col">
                 <Button
                   variant={getNavbarVariant()}
-                  className={` ${ddMobileOpen === "industries" && "bg-navbar-button-hover-primary"}`}
+                  className={` ${ddMobileOpen === "industries" && "bg-navbar-button-hover-primary"} ${theme === "light" ? "text-text-on-white-primary" : "text-text-primary"}`}
                   onClick={() => toggleMobileDropdown("industries")}
                 >
-                  <div className="flex flex-row items-center gap-2 ">
-
+                  <div className={cn("flex flex-row items-center gap-2 ", theme === "light" ? "text-text-on-white-primary" : "text-text-primary")}>
                     <span>Industries</span>
                     <ChevronDown
                       className={` transition-transform duration-500 ${ddMobileOpen === "industries" ? "rotate-180" : ""
@@ -426,7 +426,7 @@ export default function Navbar() {
                   if (img) preloadImage(img);
                 }}
               >
-                HUB
+                <Typography className={`${theme === 'light' ? "text-text-on-white-primary" : "text-text-primary"}`}>HUB</Typography>
               </Button>
 
               <Button
@@ -437,12 +437,12 @@ export default function Navbar() {
                   if (img) preloadImage(img);
                 }}
               >
-                Culture
+                <Typography className={`${theme === 'light' ? "text-text-on-white-primary" : "text-text-primary"}`}>Culture</Typography>
               </Button>
 
 
               <Button
-                variant={getNavbarFilledVariant()}
+                variant={theme === "light" ? "navbar-filled-light" : "navbar-filled-dark"}
                 className=""
                 onClick={() => window.open("https://outlook.office.com/book/IntroducingRTSSparkIndustrialBrilliance@gruports.com/?ismsaljsauthenabled=true", "_blank")}
               >
