@@ -107,10 +107,10 @@ export default function FloatingNode({ lenisRef }) {
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
       const raw = await res.text();
-      console.log("Raw text:", raw);
+      //console.log("Raw text:", raw);
 
       const data = JSON.parse(raw);
-      console.log("Parsed data:", data);
+     //console.log("Parsed data:", data);
 
       const reply = data.output || data.message || data.response || JSON.stringify(data);
 
